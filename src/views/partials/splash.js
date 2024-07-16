@@ -3,7 +3,7 @@ import { html } from 'lit'
 const splash = html`
     <div class="app-splash">
         <div>
-            <img class="app-logo" src="" />
+            <p style="color: #FFFFFF">loading...</p>
         </div>
     </div>
 `

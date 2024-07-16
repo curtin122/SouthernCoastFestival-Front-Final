@@ -1,30 +1,28 @@
-import App from '../../App'
-import {html, render } from 'lit-html'
-import {gotoRoute, anchorRoute} from '../../Router'
-import Auth from '../../Auth'
+import {html, render} from 'lit-html'
 import Utils from '../../Utils'
-import Event from '../../Event'
-import Toast from '../../Toast'
+import App from '../../App'
 
 class AdminView {
-  init(){
+  init() {
     console.log('AdminView.init')
-    document.title = 'Home'    
-    this.render()    
+    document.title = 'Home'        
     Utils.pageIntroAnim()
+    this.render()
   }
 
-  render(){
+  render() {
     const template = html`
-
+      
       <sc-app-header></sc-app-header>
 
       <div class="page-content">        
-        <p>admin go brr</p>
       </div>   
       
       <sc-app-footer></sc-app-footer>
+
     `
+
+    render(template, App.rootEl)
   }
 }
 
