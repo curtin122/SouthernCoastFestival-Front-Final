@@ -5752,10 +5752,19 @@ var _home = require("./views/pages/home");
 var _homeDefault = parcelHelpers.interopDefault(_home);
 var _404 = require("./views/pages/404");
 var _404Default = parcelHelpers.interopDefault(_404);
+var _admin = require("./views/pages/admin");
+var _adminDefault = parcelHelpers.interopDefault(_admin);
+var _events = require("./views/pages/events");
+var _eventsDefault = parcelHelpers.interopDefault(_events);
+var _newEvent = require("./views/pages/new-event");
+var _newEventDefault = parcelHelpers.interopDefault(_newEvent);
 // define routes
 const routes = {
     "/": (0, _homeDefault.default),
-    "404": (0, _404Default.default)
+    "404": (0, _404Default.default),
+    "/admin": (0, _adminDefault.default),
+    "/events": (0, _eventsDefault.default),
+    "/newEvent": (0, _newEventDefault.default)
 };
 class Router {
     constructor(){
@@ -5795,7 +5804,7 @@ function anchorRoute(e) {
     AppRouter.gotoRoute(pathname);
 }
 
-},{"./views/pages/home":"5Djc2","./views/pages/404":"BO0AV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5Djc2":[function(require,module,exports) {
+},{"./views/pages/home":"5Djc2","./views/pages/404":"BO0AV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/pages/admin":"aT5rw","./views/pages/events":"j0aCk","./views/pages/new-event":"j1mpb"}],"5Djc2":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$7d32 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -5993,7 +6002,7 @@ exports.default = new HomeView();
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"../../App":"2kQhy","lit-html":"1cmQt","../../Router":"kOSdl","../../Auth":"wuqrX","../../Utils":"iRY6S","../../Event":"cqvk6","../../Toast":"4N7Ir","react":"21dqq","../../components/react/reactHelper":"3QXBS","../../components/react/sc-event-card":"8huJy","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"1cmQt":[function(require,module,exports) {
+},{"../../App":"2kQhy","lit-html":"1cmQt","../../Router":"kOSdl","../../Auth":"wuqrX","../../Utils":"iRY6S","../../Event":"cqvk6","../../Toast":"4N7Ir","react":"21dqq","../../components/react/reactHelper":"3QXBS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../components/react/sc-event-card":"8huJy"}],"1cmQt":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2017 Google LLC
@@ -45021,7 +45030,124 @@ class ErrorView {
 }
 exports.default = new ErrorView();
 
-},{"../../App":"2kQhy","lit-html":"1cmQt","../../Router":"kOSdl","../../Auth":"wuqrX","../../Utils":"iRY6S","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kDC1R":[function(require,module,exports) {
+},{"../../App":"2kQhy","lit-html":"1cmQt","../../Router":"kOSdl","../../Auth":"wuqrX","../../Utils":"iRY6S","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aT5rw":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _app = require("../../App");
+var _appDefault = parcelHelpers.interopDefault(_app);
+var _litHtml = require("lit-html");
+var _router = require("../../Router");
+var _auth = require("../../Auth");
+var _authDefault = parcelHelpers.interopDefault(_auth);
+var _utils = require("../../Utils");
+var _utilsDefault = parcelHelpers.interopDefault(_utils);
+var _event = require("../../Event");
+var _eventDefault = parcelHelpers.interopDefault(_event);
+var _toast = require("../../Toast");
+var _toastDefault = parcelHelpers.interopDefault(_toast);
+class AdminView {
+    init() {
+        console.log("AdminView.init");
+        document.title = "Home";
+        this.render();
+        (0, _utilsDefault.default).pageIntroAnim();
+    }
+    render() {
+        const template = (0, _litHtml.html)`
+
+      <sc-app-header></sc-app-header>
+
+      <div class="page-content">        
+        <p>admin go brr</p>
+      </div>   
+      
+      <sc-app-footer></sc-app-footer>
+    `;
+    }
+}
+exports.default = new AdminView();
+
+},{"../../App":"2kQhy","lit-html":"1cmQt","../../Router":"kOSdl","../../Auth":"wuqrX","../../Utils":"iRY6S","../../Event":"cqvk6","../../Toast":"4N7Ir","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"j0aCk":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _app = require("../../App");
+var _appDefault = parcelHelpers.interopDefault(_app);
+var _lit = require("lit");
+var _router = require("../../Router");
+var _event = require("../../Event");
+var _eventDefault = parcelHelpers.interopDefault(_event);
+var _auth = require("../../Auth");
+var _authDefault = parcelHelpers.interopDefault(_auth);
+var _toast = require("../../Toast");
+var _toastDefault = parcelHelpers.interopDefault(_toast);
+var _utils = require("../../Utils");
+var _utilsDefault = parcelHelpers.interopDefault(_utils);
+class EventsView {
+}
+exports.default = new EventsView();
+
+},{"../../App":"2kQhy","lit":"4antt","../../Router":"kOSdl","../../Event":"cqvk6","../../Auth":"wuqrX","../../Toast":"4N7Ir","../../Utils":"iRY6S","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"j1mpb":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _app = require("../../App");
+var _appDefault = parcelHelpers.interopDefault(_app);
+var _lit = require("lit");
+var _router = require("../../Router");
+var _event = require("../../Event");
+var _eventDefault = parcelHelpers.interopDefault(_event);
+var _auth = require("../../Auth");
+var _authDefault = parcelHelpers.interopDefault(_auth);
+var _toast = require("../../Toast");
+var _toastDefault = parcelHelpers.interopDefault(_toast);
+var _utils = require("../../Utils");
+var _utilsDefault = parcelHelpers.interopDefault(_utils);
+class newEventView {
+    init() {
+        console.log("NewEvent.init");
+        document.title = "New Post";
+        this.render();
+        (0, _utilsDefault.default).pageIntroAnim;
+    }
+    async newEventSubmitHandler(event) {
+        event.preventDefault();
+        const submitBtn = document.querySelector(".submit-btn");
+        const formData = event.detail.formData;
+        // upload image to formData
+        const fileInput = document.getElementById("fileInput");
+        fileInput.addEventListener("change", (event)=>{
+            const selectedFile = event.target.files[0];
+            if (selectedFile) alert("Selected file: " + selectedFile.name);
+        });
+        // submit using Post
+        try {
+            await (0, _eventDefault.default).newEvent(formData);
+            (0, _toastDefault.default).show("Event added");
+        } catch (err) {
+            (0, _toastDefault.default).show(err);
+        }
+    }
+    uploadImage() {
+        document.getElementById("fileInput").click();
+    }
+    render() {
+        const template = (0, _lit.html)`
+            
+            <sc-app-header></sc-app-header>
+
+            <div class="page-content">
+                <h2>Add new event:</h2>
+                <div class="new-event-container">
+                    <form class="new-event-form">
+                        <input type="text" id="eventdisplayname"></input>
+                    </form>
+                </div>
+            </div>
+        `;
+    }
+}
+exports.default = new newEventView();
+
+},{"../../App":"2kQhy","lit":"4antt","../../Router":"kOSdl","../../Event":"cqvk6","../../Auth":"wuqrX","../../Toast":"4N7Ir","../../Utils":"iRY6S","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kDC1R":[function(require,module,exports) {
 var _lit = require("lit");
 class AppHeader extends (0, _lit.LitElement) {
     constructor(){
@@ -45270,7 +45396,7 @@ class AppFooter extends (0, _lit.LitElement) {
                     <p>Disclaimer: This website has been created as part of an assignment in an approved course of study for Curtin University and contains copyright material not created by the author. All copyright material used remains copyright of the respective owners and has been used here pursuant to Section 40 of the Copyright Act 1968 (Commonwealth of Australia). No part of this work may be reproduced without consent of the original copyright owners. See code comments for references.</p>
                 </div>
                 <div class="app-footer-right">
-                    <a href="#adminLogin">Administration Login</a>
+                    <a href="admin">Administration Login</a>
                 </div>
             </footer>
 
