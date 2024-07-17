@@ -1,10 +1,9 @@
 // REACT COMPONENT STYLING
 
 // EVENT CARD --------------------------------------
-.event-card {
-    max-width: 24%;
+.card {
     background-color: #2b2b2b !important;
-    min-height: 200px;
+    height: 100%;
 
     .event-content {
         padding: 0;
@@ -63,7 +62,11 @@
             cursor: pointer;
         }
     }
+    .hidden {
+        display: none;
+    }
 }
+
 
 // RESPONSIVE - TABLET ---------------------------------
 @media all and (max-width: 768px) {

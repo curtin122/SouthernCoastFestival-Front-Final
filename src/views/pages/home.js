@@ -1,7 +1,5 @@
 import App from '../../App'
 import {html, render } from 'lit-html'
-import {gotoRoute, anchorRoute} from '../../Router'
-import Auth from '../../Auth'
 import Utils from '../../Utils'
 import Event from '../../Event'
 import Toast from '../../Toast'
@@ -83,24 +81,9 @@ class HomeView {
               <p class="message">Showing all __ items</p>
             </div>
           </div>
+          
           <div class="events-grid">
             <div id="card-container"></div>
-          </div>
-
-          <!--EVENTS-->
-          <div class="event-grid">
-            ${this.events == null ? html`
-                <Skeleton variant="rectangular" width={210} height={118} />
-              ` : html`
-                ${this.events.map(event => html`
-                  <sc-event class="event-card"
-                    name="${event.name}",
-                    description="${event.description}",
-                    image="${event.image}",
-                    length="${event.length}",
-                    artist="${event.artist}"
-                `)}
-              `}
           </div>
         </div>
 

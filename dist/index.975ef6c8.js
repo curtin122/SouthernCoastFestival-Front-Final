@@ -2958,7 +2958,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     (0, _appDefault.default).init();
 });
 
-},{"./App":"2kQhy","./components/sc-app-header":"kDC1R","./scss/master.scss":"gpsI5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./components/sc-app-footer":"eSeCb"}],"2kQhy":[function(require,module,exports) {
+},{"./App":"2kQhy","./components/sc-app-header":"kDC1R","./components/sc-app-footer":"eSeCb","./scss/master.scss":"gpsI5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2kQhy":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _router = require("./Router");
@@ -3054,7 +3054,7 @@ function anchorRoute(e) {
     AppRouter.gotoRoute(pathname);
 }
 
-},{"./views/pages/home":"5Djc2","./views/pages/404":"BO0AV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/pages/admin":"aT5rw","./views/pages/events":"j0aCk","./views/pages/new-event":"j1mpb"}],"5Djc2":[function(require,module,exports) {
+},{"./views/pages/home":"5Djc2","./views/pages/404":"BO0AV","./views/pages/admin":"aT5rw","./views/pages/events":"j0aCk","./views/pages/new-event":"j1mpb","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5Djc2":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$7d32 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -3066,9 +3066,6 @@ parcelHelpers.defineInteropFlag(exports);
 var _app = require("../../App");
 var _appDefault = parcelHelpers.interopDefault(_app);
 var _litHtml = require("lit-html");
-var _router = require("../../Router");
-var _auth = require("../../Auth");
-var _authDefault = parcelHelpers.interopDefault(_auth);
 var _utils = require("../../Utils");
 var _utilsDefault = parcelHelpers.interopDefault(_utils);
 var _event = require("../../Event");
@@ -3151,24 +3148,9 @@ class HomeView {
               <p class="message">Showing all __ items</p>
             </div>
           </div>
+          
           <div class="events-grid">
             <div id="card-container"></div>
-          </div>
-
-          <!--EVENTS-->
-          <div class="event-grid">
-            ${this.events == null ? (0, _litHtml.html)`
-                <Skeleton variant="rectangular" width={210} height={118} />
-              ` : (0, _litHtml.html)`
-                ${this.events.map((event)=>(0, _litHtml.html)`
-                  <sc-event class="event-card"
-                    name="${event.name}",
-                    description="${event.description}",
-                    image="${event.image}",
-                    length="${event.length}",
-                    artist="${event.artist}"
-                `)}
-              `}
           </div>
         </div>
 
@@ -3252,7 +3234,7 @@ exports.default = new HomeView();
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"../../App":"2kQhy","lit-html":"1cmQt","../../Router":"kOSdl","../../Auth":"wuqrX","../../Utils":"iRY6S","../../Event":"cqvk6","../../Toast":"4N7Ir","react":"21dqq","../../components/react/reactHelper":"3QXBS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../components/react/sc-event-card":"8huJy"}],"1cmQt":[function(require,module,exports) {
+},{"../../App":"2kQhy","lit-html":"1cmQt","../../Utils":"iRY6S","../../Event":"cqvk6","../../Toast":"4N7Ir","react":"21dqq","../../components/react/reactHelper":"3QXBS","../../components/react/sc-event-card":"8huJy","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"1cmQt":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2017 Google LLC
@@ -3563,500 +3545,34 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"wuqrX":[function(require,module,exports) {
+},{}],"iRY6S":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _app = require("./App");
-var _appDefault = parcelHelpers.interopDefault(_app);
-var _router = require("./Router");
-var _routerDefault = parcelHelpers.interopDefault(_router);
-var _splash = require("./views/partials/splash");
-var _splashDefault = parcelHelpers.interopDefault(_splash);
-var _lit = require("lit");
-var _toast = require("./Toast");
-var _toastDefault = parcelHelpers.interopDefault(_toast);
-class Auth {
-    constructor(){
-        this.currentUser = {};
-    }
-    // async sign up
-    // async sign in
-    // async check
-    async check(success) {
-        // show splash screen while loading
-        (0, _lit.render)((0, _splashDefault.default), (0, _appDefault.default).rootEl);
-        // check loacl token exists
-        if (!localStorage.accessToken) {
-            // no local token
-            // Toast.show("token not found")
-            // redirect
-            (0, _router.gotoRoute)("/");
-            return;
-        }
-        // validate token via the backend
-        const response = await fetch(`${(0, _appDefault.default).apiBase}/auth/validate`, {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${localStorage.accessToken}`
-            }
-        });
-        // response not ok
-        if (!response.ok) {
-            // console log error
-            const err = await response.json();
-            if (err) console.log(err);
-            // delete local token
-            localStorage.removeItem("accessToken");
-            (0, _toastDefault.default).show("session expired, please sign in");
-            // redirect to sign in
-            (0, _router.gotoRoute)("/signin");
-            return;
-        }
-        // token is valid
-        const data = await response.json();
-        // set currentUser obj
-        this.currentUser = data.user;
-        // run success
-        success();
-    }
-}
-exports.default = new Auth();
-
-},{"./App":"2kQhy","./Router":"kOSdl","./views/partials/splash":"kasI3","lit":"4antt","./Toast":"4N7Ir","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kasI3":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _lit = require("lit");
-const splash = (0, _lit.html)`
-    <div class="app-splash">
-        <div>
-            <p style="color: #FFFFFF">loading...</p>
-        </div>
-    </div>
-`;
-exports.default = splash;
-
-},{"lit":"4antt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4antt":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _reactiveElement = require("@lit/reactive-element");
-var _litHtml = require("lit-html");
-var _litElementJs = require("lit-element/lit-element.js");
-parcelHelpers.exportAll(_litElementJs, exports);
-var _isServerJs = require("lit-html/is-server.js");
-parcelHelpers.exportAll(_isServerJs, exports);
-
-},{"@lit/reactive-element":"hypet","lit-html":"1cmQt","lit-element/lit-element.js":"9YxkX","lit-html/is-server.js":"e2OXP","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hypet":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "CSSResult", ()=>(0, _cssTagJs.CSSResult));
-parcelHelpers.export(exports, "adoptStyles", ()=>(0, _cssTagJs.adoptStyles));
-parcelHelpers.export(exports, "css", ()=>(0, _cssTagJs.css));
-parcelHelpers.export(exports, "getCompatibleStyle", ()=>(0, _cssTagJs.getCompatibleStyle));
-parcelHelpers.export(exports, "supportsAdoptingStyleSheets", ()=>(0, _cssTagJs.supportsAdoptingStyleSheets));
-parcelHelpers.export(exports, "unsafeCSS", ()=>(0, _cssTagJs.unsafeCSS));
-parcelHelpers.export(exports, "ReactiveElement", ()=>b);
-parcelHelpers.export(exports, "defaultConverter", ()=>u);
-parcelHelpers.export(exports, "notEqual", ()=>f);
-var _cssTagJs = require("./css-tag.js");
-/**
- * @license
- * Copyright 2017 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */ const { is: i, defineProperty: e, getOwnPropertyDescriptor: r, getOwnPropertyNames: h, getOwnPropertySymbols: o, getPrototypeOf: n } = Object, a = globalThis, c = a.trustedTypes, l = c ? c.emptyScript : "", p = a.reactiveElementPolyfillSupport, d = (t, s)=>t, u = {
-    toAttribute (t, s) {
-        switch(s){
-            case Boolean:
-                t = t ? l : null;
-                break;
-            case Object:
-            case Array:
-                t = null == t ? t : JSON.stringify(t);
-        }
-        return t;
-    },
-    fromAttribute (t, s) {
-        let i = t;
-        switch(s){
-            case Boolean:
-                i = null !== t;
-                break;
-            case Number:
-                i = null === t ? null : Number(t);
-                break;
-            case Object:
-            case Array:
-                try {
-                    i = JSON.parse(t);
-                } catch (t) {
-                    i = null;
-                }
-        }
-        return i;
-    }
-}, f = (t, s)=>!i(t, s), y = {
-    attribute: !0,
-    type: String,
-    converter: u,
-    reflect: !1,
-    hasChanged: f
-};
-Symbol.metadata ??= Symbol("metadata"), a.litPropertyMetadata ??= new WeakMap;
-class b extends HTMLElement {
-    static addInitializer(t) {
-        this._$Ei(), (this.l ??= []).push(t);
-    }
-    static get observedAttributes() {
-        return this.finalize(), this._$Eh && [
-            ...this._$Eh.keys()
-        ];
-    }
-    static createProperty(t, s = y) {
-        if (s.state && (s.attribute = !1), this._$Ei(), this.elementProperties.set(t, s), !s.noAccessor) {
-            const i = Symbol(), r = this.getPropertyDescriptor(t, i, s);
-            void 0 !== r && e(this.prototype, t, r);
-        }
-    }
-    static getPropertyDescriptor(t, s, i) {
-        const { get: e, set: h } = r(this.prototype, t) ?? {
-            get () {
-                return this[s];
-            },
-            set (t) {
-                this[s] = t;
-            }
-        };
-        return {
-            get () {
-                return e?.call(this);
-            },
-            set (s) {
-                const r = e?.call(this);
-                h.call(this, s), this.requestUpdate(t, r, i);
-            },
-            configurable: !0,
-            enumerable: !0
-        };
-    }
-    static getPropertyOptions(t) {
-        return this.elementProperties.get(t) ?? y;
-    }
-    static _$Ei() {
-        if (this.hasOwnProperty(d("elementProperties"))) return;
-        const t = n(this);
-        t.finalize(), void 0 !== t.l && (this.l = [
-            ...t.l
-        ]), this.elementProperties = new Map(t.elementProperties);
-    }
-    static finalize() {
-        if (this.hasOwnProperty(d("finalized"))) return;
-        if (this.finalized = !0, this._$Ei(), this.hasOwnProperty(d("properties"))) {
-            const t = this.properties, s = [
-                ...h(t),
-                ...o(t)
-            ];
-            for (const i of s)this.createProperty(i, t[i]);
-        }
-        const t = this[Symbol.metadata];
-        if (null !== t) {
-            const s = litPropertyMetadata.get(t);
-            if (void 0 !== s) for (const [t, i] of s)this.elementProperties.set(t, i);
-        }
-        this._$Eh = new Map;
-        for (const [t, s] of this.elementProperties){
-            const i = this._$Eu(t, s);
-            void 0 !== i && this._$Eh.set(i, t);
-        }
-        this.elementStyles = this.finalizeStyles(this.styles);
-    }
-    static finalizeStyles(s) {
-        const i = [];
-        if (Array.isArray(s)) {
-            const e = new Set(s.flat(1 / 0).reverse());
-            for (const s of e)i.unshift((0, _cssTagJs.getCompatibleStyle)(s));
-        } else void 0 !== s && i.push((0, _cssTagJs.getCompatibleStyle)(s));
-        return i;
-    }
-    static _$Eu(t, s) {
-        const i = s.attribute;
-        return !1 === i ? void 0 : "string" == typeof i ? i : "string" == typeof t ? t.toLowerCase() : void 0;
-    }
-    constructor(){
-        super(), this._$Ep = void 0, this.isUpdatePending = !1, this.hasUpdated = !1, this._$Em = null, this._$Ev();
-    }
-    _$Ev() {
-        this._$ES = new Promise((t)=>this.enableUpdating = t), this._$AL = new Map, this._$E_(), this.requestUpdate(), this.constructor.l?.forEach((t)=>t(this));
-    }
-    addController(t) {
-        (this._$EO ??= new Set).add(t), void 0 !== this.renderRoot && this.isConnected && t.hostConnected?.();
-    }
-    removeController(t) {
-        this._$EO?.delete(t);
-    }
-    _$E_() {
-        const t = new Map, s = this.constructor.elementProperties;
-        for (const i of s.keys())this.hasOwnProperty(i) && (t.set(i, this[i]), delete this[i]);
-        t.size > 0 && (this._$Ep = t);
-    }
-    createRenderRoot() {
-        const t = this.shadowRoot ?? this.attachShadow(this.constructor.shadowRootOptions);
-        return (0, _cssTagJs.adoptStyles)(t, this.constructor.elementStyles), t;
-    }
-    connectedCallback() {
-        this.renderRoot ??= this.createRenderRoot(), this.enableUpdating(!0), this._$EO?.forEach((t)=>t.hostConnected?.());
-    }
-    enableUpdating(t) {}
-    disconnectedCallback() {
-        this._$EO?.forEach((t)=>t.hostDisconnected?.());
-    }
-    attributeChangedCallback(t, s, i) {
-        this._$AK(t, i);
-    }
-    _$EC(t, s) {
-        const i = this.constructor.elementProperties.get(t), e = this.constructor._$Eu(t, i);
-        if (void 0 !== e && !0 === i.reflect) {
-            const r = (void 0 !== i.converter?.toAttribute ? i.converter : u).toAttribute(s, i.type);
-            this._$Em = t, null == r ? this.removeAttribute(e) : this.setAttribute(e, r), this._$Em = null;
-        }
-    }
-    _$AK(t, s) {
-        const i = this.constructor, e = i._$Eh.get(t);
-        if (void 0 !== e && this._$Em !== e) {
-            const t = i.getPropertyOptions(e), r = "function" == typeof t.converter ? {
-                fromAttribute: t.converter
-            } : void 0 !== t.converter?.fromAttribute ? t.converter : u;
-            this._$Em = e, this[e] = r.fromAttribute(s, t.type), this._$Em = null;
-        }
-    }
-    requestUpdate(t, s, i) {
-        if (void 0 !== t) {
-            if (i ??= this.constructor.getPropertyOptions(t), !(i.hasChanged ?? f)(this[t], s)) return;
-            this.P(t, s, i);
-        }
-        !1 === this.isUpdatePending && (this._$ES = this._$ET());
-    }
-    P(t, s, i) {
-        this._$AL.has(t) || this._$AL.set(t, s), !0 === i.reflect && this._$Em !== t && (this._$Ej ??= new Set).add(t);
-    }
-    async _$ET() {
-        this.isUpdatePending = !0;
-        try {
-            await this._$ES;
-        } catch (t) {
-            Promise.reject(t);
-        }
-        const t = this.scheduleUpdate();
-        return null != t && await t, !this.isUpdatePending;
-    }
-    scheduleUpdate() {
-        return this.performUpdate();
-    }
-    performUpdate() {
-        if (!this.isUpdatePending) return;
-        if (!this.hasUpdated) {
-            if (this.renderRoot ??= this.createRenderRoot(), this._$Ep) {
-                for (const [t, s] of this._$Ep)this[t] = s;
-                this._$Ep = void 0;
-            }
-            const t = this.constructor.elementProperties;
-            if (t.size > 0) for (const [s, i] of t)!0 !== i.wrapped || this._$AL.has(s) || void 0 === this[s] || this.P(s, this[s], i);
-        }
-        let t = !1;
-        const s = this._$AL;
-        try {
-            t = this.shouldUpdate(s), t ? (this.willUpdate(s), this._$EO?.forEach((t)=>t.hostUpdate?.()), this.update(s)) : this._$EU();
-        } catch (s) {
-            throw t = !1, this._$EU(), s;
-        }
-        t && this._$AE(s);
-    }
-    willUpdate(t) {}
-    _$AE(t) {
-        this._$EO?.forEach((t)=>t.hostUpdated?.()), this.hasUpdated || (this.hasUpdated = !0, this.firstUpdated(t)), this.updated(t);
-    }
-    _$EU() {
-        this._$AL = new Map, this.isUpdatePending = !1;
-    }
-    get updateComplete() {
-        return this.getUpdateComplete();
-    }
-    getUpdateComplete() {
-        return this._$ES;
-    }
-    shouldUpdate(t) {
-        return !0;
-    }
-    update(t) {
-        this._$Ej &&= this._$Ej.forEach((t)=>this._$EC(t, this[t])), this._$EU();
-    }
-    updated(t) {}
-    firstUpdated(t) {}
-}
-b.elementStyles = [], b.shadowRootOptions = {
-    mode: "open"
-}, b[d("elementProperties")] = new Map, b[d("finalized")] = new Map, p?.({
-    ReactiveElement: b
-}), (a.reactiveElementVersions ??= []).push("2.0.4");
-
-},{"./css-tag.js":"gkZsf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkZsf":[function(require,module,exports) {
-/**
- * @license
- * Copyright 2019 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "CSSResult", ()=>n);
-parcelHelpers.export(exports, "adoptStyles", ()=>S);
-parcelHelpers.export(exports, "css", ()=>i);
-parcelHelpers.export(exports, "getCompatibleStyle", ()=>c);
-parcelHelpers.export(exports, "supportsAdoptingStyleSheets", ()=>e);
-parcelHelpers.export(exports, "unsafeCSS", ()=>r);
-const t = globalThis, e = t.ShadowRoot && (void 0 === t.ShadyCSS || t.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, s = Symbol(), o = new WeakMap;
-class n {
-    constructor(t, e, o){
-        if (this._$cssResult$ = !0, o !== s) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
-        this.cssText = t, this.t = e;
-    }
-    get styleSheet() {
-        let t = this.o;
-        const s = this.t;
-        if (e && void 0 === t) {
-            const e = void 0 !== s && 1 === s.length;
-            e && (t = o.get(s)), void 0 === t && ((this.o = t = new CSSStyleSheet).replaceSync(this.cssText), e && o.set(s, t));
-        }
-        return t;
-    }
-    toString() {
-        return this.cssText;
-    }
-}
-const r = (t)=>new n("string" == typeof t ? t : t + "", void 0, s), i = (t, ...e)=>{
-    const o = 1 === t.length ? t[0] : e.reduce((e, s, o)=>e + ((t)=>{
-            if (!0 === t._$cssResult$) return t.cssText;
-            if ("number" == typeof t) return t;
-            throw Error("Value passed to 'css' function must be a 'css' function result: " + t + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
-        })(s) + t[o + 1], t[0]);
-    return new n(o, t, s);
-}, S = (s, o)=>{
-    if (e) s.adoptedStyleSheets = o.map((t)=>t instanceof CSSStyleSheet ? t : t.styleSheet);
-    else for (const e of o){
-        const o = document.createElement("style"), n = t.litNonce;
-        void 0 !== n && o.setAttribute("nonce", n), o.textContent = e.cssText, s.appendChild(o);
-    }
-}, c = e ? (t)=>t : (t)=>t instanceof CSSStyleSheet ? ((t)=>{
-        let e = "";
-        for (const s of t.cssRules)e += s.cssText;
-        return r(e);
-    })(t) : t;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9YxkX":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "LitElement", ()=>s);
-parcelHelpers.export(exports, "_$LE", ()=>o);
-var _reactiveElement = require("@lit/reactive-element");
-parcelHelpers.exportAll(_reactiveElement, exports);
-var _litHtml = require("lit-html");
-parcelHelpers.exportAll(_litHtml, exports);
-/**
- * @license
- * Copyright 2017 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */ class s extends (0, _reactiveElement.ReactiveElement) {
-    constructor(){
-        super(...arguments), this.renderOptions = {
-            host: this
-        }, this._$Do = void 0;
-    }
-    createRenderRoot() {
-        const t = super.createRenderRoot();
-        return this.renderOptions.renderBefore ??= t.firstChild, t;
-    }
-    update(t) {
-        const i = this.render();
-        this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(t), this._$Do = (0, _litHtml.render)(i, this.renderRoot, this.renderOptions);
-    }
-    connectedCallback() {
-        super.connectedCallback(), this._$Do?.setConnected(!0);
-    }
-    disconnectedCallback() {
-        super.disconnectedCallback(), this._$Do?.setConnected(!1);
-    }
-    render() {
-        return 0, _litHtml.noChange;
-    }
-}
-s._$litElement$ = !0, s["finalized"] = !0, globalThis.litElementHydrateSupport?.({
-    LitElement: s
-});
-const r = globalThis.litElementPolyfillSupport;
-r?.({
-    LitElement: s
-});
-const o = {
-    _$AK: (t, e, i)=>{
-        t._$AK(e, i);
-    },
-    _$AL: (t)=>t._$AL
-};
-(globalThis.litElementVersions ??= []).push("4.0.6");
-
-},{"@lit/reactive-element":"hypet","lit-html":"1cmQt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"e2OXP":[function(require,module,exports) {
-/**
- * @license
- * Copyright 2022 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "isServer", ()=>o);
-const o = !1;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4N7Ir":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _app = require("./App");
-var _appDefault = parcelHelpers.interopDefault(_app);
-var _lit = require("lit");
 var _gsap = require("gsap");
-class Toast {
-    static init() {
-        this.showDuration = 2.5;
-        // create container element
-        this.containerEl = document.createElement("div");
-        this.containerEl.id = "toasts";
-        // append to <body>
-        document.body.appendChild(this.containerEl);
+var _gsapDefault = parcelHelpers.interopDefault(_gsap);
+class Utils {
+    isMobile() {
+        let viewportWidth = window.innerWidth;
+        if (viewportWidth <= 768) return true;
+        else return false;
     }
-    static show(content, type = "") {
-        if (!content) return;
-        // create element
-        const toastEl = document.createElement("div");
-        toastEl.className = "toast-entry";
-        if (type != "") toastEl.classList.add("is-error");
-        toastEl.innerText = content;
-        // append to container
-        this.containerEl.appendChild(toastEl);
-        // animate using gsap
-        const tl = (0, _gsap.gsap).timeline();
-        tl.from(toastEl, {
-            y: 60,
+    pageIntroAnim() {
+        const pageContent = document.querySelector(".page-content");
+        if (!pageContent) return;
+        (0, _gsapDefault.default).fromTo(pageContent, {
             opacity: 0,
-            duration: 0.3,
-            ease: "power3.out"
-        });
-        tl.to(toastEl, {
-            marginTop: -50,
-            opacity: 0,
-            delay: this.showDuration,
-            duration: 0.3,
-            onComplete: ()=>{
-                toastEl.remove();
-            }
+            y: -12
+        }, {
+            opacity: 1,
+            y: 0,
+            ease: "power2.out",
+            duration: 0.3
         });
     }
 }
-exports.default = Toast;
+exports.default = new Utils();
 
-},{"./App":"2kQhy","lit":"4antt","gsap":"fPSuC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fPSuC":[function(require,module,exports) {
+},{"gsap":"fPSuC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fPSuC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "gsap", ()=>gsapWithCSS);
@@ -8080,34 +7596,7 @@ var CSSPlugin = {
 });
 (0, _gsapCoreJs.gsap).registerPlugin(CSSPlugin);
 
-},{"./gsap-core.js":"05eeC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iRY6S":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _gsap = require("gsap");
-var _gsapDefault = parcelHelpers.interopDefault(_gsap);
-class Utils {
-    isMobile() {
-        let viewportWidth = window.innerWidth;
-        if (viewportWidth <= 768) return true;
-        else return false;
-    }
-    pageIntroAnim() {
-        const pageContent = document.querySelector(".page-content");
-        if (!pageContent) return;
-        (0, _gsapDefault.default).fromTo(pageContent, {
-            opacity: 0,
-            y: -12
-        }, {
-            opacity: 1,
-            y: 0,
-            ease: "power2.out",
-            duration: 0.3
-        });
-    }
-}
-exports.default = new Utils();
-
-},{"gsap":"fPSuC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cqvk6":[function(require,module,exports) {
+},{"./gsap-core.js":"05eeC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cqvk6":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _app = require("./App");
@@ -8144,7 +7633,428 @@ class Event {
 }
 exports.default = new Event();
 
-},{"./App":"2kQhy","./Router":"kOSdl","./Toast":"4N7Ir","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"21dqq":[function(require,module,exports) {
+},{"./App":"2kQhy","./Router":"kOSdl","./Toast":"4N7Ir","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4N7Ir":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _app = require("./App");
+var _appDefault = parcelHelpers.interopDefault(_app);
+var _lit = require("lit");
+var _gsap = require("gsap");
+class Toast {
+    static init() {
+        this.showDuration = 2.5;
+        // create container element
+        this.containerEl = document.createElement("div");
+        this.containerEl.id = "toasts";
+        // append to <body>
+        document.body.appendChild(this.containerEl);
+    }
+    static show(content, type = "") {
+        if (!content) return;
+        // create element
+        const toastEl = document.createElement("div");
+        toastEl.className = "toast-entry";
+        if (type != "") toastEl.classList.add("is-error");
+        toastEl.innerText = content;
+        // append to container
+        this.containerEl.appendChild(toastEl);
+        // animate using gsap
+        const tl = (0, _gsap.gsap).timeline();
+        tl.from(toastEl, {
+            y: 60,
+            opacity: 0,
+            duration: 0.3,
+            ease: "power3.out"
+        });
+        tl.to(toastEl, {
+            marginTop: -50,
+            opacity: 0,
+            delay: this.showDuration,
+            duration: 0.3,
+            onComplete: ()=>{
+                toastEl.remove();
+            }
+        });
+    }
+}
+exports.default = Toast;
+
+},{"./App":"2kQhy","lit":"4antt","gsap":"fPSuC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4antt":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _reactiveElement = require("@lit/reactive-element");
+var _litHtml = require("lit-html");
+var _litElementJs = require("lit-element/lit-element.js");
+parcelHelpers.exportAll(_litElementJs, exports);
+var _isServerJs = require("lit-html/is-server.js");
+parcelHelpers.exportAll(_isServerJs, exports);
+
+},{"@lit/reactive-element":"hypet","lit-html":"1cmQt","lit-element/lit-element.js":"9YxkX","lit-html/is-server.js":"e2OXP","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hypet":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "CSSResult", ()=>(0, _cssTagJs.CSSResult));
+parcelHelpers.export(exports, "adoptStyles", ()=>(0, _cssTagJs.adoptStyles));
+parcelHelpers.export(exports, "css", ()=>(0, _cssTagJs.css));
+parcelHelpers.export(exports, "getCompatibleStyle", ()=>(0, _cssTagJs.getCompatibleStyle));
+parcelHelpers.export(exports, "supportsAdoptingStyleSheets", ()=>(0, _cssTagJs.supportsAdoptingStyleSheets));
+parcelHelpers.export(exports, "unsafeCSS", ()=>(0, _cssTagJs.unsafeCSS));
+parcelHelpers.export(exports, "ReactiveElement", ()=>b);
+parcelHelpers.export(exports, "defaultConverter", ()=>u);
+parcelHelpers.export(exports, "notEqual", ()=>f);
+var _cssTagJs = require("./css-tag.js");
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */ const { is: i, defineProperty: e, getOwnPropertyDescriptor: r, getOwnPropertyNames: h, getOwnPropertySymbols: o, getPrototypeOf: n } = Object, a = globalThis, c = a.trustedTypes, l = c ? c.emptyScript : "", p = a.reactiveElementPolyfillSupport, d = (t, s)=>t, u = {
+    toAttribute (t, s) {
+        switch(s){
+            case Boolean:
+                t = t ? l : null;
+                break;
+            case Object:
+            case Array:
+                t = null == t ? t : JSON.stringify(t);
+        }
+        return t;
+    },
+    fromAttribute (t, s) {
+        let i = t;
+        switch(s){
+            case Boolean:
+                i = null !== t;
+                break;
+            case Number:
+                i = null === t ? null : Number(t);
+                break;
+            case Object:
+            case Array:
+                try {
+                    i = JSON.parse(t);
+                } catch (t) {
+                    i = null;
+                }
+        }
+        return i;
+    }
+}, f = (t, s)=>!i(t, s), y = {
+    attribute: !0,
+    type: String,
+    converter: u,
+    reflect: !1,
+    hasChanged: f
+};
+Symbol.metadata ??= Symbol("metadata"), a.litPropertyMetadata ??= new WeakMap;
+class b extends HTMLElement {
+    static addInitializer(t) {
+        this._$Ei(), (this.l ??= []).push(t);
+    }
+    static get observedAttributes() {
+        return this.finalize(), this._$Eh && [
+            ...this._$Eh.keys()
+        ];
+    }
+    static createProperty(t, s = y) {
+        if (s.state && (s.attribute = !1), this._$Ei(), this.elementProperties.set(t, s), !s.noAccessor) {
+            const i = Symbol(), r = this.getPropertyDescriptor(t, i, s);
+            void 0 !== r && e(this.prototype, t, r);
+        }
+    }
+    static getPropertyDescriptor(t, s, i) {
+        const { get: e, set: h } = r(this.prototype, t) ?? {
+            get () {
+                return this[s];
+            },
+            set (t) {
+                this[s] = t;
+            }
+        };
+        return {
+            get () {
+                return e?.call(this);
+            },
+            set (s) {
+                const r = e?.call(this);
+                h.call(this, s), this.requestUpdate(t, r, i);
+            },
+            configurable: !0,
+            enumerable: !0
+        };
+    }
+    static getPropertyOptions(t) {
+        return this.elementProperties.get(t) ?? y;
+    }
+    static _$Ei() {
+        if (this.hasOwnProperty(d("elementProperties"))) return;
+        const t = n(this);
+        t.finalize(), void 0 !== t.l && (this.l = [
+            ...t.l
+        ]), this.elementProperties = new Map(t.elementProperties);
+    }
+    static finalize() {
+        if (this.hasOwnProperty(d("finalized"))) return;
+        if (this.finalized = !0, this._$Ei(), this.hasOwnProperty(d("properties"))) {
+            const t = this.properties, s = [
+                ...h(t),
+                ...o(t)
+            ];
+            for (const i of s)this.createProperty(i, t[i]);
+        }
+        const t = this[Symbol.metadata];
+        if (null !== t) {
+            const s = litPropertyMetadata.get(t);
+            if (void 0 !== s) for (const [t, i] of s)this.elementProperties.set(t, i);
+        }
+        this._$Eh = new Map;
+        for (const [t, s] of this.elementProperties){
+            const i = this._$Eu(t, s);
+            void 0 !== i && this._$Eh.set(i, t);
+        }
+        this.elementStyles = this.finalizeStyles(this.styles);
+    }
+    static finalizeStyles(s) {
+        const i = [];
+        if (Array.isArray(s)) {
+            const e = new Set(s.flat(1 / 0).reverse());
+            for (const s of e)i.unshift((0, _cssTagJs.getCompatibleStyle)(s));
+        } else void 0 !== s && i.push((0, _cssTagJs.getCompatibleStyle)(s));
+        return i;
+    }
+    static _$Eu(t, s) {
+        const i = s.attribute;
+        return !1 === i ? void 0 : "string" == typeof i ? i : "string" == typeof t ? t.toLowerCase() : void 0;
+    }
+    constructor(){
+        super(), this._$Ep = void 0, this.isUpdatePending = !1, this.hasUpdated = !1, this._$Em = null, this._$Ev();
+    }
+    _$Ev() {
+        this._$ES = new Promise((t)=>this.enableUpdating = t), this._$AL = new Map, this._$E_(), this.requestUpdate(), this.constructor.l?.forEach((t)=>t(this));
+    }
+    addController(t) {
+        (this._$EO ??= new Set).add(t), void 0 !== this.renderRoot && this.isConnected && t.hostConnected?.();
+    }
+    removeController(t) {
+        this._$EO?.delete(t);
+    }
+    _$E_() {
+        const t = new Map, s = this.constructor.elementProperties;
+        for (const i of s.keys())this.hasOwnProperty(i) && (t.set(i, this[i]), delete this[i]);
+        t.size > 0 && (this._$Ep = t);
+    }
+    createRenderRoot() {
+        const t = this.shadowRoot ?? this.attachShadow(this.constructor.shadowRootOptions);
+        return (0, _cssTagJs.adoptStyles)(t, this.constructor.elementStyles), t;
+    }
+    connectedCallback() {
+        this.renderRoot ??= this.createRenderRoot(), this.enableUpdating(!0), this._$EO?.forEach((t)=>t.hostConnected?.());
+    }
+    enableUpdating(t) {}
+    disconnectedCallback() {
+        this._$EO?.forEach((t)=>t.hostDisconnected?.());
+    }
+    attributeChangedCallback(t, s, i) {
+        this._$AK(t, i);
+    }
+    _$EC(t, s) {
+        const i = this.constructor.elementProperties.get(t), e = this.constructor._$Eu(t, i);
+        if (void 0 !== e && !0 === i.reflect) {
+            const r = (void 0 !== i.converter?.toAttribute ? i.converter : u).toAttribute(s, i.type);
+            this._$Em = t, null == r ? this.removeAttribute(e) : this.setAttribute(e, r), this._$Em = null;
+        }
+    }
+    _$AK(t, s) {
+        const i = this.constructor, e = i._$Eh.get(t);
+        if (void 0 !== e && this._$Em !== e) {
+            const t = i.getPropertyOptions(e), r = "function" == typeof t.converter ? {
+                fromAttribute: t.converter
+            } : void 0 !== t.converter?.fromAttribute ? t.converter : u;
+            this._$Em = e, this[e] = r.fromAttribute(s, t.type), this._$Em = null;
+        }
+    }
+    requestUpdate(t, s, i) {
+        if (void 0 !== t) {
+            if (i ??= this.constructor.getPropertyOptions(t), !(i.hasChanged ?? f)(this[t], s)) return;
+            this.P(t, s, i);
+        }
+        !1 === this.isUpdatePending && (this._$ES = this._$ET());
+    }
+    P(t, s, i) {
+        this._$AL.has(t) || this._$AL.set(t, s), !0 === i.reflect && this._$Em !== t && (this._$Ej ??= new Set).add(t);
+    }
+    async _$ET() {
+        this.isUpdatePending = !0;
+        try {
+            await this._$ES;
+        } catch (t) {
+            Promise.reject(t);
+        }
+        const t = this.scheduleUpdate();
+        return null != t && await t, !this.isUpdatePending;
+    }
+    scheduleUpdate() {
+        return this.performUpdate();
+    }
+    performUpdate() {
+        if (!this.isUpdatePending) return;
+        if (!this.hasUpdated) {
+            if (this.renderRoot ??= this.createRenderRoot(), this._$Ep) {
+                for (const [t, s] of this._$Ep)this[t] = s;
+                this._$Ep = void 0;
+            }
+            const t = this.constructor.elementProperties;
+            if (t.size > 0) for (const [s, i] of t)!0 !== i.wrapped || this._$AL.has(s) || void 0 === this[s] || this.P(s, this[s], i);
+        }
+        let t = !1;
+        const s = this._$AL;
+        try {
+            t = this.shouldUpdate(s), t ? (this.willUpdate(s), this._$EO?.forEach((t)=>t.hostUpdate?.()), this.update(s)) : this._$EU();
+        } catch (s) {
+            throw t = !1, this._$EU(), s;
+        }
+        t && this._$AE(s);
+    }
+    willUpdate(t) {}
+    _$AE(t) {
+        this._$EO?.forEach((t)=>t.hostUpdated?.()), this.hasUpdated || (this.hasUpdated = !0, this.firstUpdated(t)), this.updated(t);
+    }
+    _$EU() {
+        this._$AL = new Map, this.isUpdatePending = !1;
+    }
+    get updateComplete() {
+        return this.getUpdateComplete();
+    }
+    getUpdateComplete() {
+        return this._$ES;
+    }
+    shouldUpdate(t) {
+        return !0;
+    }
+    update(t) {
+        this._$Ej &&= this._$Ej.forEach((t)=>this._$EC(t, this[t])), this._$EU();
+    }
+    updated(t) {}
+    firstUpdated(t) {}
+}
+b.elementStyles = [], b.shadowRootOptions = {
+    mode: "open"
+}, b[d("elementProperties")] = new Map, b[d("finalized")] = new Map, p?.({
+    ReactiveElement: b
+}), (a.reactiveElementVersions ??= []).push("2.0.4");
+
+},{"./css-tag.js":"gkZsf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkZsf":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "CSSResult", ()=>n);
+parcelHelpers.export(exports, "adoptStyles", ()=>S);
+parcelHelpers.export(exports, "css", ()=>i);
+parcelHelpers.export(exports, "getCompatibleStyle", ()=>c);
+parcelHelpers.export(exports, "supportsAdoptingStyleSheets", ()=>e);
+parcelHelpers.export(exports, "unsafeCSS", ()=>r);
+const t = globalThis, e = t.ShadowRoot && (void 0 === t.ShadyCSS || t.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, s = Symbol(), o = new WeakMap;
+class n {
+    constructor(t, e, o){
+        if (this._$cssResult$ = !0, o !== s) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
+        this.cssText = t, this.t = e;
+    }
+    get styleSheet() {
+        let t = this.o;
+        const s = this.t;
+        if (e && void 0 === t) {
+            const e = void 0 !== s && 1 === s.length;
+            e && (t = o.get(s)), void 0 === t && ((this.o = t = new CSSStyleSheet).replaceSync(this.cssText), e && o.set(s, t));
+        }
+        return t;
+    }
+    toString() {
+        return this.cssText;
+    }
+}
+const r = (t)=>new n("string" == typeof t ? t : t + "", void 0, s), i = (t, ...e)=>{
+    const o = 1 === t.length ? t[0] : e.reduce((e, s, o)=>e + ((t)=>{
+            if (!0 === t._$cssResult$) return t.cssText;
+            if ("number" == typeof t) return t;
+            throw Error("Value passed to 'css' function must be a 'css' function result: " + t + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
+        })(s) + t[o + 1], t[0]);
+    return new n(o, t, s);
+}, S = (s, o)=>{
+    if (e) s.adoptedStyleSheets = o.map((t)=>t instanceof CSSStyleSheet ? t : t.styleSheet);
+    else for (const e of o){
+        const o = document.createElement("style"), n = t.litNonce;
+        void 0 !== n && o.setAttribute("nonce", n), o.textContent = e.cssText, s.appendChild(o);
+    }
+}, c = e ? (t)=>t : (t)=>t instanceof CSSStyleSheet ? ((t)=>{
+        let e = "";
+        for (const s of t.cssRules)e += s.cssText;
+        return r(e);
+    })(t) : t;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9YxkX":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "LitElement", ()=>s);
+parcelHelpers.export(exports, "_$LE", ()=>o);
+var _reactiveElement = require("@lit/reactive-element");
+parcelHelpers.exportAll(_reactiveElement, exports);
+var _litHtml = require("lit-html");
+parcelHelpers.exportAll(_litHtml, exports);
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */ class s extends (0, _reactiveElement.ReactiveElement) {
+    constructor(){
+        super(...arguments), this.renderOptions = {
+            host: this
+        }, this._$Do = void 0;
+    }
+    createRenderRoot() {
+        const t = super.createRenderRoot();
+        return this.renderOptions.renderBefore ??= t.firstChild, t;
+    }
+    update(t) {
+        const i = this.render();
+        this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(t), this._$Do = (0, _litHtml.render)(i, this.renderRoot, this.renderOptions);
+    }
+    connectedCallback() {
+        super.connectedCallback(), this._$Do?.setConnected(!0);
+    }
+    disconnectedCallback() {
+        super.disconnectedCallback(), this._$Do?.setConnected(!1);
+    }
+    render() {
+        return 0, _litHtml.noChange;
+    }
+}
+s._$litElement$ = !0, s["finalized"] = !0, globalThis.litElementHydrateSupport?.({
+    LitElement: s
+});
+const r = globalThis.litElementPolyfillSupport;
+r?.({
+    LitElement: s
+});
+const o = {
+    _$AK: (t, e, i)=>{
+        t._$AK(e, i);
+    },
+    _$AL: (t)=>t._$AL
+};
+(globalThis.litElementVersions ??= []).push("4.0.6");
+
+},{"@lit/reactive-element":"hypet","lit-html":"1cmQt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"e2OXP":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2022 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "isServer", ()=>o);
+const o = !1;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"21dqq":[function(require,module,exports) {
 "use strict";
 module.exports = require("a569817e6ea559f6");
 
@@ -32570,114 +32480,137 @@ var _reactScss = require("../../scss/react.scss");
 var _eventdata = require("../../eventdata");
 var _eventdataDefault = parcelHelpers.interopDefault(_eventdata);
 const eventCard = ()=>{
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
-        children: (0, _eventdataDefault.default).map((event)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Card), {
-                className: "event-card",
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardContent), {
-                    className: "event-content",
-                    children: [
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardMedia), {
-                            component: "img",
-                            alt: "placeholder",
-                            height: "150",
-                            image: event.eventimage,
-                            className: "event-image"
-                        }, void 0, false, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 14,
-                            columnNumber: 21
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Box), {
-                            className: "event-title-box",
-                            children: [
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                                    className: "event-title",
-                                    children: event.eventdisplayname
-                                }, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 21,
-                                    columnNumber: 25
-                                }, undefined),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.IconButton), {
-                                    className: "event-button",
-                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        className: "material-icons",
-                                        children: "favorite_border"
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Grid), {
+        container: true,
+        spacing: 3,
+        className: "card-grid",
+        children: (0, _eventdataDefault.default).map((event)=>{
+            const imageUrl = event.eventimage || (0, _chefBryanEntertainmentJpgDefault.default);
+            console.log("Image URL:", imageUrl);
+            return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Grid), {
+                item: true,
+                xs: 12,
+                sm: 6,
+                md: 4,
+                lg: 3,
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Card), {
+                    className: "card",
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardContent), {
+                        className: "event-content",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardMedia), {
+                                component: "img",
+                                alt: "placeholder",
+                                height: "150",
+                                image: event.eventimage,
+                                className: "event-image"
+                            }, void 0, false, {
+                                fileName: "src/components/react/sc-event-card.js",
+                                lineNumber: 18,
+                                columnNumber: 33
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Box), {
+                                className: "event-title-box",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                                        className: "event-title",
+                                        children: event.eventdisplayname
                                     }, void 0, false, {
                                         fileName: "src/components/react/sc-event-card.js",
                                         lineNumber: 25,
-                                        columnNumber: 29
+                                        columnNumber: 37
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.IconButton), {
+                                        className: "event-button",
+                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                            className: "material-icons",
+                                            children: "favorite_border"
+                                        }, void 0, false, {
+                                            fileName: "src/components/react/sc-event-card.js",
+                                            lineNumber: 29,
+                                            columnNumber: 41
+                                        }, undefined)
+                                    }, void 0, false, {
+                                        fileName: "src/components/react/sc-event-card.js",
+                                        lineNumber: 28,
+                                        columnNumber: 37
                                     }, undefined)
-                                }, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 24,
-                                    columnNumber: 25
-                                }, undefined)
-                            ]
-                        }, void 0, true, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 20,
-                            columnNumber: 21
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                            className: "event-description",
-                            children: event.eventdescription
-                        }, void 0, false, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 30,
-                            columnNumber: 21
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                            className: "event-times",
-                            children: [
-                                event.eventoperationdatetimestart,
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 34,
-                                    columnNumber: 60
-                                }, undefined),
-                                event.eventoperationdatetimeend
-                            ]
-                        }, void 0, true, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 33,
-                            columnNumber: 21
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                            children: event.eventstall
-                        }, void 0, false, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 37,
-                            columnNumber: 21
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                            className: "hidden",
-                            children: [
-                                event.eventcategory,
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 41,
-                                    columnNumber: 46
-                                }, undefined),
-                                event.eventtag
-                            ]
-                        }, void 0, true, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 40,
-                            columnNumber: 21
-                        }, undefined)
-                    ]
-                }, void 0, true, {
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/react/sc-event-card.js",
+                                lineNumber: 24,
+                                columnNumber: 33
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                                className: "event-description",
+                                children: event.eventdescription
+                            }, void 0, false, {
+                                fileName: "src/components/react/sc-event-card.js",
+                                lineNumber: 34,
+                                columnNumber: 33
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                                className: "event-times",
+                                children: [
+                                    event.eventoperationdatetimestart,
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                                        fileName: "src/components/react/sc-event-card.js",
+                                        lineNumber: 38,
+                                        columnNumber: 72
+                                    }, undefined),
+                                    event.eventoperationdatetimeend
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/react/sc-event-card.js",
+                                lineNumber: 37,
+                                columnNumber: 33
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                                className: "hidden",
+                                children: event.eventstallnumber
+                            }, void 0, false, {
+                                fileName: "src/components/react/sc-event-card.js",
+                                lineNumber: 41,
+                                columnNumber: 33
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                                className: "hidden",
+                                children: [
+                                    event.eventcategory,
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                                        fileName: "src/components/react/sc-event-card.js",
+                                        lineNumber: 45,
+                                        columnNumber: 58
+                                    }, undefined),
+                                    event.eventtag
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/react/sc-event-card.js",
+                                lineNumber: 44,
+                                columnNumber: 33
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/react/sc-event-card.js",
+                        lineNumber: 17,
+                        columnNumber: 29
+                    }, undefined)
+                }, void 0, false, {
                     fileName: "src/components/react/sc-event-card.js",
-                    lineNumber: 13,
-                    columnNumber: 17
+                    lineNumber: 16,
+                    columnNumber: 25
                 }, undefined)
             }, event._id, false, {
                 fileName: "src/components/react/sc-event-card.js",
-                lineNumber: 12,
-                columnNumber: 13
-            }, undefined))
-    }, void 0, false);
+                lineNumber: 15,
+                columnNumber: 21
+            }, undefined);
+        })
+    }, void 0, false, {
+        fileName: "src/components/react/sc-event-card.js",
+        lineNumber: 9,
+        columnNumber: 9
+    }, undefined);
 };
 exports.default = eventCard;
 
@@ -32686,7 +32619,7 @@ exports.default = eventCard;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","../../../static/images/chef-bryan-entertainment.jpg":"aMs6C","../../scss/react.scss":"aLSRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../eventdata":"5Y3fe"}],"40376":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","../../../static/images/chef-bryan-entertainment.jpg":"aMs6C","../../scss/react.scss":"aLSRg","../../eventdata":"5Y3fe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"40376":[function(require,module,exports) {
 /**
  * @mui/material v5.16.1
  *
@@ -33251,7 +33184,7 @@ var _generateUtilityClassesDefault = parcelHelpers.interopDefault(_generateUtili
 var _unstableTrapFocus = require("./Unstable_TrapFocus");
 var _unstableTrapFocusDefault = parcelHelpers.interopDefault(_unstableTrapFocus);
 
-},{"./colors":false,"./styles":false,"./utils":false,"./Accordion":false,"./AccordionActions":false,"./AccordionDetails":false,"./AccordionSummary":false,"./Alert":false,"./AlertTitle":false,"./AppBar":false,"./Autocomplete":false,"./Avatar":false,"./AvatarGroup":false,"./Backdrop":false,"./Badge":false,"./BottomNavigation":false,"./BottomNavigationAction":false,"./Box":"eQD0H","./Breadcrumbs":false,"./Button":false,"./ButtonBase":false,"./ButtonGroup":false,"./Card":"hWYZ3","./CardActionArea":false,"./CardActions":false,"./CardContent":"lVecn","./CardHeader":false,"./CardMedia":"kaOTJ","./Checkbox":false,"./Chip":false,"./CircularProgress":false,"./ClickAwayListener":false,"./Collapse":false,"./Container":false,"./CssBaseline":false,"./darkScrollbar":false,"./Dialog":false,"./DialogActions":false,"./DialogContent":false,"./DialogContentText":false,"./DialogTitle":false,"./Divider":false,"./Drawer":false,"./Fab":false,"./Fade":false,"./FilledInput":false,"./FormControl":false,"./FormControlLabel":false,"./FormGroup":false,"./FormHelperText":false,"./FormLabel":false,"./Grid":false,"./Unstable_Grid2":false,"./Grow":false,"./Hidden":false,"./Icon":false,"./IconButton":"38BrD","./ImageList":false,"./ImageListItem":false,"./ImageListItemBar":false,"./Input":false,"./InputAdornment":false,"./InputBase":false,"./InputLabel":false,"./LinearProgress":false,"./Link":false,"./List":false,"./ListItem":false,"./ListItemAvatar":false,"./ListItemButton":false,"./ListItemIcon":false,"./ListItemSecondaryAction":false,"./ListItemText":false,"./ListSubheader":false,"./Menu":false,"./MenuItem":false,"./MenuList":false,"./MobileStepper":false,"./Modal":false,"./NativeSelect":false,"./NoSsr":false,"./OutlinedInput":false,"./Pagination":false,"./PaginationItem":false,"./Paper":false,"./Popover":false,"./Popper":false,"./Portal":false,"./Radio":false,"./RadioGroup":false,"./Rating":false,"./ScopedCssBaseline":false,"./Select":false,"./Skeleton":false,"./Slide":false,"./Slider":false,"./Snackbar":false,"./SnackbarContent":false,"./SpeedDial":false,"./SpeedDialAction":false,"./SpeedDialIcon":false,"./Stack":false,"./Step":false,"./StepButton":false,"./StepConnector":false,"./StepContent":false,"./StepIcon":false,"./StepLabel":false,"./Stepper":false,"./SvgIcon":false,"./SwipeableDrawer":false,"./Switch":false,"./Tab":false,"./Table":false,"./TableBody":false,"./TableCell":false,"./TableContainer":false,"./TableFooter":false,"./TableHead":false,"./TablePagination":false,"./TableRow":false,"./TableSortLabel":false,"./Tabs":false,"./TabScrollButton":false,"./TextField":false,"./TextareaAutosize":false,"./ToggleButton":false,"./ToggleButtonGroup":false,"./Toolbar":false,"./Tooltip":false,"./Typography":"faxSz","./useMediaQuery":false,"./usePagination":false,"./useScrollTrigger":false,"./Zoom":false,"./useAutocomplete":false,"./GlobalStyles":false,"@mui/base/composeClasses":false,"./generateUtilityClass":false,"./generateUtilityClasses":false,"./Unstable_TrapFocus":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1lzai":[function(require,module,exports) {
+},{"./colors":false,"./styles":false,"./utils":false,"./Accordion":false,"./AccordionActions":false,"./AccordionDetails":false,"./AccordionSummary":false,"./Alert":false,"./AlertTitle":false,"./AppBar":false,"./Autocomplete":false,"./Avatar":false,"./AvatarGroup":false,"./Backdrop":false,"./Badge":false,"./BottomNavigation":false,"./BottomNavigationAction":false,"./Box":"eQD0H","./Breadcrumbs":false,"./Button":false,"./ButtonBase":false,"./ButtonGroup":false,"./Card":"hWYZ3","./CardActionArea":false,"./CardActions":false,"./CardContent":"lVecn","./CardHeader":false,"./CardMedia":"kaOTJ","./Checkbox":false,"./Chip":false,"./CircularProgress":false,"./ClickAwayListener":false,"./Collapse":false,"./Container":false,"./CssBaseline":false,"./darkScrollbar":false,"./Dialog":false,"./DialogActions":false,"./DialogContent":false,"./DialogContentText":false,"./DialogTitle":false,"./Divider":false,"./Drawer":false,"./Fab":false,"./Fade":false,"./FilledInput":false,"./FormControl":false,"./FormControlLabel":false,"./FormGroup":false,"./FormHelperText":false,"./FormLabel":false,"./Grid":"c17UE","./Unstable_Grid2":false,"./Grow":false,"./Hidden":false,"./Icon":false,"./IconButton":"38BrD","./ImageList":false,"./ImageListItem":false,"./ImageListItemBar":false,"./Input":false,"./InputAdornment":false,"./InputBase":false,"./InputLabel":false,"./LinearProgress":false,"./Link":false,"./List":false,"./ListItem":false,"./ListItemAvatar":false,"./ListItemButton":false,"./ListItemIcon":false,"./ListItemSecondaryAction":false,"./ListItemText":false,"./ListSubheader":false,"./Menu":false,"./MenuItem":false,"./MenuList":false,"./MobileStepper":false,"./Modal":false,"./NativeSelect":false,"./NoSsr":false,"./OutlinedInput":false,"./Pagination":false,"./PaginationItem":false,"./Paper":false,"./Popover":false,"./Popper":false,"./Portal":false,"./Radio":false,"./RadioGroup":false,"./Rating":false,"./ScopedCssBaseline":false,"./Select":false,"./Skeleton":false,"./Slide":false,"./Slider":false,"./Snackbar":false,"./SnackbarContent":false,"./SpeedDial":false,"./SpeedDialAction":false,"./SpeedDialIcon":false,"./Stack":false,"./Step":false,"./StepButton":false,"./StepConnector":false,"./StepContent":false,"./StepIcon":false,"./StepLabel":false,"./Stepper":false,"./SvgIcon":false,"./SwipeableDrawer":false,"./Switch":false,"./Tab":false,"./Table":false,"./TableBody":false,"./TableCell":false,"./TableContainer":false,"./TableFooter":false,"./TableHead":false,"./TablePagination":false,"./TableRow":false,"./TableSortLabel":false,"./Tabs":false,"./TabScrollButton":false,"./TextField":false,"./TextareaAutosize":false,"./ToggleButton":false,"./ToggleButtonGroup":false,"./Toolbar":false,"./Tooltip":false,"./Typography":"faxSz","./useMediaQuery":false,"./usePagination":false,"./useScrollTrigger":false,"./Zoom":false,"./useAutocomplete":false,"./GlobalStyles":false,"@mui/base/composeClasses":false,"./generateUtilityClass":false,"./generateUtilityClasses":false,"./Unstable_TrapFocus":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1lzai":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "THEME_ID", ()=>(0, _identifierDefault.default));
@@ -33542,7 +33475,7 @@ function experimental_sx() {
     throw new Error(`MUI: The \`experimental_sx\` has been moved to \`theme.unstable_sx\`.For more details, see https://github.com/mui/material-ui/pull/35150.`);
 }
 
-},{"@mui/utils/formatMuiErrorMessage":"7QIu9","@mui/styled-engine":"eTow5","./GlobalStyles":false,"./borders":false,"./breakpoints":false,"./compose":false,"./display":false,"./flexbox":false,"./cssGrid":false,"./palette":false,"./positions":false,"./shadows":false,"./sizing":false,"./spacing":false,"./style":false,"./typography":false,"./styleFunctionSx":false,"./getThemeValue":false,"./Box":false,"./createBox":"bc03s","./createStyled":false,"./styled":false,"./createTheme":false,"./createTheme/createBreakpoints":false,"./createTheme/createSpacing":false,"./createTheme/shape":false,"./useThemeProps":false,"./useTheme":"h9QTR","./useThemeWithoutDefault":false,"./useMediaQuery":false,"./colorManipulator":false,"./ThemeProvider":false,"./cssVars/createCssVarsProvider":false,"./cssVars/createGetCssVar":false,"./cssVars/cssVarsParser":false,"./cssVars/prepareCssVars":false,"./cssVars/createCssVarsTheme":false,"./responsivePropType":false,"./RtlProvider":false,"./Container/createContainer":false,"./Container":false,"./Unstable_Grid/Grid":false,"./Unstable_Grid":false,"./Stack/Stack":false,"./Stack":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eTow5":[function(require,module,exports) {
+},{"@mui/utils/formatMuiErrorMessage":"7QIu9","@mui/styled-engine":"eTow5","./GlobalStyles":false,"./borders":false,"./breakpoints":"jN5Vx","./compose":false,"./display":false,"./flexbox":false,"./cssGrid":false,"./palette":false,"./positions":false,"./shadows":false,"./sizing":false,"./spacing":false,"./style":false,"./typography":false,"./styleFunctionSx":false,"./getThemeValue":false,"./Box":false,"./createBox":"bc03s","./createStyled":false,"./styled":false,"./createTheme":false,"./createTheme/createBreakpoints":false,"./createTheme/createSpacing":false,"./createTheme/shape":false,"./useThemeProps":false,"./useTheme":"h9QTR","./useThemeWithoutDefault":false,"./useMediaQuery":false,"./colorManipulator":false,"./ThemeProvider":false,"./cssVars/createCssVarsProvider":false,"./cssVars/createGetCssVar":false,"./cssVars/cssVarsParser":false,"./cssVars/prepareCssVars":false,"./cssVars/createCssVarsTheme":false,"./responsivePropType":false,"./RtlProvider":false,"./Container/createContainer":false,"./Container":false,"./Unstable_Grid/Grid":false,"./Unstable_Grid":false,"./Stack/Stack":false,"./Stack":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eTow5":[function(require,module,exports) {
 /**
  * @mui/styled-engine v5.16.1
  *
@@ -41670,7 +41603,36 @@ const refType = (0, _propTypesDefault.default).oneOfType([
 ]);
 exports.default = refType;
 
-},{"prop-types":"7wKI2","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dFja4":[function(require,module,exports) {
+},{"prop-types":"7wKI2","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"a9zQe":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>(0, _requirePropFactoryDefault.default));
+var _requirePropFactory = require("./requirePropFactory");
+var _requirePropFactoryDefault = parcelHelpers.interopDefault(_requirePropFactory);
+
+},{"./requirePropFactory":"ac6CU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ac6CU":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>requirePropFactory);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+function requirePropFactory(componentNameInError, Component) {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
+    const prevPropTypes = Component ? (0, _extendsDefault.default)({}, Component.propTypes) : null;
+    const requireProp = (requiredProp)=>(props, propName, componentName, location, propFullName, ...args)=>{
+            const propFullNameSafe = propFullName || propName;
+            const defaultTypeChecker = prevPropTypes == null ? void 0 : prevPropTypes[propFullNameSafe];
+            if (defaultTypeChecker) {
+                const typeCheckerResult = defaultTypeChecker(props, propName, componentName, location, propFullName, ...args);
+                if (typeCheckerResult) return typeCheckerResult;
+            }
+            if (typeof props[propName] !== "undefined" && !props[requiredProp]) return new Error(`The prop \`${propFullNameSafe}\` of ` + `\`${componentNameInError}\` can only be used together with the \`${requiredProp}\` prop.`);
+            return null;
+        };
+    return requireProp;
+}
+
+},{"@babel/runtime/helpers/esm/extends":"fTBFS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dFja4":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>(0, _setRefDefault.default));
@@ -44137,6 +44099,681 @@ const cardMediaClasses = (0, _generateUtilityClassesDefault.default)("MuiCardMed
 ]);
 exports.default = cardMediaClasses;
 
+},{"@mui/utils/generateUtilityClasses":"7eO93","@mui/utils/generateUtilityClass":"d6tPU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"c17UE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>(0, _gridDefault.default));
+parcelHelpers.export(exports, "gridClasses", ()=>(0, _gridClassesDefault.default));
+var _grid = require("./Grid");
+var _gridDefault = parcelHelpers.interopDefault(_grid);
+var _gridClasses = require("./gridClasses");
+var _gridClassesDefault = parcelHelpers.interopDefault(_gridClasses);
+parcelHelpers.exportAll(_gridClasses, exports);
+"use client";
+
+},{"./Grid":"60L6y","./gridClasses":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"60L6y":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "generateGrid", ()=>generateGrid);
+parcelHelpers.export(exports, "generateDirection", ()=>generateDirection);
+parcelHelpers.export(exports, "generateRowGap", ()=>generateRowGap);
+parcelHelpers.export(exports, "generateColumnGap", ()=>generateColumnGap);
+parcelHelpers.export(exports, "resolveSpacingStyles", ()=>resolveSpacingStyles);
+parcelHelpers.export(exports, "resolveSpacingClasses", ()=>resolveSpacingClasses);
+// A grid component using the following libs as inspiration.
+//
+// For the implementation:
+// - https://getbootstrap.com/docs/4.3/layout/grid/
+// - https://github.com/kristoferjoseph/flexboxgrid/blob/master/src/css/flexboxgrid.css
+// - https://github.com/roylee0704/react-flexbox-grid
+// - https://material.angularjs.org/latest/layout/introduction
+//
+// Follow this flexbox Guide to better understand the underlying model:
+// - https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
+var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _react = require("react");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _clsx = require("clsx");
+var _clsxDefault = parcelHelpers.interopDefault(_clsx);
+var _system = require("@mui/system");
+var _styleFunctionSx = require("@mui/system/styleFunctionSx");
+var _composeClasses = require("@mui/utils/composeClasses");
+var _composeClassesDefault = parcelHelpers.interopDefault(_composeClasses);
+var _requirePropFactory = require("../utils/requirePropFactory");
+var _requirePropFactoryDefault = parcelHelpers.interopDefault(_requirePropFactory);
+var _styled = require("../styles/styled");
+var _styledDefault = parcelHelpers.interopDefault(_styled);
+var _defaultPropsProvider = require("../DefaultPropsProvider");
+var _useTheme = require("../styles/useTheme");
+var _useThemeDefault = parcelHelpers.interopDefault(_useTheme);
+var _gridContext = require("./GridContext");
+var _gridContextDefault = parcelHelpers.interopDefault(_gridContext);
+var _gridClasses = require("./gridClasses");
+var _gridClassesDefault = parcelHelpers.interopDefault(_gridClasses);
+var _jsxRuntime = require("react/jsx-runtime");
+"use client";
+const _excluded = [
+    "className",
+    "columns",
+    "columnSpacing",
+    "component",
+    "container",
+    "direction",
+    "item",
+    "rowSpacing",
+    "spacing",
+    "wrap",
+    "zeroMinWidth"
+];
+function getOffset(val) {
+    const parse = parseFloat(val);
+    return `${parse}${String(val).replace(String(parse), "") || "px"}`;
+}
+function generateGrid({ theme, ownerState }) {
+    let size;
+    return theme.breakpoints.keys.reduce((globalStyles, breakpoint)=>{
+        // Use side effect over immutability for better performance.
+        let styles = {};
+        if (ownerState[breakpoint]) size = ownerState[breakpoint];
+        if (!size) return globalStyles;
+        if (size === true) // For the auto layouting
+        styles = {
+            flexBasis: 0,
+            flexGrow: 1,
+            maxWidth: "100%"
+        };
+        else if (size === "auto") styles = {
+            flexBasis: "auto",
+            flexGrow: 0,
+            flexShrink: 0,
+            maxWidth: "none",
+            width: "auto"
+        };
+        else {
+            const columnsBreakpointValues = (0, _system.unstable_resolveBreakpointValues)({
+                values: ownerState.columns,
+                breakpoints: theme.breakpoints.values
+            });
+            const columnValue = typeof columnsBreakpointValues === "object" ? columnsBreakpointValues[breakpoint] : columnsBreakpointValues;
+            if (columnValue === undefined || columnValue === null) return globalStyles;
+            // Keep 7 significant numbers.
+            const width = `${Math.round(size / columnValue * 10e7) / 10e5}%`;
+            let more = {};
+            if (ownerState.container && ownerState.item && ownerState.columnSpacing !== 0) {
+                const themeSpacing = theme.spacing(ownerState.columnSpacing);
+                if (themeSpacing !== "0px") {
+                    const fullWidth = `calc(${width} + ${getOffset(themeSpacing)})`;
+                    more = {
+                        flexBasis: fullWidth,
+                        maxWidth: fullWidth
+                    };
+                }
+            }
+            // Close to the bootstrap implementation:
+            // https://github.com/twbs/bootstrap/blob/8fccaa2439e97ec72a4b7dc42ccc1f649790adb0/scss/mixins/_grid.scss#L41
+            styles = (0, _extendsDefault.default)({
+                flexBasis: width,
+                flexGrow: 0,
+                maxWidth: width
+            }, more);
+        }
+        // No need for a media query for the first size.
+        if (theme.breakpoints.values[breakpoint] === 0) Object.assign(globalStyles, styles);
+        else globalStyles[theme.breakpoints.up(breakpoint)] = styles;
+        return globalStyles;
+    }, {});
+}
+function generateDirection({ theme, ownerState }) {
+    const directionValues = (0, _system.unstable_resolveBreakpointValues)({
+        values: ownerState.direction,
+        breakpoints: theme.breakpoints.values
+    });
+    return (0, _system.handleBreakpoints)({
+        theme
+    }, directionValues, (propValue)=>{
+        const output = {
+            flexDirection: propValue
+        };
+        if (propValue.indexOf("column") === 0) output[`& > .${(0, _gridClassesDefault.default).item}`] = {
+            maxWidth: "none"
+        };
+        return output;
+    });
+}
+/**
+ * Extracts zero value breakpoint keys before a non-zero value breakpoint key.
+ * @example { xs: 0, sm: 0, md: 2, lg: 0, xl: 0 } or [0, 0, 2, 0, 0]
+ * @returns [xs, sm]
+ */ function extractZeroValueBreakpointKeys({ breakpoints, values }) {
+    let nonZeroKey = "";
+    Object.keys(values).forEach((key)=>{
+        if (nonZeroKey !== "") return;
+        if (values[key] !== 0) nonZeroKey = key;
+    });
+    const sortedBreakpointKeysByValue = Object.keys(breakpoints).sort((a, b)=>{
+        return breakpoints[a] - breakpoints[b];
+    });
+    return sortedBreakpointKeysByValue.slice(0, sortedBreakpointKeysByValue.indexOf(nonZeroKey));
+}
+function generateRowGap({ theme, ownerState }) {
+    const { container, rowSpacing } = ownerState;
+    let styles = {};
+    if (container && rowSpacing !== 0) {
+        const rowSpacingValues = (0, _system.unstable_resolveBreakpointValues)({
+            values: rowSpacing,
+            breakpoints: theme.breakpoints.values
+        });
+        let zeroValueBreakpointKeys;
+        if (typeof rowSpacingValues === "object") zeroValueBreakpointKeys = extractZeroValueBreakpointKeys({
+            breakpoints: theme.breakpoints.values,
+            values: rowSpacingValues
+        });
+        styles = (0, _system.handleBreakpoints)({
+            theme
+        }, rowSpacingValues, (propValue, breakpoint)=>{
+            var _zeroValueBreakpointK;
+            const themeSpacing = theme.spacing(propValue);
+            if (themeSpacing !== "0px") return {
+                marginTop: `-${getOffset(themeSpacing)}`,
+                [`& > .${(0, _gridClassesDefault.default).item}`]: {
+                    paddingTop: getOffset(themeSpacing)
+                }
+            };
+            if ((_zeroValueBreakpointK = zeroValueBreakpointKeys) != null && _zeroValueBreakpointK.includes(breakpoint)) return {};
+            return {
+                marginTop: 0,
+                [`& > .${(0, _gridClassesDefault.default).item}`]: {
+                    paddingTop: 0
+                }
+            };
+        });
+    }
+    return styles;
+}
+function generateColumnGap({ theme, ownerState }) {
+    const { container, columnSpacing } = ownerState;
+    let styles = {};
+    if (container && columnSpacing !== 0) {
+        const columnSpacingValues = (0, _system.unstable_resolveBreakpointValues)({
+            values: columnSpacing,
+            breakpoints: theme.breakpoints.values
+        });
+        let zeroValueBreakpointKeys;
+        if (typeof columnSpacingValues === "object") zeroValueBreakpointKeys = extractZeroValueBreakpointKeys({
+            breakpoints: theme.breakpoints.values,
+            values: columnSpacingValues
+        });
+        styles = (0, _system.handleBreakpoints)({
+            theme
+        }, columnSpacingValues, (propValue, breakpoint)=>{
+            var _zeroValueBreakpointK2;
+            const themeSpacing = theme.spacing(propValue);
+            if (themeSpacing !== "0px") return {
+                width: `calc(100% + ${getOffset(themeSpacing)})`,
+                marginLeft: `-${getOffset(themeSpacing)}`,
+                [`& > .${(0, _gridClassesDefault.default).item}`]: {
+                    paddingLeft: getOffset(themeSpacing)
+                }
+            };
+            if ((_zeroValueBreakpointK2 = zeroValueBreakpointKeys) != null && _zeroValueBreakpointK2.includes(breakpoint)) return {};
+            return {
+                width: "100%",
+                marginLeft: 0,
+                [`& > .${(0, _gridClassesDefault.default).item}`]: {
+                    paddingLeft: 0
+                }
+            };
+        });
+    }
+    return styles;
+}
+function resolveSpacingStyles(spacing, breakpoints, styles = {}) {
+    // undefined/null or `spacing` <= 0
+    if (!spacing || spacing <= 0) return [];
+    // in case of string/number `spacing`
+    if (typeof spacing === "string" && !Number.isNaN(Number(spacing)) || typeof spacing === "number") return [
+        styles[`spacing-xs-${String(spacing)}`]
+    ];
+    // in case of object `spacing`
+    const spacingStyles = [];
+    breakpoints.forEach((breakpoint)=>{
+        const value = spacing[breakpoint];
+        if (Number(value) > 0) spacingStyles.push(styles[`spacing-${breakpoint}-${String(value)}`]);
+    });
+    return spacingStyles;
+}
+// Default CSS values
+// flex: '0 1 auto',
+// flexDirection: 'row',
+// alignItems: 'flex-start',
+// flexWrap: 'nowrap',
+// justifyContent: 'flex-start',
+const GridRoot = (0, _styledDefault.default)("div", {
+    name: "MuiGrid",
+    slot: "Root",
+    overridesResolver: (props, styles)=>{
+        const { ownerState } = props;
+        const { container, direction, item, spacing, wrap, zeroMinWidth, breakpoints } = ownerState;
+        let spacingStyles = [];
+        // in case of grid item
+        if (container) spacingStyles = resolveSpacingStyles(spacing, breakpoints, styles);
+        const breakpointsStyles = [];
+        breakpoints.forEach((breakpoint)=>{
+            const value = ownerState[breakpoint];
+            if (value) breakpointsStyles.push(styles[`grid-${breakpoint}-${String(value)}`]);
+        });
+        return [
+            styles.root,
+            container && styles.container,
+            item && styles.item,
+            zeroMinWidth && styles.zeroMinWidth,
+            ...spacingStyles,
+            direction !== "row" && styles[`direction-xs-${String(direction)}`],
+            wrap !== "wrap" && styles[`wrap-xs-${String(wrap)}`],
+            ...breakpointsStyles
+        ];
+    }
+})(({ ownerState })=>(0, _extendsDefault.default)({
+        boxSizing: "border-box"
+    }, ownerState.container && {
+        display: "flex",
+        flexWrap: "wrap",
+        width: "100%"
+    }, ownerState.item && {
+        margin: 0 // For instance, it's useful when used with a `figure` element.
+    }, ownerState.zeroMinWidth && {
+        minWidth: 0
+    }, ownerState.wrap !== "wrap" && {
+        flexWrap: ownerState.wrap
+    }), generateDirection, generateRowGap, generateColumnGap, generateGrid);
+function resolveSpacingClasses(spacing, breakpoints) {
+    // undefined/null or `spacing` <= 0
+    if (!spacing || spacing <= 0) return [];
+    // in case of string/number `spacing`
+    if (typeof spacing === "string" && !Number.isNaN(Number(spacing)) || typeof spacing === "number") return [
+        `spacing-xs-${String(spacing)}`
+    ];
+    // in case of object `spacing`
+    const classes = [];
+    breakpoints.forEach((breakpoint)=>{
+        const value = spacing[breakpoint];
+        if (Number(value) > 0) {
+            const className = `spacing-${breakpoint}-${String(value)}`;
+            classes.push(className);
+        }
+    });
+    return classes;
+}
+const useUtilityClasses = (ownerState)=>{
+    const { classes, container, direction, item, spacing, wrap, zeroMinWidth, breakpoints } = ownerState;
+    let spacingClasses = [];
+    // in case of grid item
+    if (container) spacingClasses = resolveSpacingClasses(spacing, breakpoints);
+    const breakpointsClasses = [];
+    breakpoints.forEach((breakpoint)=>{
+        const value = ownerState[breakpoint];
+        if (value) breakpointsClasses.push(`grid-${breakpoint}-${String(value)}`);
+    });
+    const slots = {
+        root: [
+            "root",
+            container && "container",
+            item && "item",
+            zeroMinWidth && "zeroMinWidth",
+            ...spacingClasses,
+            direction !== "row" && `direction-xs-${String(direction)}`,
+            wrap !== "wrap" && `wrap-xs-${String(wrap)}`,
+            ...breakpointsClasses
+        ]
+    };
+    return (0, _composeClassesDefault.default)(slots, (0, _gridClasses.getGridUtilityClass), classes);
+};
+const Grid = /*#__PURE__*/ _react.forwardRef(function Grid(inProps, ref) {
+    const themeProps = (0, _defaultPropsProvider.useDefaultProps)({
+        props: inProps,
+        name: "MuiGrid"
+    });
+    const { breakpoints } = (0, _useThemeDefault.default)();
+    const props = (0, _styleFunctionSx.extendSxProp)(themeProps);
+    const { className, columns: columnsProp, columnSpacing: columnSpacingProp, component = "div", container = false, direction = "row", item = false, rowSpacing: rowSpacingProp, spacing = 0, wrap = "wrap", zeroMinWidth = false } = props, other = (0, _objectWithoutPropertiesLooseDefault.default)(props, _excluded);
+    const rowSpacing = rowSpacingProp || spacing;
+    const columnSpacing = columnSpacingProp || spacing;
+    const columnsContext = _react.useContext((0, _gridContextDefault.default));
+    // columns set with default breakpoint unit of 12
+    const columns = container ? columnsProp || 12 : columnsContext;
+    const breakpointsValues = {};
+    const otherFiltered = (0, _extendsDefault.default)({}, other);
+    breakpoints.keys.forEach((breakpoint)=>{
+        if (other[breakpoint] != null) {
+            breakpointsValues[breakpoint] = other[breakpoint];
+            delete otherFiltered[breakpoint];
+        }
+    });
+    const ownerState = (0, _extendsDefault.default)({}, props, {
+        columns,
+        container,
+        direction,
+        item,
+        rowSpacing,
+        columnSpacing,
+        wrap,
+        zeroMinWidth,
+        spacing
+    }, breakpointsValues, {
+        breakpoints: breakpoints.keys
+    });
+    const classes = useUtilityClasses(ownerState);
+    return /*#__PURE__*/ (0, _jsxRuntime.jsx)((0, _gridContextDefault.default).Provider, {
+        value: columns,
+        children: /*#__PURE__*/ (0, _jsxRuntime.jsx)(GridRoot, (0, _extendsDefault.default)({
+            ownerState: ownerState,
+            className: (0, _clsxDefault.default)(classes.root, className),
+            as: component,
+            ref: ref
+        }, otherFiltered))
+    });
+});
+Grid.propTypes /* remove-proptypes */  = {
+    // ┌────────────────────────────── Warning ──────────────────────────────┐
+    // │ These PropTypes are generated from the TypeScript type definitions. │
+    // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+    // └─────────────────────────────────────────────────────────────────────┘
+    /**
+   * The content of the component.
+   */ children: (0, _propTypesDefault.default).node,
+    /**
+   * Override or extend the styles applied to the component.
+   */ classes: (0, _propTypesDefault.default).object,
+    /**
+   * @ignore
+   */ className: (0, _propTypesDefault.default).string,
+    /**
+   * The number of columns.
+   * @default 12
+   */ columns: (0, _propTypesDefault.default).oneOfType([
+        (0, _propTypesDefault.default).arrayOf((0, _propTypesDefault.default).number),
+        (0, _propTypesDefault.default).number,
+        (0, _propTypesDefault.default).object
+    ]),
+    /**
+   * Defines the horizontal space between the type `item` components.
+   * It overrides the value of the `spacing` prop.
+   */ columnSpacing: (0, _propTypesDefault.default).oneOfType([
+        (0, _propTypesDefault.default).arrayOf((0, _propTypesDefault.default).oneOfType([
+            (0, _propTypesDefault.default).number,
+            (0, _propTypesDefault.default).string
+        ])),
+        (0, _propTypesDefault.default).number,
+        (0, _propTypesDefault.default).object,
+        (0, _propTypesDefault.default).string
+    ]),
+    /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */ component: (0, _propTypesDefault.default).elementType,
+    /**
+   * If `true`, the component will have the flex *container* behavior.
+   * You should be wrapping *items* with a *container*.
+   * @default false
+   */ container: (0, _propTypesDefault.default).bool,
+    /**
+   * Defines the `flex-direction` style property.
+   * It is applied for all screen sizes.
+   * @default 'row'
+   */ direction: (0, _propTypesDefault.default).oneOfType([
+        (0, _propTypesDefault.default).oneOf([
+            "column-reverse",
+            "column",
+            "row-reverse",
+            "row"
+        ]),
+        (0, _propTypesDefault.default).arrayOf((0, _propTypesDefault.default).oneOf([
+            "column-reverse",
+            "column",
+            "row-reverse",
+            "row"
+        ])),
+        (0, _propTypesDefault.default).object
+    ]),
+    /**
+   * If `true`, the component will have the flex *item* behavior.
+   * You should be wrapping *items* with a *container*.
+   * @default false
+   */ item: (0, _propTypesDefault.default).bool,
+    /**
+   * If a number, it sets the number of columns the grid item uses.
+   * It can't be greater than the total number of columns of the container (12 by default).
+   * If 'auto', the grid item's width matches its content.
+   * If false, the prop is ignored.
+   * If true, the grid item's width grows to use the space available in the grid container.
+   * The value is applied for the `lg` breakpoint and wider screens if not overridden.
+   * @default false
+   */ lg: (0, _propTypesDefault.default).oneOfType([
+        (0, _propTypesDefault.default).oneOf([
+            "auto"
+        ]),
+        (0, _propTypesDefault.default).number,
+        (0, _propTypesDefault.default).bool
+    ]),
+    /**
+   * If a number, it sets the number of columns the grid item uses.
+   * It can't be greater than the total number of columns of the container (12 by default).
+   * If 'auto', the grid item's width matches its content.
+   * If false, the prop is ignored.
+   * If true, the grid item's width grows to use the space available in the grid container.
+   * The value is applied for the `md` breakpoint and wider screens if not overridden.
+   * @default false
+   */ md: (0, _propTypesDefault.default).oneOfType([
+        (0, _propTypesDefault.default).oneOf([
+            "auto"
+        ]),
+        (0, _propTypesDefault.default).number,
+        (0, _propTypesDefault.default).bool
+    ]),
+    /**
+   * Defines the vertical space between the type `item` components.
+   * It overrides the value of the `spacing` prop.
+   */ rowSpacing: (0, _propTypesDefault.default).oneOfType([
+        (0, _propTypesDefault.default).arrayOf((0, _propTypesDefault.default).oneOfType([
+            (0, _propTypesDefault.default).number,
+            (0, _propTypesDefault.default).string
+        ])),
+        (0, _propTypesDefault.default).number,
+        (0, _propTypesDefault.default).object,
+        (0, _propTypesDefault.default).string
+    ]),
+    /**
+   * If a number, it sets the number of columns the grid item uses.
+   * It can't be greater than the total number of columns of the container (12 by default).
+   * If 'auto', the grid item's width matches its content.
+   * If false, the prop is ignored.
+   * If true, the grid item's width grows to use the space available in the grid container.
+   * The value is applied for the `sm` breakpoint and wider screens if not overridden.
+   * @default false
+   */ sm: (0, _propTypesDefault.default).oneOfType([
+        (0, _propTypesDefault.default).oneOf([
+            "auto"
+        ]),
+        (0, _propTypesDefault.default).number,
+        (0, _propTypesDefault.default).bool
+    ]),
+    /**
+   * Defines the space between the type `item` components.
+   * It can only be used on a type `container` component.
+   * @default 0
+   */ spacing: (0, _propTypesDefault.default).oneOfType([
+        (0, _propTypesDefault.default).arrayOf((0, _propTypesDefault.default).oneOfType([
+            (0, _propTypesDefault.default).number,
+            (0, _propTypesDefault.default).string
+        ])),
+        (0, _propTypesDefault.default).number,
+        (0, _propTypesDefault.default).object,
+        (0, _propTypesDefault.default).string
+    ]),
+    /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */ sx: (0, _propTypesDefault.default).oneOfType([
+        (0, _propTypesDefault.default).arrayOf((0, _propTypesDefault.default).oneOfType([
+            (0, _propTypesDefault.default).func,
+            (0, _propTypesDefault.default).object,
+            (0, _propTypesDefault.default).bool
+        ])),
+        (0, _propTypesDefault.default).func,
+        (0, _propTypesDefault.default).object
+    ]),
+    /**
+   * Defines the `flex-wrap` style property.
+   * It's applied for all screen sizes.
+   * @default 'wrap'
+   */ wrap: (0, _propTypesDefault.default).oneOf([
+        "nowrap",
+        "wrap-reverse",
+        "wrap"
+    ]),
+    /**
+   * If a number, it sets the number of columns the grid item uses.
+   * It can't be greater than the total number of columns of the container (12 by default).
+   * If 'auto', the grid item's width matches its content.
+   * If false, the prop is ignored.
+   * If true, the grid item's width grows to use the space available in the grid container.
+   * The value is applied for the `xl` breakpoint and wider screens if not overridden.
+   * @default false
+   */ xl: (0, _propTypesDefault.default).oneOfType([
+        (0, _propTypesDefault.default).oneOf([
+            "auto"
+        ]),
+        (0, _propTypesDefault.default).number,
+        (0, _propTypesDefault.default).bool
+    ]),
+    /**
+   * If a number, it sets the number of columns the grid item uses.
+   * It can't be greater than the total number of columns of the container (12 by default).
+   * If 'auto', the grid item's width matches its content.
+   * If false, the prop is ignored.
+   * If true, the grid item's width grows to use the space available in the grid container.
+   * The value is applied for all the screen sizes with the lowest priority.
+   * @default false
+   */ xs: (0, _propTypesDefault.default).oneOfType([
+        (0, _propTypesDefault.default).oneOf([
+            "auto"
+        ]),
+        (0, _propTypesDefault.default).number,
+        (0, _propTypesDefault.default).bool
+    ]),
+    /**
+   * If `true`, it sets `min-width: 0` on the item.
+   * Refer to the limitations section of the documentation to better understand the use case.
+   * @default false
+   */ zeroMinWidth: (0, _propTypesDefault.default).bool
+};
+{
+    const requireProp = (0, _requirePropFactoryDefault.default)("Grid", Grid);
+    // eslint-disable-next-line no-useless-concat
+    Grid["propTypes"] = (0, _extendsDefault.default)({}, Grid.propTypes, {
+        direction: requireProp("container"),
+        lg: requireProp("item"),
+        md: requireProp("item"),
+        sm: requireProp("item"),
+        spacing: requireProp("container"),
+        wrap: requireProp("container"),
+        xs: requireProp("item"),
+        zeroMinWidth: requireProp("item")
+    });
+}exports.default = Grid;
+
+},{"@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"adHgr","@babel/runtime/helpers/esm/extends":"fTBFS","react":"21dqq","prop-types":"7wKI2","clsx":"gocd3","@mui/system":"Q0Zql","@mui/system/styleFunctionSx":"bRwpN","@mui/utils/composeClasses":"4kKno","../utils/requirePropFactory":"gQOX7","../styles/styled":"32xTg","../DefaultPropsProvider":"gbkfk","../styles/useTheme":"5nWMX","./GridContext":"ghr8E","./gridClasses":"iRwNS","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gQOX7":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _requirePropFactory = require("@mui/utils/requirePropFactory");
+var _requirePropFactoryDefault = parcelHelpers.interopDefault(_requirePropFactory);
+exports.default = (0, _requirePropFactoryDefault.default);
+
+},{"@mui/utils/requirePropFactory":"a9zQe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ghr8E":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+"use client";
+/**
+ * @ignore - internal component.
+ */ const GridContext = /*#__PURE__*/ _react.createContext();
+GridContext.displayName = "GridContext";
+exports.default = GridContext;
+
+},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iRwNS":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getGridUtilityClass", ()=>getGridUtilityClass);
+var _generateUtilityClasses = require("@mui/utils/generateUtilityClasses");
+var _generateUtilityClassesDefault = parcelHelpers.interopDefault(_generateUtilityClasses);
+var _generateUtilityClass = require("@mui/utils/generateUtilityClass");
+var _generateUtilityClassDefault = parcelHelpers.interopDefault(_generateUtilityClass);
+function getGridUtilityClass(slot) {
+    return (0, _generateUtilityClassDefault.default)("MuiGrid", slot);
+}
+const SPACINGS = [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+];
+const DIRECTIONS = [
+    "column-reverse",
+    "column",
+    "row-reverse",
+    "row"
+];
+const WRAPS = [
+    "nowrap",
+    "wrap-reverse",
+    "wrap"
+];
+const GRID_SIZES = [
+    "auto",
+    true,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+];
+const gridClasses = (0, _generateUtilityClassesDefault.default)("MuiGrid", [
+    "root",
+    "container",
+    "item",
+    "zeroMinWidth",
+    // spacings
+    ...SPACINGS.map((spacing)=>`spacing-xs-${spacing}`),
+    // direction values
+    ...DIRECTIONS.map((direction)=>`direction-xs-${direction}`),
+    // wrap values
+    ...WRAPS.map((wrap)=>`wrap-xs-${wrap}`),
+    // grid sizes for all breakpoints
+    ...GRID_SIZES.map((size)=>`grid-xs-${size}`),
+    ...GRID_SIZES.map((size)=>`grid-sm-${size}`),
+    ...GRID_SIZES.map((size)=>`grid-md-${size}`),
+    ...GRID_SIZES.map((size)=>`grid-lg-${size}`),
+    ...GRID_SIZES.map((size)=>`grid-xl-${size}`)
+]);
+exports.default = gridClasses;
+
 },{"@mui/utils/generateUtilityClasses":"7eO93","@mui/utils/generateUtilityClass":"d6tPU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"38BrD":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -44740,6 +45377,26 @@ exports.getOrigin = getOrigin;
 },{}],"aLSRg":[function() {},{}],"5Y3fe":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+var _treeoflifeJpg = require("../static/images/treeoflife.jpg");
+var _treeoflifeJpgDefault = parcelHelpers.interopDefault(_treeoflifeJpg);
+var _bbqFoodJpg = require("../static/images/bbq-food.jpg");
+var _bbqFoodJpgDefault = parcelHelpers.interopDefault(_bbqFoodJpg);
+var _anzaEarringStallJpg = require("../static/images/anza-earring-stall.jpg");
+var _anzaEarringStallJpgDefault = parcelHelpers.interopDefault(_anzaEarringStallJpg);
+var _djDuoEntertainmentJpg = require("../static/images/dj-duo-entertainment.jpg");
+var _djDuoEntertainmentJpgDefault = parcelHelpers.interopDefault(_djDuoEntertainmentJpg);
+var _bakeryFoodJpg = require("../static/images/bakery-food.jpg");
+var _bakeryFoodJpgDefault = parcelHelpers.interopDefault(_bakeryFoodJpg);
+var _lanternStallJpg = require("../static/images/lantern-stall.jpg");
+var _lanternStallJpgDefault = parcelHelpers.interopDefault(_lanternStallJpg);
+var _makingLanternActivityJpg = require("../static/images/making_lantern_activity.jpg");
+var _makingLanternActivityJpgDefault = parcelHelpers.interopDefault(_makingLanternActivityJpg);
+var _loadedpotatoFoodJpg = require("../static/images/loadedpotato-food.jpg");
+var _loadedpotatoFoodJpgDefault = parcelHelpers.interopDefault(_loadedpotatoFoodJpg);
+var _soapStallJpg = require("../static/images/soap-stall.jpg");
+var _soapStallJpgDefault = parcelHelpers.interopDefault(_soapStallJpg);
+var _alisaMusicEntertainmentJpg = require("../static/images/alisa-music-entertainment.jpg");
+var _alisaMusicEntertainmentJpgDefault = parcelHelpers.interopDefault(_alisaMusicEntertainmentJpg);
 const data = [
     {
         _id: "1",
@@ -44748,7 +45405,7 @@ const data = [
         eventoperationdatetimestart: "18:00",
         eventoperationdatetimeend: "22:00",
         eventdescription: "Witness the mesmerizing light show projected onto the tree while relaxing with your drinks",
-        eventimage: "static/images/treeofline.jpg",
+        eventimage: (0, _treeoflifeJpgDefault.default),
         eventstallnumber: "1",
         eventtag: [
             "adult only"
@@ -44761,7 +45418,7 @@ const data = [
         eventoperationdatetimestart: "",
         eventoperationdatetimeend: "",
         eventdescription: "Inspired by Texas, Tex BBQ is cooking up a storm with briskets and pulled pork. Don`t forget the mac and cheese!",
-        eventimage: "",
+        eventimage: (0, _bbqFoodJpgDefault.default),
         eventstallnumber: "4",
         eventtag: [
             "food"
@@ -44774,7 +45431,7 @@ const data = [
         eventoperationdatetimestart: "",
         eventoperationdatetimeend: "",
         eventdescription: "Handmade selection of earrings, perfect for any occasion.",
-        eventimage: "",
+        eventimage: (0, _anzaEarringStallJpgDefault.default),
         eventstallnumber: "40",
         eventtag: [
             ""
@@ -44787,7 +45444,7 @@ const data = [
         eventoperationdatetimestart: "15:00",
         eventoperationdatetimeend: "22:00",
         eventdescription: "Geelong locals DJs Lucy and Cara keeping the vibe going between musical and talents acts.",
-        eventimage: "",
+        eventimage: (0, _djDuoEntertainmentJpgDefault.default),
         eventstallnumber: "10",
         eventtag: [
             "music"
@@ -44800,7 +45457,7 @@ const data = [
         eventoperationdatetimestart: "",
         eventoperationdatetimeend: "",
         eventdescription: "Swirl Bakery will be bringing over 20 kinds of baked goods to the showground.",
-        eventimage: "",
+        eventimage: (0, _bakeryFoodJpgDefault.default),
         eventstallnumber: "13",
         eventtag: [
             "gluten-free",
@@ -44814,7 +45471,7 @@ const data = [
         eventoperationdatetimestart: "",
         eventoperationdatetimeend: "",
         eventdescription: "lluminate your space with captivating collection of beautifully designed lanterns.",
-        eventimage: "",
+        eventimage: (0, _lanternStallJpgDefault.default),
         eventstallnumber: "45",
         eventtag: []
     },
@@ -44825,7 +45482,7 @@ const data = [
         eventoperationdatetimestart: "15:00",
         eventoperationdatetimeend: "22:00",
         eventdescription: "Light up your night even more with lantern making class. $10 per person.",
-        eventimage: "",
+        eventimage: (0, _makingLanternActivityJpgDefault.default),
         eventstallnumber: "11",
         eventtag: [
             "activity",
@@ -44839,7 +45496,7 @@ const data = [
         eventoperationdatetimestart: "",
         eventoperationdatetimeend: "",
         eventdescription: "Load your potatoes however you want! Vegan options available.",
-        eventimage: "",
+        eventimage: (0, _loadedpotatoFoodJpgDefault.default),
         eventstallnumber: "21",
         eventtag: [
             "vegan"
@@ -44852,7 +45509,7 @@ const data = [
         eventoperationdatetimestart: "",
         eventoperationdatetimeend: "",
         eventdescription: "Indulge in our luxurious, all-natural soaps that leave your skin feeling soft and refreshed.",
-        eventimage: "",
+        eventimage: (0, _soapStallJpgDefault.default),
         eventstallnumber: "47",
         eventtag: []
     },
@@ -44863,7 +45520,7 @@ const data = [
         eventoperationdatetimestart: "18:00",
         eventoperationdatetimeend: "18:45",
         eventdescription: "Alisa will showcase her soulful voice, blending contemporary pop with classic melodies.",
-        eventimage: "",
+        eventimage: (0, _alisaMusicEntertainmentJpgDefault.default),
         eventstallnumber: "10",
         eventtag: [
             "music",
@@ -44873,7 +45530,37 @@ const data = [
 ];
 exports.default = data;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"BO0AV":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../static/images/treeoflife.jpg":"iyS7s","../static/images/bbq-food.jpg":"eS59g","../static/images/anza-earring-stall.jpg":"8zxNf","../static/images/dj-duo-entertainment.jpg":"2cfqD","../static/images/bakery-food.jpg":"gYice","../static/images/lantern-stall.jpg":"hR4Yf","../static/images/loadedpotato-food.jpg":"1u5Pb","../static/images/soap-stall.jpg":"aWAQi","../static/images/alisa-music-entertainment.jpg":"kAZeJ","../static/images/making_lantern_activity.jpg":"39Orq"}],"iyS7s":[function(require,module,exports) {
+module.exports = require("63beeac1eee45873").getBundleURL("bLxZJ") + "treeoflife.7725f5df.jpg" + "?" + Date.now();
+
+},{"63beeac1eee45873":"lgJ39"}],"eS59g":[function(require,module,exports) {
+module.exports = require("402f874e31cbf5b3").getBundleURL("bLxZJ") + "bbq-food.32992898.jpg" + "?" + Date.now();
+
+},{"402f874e31cbf5b3":"lgJ39"}],"8zxNf":[function(require,module,exports) {
+module.exports = require("b60c10869431ec80").getBundleURL("bLxZJ") + "anza-earring-stall.f71af85b.jpg" + "?" + Date.now();
+
+},{"b60c10869431ec80":"lgJ39"}],"2cfqD":[function(require,module,exports) {
+module.exports = require("8e13a6fd3904db76").getBundleURL("bLxZJ") + "dj-duo-entertainment.7f4c1c93.jpg" + "?" + Date.now();
+
+},{"8e13a6fd3904db76":"lgJ39"}],"gYice":[function(require,module,exports) {
+module.exports = require("4e59102dbb322cb5").getBundleURL("bLxZJ") + "bakery-food.126468ba.jpg" + "?" + Date.now();
+
+},{"4e59102dbb322cb5":"lgJ39"}],"hR4Yf":[function(require,module,exports) {
+module.exports = require("82f82b9335e17ee0").getBundleURL("bLxZJ") + "lantern-stall.bcbf2d55.jpg" + "?" + Date.now();
+
+},{"82f82b9335e17ee0":"lgJ39"}],"1u5Pb":[function(require,module,exports) {
+module.exports = require("4988abb476c7feaf").getBundleURL("bLxZJ") + "loadedpotato-food.c251ae8c.jpg" + "?" + Date.now();
+
+},{"4988abb476c7feaf":"lgJ39"}],"aWAQi":[function(require,module,exports) {
+module.exports = require("ce80a0761df9a61").getBundleURL("bLxZJ") + "soap-stall.d160c0ee.jpg" + "?" + Date.now();
+
+},{"ce80a0761df9a61":"lgJ39"}],"kAZeJ":[function(require,module,exports) {
+module.exports = require("a9a563b4b5636df9").getBundleURL("bLxZJ") + "alisa-music-entertainment.5a5fde9e.jpg" + "?" + Date.now();
+
+},{"a9a563b4b5636df9":"lgJ39"}],"39Orq":[function(require,module,exports) {
+module.exports = require("1bab4cc91de5280d").getBundleURL("bLxZJ") + "making_lantern_activity.01503c18.jpg" + "?" + Date.now();
+
+},{"1bab4cc91de5280d":"lgJ39"}],"BO0AV":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _app = require("../../App");
@@ -44902,7 +45589,79 @@ class ErrorView {
 }
 exports.default = new ErrorView();
 
-},{"../../App":"2kQhy","lit-html":"1cmQt","../../Router":"kOSdl","../../Auth":"wuqrX","../../Utils":"iRY6S","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aT5rw":[function(require,module,exports) {
+},{"../../App":"2kQhy","lit-html":"1cmQt","../../Router":"kOSdl","../../Auth":"wuqrX","../../Utils":"iRY6S","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"wuqrX":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _app = require("./App");
+var _appDefault = parcelHelpers.interopDefault(_app);
+var _router = require("./Router");
+var _routerDefault = parcelHelpers.interopDefault(_router);
+var _splash = require("./views/partials/splash");
+var _splashDefault = parcelHelpers.interopDefault(_splash);
+var _lit = require("lit");
+var _toast = require("./Toast");
+var _toastDefault = parcelHelpers.interopDefault(_toast);
+class Auth {
+    constructor(){
+        this.currentUser = {};
+    }
+    // async sign up
+    // async sign in
+    // async check
+    async check(success) {
+        // show splash screen while loading
+        (0, _lit.render)((0, _splashDefault.default), (0, _appDefault.default).rootEl);
+        // check loacl token exists
+        if (!localStorage.accessToken) {
+            // no local token
+            // Toast.show("token not found")
+            // redirect
+            (0, _router.gotoRoute)("/");
+            return;
+        }
+        // validate token via the backend
+        const response = await fetch(`${(0, _appDefault.default).apiBase}/auth/validate`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${localStorage.accessToken}`
+            }
+        });
+        // response not ok
+        if (!response.ok) {
+            // console log error
+            const err = await response.json();
+            if (err) console.log(err);
+            // delete local token
+            localStorage.removeItem("accessToken");
+            (0, _toastDefault.default).show("session expired, please sign in");
+            // redirect to sign in
+            (0, _router.gotoRoute)("/signin");
+            return;
+        }
+        // token is valid
+        const data = await response.json();
+        // set currentUser obj
+        this.currentUser = data.user;
+        // run success
+        success();
+    }
+}
+exports.default = new Auth();
+
+},{"./App":"2kQhy","./Router":"kOSdl","./views/partials/splash":"kasI3","lit":"4antt","./Toast":"4N7Ir","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kasI3":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _lit = require("lit");
+const splash = (0, _lit.html)`
+    <div class="app-splash">
+        <div>
+            <p style="color: #FFFFFF">loading...</p>
+        </div>
+    </div>
+`;
+exports.default = splash;
+
+},{"lit":"4antt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aT5rw":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _litHtml = require("lit-html");
@@ -44933,7 +45692,7 @@ class AdminView {
 }
 exports.default = new AdminView();
 
-},{"../../Utils":"iRY6S","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","lit-html":"1cmQt","../../App":"2kQhy"}],"j0aCk":[function(require,module,exports) {
+},{"lit-html":"1cmQt","../../Utils":"iRY6S","../../App":"2kQhy","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"j0aCk":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _app = require("../../App");
@@ -45196,7 +45955,7 @@ class AppHeader extends (0, _lit.LitElement) {
 }
 customElements.define("sc-app-header", AppHeader);
 
-},{"lit":"4antt"}],"gpsI5":[function() {},{}],"eSeCb":[function(require,module,exports) {
+},{"lit":"4antt"}],"eSeCb":[function(require,module,exports) {
 var _lit = require("lit");
 class AppFooter extends (0, _lit.LitElement) {
     constructor(){
@@ -45271,6 +46030,6 @@ class AppFooter extends (0, _lit.LitElement) {
 }
 customElements.define("sc-app-footer", AppFooter);
 
-},{"lit":"4antt"}]},["farZc","1xC6H","8lqZg"], "8lqZg", "parcelRequiree1b3")
+},{"lit":"4antt"}],"gpsI5":[function() {},{}]},["farZc","1xC6H","8lqZg"], "8lqZg", "parcelRequiree1b3")
 
 //# sourceMappingURL=index.975ef6c8.js.map

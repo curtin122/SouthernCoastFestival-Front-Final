@@ -1,24 +1,23 @@
-.event-card {
-  max-width: 24%;
-  min-height: 200px;
+.card {
+  height: 100%;
   background-color: #2b2b2b !important;
 }
 
-.event-card .event-content {
+.card .event-content {
   padding: 0;
 }
 
-.event-card .event-image {
+.card .event-image {
   display: flex;
 }
 
-.event-card .event-title-box {
+.card .event-title-box {
   justify-content: space-between;
   align-items: center;
   display: flex;
 }
 
-.event-card .event-title-box .event-title {
+.card .event-title-box .event-title {
   font-family: var(--base-font-family);
   color: #fff;
   padding: 1em;
@@ -26,14 +25,14 @@
   font-weight: bold;
 }
 
-.event-card .event-description {
+.card .event-description {
   font-family: var(--base-font-family);
   color: #fff;
   padding: 0 1.5em;
   font-size: 75%;
 }
 
-.event-card .event-times {
+.card .event-times {
   font-family: var(--base-font-family);
   color: #fff;
   float: right;
@@ -41,7 +40,7 @@
   font-size: 75%;
 }
 
-.event-card .event-button {
+.card .event-button {
   z-index: 10;
   background-color: #2b2b2b;
   border: none;
@@ -50,14 +49,18 @@
   display: flex;
 }
 
-.event-card .event-button .material-icons {
+.card .event-button .material-icons {
   color: #bdbdbd;
   width: 24px;
 }
 
-.event-card .event-button:hover .material-icons, .event-card .event-button.active .material-icons {
+.card .event-button:hover .material-icons, .card .event-button.active .material-icons {
   color: #ffc600;
   cursor: pointer;
+}
+
+.card .hidden {
+  display: none;
 }
 
 @media (width <= 768px) {
@@ -220,17 +223,14 @@
 }
 
 .events-grid {
-  border-radius: .2em;
   width: 80%;
-  height: auto;
-  margin: 2em auto;
+  margin: auto;
+  padding-top: 1em;
+  display: grid;
 }
 
 .events-grid #card-container {
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 0;
-  display: flex;
+  padding-bottom: 2em;
 }
 
 #venue {

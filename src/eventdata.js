@@ -1,3 +1,14 @@
+import treeoflife from '../static/images/treeoflife.jpg'
+import texbbq from '../static/images/bbq-food.jpg'
+import anza from '../static/images/anza-earring-stall.jpg'
+import djduo from '../static/images/dj-duo-entertainment.jpg'
+import swirl from '../static/images/bakery-food.jpg'
+import luminous from '../static/images/lantern-stall.jpg'
+import lanterns from '../static/images/making_lantern_activity.jpg'
+import loaded from '../static/images/loadedpotato-food.jpg'
+import vine from '../static/images/soap-stall.jpg'
+import alisa from '../static/images/alisa-music-entertainment.jpg'
+
 const data = [
     { 
         _id: '1',
@@ -6,7 +17,7 @@ const data = [
         eventoperationdatetimestart: '18:00',
         eventoperationdatetimeend: '22:00',
         eventdescription: 'Witness the mesmerizing light show projected onto the tree while relaxing with your drinks',
-        eventimage: 'static/images/treeofline.jpg',
+        eventimage: treeoflife,
         eventstallnumber: '1',
         eventtag: ['adult only']
     },
@@ -17,7 +28,7 @@ const data = [
         eventoperationdatetimestart: '',
         eventoperationdatetimeend: '',
         eventdescription: 'Inspired by Texas, Tex BBQ is cooking up a storm with briskets and pulled pork. Don`t forget the mac and cheese!',
-        eventimage: '',
+        eventimage: texbbq,
         eventstallnumber: '4',
         eventtag: ['food']
     },
@@ -28,7 +39,7 @@ const data = [
         eventoperationdatetimestart: '',
         eventoperationdatetimeend: '',
         eventdescription: 'Handmade selection of earrings, perfect for any occasion.',
-        eventimage: '',
+        eventimage: anza,
         eventstallnumber: '40',
         eventtag: ['']
     },
@@ -39,7 +50,7 @@ const data = [
         eventoperationdatetimestart: '15:00',
         eventoperationdatetimeend: '22:00',
         eventdescription: 'Geelong locals DJs Lucy and Cara keeping the vibe going between musical and talents acts.',
-        eventimage: '',
+        eventimage: djduo,
         eventstallnumber: '10',
         eventtag: ['music']
     },
@@ -50,7 +61,7 @@ const data = [
         eventoperationdatetimestart: '',
         eventoperationdatetimeend: '',
         eventdescription: 'Swirl Bakery will be bringing over 20 kinds of baked goods to the showground.',
-        eventimage: '',
+        eventimage: swirl,
         eventstallnumber: '13',
         eventtag: ['gluten-free', 'gourmet']
     },
@@ -61,7 +72,7 @@ const data = [
         eventoperationdatetimestart: '',
         eventoperationdatetimeend: '',
         eventdescription: 'lluminate your space with captivating collection of beautifully designed lanterns.',
-        eventimage: '',
+        eventimage: luminous,
         eventstallnumber: '45',
         eventtag: []
     },
@@ -72,7 +83,7 @@ const data = [
         eventoperationdatetimestart: '15:00',
         eventoperationdatetimeend: '22:00',
         eventdescription: 'Light up your night even more with lantern making class. $10 per person.',
-        eventimage: '',
+        eventimage: lanterns,
         eventstallnumber: '11',
         eventtag: ['activity', 'family-friendly']
     },
@@ -83,7 +94,7 @@ const data = [
         eventoperationdatetimestart: '',
         eventoperationdatetimeend: '',
         eventdescription: 'Load your potatoes however you want! Vegan options available.',
-        eventimage: '',
+        eventimage: loaded,
         eventstallnumber: '21',
         eventtag: ['vegan']
     },
@@ -94,7 +105,7 @@ const data = [
         eventoperationdatetimestart: '',
         eventoperationdatetimeend: '',
         eventdescription: 'Indulge in our luxurious, all-natural soaps that leave your skin feeling soft and refreshed.',
-        eventimage: '',
+        eventimage: vine,
         eventstallnumber: '47',
         eventtag: []
     },
@@ -105,7 +116,7 @@ const data = [
         eventoperationdatetimestart: '18:00',
         eventoperationdatetimeend: '18:45',
         eventdescription: 'Alisa will showcase her soulful voice, blending contemporary pop with classic melodies.',
-        eventimage: '',
+        eventimage: alisa,
         eventstallnumber: '10',
         eventtag: ['music', 'stage']
     }
