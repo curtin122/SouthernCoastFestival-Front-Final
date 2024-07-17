@@ -32567,16 +32567,11 @@ var _material = require("@mui/material");
 var _chefBryanEntertainmentJpg = require("../../../static/images/chef-bryan-entertainment.jpg");
 var _chefBryanEntertainmentJpgDefault = parcelHelpers.interopDefault(_chefBryanEntertainmentJpg);
 var _reactScss = require("../../scss/react.scss");
-var _s = $RefreshSig$();
+var _eventdata = require("../../eventdata");
+var _eventdataDefault = parcelHelpers.interopDefault(_eventdata);
 const eventCard = ()=>{
-    _s();
-    const [isActive, setActive] = (0, _react.useState)(false);
-    const handleButtonClick = ()=>{
-        setIsActive(!isActive);
-    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Card), {
+        children: (0, _eventdataDefault.default).map((event)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Card), {
                 className: "event-card",
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardContent), {
                     className: "event-content",
@@ -32585,23 +32580,23 @@ const eventCard = ()=>{
                             component: "img",
                             alt: "placeholder",
                             height: "150",
-                            image: (0, _chefBryanEntertainmentJpgDefault.default),
+                            image: event.eventimage,
                             className: "event-image"
                         }, void 0, false, {
                             fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 18,
-                            columnNumber: 17
+                            lineNumber: 14,
+                            columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Box), {
                             className: "event-title-box",
                             children: [
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
                                     className: "event-title",
-                                    children: "Chef Bryan"
+                                    children: event.eventdisplayname
                                 }, void 0, false, {
                                     fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 25,
-                                    columnNumber: 21
+                                    lineNumber: 21,
+                                    columnNumber: 25
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.IconButton), {
                                     className: "event-button",
@@ -32610,308 +32605,80 @@ const eventCard = ()=>{
                                         children: "favorite_border"
                                     }, void 0, false, {
                                         fileName: "src/components/react/sc-event-card.js",
-                                        lineNumber: 29,
-                                        columnNumber: 25
+                                        lineNumber: 25,
+                                        columnNumber: 29
                                     }, undefined)
                                 }, void 0, false, {
                                     fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 28,
-                                    columnNumber: 21
+                                    lineNumber: 24,
+                                    columnNumber: 25
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 24,
-                            columnNumber: 17
+                            lineNumber: 20,
+                            columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
                             className: "event-description",
-                            children: "Watch past MasterChef contestant Bryan cook up a storm at the stage"
+                            children: event.eventdescription
                         }, void 0, false, {
                             fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 34,
-                            columnNumber: 17
+                            lineNumber: 30,
+                            columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
                             className: "event-times",
                             children: [
-                                "Sat \u2014 19:00-19:45",
+                                event.eventoperationdatetimestart,
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                     fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 38,
-                                    columnNumber: 38
+                                    lineNumber: 34,
+                                    columnNumber: 60
                                 }, undefined),
-                                "Sun \u2014 19:00-19:45"
+                                event.eventoperationdatetimeend
                             ]
                         }, void 0, true, {
+                            fileName: "src/components/react/sc-event-card.js",
+                            lineNumber: 33,
+                            columnNumber: 21
+                        }, undefined),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                            children: event.eventstall
+                        }, void 0, false, {
                             fileName: "src/components/react/sc-event-card.js",
                             lineNumber: 37,
-                            columnNumber: 17
-                        }, undefined)
-                    ]
-                }, void 0, true, {
-                    fileName: "src/components/react/sc-event-card.js",
-                    lineNumber: 17,
-                    columnNumber: 13
-                }, undefined)
-            }, void 0, false, {
-                fileName: "src/components/react/sc-event-card.js",
-                lineNumber: 16,
-                columnNumber: 9
-            }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Card), {
-                className: "event-card",
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardContent), {
-                    className: "event-content",
-                    children: [
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardMedia), {
-                            component: "img",
-                            alt: "placeholder",
-                            height: "150",
-                            image: (0, _chefBryanEntertainmentJpgDefault.default),
-                            className: "event-image"
-                        }, void 0, false, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 45,
-                            columnNumber: 17
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Box), {
-                            className: "event-title-box",
-                            children: [
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                                    className: "event-title",
-                                    children: "Light Experience Room"
-                                }, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 52,
-                                    columnNumber: 21
-                                }, undefined),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.IconButton), {
-                                    className: "event-button",
-                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        className: "material-icons",
-                                        children: "favorite_border"
-                                    }, void 0, false, {
-                                        fileName: "src/components/react/sc-event-card.js",
-                                        lineNumber: 56,
-                                        columnNumber: 25
-                                    }, undefined)
-                                }, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 55,
-                                    columnNumber: 21
-                                }, undefined)
-                            ]
-                        }, void 0, true, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 51,
-                            columnNumber: 17
+                            columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                            className: "event-description",
-                            children: "Where art and lights meet! Enjoy a 20 min light art experience. Two shows every hour. Entry is $5 per person."
-                        }, void 0, false, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 61,
-                            columnNumber: 17
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                            className: "event-times",
+                            className: "hidden",
                             children: [
-                                "Sat \u2014 19:00-19:45",
+                                event.eventcategory,
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                     fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 65,
-                                    columnNumber: 38
+                                    lineNumber: 41,
+                                    columnNumber: 46
                                 }, undefined),
-                                "Sun \u2014 19:00-19:45"
+                                event.eventtag
                             ]
                         }, void 0, true, {
                             fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 64,
-                            columnNumber: 17
+                            lineNumber: 40,
+                            columnNumber: 21
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/react/sc-event-card.js",
-                    lineNumber: 44,
-                    columnNumber: 13
+                    lineNumber: 13,
+                    columnNumber: 17
                 }, undefined)
-            }, void 0, false, {
+            }, event._id, false, {
                 fileName: "src/components/react/sc-event-card.js",
-                lineNumber: 43,
-                columnNumber: 9
-            }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Card), {
-                className: "event-card",
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardContent), {
-                    className: "event-content",
-                    children: [
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardMedia), {
-                            component: "img",
-                            alt: "placeholder",
-                            height: "150",
-                            image: (0, _chefBryanEntertainmentJpgDefault.default),
-                            className: "event-image"
-                        }, void 0, false, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 72,
-                            columnNumber: 17
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Box), {
-                            className: "event-title-box",
-                            children: [
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                                    className: "event-title",
-                                    children: "Chef Bryan"
-                                }, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 79,
-                                    columnNumber: 21
-                                }, undefined),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.IconButton), {
-                                    className: "event-button",
-                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        className: "material-icons",
-                                        children: "favorite_border"
-                                    }, void 0, false, {
-                                        fileName: "src/components/react/sc-event-card.js",
-                                        lineNumber: 83,
-                                        columnNumber: 25
-                                    }, undefined)
-                                }, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 82,
-                                    columnNumber: 21
-                                }, undefined)
-                            ]
-                        }, void 0, true, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 78,
-                            columnNumber: 17
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                            className: "event-description",
-                            children: "Watch past MasterChef contestant Bryan cook up a storm at the stage"
-                        }, void 0, false, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 88,
-                            columnNumber: 17
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                            className: "event-times",
-                            children: [
-                                "Sat \u2014 19:00-19:45",
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 92,
-                                    columnNumber: 38
-                                }, undefined),
-                                "Sun \u2014 19:00-19:45"
-                            ]
-                        }, void 0, true, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 91,
-                            columnNumber: 17
-                        }, undefined)
-                    ]
-                }, void 0, true, {
-                    fileName: "src/components/react/sc-event-card.js",
-                    lineNumber: 71,
-                    columnNumber: 13
-                }, undefined)
-            }, void 0, false, {
-                fileName: "src/components/react/sc-event-card.js",
-                lineNumber: 70,
-                columnNumber: 9
-            }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Card), {
-                className: "event-card",
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardContent), {
-                    className: "event-content",
-                    children: [
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardMedia), {
-                            component: "img",
-                            alt: "placeholder",
-                            height: "150",
-                            image: (0, _chefBryanEntertainmentJpgDefault.default),
-                            className: "event-image"
-                        }, void 0, false, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 99,
-                            columnNumber: 17
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Box), {
-                            className: "event-title-box",
-                            children: [
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                                    className: "event-title",
-                                    children: "Light Experience Room"
-                                }, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 106,
-                                    columnNumber: 21
-                                }, undefined),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.IconButton), {
-                                    className: "event-button",
-                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        className: "material-icons",
-                                        children: "favorite_border"
-                                    }, void 0, false, {
-                                        fileName: "src/components/react/sc-event-card.js",
-                                        lineNumber: 110,
-                                        columnNumber: 25
-                                    }, undefined)
-                                }, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 109,
-                                    columnNumber: 21
-                                }, undefined)
-                            ]
-                        }, void 0, true, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 105,
-                            columnNumber: 17
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                            className: "event-description",
-                            children: "Where art and lights meet! Enjoy a 20 min light art experience. Two shows every hour. Entry is $5 per person."
-                        }, void 0, false, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 115,
-                            columnNumber: 17
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                            className: "event-times",
-                            children: [
-                                "Sat \u2014 19:00-19:45",
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 119,
-                                    columnNumber: 38
-                                }, undefined),
-                                "Sun \u2014 19:00-19:45"
-                            ]
-                        }, void 0, true, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 118,
-                            columnNumber: 17
-                        }, undefined)
-                    ]
-                }, void 0, true, {
-                    fileName: "src/components/react/sc-event-card.js",
-                    lineNumber: 98,
-                    columnNumber: 13
-                }, undefined)
-            }, void 0, false, {
-                fileName: "src/components/react/sc-event-card.js",
-                lineNumber: 97,
-                columnNumber: 9
-            }, undefined)
-        ]
-    }, void 0, true);
+                lineNumber: 12,
+                columnNumber: 13
+            }, undefined))
+    }, void 0, false);
 };
-_s(eventCard, "NIDogoy7bmTp1+ctz7hxf3NMsLg=");
 exports.default = eventCard;
 
   $parcel$ReactRefreshHelpers$94a6.postlude(module);
@@ -32919,7 +32686,7 @@ exports.default = eventCard;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","../../../static/images/chef-bryan-entertainment.jpg":"aMs6C","../../scss/react.scss":"aLSRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"40376":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","../../../static/images/chef-bryan-entertainment.jpg":"aMs6C","../../scss/react.scss":"aLSRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../eventdata":"5Y3fe"}],"40376":[function(require,module,exports) {
 /**
  * @mui/material v5.16.1
  *
@@ -44970,7 +44737,143 @@ exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 exports.getOrigin = getOrigin;
 
-},{}],"aLSRg":[function() {},{}],"BO0AV":[function(require,module,exports) {
+},{}],"aLSRg":[function() {},{}],"5Y3fe":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const data = [
+    {
+        _id: "1",
+        eventdisplayname: "Tree of Life",
+        eventcatergory: "Entertainment",
+        eventoperationdatetimestart: "18:00",
+        eventoperationdatetimeend: "22:00",
+        eventdescription: "Witness the mesmerizing light show projected onto the tree while relaxing with your drinks",
+        eventimage: "static/images/treeofline.jpg",
+        eventstallnumber: "1",
+        eventtag: [
+            "adult only"
+        ]
+    },
+    {
+        _id: "2",
+        eventdisplayname: "Tex BBQ",
+        eventcatergory: "Food",
+        eventoperationdatetimestart: "",
+        eventoperationdatetimeend: "",
+        eventdescription: "Inspired by Texas, Tex BBQ is cooking up a storm with briskets and pulled pork. Don`t forget the mac and cheese!",
+        eventimage: "",
+        eventstallnumber: "4",
+        eventtag: [
+            "food"
+        ]
+    },
+    {
+        _id: "3",
+        eventdisplayname: "Anza Earrings",
+        eventcatergory: "Shop",
+        eventoperationdatetimestart: "",
+        eventoperationdatetimeend: "",
+        eventdescription: "Handmade selection of earrings, perfect for any occasion.",
+        eventimage: "",
+        eventstallnumber: "40",
+        eventtag: [
+            ""
+        ]
+    },
+    {
+        _id: "4",
+        eventdisplayname: "DJ Lucy & Cara",
+        eventcatergory: "Entertainment",
+        eventoperationdatetimestart: "15:00",
+        eventoperationdatetimeend: "22:00",
+        eventdescription: "Geelong locals DJs Lucy and Cara keeping the vibe going between musical and talents acts.",
+        eventimage: "",
+        eventstallnumber: "10",
+        eventtag: [
+            "music"
+        ]
+    },
+    {
+        _id: "5",
+        eventdisplayname: "Swirl Bakery",
+        eventcatergory: "Food",
+        eventoperationdatetimestart: "",
+        eventoperationdatetimeend: "",
+        eventdescription: "Swirl Bakery will be bringing over 20 kinds of baked goods to the showground.",
+        eventimage: "",
+        eventstallnumber: "13",
+        eventtag: [
+            "gluten-free",
+            "gourmet"
+        ]
+    },
+    {
+        _id: "6",
+        eventdisplayname: "Luminous Lanterns",
+        eventcatergory: "Shop",
+        eventoperationdatetimestart: "",
+        eventoperationdatetimeend: "",
+        eventdescription: "lluminate your space with captivating collection of beautifully designed lanterns.",
+        eventimage: "",
+        eventstallnumber: "45",
+        eventtag: []
+    },
+    {
+        _id: "7",
+        eventdisplayname: "Make Lanterns",
+        eventcatergory: "Entertainment",
+        eventoperationdatetimestart: "15:00",
+        eventoperationdatetimeend: "22:00",
+        eventdescription: "Light up your night even more with lantern making class. $10 per person.",
+        eventimage: "",
+        eventstallnumber: "11",
+        eventtag: [
+            "activity",
+            "family-friendly"
+        ]
+    },
+    {
+        _id: "8",
+        eventdisplayname: "Loaded",
+        eventcatergory: "Food",
+        eventoperationdatetimestart: "",
+        eventoperationdatetimeend: "",
+        eventdescription: "Load your potatoes however you want! Vegan options available.",
+        eventimage: "",
+        eventstallnumber: "21",
+        eventtag: [
+            "vegan"
+        ]
+    },
+    {
+        _id: "9",
+        eventdisplayname: "Vine Soaps",
+        eventcatergory: "Shop",
+        eventoperationdatetimestart: "",
+        eventoperationdatetimeend: "",
+        eventdescription: "Indulge in our luxurious, all-natural soaps that leave your skin feeling soft and refreshed.",
+        eventimage: "",
+        eventstallnumber: "47",
+        eventtag: []
+    },
+    {
+        _id: "10",
+        eventdisplayname: "Music by Alisa",
+        eventcatergory: "Entertainment",
+        eventoperationdatetimestart: "18:00",
+        eventoperationdatetimeend: "18:45",
+        eventdescription: "Alisa will showcase her soulful voice, blending contemporary pop with classic melodies.",
+        eventimage: "",
+        eventstallnumber: "10",
+        eventtag: [
+            "music",
+            "stage"
+        ]
+    }
+];
+exports.default = data;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"BO0AV":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _app = require("../../App");
