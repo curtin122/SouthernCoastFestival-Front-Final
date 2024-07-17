@@ -63,6 +63,23 @@
   display: none;
 }
 
+#admin-icon {
+  color: #ffc600;
+  margin: .2em auto;
+  font-size: 5em;
+}
+
+.admin-text {
+  color: #ffc600;
+  text-align: center;
+  font-family: var(--base-font-family) !important;
+}
+
+.admin-text:first-of-type {
+  font-size: 1.5em;
+  font-weight: bold !important;
+}
+
 @media (width <= 768px) {
   .event-card {
     max-width: 32%;
@@ -76,6 +93,10 @@
   }
 }
 
+.content-container {
+  padding-right: 9em;
+}
+
 #root {
   background-color: #000;
   position: absolute;
@@ -87,6 +108,7 @@
   width: 100%;
   height: auto;
   padding-bottom: 2em;
+  padding-right: 240px;
   transform: translate(0, -21px);
 }
 

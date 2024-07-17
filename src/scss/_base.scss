@@ -1,5 +1,9 @@
 // BASE STYLING
 
+.content-container {
+    padding-right: 9em;
+}
+
 // ROOT -------------------------------
 #root {
     position: absolute;
@@ -18,6 +22,7 @@
     transform: translate(0px, -21px);
     height: auto;
     padding-bottom: 2em;
+    padding-right: 240px;
 }
 
 // APP HEADER ---------------------------
