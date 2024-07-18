@@ -1,3 +1,74 @@
+#category-container {
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin: .5em auto;
+  display: flex;
+}
+
+#category-container .category-button {
+  font-family: var(--base-font-family);
+  background-color: #bdbdbd;
+  border-style: none;
+  border-radius: .2em;
+  width: 32%;
+  padding: .5em;
+}
+
+#category-container .category-button:hover, #category-container .category-button.active {
+  cursor: pointer;
+  background-color: #ffc600;
+  font-weight: bold;
+}
+
+#tag-container {
+  background-color: #2b2b2b;
+  border-radius: .2em;
+  width: 80%;
+  margin: auto auto 1em;
+  padding: .25em;
+}
+
+#tag-container .tag-button {
+  color: #bdbdbd;
+  background-color: #000;
+  border: 1px solid #000;
+  border-radius: .2em;
+  margin: .25em;
+  padding: .25em .5em;
+  font-size: .75em;
+}
+
+#tag-container .tag-button .material-icons {
+  align-items: center;
+  font-size: .75em;
+}
+
+#tag-container .tag-button:hover, #tag-container .tag-button.active {
+  cursor: pointer;
+  color: #ffc600;
+  border: 1px solid #ffc600;
+}
+
+#tag-container .message {
+  font-family: var(--base-font-family);
+  color: #ffc600;
+  text-align: center;
+  margin: auto;
+  padding: 1em;
+  font-size: .5em;
+}
+
+.skel-grid {
+  flex-direction: row;
+  height: 100%;
+  display: flex;
+}
+
+.skel-grid .skel-box {
+  padding-left: 1em;
+}
+
 .card {
   height: 100%;
   background-color: #2b2b2b !important;
@@ -179,69 +250,10 @@
 }
 
 #filter-container {
-  width: 50%;
+  width: 80%;
   height: auto;
   margin: auto;
-}
-
-#filter-container #sections-container {
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin: .5em auto;
-  display: flex;
-}
-
-#filter-container #sections-container .section-button {
-  font-family: var(--base-font-family);
-  background-color: #bdbdbd;
-  border-style: none;
-  border-radius: .2em;
-  width: 32%;
-  padding: .5em;
-}
-
-#filter-container #sections-container .section-button:hover, #filter-container #sections-container .section-button.active {
-  cursor: pointer;
-  background-color: #ffc600;
-  font-weight: bold;
-}
-
-#filter-container #tag-container {
-  background-color: #2b2b2b;
-  border-radius: .2em;
-  margin: auto;
-  padding: .25em;
-}
-
-#filter-container #tag-container .tag-button {
-  color: #bdbdbd;
-  background-color: #000;
-  border: 1px solid #000;
-  border-radius: .2em;
-  margin: .25em;
-  padding: .25em .5em;
-  font-size: .75em;
-}
-
-#filter-container #tag-container .tag-button .material-icons {
-  align-items: center;
-  font-size: .75em;
-}
-
-#filter-container #tag-container .tag-button:hover, #filter-container #tag-container .tag-button.active {
-  cursor: pointer;
-  color: #ffc600;
-  border: 1px solid #ffc600;
-}
-
-#filter-container #tag-container .message {
-  font-family: var(--base-font-family);
-  color: #ffc600;
-  text-align: center;
-  margin: auto;
-  padding: 1em;
-  font-size: .5em;
+  padding-bottom: 1em;
 }
 
 .events-grid {
@@ -268,13 +280,19 @@
 
 .venue-nav ul {
   font-family: var(--base-font-family);
-  justify-content: space-evenly;
+  justify-content: center;
   width: 100%;
   margin: 0;
   padding: 0;
   font-size: .75em;
   list-style-type: none;
   display: flex;
+}
+
+.venue-nav ul li {
+  text-wrap: nowrap;
+  width: 100%;
+  margin: .5em;
 }
 
 .venue-nav ul li a {

@@ -13,7 +13,7 @@ const data = [
     { 
         _id: '1',
         eventdisplayname: 'Tree of Life',
-        eventcatergory: 'Entertainment',
+        eventcategory: 'Entertainment',
         eventoperationdatetimestart: '18:00',
         eventoperationdatetimeend: '22:00',
         eventdescription: 'Witness the mesmerizing light show projected onto the tree while relaxing with your drinks',
@@ -24,7 +24,7 @@ const data = [
     { 
         _id: '2',
         eventdisplayname: 'Tex BBQ',
-        eventcatergory: 'Food',
+        eventcategory: 'Food',
         eventoperationdatetimestart: '',
         eventoperationdatetimeend: '',
         eventdescription: 'Inspired by Texas, Tex BBQ is cooking up a storm with briskets and pulled pork. Don`t forget the mac and cheese!',
@@ -35,7 +35,7 @@ const data = [
     { 
         _id: '3',
         eventdisplayname: 'Anza Earrings',
-        eventcatergory: 'Shop',
+        eventcategory: 'Shop',
         eventoperationdatetimestart: '',
         eventoperationdatetimeend: '',
         eventdescription: 'Handmade selection of earrings, perfect for any occasion.',
@@ -46,7 +46,7 @@ const data = [
     { 
         _id: '4',
         eventdisplayname: 'DJ Lucy & Cara',
-        eventcatergory: 'Entertainment',
+        eventcategory: 'Entertainment',
         eventoperationdatetimestart: '15:00',
         eventoperationdatetimeend: '22:00',
         eventdescription: 'Geelong locals DJs Lucy and Cara keeping the vibe going between musical and talents acts.',
@@ -57,7 +57,7 @@ const data = [
     { 
         _id: '5',
         eventdisplayname: 'Swirl Bakery',
-        eventcatergory: 'Food',
+        eventcategory: 'Food',
         eventoperationdatetimestart: '',
         eventoperationdatetimeend: '',
         eventdescription: 'Swirl Bakery will be bringing over 20 kinds of baked goods to the showground.',
@@ -68,7 +68,7 @@ const data = [
     { 
         _id: '6',
         eventdisplayname: 'Luminous Lanterns',
-        eventcatergory: 'Shop',
+        eventcategory: 'Shop',
         eventoperationdatetimestart: '',
         eventoperationdatetimeend: '',
         eventdescription: 'lluminate your space with captivating collection of beautifully designed lanterns.',
@@ -79,7 +79,7 @@ const data = [
     { 
         _id: '7',
         eventdisplayname: 'Make Lanterns',
-        eventcatergory: 'Entertainment',
+        eventcategory: 'Entertainment',
         eventoperationdatetimestart: '15:00',
         eventoperationdatetimeend: '22:00',
         eventdescription: 'Light up your night even more with lantern making class. $10 per person.',
@@ -90,7 +90,7 @@ const data = [
     { 
         _id: '8',
         eventdisplayname: 'Loaded',
-        eventcatergory: 'Food',
+        eventcategory: 'Food',
         eventoperationdatetimestart: '',
         eventoperationdatetimeend: '',
         eventdescription: 'Load your potatoes however you want! Vegan options available.',
@@ -101,7 +101,7 @@ const data = [
     { 
         _id: '9',
         eventdisplayname: 'Vine Soaps',
-        eventcatergory: 'Shop',
+        eventcategory: 'Shop',
         eventoperationdatetimestart: '',
         eventoperationdatetimeend: '',
         eventdescription: 'Indulge in our luxurious, all-natural soaps that leave your skin feeling soft and refreshed.',
@@ -112,7 +112,7 @@ const data = [
     { 
         _id: '10',
         eventdisplayname: 'Music by Alisa',
-        eventcatergory: 'Entertainment',
+        eventcategory: 'Entertainment',
         eventoperationdatetimestart: '18:00',
         eventoperationdatetimeend: '18:45',
         eventdescription: 'Alisa will showcase her soulful voice, blending contemporary pop with classic melodies.',

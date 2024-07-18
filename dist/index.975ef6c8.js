@@ -3073,16 +3073,24 @@ var _eventDefault = parcelHelpers.interopDefault(_event);
 var _toast = require("../../Toast");
 var _toastDefault = parcelHelpers.interopDefault(_toast);
 var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactHelper = require("../../components/react/reactHelper");
-var _scEventCard = require("../../components/react/sc-event-card");
-var _scEventCardDefault = parcelHelpers.interopDefault(_scEventCard);
+var _scEventsGridJs = require("../../components/sc-events-grid.js");
+var _scEventsGridJsDefault = parcelHelpers.interopDefault(_scEventsGridJs);
+var _eventdataJs = require("../../eventdata.js");
+var _eventdataJsDefault = parcelHelpers.interopDefault(_eventdataJs);
 class HomeView {
+    constructor(){
+        this.events = (0, _eventdataJsDefault.default);
+        console.log(this.events);
+    }
     init() {
         console.log("HomeView.init");
         document.title = "Home";
+        // await this.getEvents() // only use when front and back are talking
         this.render();
         (0, _utilsDefault.default).pageIntroAnim();
-        const jumpTo = document.querySelectorAll("jumpTo");
+        const jumpTo = document.querySelectorAll(".jumpTo");
         jumpTo.forEach((button)=>button.addEventListener("click", this.scrollTo));
     }
     async getEvents() {
@@ -3124,34 +3132,7 @@ class HomeView {
         <!-- use react grid to create events layout -->
 
         <div id="events">
-          <div id="filter-container">
-            <!--MAIN FILTERS-->
-            <div id="sections-container">
-              <button class="section-button">Eat + Drink</button>
-              <button class="section-button">Entertainment</button>
-              <button class="section-button">Shop</button>
-            </div>
-            <!--TAGS-->
-            <div id="tag-container">
-              <button class="tag-button">All</button>
-              <button class="tag-button">Drinks</button>
-              <button class="tag-button">Food</button>
-              <button class="tag-button">Alcholic</button>
-              <button class="tag-button">Gluten Free</button>
-              <button class="tag-button">Nut Free</button>
-              <button class="tag-button">Gourmet</button>
-              <button class="tag-button">
-                <span class="material-icons">favorite_border</span>
-                Favourites
-              </button>
-              <!-- <button class="tag-button"></button> -->
-              <p class="message">Showing all __ items</p>
-            </div>
-          </div>
-          
-          <div class="events-grid">
-            <div id="card-container"></div>
-          </div>
+          <div id="filter-container"></div>
         </div>
 
         <!--VENUE-->
@@ -3223,8 +3204,8 @@ class HomeView {
       <sc-app-footer></sc-app-footer>
     `;
         (0, _litHtml.render)(template, (0, _appDefault.default).rootEl);
-        const cardContainer = document.getElementById("card-container");
-        (0, _reactHelper.renderReactComponent)((0, _scEventCardDefault.default), cardContainer);
+        const filterContainer = document.getElementById("filter-container");
+        (0, _reactHelper.renderReactComponent)((0, _scEventsGridJsDefault.default), filterContainer);
     }
 }
 exports.default = new HomeView();
@@ -3234,7 +3215,7 @@ exports.default = new HomeView();
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"../../App":"2kQhy","lit-html":"1cmQt","../../Utils":"iRY6S","../../Event":"cqvk6","../../Toast":"4N7Ir","react":"21dqq","../../components/react/reactHelper":"3QXBS","../../components/react/sc-event-card":"8huJy","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"1cmQt":[function(require,module,exports) {
+},{"../../App":"2kQhy","lit-html":"1cmQt","../../Utils":"iRY6S","../../Event":"cqvk6","../../Toast":"4N7Ir","react":"21dqq","../../components/react/reactHelper":"3QXBS","../../components/sc-events-grid.js":"32p0x","../../eventdata.js":"5Y3fe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"1cmQt":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2017 Google LLC
@@ -9938,13 +9919,19 @@ parcelHelpers.export(exports, "renderReactComponent", ()=>renderReactComponent);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _client = require("react-dom/client");
+const roots = new Map();
 const renderReactComponent = (Component, container)=>{
-    const root = (0, _client.createRoot)(container);
-    root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Component, {}, void 0, false, {
+    if (!roots.has(container)) {
+        const root = (0, _client.createRoot)(container);
+        roots.set(container, root);
+    }
+    const root = roots.get(container);
+    if (typeof Component === "function") root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Component, {}, void 0, false, {
         fileName: "src/components/react/reactHelper.js",
-        lineNumber: 6,
-        columnNumber: 17
+        lineNumber: 14,
+        columnNumber: 21
     }, undefined));
+    else console.error("Invalid component type:", typeof Component);
 };
 
   $parcel$ReactRefreshHelpers$08ff.postlude(module);
@@ -32462,164 +32449,450 @@ function registerExportsForReactRefresh(module1) {
     }
 }
 
-},{"7422ead32dcc1e6b":"786KC"}],"8huJy":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$94a6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{"7422ead32dcc1e6b":"786KC"}],"32p0x":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$44c1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$94a6.prelude(module);
+$parcel$ReactRefreshHelpers$44c1.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
 var _material = require("@mui/material");
-var _chefBryanEntertainmentJpg = require("../../../static/images/chef-bryan-entertainment.jpg");
+var _chefBryanEntertainmentJpg = require("../../static/images/chef-bryan-entertainment.jpg");
 var _chefBryanEntertainmentJpgDefault = parcelHelpers.interopDefault(_chefBryanEntertainmentJpg);
-var _reactScss = require("../../scss/react.scss");
-var _eventdata = require("../../eventdata");
+var _reactScss = require("../scss/react.scss");
+var _eventdata = require("../eventdata");
 var _eventdataDefault = parcelHelpers.interopDefault(_eventdata);
-const eventCard = ()=>{
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Grid), {
-        container: true,
-        spacing: 3,
-        className: "card-grid",
-        children: (0, _eventdataDefault.default).map((event)=>{
-            const imageUrl = event.eventimage || (0, _chefBryanEntertainmentJpgDefault.default);
-            console.log("Image URL:", imageUrl);
-            return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Grid), {
-                item: true,
-                xs: 12,
-                sm: 6,
-                md: 4,
-                lg: 3,
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Card), {
-                    className: "card",
-                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardContent), {
-                        className: "event-content",
+var _s = $RefreshSig$();
+const EventContainer = ()=>{
+    _s();
+    const [events, setEvents] = (0, _react.useState)([]);
+    const [selectedCategory, setSelectedCategory] = (0, _react.useState)("all");
+    const [selectedTag, setSelectedTag] = (0, _react.useState)("all");
+    (0, _react.useEffect)(()=>{
+        const fetchEvents = ()=>{
+            setEvents((0, _eventdataDefault.default));
+        };
+        fetchEvents();
+    }, []);
+    const [filteredEvents, setFilteredEvents] = (0, _react.useState)([]);
+    (0, _react.useEffect)(()=>{
+        let filtered = events;
+        if (selectedCategory !== "all") filtered = filtered.filter((event)=>event.eventcategory === selectedCategory);
+        if (selectedTag !== "all") filtered = filtered.filter((event)=>{
+            if (Array.isArray(event.eventtag)) return event.eventtag.includes(selectedTag);
+            return event.eventtag === selectedTag;
+        });
+        setFilteredEvents(filtered);
+    }, [
+        selectedCategory,
+        selectedTag,
+        events
+    ]);
+    const handleCategoryChange = (category)=>{
+        console.log("selected button:", category);
+        setSelectedCategory(category);
+        setSelectedTag("all");
+    };
+    const handleTagChange = (tag)=>{
+        setSelectedTag(tag);
+    };
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                id: "category-container",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: `category-button ${selectedCategory === "Food" ? "active" : ""}`,
+                        onClick: ()=>handleCategoryChange("Food"),
+                        children: "Eat + Drink"
+                    }, void 0, false, {
+                        fileName: "src/components/sc-events-grid.js",
+                        lineNumber: 53,
+                        columnNumber: 17
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: `category-button ${selectedCategory === "Entertainment" ? "active" : ""}`,
+                        onClick: ()=>handleCategoryChange("Entertainment"),
+                        children: "Entertainment"
+                    }, void 0, false, {
+                        fileName: "src/components/sc-events-grid.js",
+                        lineNumber: 54,
+                        columnNumber: 17
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: `category-button ${selectedCategory === "Shop" ? "active" : ""}`,
+                        onClick: ()=>handleCategoryChange("Shop"),
+                        children: "Shop"
+                    }, void 0, false, {
+                        fileName: "src/components/sc-events-grid.js",
+                        lineNumber: 55,
+                        columnNumber: 17
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/sc-events-grid.js",
+                lineNumber: 52,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                id: "tag-container",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: `tag-button ${selectedTag === "all" ? "active" : ""}`,
+                        onClick: ()=>handleTagChange("all"),
+                        children: "All"
+                    }, void 0, false, {
+                        fileName: "src/components/sc-events-grid.js",
+                        lineNumber: 59,
+                        columnNumber: 17
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: `tag-button ${selectedTag === "drink" ? "active" : ""}`,
+                        onClick: ()=>handleTagChange("drink"),
+                        children: "Drinks"
+                    }, void 0, false, {
+                        fileName: "src/components/sc-events-grid.js",
+                        lineNumber: 60,
+                        columnNumber: 17
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: `tag-button ${selectedTag === "food" ? "active" : ""}`,
+                        onClick: ()=>handleTagChange("food"),
+                        children: "Food"
+                    }, void 0, false, {
+                        fileName: "src/components/sc-events-grid.js",
+                        lineNumber: 61,
+                        columnNumber: 17
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: `tag-button ${selectedTag === "alcoholic" ? "active" : ""}`,
+                        onClick: ()=>handleTagChange("alcoholic"),
+                        children: "Alcholic"
+                    }, void 0, false, {
+                        fileName: "src/components/sc-events-grid.js",
+                        lineNumber: 62,
+                        columnNumber: 17
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: `tag-button ${selectedTag === "gluten-free" ? "active" : ""}`,
+                        onClick: ()=>handleTagChange("gluten-free"),
+                        children: "Gluten Free"
+                    }, void 0, false, {
+                        fileName: "src/components/sc-events-grid.js",
+                        lineNumber: 63,
+                        columnNumber: 17
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: `tag-button ${selectedTag === "nut-free" ? "active" : ""}`,
+                        onClick: ()=>handleTagChange("nut-free"),
+                        children: "Nut Free"
+                    }, void 0, false, {
+                        fileName: "src/components/sc-events-grid.js",
+                        lineNumber: 64,
+                        columnNumber: 17
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: `tag-button ${selectedTag === "gourmet" ? "active" : ""}`,
+                        onClick: ()=>handleTagChange("gourmet"),
+                        children: "Gourmet"
+                    }, void 0, false, {
+                        fileName: "src/components/sc-events-grid.js",
+                        lineNumber: 65,
+                        columnNumber: 17
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: `tag-button ${selectedTag === "vegan" ? "active" : ""}`,
+                        onClick: ()=>handleTagChange("vegan"),
+                        children: "Vegan"
+                    }, void 0, false, {
+                        fileName: "src/components/sc-events-grid.js",
+                        lineNumber: 66,
+                        columnNumber: 17
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: `tag-button ${selectedTag === "favourites" ? "active" : ""}`,
+                        onClick: ()=>handleTagChange("favourites"),
                         children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardMedia), {
-                                component: "img",
-                                alt: "placeholder",
-                                height: "150",
-                                image: event.eventimage,
-                                className: "event-image"
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                className: "material-icons",
+                                children: "favorite_border"
                             }, void 0, false, {
-                                fileName: "src/components/react/sc-event-card.js",
-                                lineNumber: 18,
-                                columnNumber: 33
+                                fileName: "src/components/sc-events-grid.js",
+                                lineNumber: 68,
+                                columnNumber: 21
                             }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Box), {
-                                className: "event-title-box",
+                            "Favourites"
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/sc-events-grid.js",
+                        lineNumber: 67,
+                        columnNumber: 17
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                        className: "message",
+                        children: [
+                            "Showing all ",
+                            filteredEvents.length,
+                            " items"
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/sc-events-grid.js",
+                        lineNumber: 71,
+                        columnNumber: 17
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/sc-events-grid.js",
+                lineNumber: 58,
+                columnNumber: 13
+            }, undefined),
+            filteredEvents.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                        sx: {
+                            color: "#FFFFFF",
+                            fontFamily: "var(--base-font-family)",
+                            textAlign: "center",
+                            paddingBottom: "10px",
+                            fontSize: "1em"
+                        },
+                        children: "No events found matching that criteria"
+                    }, void 0, false, {
+                        fileName: "src/components/sc-events-grid.js",
+                        lineNumber: 76,
+                        columnNumber: 17
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Grid), {
+                        container: true,
+                        spacing: 3,
+                        className: "skel-grid",
+                        children: [
+                            ...Array(2)
+                        ].map((_, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Grid), {
+                                item: true,
+                                xs: 12,
+                                sm: 6,
+                                md: 4,
+                                lg: 3,
+                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Card), {
+                                    className: "card",
+                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardContent), {
+                                        className: "event-content",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Skeleton), {
+                                                variant: "rounded",
+                                                height: 200
+                                            }, void 0, false, {
+                                                fileName: "src/components/sc-events-grid.js",
+                                                lineNumber: 82,
+                                                columnNumber: 37
+                                            }, undefined),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Box), {
+                                                mt: 2,
+                                                className: "skel-box",
+                                                children: [
+                                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Skeleton), {
+                                                        variant: "text",
+                                                        width: "60%"
+                                                    }, void 0, false, {
+                                                        fileName: "src/components/sc-events-grid.js",
+                                                        lineNumber: 84,
+                                                        columnNumber: 41
+                                                    }, undefined),
+                                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Skeleton), {
+                                                        variant: "text",
+                                                        width: "80%"
+                                                    }, void 0, false, {
+                                                        fileName: "src/components/sc-events-grid.js",
+                                                        lineNumber: 85,
+                                                        columnNumber: 41
+                                                    }, undefined),
+                                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Skeleton), {
+                                                        variant: "text",
+                                                        width: "40%"
+                                                    }, void 0, false, {
+                                                        fileName: "src/components/sc-events-grid.js",
+                                                        lineNumber: 86,
+                                                        columnNumber: 41
+                                                    }, undefined)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "src/components/sc-events-grid.js",
+                                                lineNumber: 83,
+                                                columnNumber: 37
+                                            }, undefined)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/components/sc-events-grid.js",
+                                        lineNumber: 81,
+                                        columnNumber: 33
+                                    }, undefined)
+                                }, void 0, false, {
+                                    fileName: "src/components/sc-events-grid.js",
+                                    lineNumber: 80,
+                                    columnNumber: 29
+                                }, undefined)
+                            }, index, false, {
+                                fileName: "src/components/sc-events-grid.js",
+                                lineNumber: 79,
+                                columnNumber: 25
+                            }, undefined))
+                    }, void 0, false, {
+                        fileName: "src/components/sc-events-grid.js",
+                        lineNumber: 77,
+                        columnNumber: 17
+                    }, undefined)
+                ]
+            }, void 0, true) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Grid), {
+                container: true,
+                spacing: 3,
+                className: "card-grid",
+                children: filteredEvents.map((event)=>{
+                    const imageUrl = event.eventimage || (0, _chefBryanEntertainmentJpgDefault.default);
+                    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Grid), {
+                        item: true,
+                        xs: 12,
+                        sm: 6,
+                        md: 4,
+                        lg: 3,
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Card), {
+                            className: "card",
+                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardContent), {
+                                className: "event-content",
                                 children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                                        className: "event-title",
-                                        children: event.eventdisplayname
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardMedia), {
+                                        component: "img",
+                                        alt: "placeholder",
+                                        height: "150",
+                                        image: imageUrl,
+                                        className: "event-image"
                                     }, void 0, false, {
-                                        fileName: "src/components/react/sc-event-card.js",
-                                        lineNumber: 25,
-                                        columnNumber: 37
+                                        fileName: "src/components/sc-events-grid.js",
+                                        lineNumber: 103,
+                                        columnNumber: 41
                                     }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.IconButton), {
-                                        className: "event-button",
-                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                            className: "material-icons",
-                                            children: "favorite_border"
-                                        }, void 0, false, {
-                                            fileName: "src/components/react/sc-event-card.js",
-                                            lineNumber: 29,
-                                            columnNumber: 41
-                                        }, undefined)
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Box), {
+                                        className: "event-title-box",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                                                className: "event-title",
+                                                children: event.eventdisplayname
+                                            }, void 0, false, {
+                                                fileName: "src/components/sc-events-grid.js",
+                                                lineNumber: 110,
+                                                columnNumber: 45
+                                            }, undefined),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.IconButton), {
+                                                className: "event-button",
+                                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                                    className: "material-icons",
+                                                    children: "favorite_border"
+                                                }, void 0, false, {
+                                                    fileName: "src/components/sc-events-grid.js",
+                                                    lineNumber: 114,
+                                                    columnNumber: 49
+                                                }, undefined)
+                                            }, void 0, false, {
+                                                fileName: "src/components/sc-events-grid.js",
+                                                lineNumber: 113,
+                                                columnNumber: 45
+                                            }, undefined)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/components/sc-events-grid.js",
+                                        lineNumber: 109,
+                                        columnNumber: 41
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                                        className: "event-description",
+                                        children: event.eventdescription
                                     }, void 0, false, {
-                                        fileName: "src/components/react/sc-event-card.js",
-                                        lineNumber: 28,
-                                        columnNumber: 37
+                                        fileName: "src/components/sc-events-grid.js",
+                                        lineNumber: 119,
+                                        columnNumber: 41
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                                        className: "event-times",
+                                        children: [
+                                            event.eventoperationdatetimestart,
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                                                fileName: "src/components/sc-events-grid.js",
+                                                lineNumber: 123,
+                                                columnNumber: 80
+                                            }, undefined),
+                                            event.eventoperationdatetimeend
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/components/sc-events-grid.js",
+                                        lineNumber: 122,
+                                        columnNumber: 41
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                                        className: "hidden",
+                                        children: event.eventstallnumber
+                                    }, void 0, false, {
+                                        fileName: "src/components/sc-events-grid.js",
+                                        lineNumber: 126,
+                                        columnNumber: 41
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                                        className: "hidden",
+                                        children: [
+                                            event.eventcategory,
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                                                fileName: "src/components/sc-events-grid.js",
+                                                lineNumber: 130,
+                                                columnNumber: 66
+                                            }, undefined),
+                                            event.eventtag
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/components/sc-events-grid.js",
+                                        lineNumber: 129,
+                                        columnNumber: 41
                                     }, undefined)
                                 ]
                             }, void 0, true, {
-                                fileName: "src/components/react/sc-event-card.js",
-                                lineNumber: 24,
-                                columnNumber: 33
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                                className: "event-description",
-                                children: event.eventdescription
-                            }, void 0, false, {
-                                fileName: "src/components/react/sc-event-card.js",
-                                lineNumber: 34,
-                                columnNumber: 33
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                                className: "event-times",
-                                children: [
-                                    event.eventoperationdatetimestart,
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                                        fileName: "src/components/react/sc-event-card.js",
-                                        lineNumber: 38,
-                                        columnNumber: 72
-                                    }, undefined),
-                                    event.eventoperationdatetimeend
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/components/react/sc-event-card.js",
-                                lineNumber: 37,
-                                columnNumber: 33
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                                className: "hidden",
-                                children: event.eventstallnumber
-                            }, void 0, false, {
-                                fileName: "src/components/react/sc-event-card.js",
-                                lineNumber: 41,
-                                columnNumber: 33
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                                className: "hidden",
-                                children: [
-                                    event.eventcategory,
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                                        fileName: "src/components/react/sc-event-card.js",
-                                        lineNumber: 45,
-                                        columnNumber: 58
-                                    }, undefined),
-                                    event.eventtag
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/components/react/sc-event-card.js",
-                                lineNumber: 44,
-                                columnNumber: 33
+                                fileName: "src/components/sc-events-grid.js",
+                                lineNumber: 102,
+                                columnNumber: 37
                             }, undefined)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/components/react/sc-event-card.js",
-                        lineNumber: 17,
+                        }, void 0, false, {
+                            fileName: "src/components/sc-events-grid.js",
+                            lineNumber: 101,
+                            columnNumber: 33
+                        }, undefined)
+                    }, event._id, false, {
+                        fileName: "src/components/sc-events-grid.js",
+                        lineNumber: 100,
                         columnNumber: 29
-                    }, undefined)
-                }, void 0, false, {
-                    fileName: "src/components/react/sc-event-card.js",
-                    lineNumber: 16,
-                    columnNumber: 25
-                }, undefined)
-            }, event._id, false, {
-                fileName: "src/components/react/sc-event-card.js",
-                lineNumber: 15,
-                columnNumber: 21
-            }, undefined);
-        })
-    }, void 0, false, {
-        fileName: "src/components/react/sc-event-card.js",
-        lineNumber: 9,
-        columnNumber: 9
-    }, undefined);
+                    }, undefined);
+                })
+            }, void 0, false, {
+                fileName: "src/components/sc-events-grid.js",
+                lineNumber: 95,
+                columnNumber: 17
+            }, undefined)
+        ]
+    }, void 0, true);
 };
-exports.default = eventCard;
+_s(EventContainer, "1H2m1pnYWYjA4ZoBa+XA5tOCGhk=");
+_c = EventContainer;
+exports.default = EventContainer;
+var _c;
+$RefreshReg$(_c, "EventContainer");
 
-  $parcel$ReactRefreshHelpers$94a6.postlude(module);
+  $parcel$ReactRefreshHelpers$44c1.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","../../../static/images/chef-bryan-entertainment.jpg":"aMs6C","../../scss/react.scss":"aLSRg","../../eventdata":"5Y3fe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"40376":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","../../static/images/chef-bryan-entertainment.jpg":"aMs6C","../scss/react.scss":"aLSRg","../eventdata":"5Y3fe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"40376":[function(require,module,exports) {
 /**
  * @mui/material v5.16.1
  *
@@ -33184,7 +33457,7 @@ var _generateUtilityClassesDefault = parcelHelpers.interopDefault(_generateUtili
 var _unstableTrapFocus = require("./Unstable_TrapFocus");
 var _unstableTrapFocusDefault = parcelHelpers.interopDefault(_unstableTrapFocus);
 
-},{"./colors":false,"./styles":false,"./utils":false,"./Accordion":false,"./AccordionActions":false,"./AccordionDetails":false,"./AccordionSummary":false,"./Alert":false,"./AlertTitle":false,"./AppBar":false,"./Autocomplete":false,"./Avatar":false,"./AvatarGroup":false,"./Backdrop":false,"./Badge":false,"./BottomNavigation":false,"./BottomNavigationAction":false,"./Box":"eQD0H","./Breadcrumbs":false,"./Button":false,"./ButtonBase":false,"./ButtonGroup":false,"./Card":"hWYZ3","./CardActionArea":false,"./CardActions":false,"./CardContent":"lVecn","./CardHeader":false,"./CardMedia":"kaOTJ","./Checkbox":false,"./Chip":false,"./CircularProgress":false,"./ClickAwayListener":false,"./Collapse":false,"./Container":false,"./CssBaseline":false,"./darkScrollbar":false,"./Dialog":false,"./DialogActions":false,"./DialogContent":false,"./DialogContentText":false,"./DialogTitle":false,"./Divider":false,"./Drawer":"hMEec","./Fab":false,"./Fade":false,"./FilledInput":false,"./FormControl":false,"./FormControlLabel":false,"./FormGroup":false,"./FormHelperText":false,"./FormLabel":false,"./Grid":"c17UE","./Unstable_Grid2":false,"./Grow":false,"./Hidden":false,"./Icon":false,"./IconButton":"38BrD","./ImageList":false,"./ImageListItem":false,"./ImageListItemBar":false,"./Input":false,"./InputAdornment":false,"./InputBase":false,"./InputLabel":false,"./LinearProgress":false,"./Link":false,"./List":"PwNf5","./ListItem":"kkzrF","./ListItemAvatar":false,"./ListItemButton":false,"./ListItemIcon":false,"./ListItemSecondaryAction":false,"./ListItemText":"g3ISx","./ListSubheader":false,"./Menu":false,"./MenuItem":false,"./MenuList":false,"./MobileStepper":false,"./Modal":false,"./NativeSelect":false,"./NoSsr":false,"./OutlinedInput":false,"./Pagination":false,"./PaginationItem":false,"./Paper":false,"./Popover":false,"./Popper":false,"./Portal":false,"./Radio":false,"./RadioGroup":false,"./Rating":false,"./ScopedCssBaseline":false,"./Select":false,"./Skeleton":false,"./Slide":false,"./Slider":false,"./Snackbar":false,"./SnackbarContent":false,"./SpeedDial":false,"./SpeedDialAction":false,"./SpeedDialIcon":false,"./Stack":false,"./Step":false,"./StepButton":false,"./StepConnector":false,"./StepContent":false,"./StepIcon":false,"./StepLabel":false,"./Stepper":false,"./SvgIcon":false,"./SwipeableDrawer":false,"./Switch":false,"./Tab":false,"./Table":false,"./TableBody":false,"./TableCell":false,"./TableContainer":false,"./TableFooter":false,"./TableHead":false,"./TablePagination":false,"./TableRow":false,"./TableSortLabel":false,"./Tabs":false,"./TabScrollButton":false,"./TextField":false,"./TextareaAutosize":false,"./ToggleButton":false,"./ToggleButtonGroup":false,"./Toolbar":false,"./Tooltip":false,"./Typography":"faxSz","./useMediaQuery":false,"./usePagination":false,"./useScrollTrigger":false,"./Zoom":false,"./useAutocomplete":false,"./GlobalStyles":false,"@mui/base/composeClasses":false,"./generateUtilityClass":false,"./generateUtilityClasses":false,"./Unstable_TrapFocus":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1lzai":[function(require,module,exports) {
+},{"./colors":false,"./styles":false,"./utils":false,"./Accordion":false,"./AccordionActions":false,"./AccordionDetails":false,"./AccordionSummary":false,"./Alert":false,"./AlertTitle":false,"./AppBar":false,"./Autocomplete":false,"./Avatar":false,"./AvatarGroup":false,"./Backdrop":false,"./Badge":false,"./BottomNavigation":false,"./BottomNavigationAction":false,"./Box":"eQD0H","./Breadcrumbs":false,"./Button":false,"./ButtonBase":false,"./ButtonGroup":false,"./Card":"hWYZ3","./CardActionArea":false,"./CardActions":false,"./CardContent":"lVecn","./CardHeader":false,"./CardMedia":"kaOTJ","./Checkbox":false,"./Chip":false,"./CircularProgress":false,"./ClickAwayListener":false,"./Collapse":false,"./Container":false,"./CssBaseline":false,"./darkScrollbar":false,"./Dialog":false,"./DialogActions":false,"./DialogContent":false,"./DialogContentText":false,"./DialogTitle":false,"./Divider":false,"./Drawer":"hMEec","./Fab":false,"./Fade":false,"./FilledInput":false,"./FormControl":false,"./FormControlLabel":false,"./FormGroup":false,"./FormHelperText":false,"./FormLabel":false,"./Grid":"c17UE","./Unstable_Grid2":false,"./Grow":false,"./Hidden":false,"./Icon":false,"./IconButton":"38BrD","./ImageList":false,"./ImageListItem":false,"./ImageListItemBar":false,"./Input":false,"./InputAdornment":false,"./InputBase":false,"./InputLabel":false,"./LinearProgress":false,"./Link":false,"./List":"PwNf5","./ListItem":"kkzrF","./ListItemAvatar":false,"./ListItemButton":false,"./ListItemIcon":false,"./ListItemSecondaryAction":false,"./ListItemText":"g3ISx","./ListSubheader":false,"./Menu":false,"./MenuItem":false,"./MenuList":false,"./MobileStepper":false,"./Modal":false,"./NativeSelect":false,"./NoSsr":false,"./OutlinedInput":false,"./Pagination":false,"./PaginationItem":false,"./Paper":false,"./Popover":false,"./Popper":false,"./Portal":false,"./Radio":false,"./RadioGroup":false,"./Rating":false,"./ScopedCssBaseline":false,"./Select":false,"./Skeleton":"4F50o","./Slide":false,"./Slider":false,"./Snackbar":false,"./SnackbarContent":false,"./SpeedDial":false,"./SpeedDialAction":false,"./SpeedDialIcon":false,"./Stack":false,"./Step":false,"./StepButton":false,"./StepConnector":false,"./StepContent":false,"./StepIcon":false,"./StepLabel":false,"./Stepper":false,"./SvgIcon":false,"./SwipeableDrawer":false,"./Switch":false,"./Tab":false,"./Table":false,"./TableBody":false,"./TableCell":false,"./TableContainer":false,"./TableFooter":false,"./TableHead":false,"./TablePagination":false,"./TableRow":false,"./TableSortLabel":false,"./Tabs":false,"./TabScrollButton":false,"./TextField":false,"./TextareaAutosize":false,"./ToggleButton":false,"./ToggleButtonGroup":false,"./Toolbar":false,"./Tooltip":false,"./Typography":"faxSz","./useMediaQuery":false,"./usePagination":false,"./useScrollTrigger":false,"./Zoom":false,"./useAutocomplete":false,"./GlobalStyles":false,"@mui/base/composeClasses":false,"./generateUtilityClass":false,"./generateUtilityClasses":false,"./Unstable_TrapFocus":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1lzai":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "THEME_ID", ()=>(0, _identifierDefault.default));
@@ -33282,7 +33555,7 @@ function experimental_sx() {
     throw new Error(`MUI: The \`experimental_sx\` has been moved to \`theme.unstable_sx\`.For more details, see https://github.com/mui/material-ui/pull/35150.`);
 }
 
-},{"@mui/utils/formatMuiErrorMessage":"7QIu9","./identifier":false,"./adaptV4Theme":false,"@mui/system":false,"./createTheme":"8OdgZ","./createMuiStrictModeTheme":false,"./createStyles":false,"./cssUtils":false,"./responsiveFontSizes":false,"./createTransitions":false,"./useTheme":false,"./useThemeProps":false,"./styled":false,"./ThemeProvider":false,"./makeStyles":false,"./withStyles":false,"./withTheme":false,"./CssVarsProvider":false,"./experimental_extendTheme":false,"./getOverlayAlpha":false,"./shouldSkipGeneratingVar":false,"./createTypography":false,"./createMixins":false,"./excludeVariablesFromRoot":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7QIu9":[function(require,module,exports) {
+},{"@mui/utils/formatMuiErrorMessage":"7QIu9","./identifier":false,"./adaptV4Theme":false,"@mui/system":"Q0Zql","./createTheme":"8OdgZ","./createMuiStrictModeTheme":false,"./createStyles":false,"./cssUtils":"lWtOa","./responsiveFontSizes":false,"./createTransitions":false,"./useTheme":false,"./useThemeProps":false,"./styled":false,"./ThemeProvider":false,"./makeStyles":false,"./withStyles":false,"./withTheme":false,"./CssVarsProvider":false,"./experimental_extendTheme":false,"./getOverlayAlpha":false,"./shouldSkipGeneratingVar":false,"./createTypography":false,"./createMixins":false,"./excludeVariablesFromRoot":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7QIu9":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>(0, _formatMuiErrorMessageDefault.default));
@@ -33475,7 +33748,7 @@ function experimental_sx() {
     throw new Error(`MUI: The \`experimental_sx\` has been moved to \`theme.unstable_sx\`.For more details, see https://github.com/mui/material-ui/pull/35150.`);
 }
 
-},{"@mui/utils/formatMuiErrorMessage":"7QIu9","@mui/styled-engine":"eTow5","./GlobalStyles":false,"./borders":false,"./breakpoints":"jN5Vx","./compose":false,"./display":false,"./flexbox":false,"./cssGrid":false,"./palette":false,"./positions":false,"./shadows":false,"./sizing":false,"./spacing":false,"./style":false,"./typography":false,"./styleFunctionSx":false,"./getThemeValue":false,"./Box":false,"./createBox":"bc03s","./createStyled":false,"./styled":false,"./createTheme":false,"./createTheme/createBreakpoints":false,"./createTheme/createSpacing":false,"./createTheme/shape":false,"./useThemeProps":false,"./useTheme":"h9QTR","./useThemeWithoutDefault":false,"./useMediaQuery":false,"./colorManipulator":false,"./ThemeProvider":false,"./cssVars/createCssVarsProvider":false,"./cssVars/createGetCssVar":false,"./cssVars/cssVarsParser":false,"./cssVars/prepareCssVars":false,"./cssVars/createCssVarsTheme":false,"./responsivePropType":false,"./RtlProvider":false,"./Container/createContainer":false,"./Container":false,"./Unstable_Grid/Grid":false,"./Unstable_Grid":false,"./Stack/Stack":false,"./Stack":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eTow5":[function(require,module,exports) {
+},{"@mui/utils/formatMuiErrorMessage":"7QIu9","@mui/styled-engine":"eTow5","./GlobalStyles":false,"./borders":false,"./breakpoints":"jN5Vx","./compose":false,"./display":false,"./flexbox":false,"./cssGrid":false,"./palette":false,"./positions":false,"./shadows":false,"./sizing":false,"./spacing":false,"./style":false,"./typography":false,"./styleFunctionSx":false,"./getThemeValue":false,"./Box":false,"./createBox":"bc03s","./createStyled":false,"./styled":false,"./createTheme":false,"./createTheme/createBreakpoints":false,"./createTheme/createSpacing":false,"./createTheme/shape":false,"./useThemeProps":false,"./useTheme":"h9QTR","./useThemeWithoutDefault":false,"./useMediaQuery":false,"./colorManipulator":"cIbr0","./ThemeProvider":false,"./cssVars/createCssVarsProvider":false,"./cssVars/createGetCssVar":false,"./cssVars/cssVarsParser":false,"./cssVars/prepareCssVars":false,"./cssVars/createCssVarsTheme":false,"./responsivePropType":false,"./RtlProvider":false,"./Container/createContainer":false,"./Container":false,"./Unstable_Grid/Grid":false,"./Unstable_Grid":false,"./Stack/Stack":false,"./Stack":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eTow5":[function(require,module,exports) {
 /**
  * @mui/styled-engine v5.16.1
  *
@@ -39571,7 +39844,315 @@ function useTheme(defaultTheme = null) {
 }
 exports.default = useTheme;
 
-},{"react":"21dqq","@mui/styled-engine":"eTow5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4iqca":[function(require,module,exports) {
+},{"react":"21dqq","@mui/styled-engine":"eTow5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cIbr0":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+/**
+ * Converts a color from CSS hex format to CSS rgb format.
+ * @param {string} color - Hex color, i.e. #nnn or #nnnnnn
+ * @returns {string} A CSS rgb color string
+ */ parcelHelpers.export(exports, "hexToRgb", ()=>hexToRgb);
+/**
+ * Returns an object with the type and values of a color.
+ *
+ * Note: Does not support rgb % values.
+ * @param {string} color - CSS color, i.e. one of: #nnn, #nnnnnn, rgb(), rgba(), hsl(), hsla(), color()
+ * @returns {object} - A MUI color object: {type: string, values: number[]}
+ */ parcelHelpers.export(exports, "decomposeColor", ()=>decomposeColor);
+parcelHelpers.export(exports, "colorChannel", ()=>colorChannel);
+parcelHelpers.export(exports, "private_safeColorChannel", ()=>private_safeColorChannel);
+/**
+ * Converts a color object with type and values to a string.
+ * @param {object} color - Decomposed color
+ * @param {string} color.type - One of: 'rgb', 'rgba', 'hsl', 'hsla', 'color'
+ * @param {array} color.values - [n,n,n] or [n,n,n,n]
+ * @returns {string} A CSS color string
+ */ parcelHelpers.export(exports, "recomposeColor", ()=>recomposeColor);
+/**
+ * Converts a color from CSS rgb format to CSS hex format.
+ * @param {string} color - RGB color, i.e. rgb(n, n, n)
+ * @returns {string} A CSS rgb color string, i.e. #nnnnnn
+ */ parcelHelpers.export(exports, "rgbToHex", ()=>rgbToHex);
+/**
+ * Converts a color from hsl format to rgb format.
+ * @param {string} color - HSL color values
+ * @returns {string} rgb color values
+ */ parcelHelpers.export(exports, "hslToRgb", ()=>hslToRgb);
+/**
+ * The relative brightness of any point in a color space,
+ * normalized to 0 for darkest black and 1 for lightest white.
+ *
+ * Formula: https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
+ * @param {string} color - CSS color, i.e. one of: #nnn, #nnnnnn, rgb(), rgba(), hsl(), hsla(), color()
+ * @returns {number} The relative brightness of the color in the range 0 - 1
+ */ parcelHelpers.export(exports, "getLuminance", ()=>getLuminance);
+/**
+ * Calculates the contrast ratio between two colors.
+ *
+ * Formula: https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
+ * @param {string} foreground - CSS color, i.e. one of: #nnn, #nnnnnn, rgb(), rgba(), hsl(), hsla()
+ * @param {string} background - CSS color, i.e. one of: #nnn, #nnnnnn, rgb(), rgba(), hsl(), hsla()
+ * @returns {number} A contrast ratio value in the range 0 - 21.
+ */ parcelHelpers.export(exports, "getContrastRatio", ()=>getContrastRatio);
+/**
+ * Sets the absolute transparency of a color.
+ * Any existing alpha values are overwritten.
+ * @param {string} color - CSS color, i.e. one of: #nnn, #nnnnnn, rgb(), rgba(), hsl(), hsla(), color()
+ * @param {number} value - value to set the alpha channel to in the range 0 - 1
+ * @returns {string} A CSS color string. Hex input values are returned as rgb
+ */ parcelHelpers.export(exports, "alpha", ()=>alpha);
+parcelHelpers.export(exports, "private_safeAlpha", ()=>private_safeAlpha);
+/**
+ * Darkens a color.
+ * @param {string} color - CSS color, i.e. one of: #nnn, #nnnnnn, rgb(), rgba(), hsl(), hsla(), color()
+ * @param {number} coefficient - multiplier in the range 0 - 1
+ * @returns {string} A CSS color string. Hex input values are returned as rgb
+ */ parcelHelpers.export(exports, "darken", ()=>darken);
+parcelHelpers.export(exports, "private_safeDarken", ()=>private_safeDarken);
+/**
+ * Lightens a color.
+ * @param {string} color - CSS color, i.e. one of: #nnn, #nnnnnn, rgb(), rgba(), hsl(), hsla(), color()
+ * @param {number} coefficient - multiplier in the range 0 - 1
+ * @returns {string} A CSS color string. Hex input values are returned as rgb
+ */ parcelHelpers.export(exports, "lighten", ()=>lighten);
+parcelHelpers.export(exports, "private_safeLighten", ()=>private_safeLighten);
+/**
+ * Darken or lighten a color, depending on its luminance.
+ * Light colors are darkened, dark colors are lightened.
+ * @param {string} color - CSS color, i.e. one of: #nnn, #nnnnnn, rgb(), rgba(), hsl(), hsla(), color()
+ * @param {number} coefficient=0.15 - multiplier in the range 0 - 1
+ * @returns {string} A CSS color string. Hex input values are returned as rgb
+ */ parcelHelpers.export(exports, "emphasize", ()=>emphasize);
+parcelHelpers.export(exports, "private_safeEmphasize", ()=>private_safeEmphasize);
+/**
+ * Blend a transparent overlay color with a background color, resulting in a single
+ * RGB color.
+ * @param {string} background - CSS color
+ * @param {string} overlay - CSS color
+ * @param {number} opacity - Opacity multiplier in the range 0 - 1
+ * @param {number} [gamma=1.0] - Gamma correction factor. For gamma-correct blending, 2.2 is usual.
+ */ parcelHelpers.export(exports, "blend", ()=>blend);
+var _formatMuiErrorMessage = require("@mui/utils/formatMuiErrorMessage");
+var _formatMuiErrorMessageDefault = parcelHelpers.interopDefault(_formatMuiErrorMessage);
+/* eslint-disable @typescript-eslint/naming-convention */ var _clamp = require("@mui/utils/clamp");
+var _clampDefault = parcelHelpers.interopDefault(_clamp);
+/**
+ * Returns a number whose value is limited to the given range.
+ * @param {number} value The value to be clamped
+ * @param {number} min The lower boundary of the output range
+ * @param {number} max The upper boundary of the output range
+ * @returns {number} A number in the range [min, max]
+ */ function clampWrapper(value, min = 0, max = 1) {
+    if (value < min || value > max) console.error(`MUI: The value provided ${value} is out of range [${min}, ${max}].`);
+    return (0, _clampDefault.default)(value, min, max);
+}
+function hexToRgb(color) {
+    color = color.slice(1);
+    const re = new RegExp(`.{1,${color.length >= 6 ? 2 : 1}}`, "g");
+    let colors = color.match(re);
+    if (colors && colors[0].length === 1) colors = colors.map((n)=>n + n);
+    return colors ? `rgb${colors.length === 4 ? "a" : ""}(${colors.map((n, index)=>{
+        return index < 3 ? parseInt(n, 16) : Math.round(parseInt(n, 16) / 255 * 1000) / 1000;
+    }).join(", ")})` : "";
+}
+function intToHex(int) {
+    const hex = int.toString(16);
+    return hex.length === 1 ? `0${hex}` : hex;
+}
+function decomposeColor(color) {
+    // Idempotent
+    if (color.type) return color;
+    if (color.charAt(0) === "#") return decomposeColor(hexToRgb(color));
+    const marker = color.indexOf("(");
+    const type = color.substring(0, marker);
+    if ([
+        "rgb",
+        "rgba",
+        "hsl",
+        "hsla",
+        "color"
+    ].indexOf(type) === -1) throw new Error(`MUI: Unsupported \`${color}\` color.
+The following formats are supported: #nnn, #nnnnnn, rgb(), rgba(), hsl(), hsla(), color().`);
+    let values = color.substring(marker + 1, color.length - 1);
+    let colorSpace;
+    if (type === "color") {
+        values = values.split(" ");
+        colorSpace = values.shift();
+        if (values.length === 4 && values[3].charAt(0) === "/") values[3] = values[3].slice(1);
+        if ([
+            "srgb",
+            "display-p3",
+            "a98-rgb",
+            "prophoto-rgb",
+            "rec-2020"
+        ].indexOf(colorSpace) === -1) throw new Error(`MUI: unsupported \`${colorSpace}\` color space.
+The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rgb, rec-2020.`);
+    } else values = values.split(",");
+    values = values.map((value)=>parseFloat(value));
+    return {
+        type,
+        values,
+        colorSpace
+    };
+}
+const colorChannel = (color)=>{
+    const decomposedColor = decomposeColor(color);
+    return decomposedColor.values.slice(0, 3).map((val, idx)=>decomposedColor.type.indexOf("hsl") !== -1 && idx !== 0 ? `${val}%` : val).join(" ");
+};
+const private_safeColorChannel = (color, warning)=>{
+    try {
+        return colorChannel(color);
+    } catch (error) {
+        if (warning && true) console.warn(warning);
+        return color;
+    }
+};
+function recomposeColor(color) {
+    const { type, colorSpace } = color;
+    let { values } = color;
+    if (type.indexOf("rgb") !== -1) // Only convert the first 3 values to int (i.e. not alpha)
+    values = values.map((n, i)=>i < 3 ? parseInt(n, 10) : n);
+    else if (type.indexOf("hsl") !== -1) {
+        values[1] = `${values[1]}%`;
+        values[2] = `${values[2]}%`;
+    }
+    if (type.indexOf("color") !== -1) values = `${colorSpace} ${values.join(" ")}`;
+    else values = `${values.join(", ")}`;
+    return `${type}(${values})`;
+}
+function rgbToHex(color) {
+    // Idempotent
+    if (color.indexOf("#") === 0) return color;
+    const { values } = decomposeColor(color);
+    return `#${values.map((n, i)=>intToHex(i === 3 ? Math.round(255 * n) : n)).join("")}`;
+}
+function hslToRgb(color) {
+    color = decomposeColor(color);
+    const { values } = color;
+    const h = values[0];
+    const s = values[1] / 100;
+    const l = values[2] / 100;
+    const a = s * Math.min(l, 1 - l);
+    const f = (n, k = (n + h / 30) % 12)=>l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+    let type = "rgb";
+    const rgb = [
+        Math.round(f(0) * 255),
+        Math.round(f(8) * 255),
+        Math.round(f(4) * 255)
+    ];
+    if (color.type === "hsla") {
+        type += "a";
+        rgb.push(values[3]);
+    }
+    return recomposeColor({
+        type,
+        values: rgb
+    });
+}
+function getLuminance(color) {
+    color = decomposeColor(color);
+    let rgb = color.type === "hsl" || color.type === "hsla" ? decomposeColor(hslToRgb(color)).values : color.values;
+    rgb = rgb.map((val)=>{
+        if (color.type !== "color") val /= 255; // normalized
+        return val <= 0.03928 ? val / 12.92 : ((val + 0.055) / 1.055) ** 2.4;
+    });
+    // Truncate at 3 digits
+    return Number((0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]).toFixed(3));
+}
+function getContrastRatio(foreground, background) {
+    const lumA = getLuminance(foreground);
+    const lumB = getLuminance(background);
+    return (Math.max(lumA, lumB) + 0.05) / (Math.min(lumA, lumB) + 0.05);
+}
+function alpha(color, value) {
+    color = decomposeColor(color);
+    value = clampWrapper(value);
+    if (color.type === "rgb" || color.type === "hsl") color.type += "a";
+    if (color.type === "color") color.values[3] = `/${value}`;
+    else color.values[3] = value;
+    return recomposeColor(color);
+}
+function private_safeAlpha(color, value, warning) {
+    try {
+        return alpha(color, value);
+    } catch (error) {
+        if (warning && true) console.warn(warning);
+        return color;
+    }
+}
+function darken(color, coefficient) {
+    color = decomposeColor(color);
+    coefficient = clampWrapper(coefficient);
+    if (color.type.indexOf("hsl") !== -1) color.values[2] *= 1 - coefficient;
+    else if (color.type.indexOf("rgb") !== -1 || color.type.indexOf("color") !== -1) for(let i = 0; i < 3; i += 1)color.values[i] *= 1 - coefficient;
+    return recomposeColor(color);
+}
+function private_safeDarken(color, coefficient, warning) {
+    try {
+        return darken(color, coefficient);
+    } catch (error) {
+        if (warning && true) console.warn(warning);
+        return color;
+    }
+}
+function lighten(color, coefficient) {
+    color = decomposeColor(color);
+    coefficient = clampWrapper(coefficient);
+    if (color.type.indexOf("hsl") !== -1) color.values[2] += (100 - color.values[2]) * coefficient;
+    else if (color.type.indexOf("rgb") !== -1) for(let i = 0; i < 3; i += 1)color.values[i] += (255 - color.values[i]) * coefficient;
+    else if (color.type.indexOf("color") !== -1) for(let i = 0; i < 3; i += 1)color.values[i] += (1 - color.values[i]) * coefficient;
+    return recomposeColor(color);
+}
+function private_safeLighten(color, coefficient, warning) {
+    try {
+        return lighten(color, coefficient);
+    } catch (error) {
+        if (warning && true) console.warn(warning);
+        return color;
+    }
+}
+function emphasize(color, coefficient = 0.15) {
+    return getLuminance(color) > 0.5 ? darken(color, coefficient) : lighten(color, coefficient);
+}
+function private_safeEmphasize(color, coefficient, warning) {
+    try {
+        return emphasize(color, coefficient);
+    } catch (error) {
+        if (warning && true) console.warn(warning);
+        return color;
+    }
+}
+function blend(background, overlay, opacity, gamma = 1.0) {
+    const blendChannel = (b, o)=>Math.round((b ** (1 / gamma) * (1 - opacity) + o ** (1 / gamma) * opacity) ** gamma);
+    const backgroundColor = decomposeColor(background);
+    const overlayColor = decomposeColor(overlay);
+    const rgb = [
+        blendChannel(backgroundColor.values[0], overlayColor.values[0]),
+        blendChannel(backgroundColor.values[1], overlayColor.values[1]),
+        blendChannel(backgroundColor.values[2], overlayColor.values[2])
+    ];
+    return recomposeColor({
+        type: "rgb",
+        values: rgb
+    });
+}
+
+},{"@mui/utils/formatMuiErrorMessage":"7QIu9","@mui/utils/clamp":"awWhD","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"awWhD":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>(0, _clampDefault.default));
+var _clamp = require("./clamp");
+var _clampDefault = parcelHelpers.interopDefault(_clamp);
+
+},{"./clamp":"bht33","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bht33":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function clamp(val, min = Number.MIN_SAFE_INTEGER, max = Number.MAX_SAFE_INTEGER) {
+    return Math.max(min, Math.min(val, max));
+}
+exports.default = clamp;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4iqca":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "useRtl", ()=>useRtl);
@@ -40416,22 +40997,7 @@ function _interopRequireDefault(e) {
 }
 module.exports = _interopRequireDefault, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
-},{}],"awWhD":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>(0, _clampDefault.default));
-var _clamp = require("./clamp");
-var _clampDefault = parcelHelpers.interopDefault(_clamp);
-
-},{"./clamp":"bht33","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bht33":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-function clamp(val, min = Number.MIN_SAFE_INTEGER, max = Number.MAX_SAFE_INTEGER) {
-    return Math.max(min, Math.min(val, max));
-}
-exports.default = clamp;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bwTuH":[function(require,module,exports) {
+},{}],"bwTuH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 const common = {
@@ -40814,6 +41380,112 @@ const zIndex = {
     tooltip: 1500
 };
 exports.default = zIndex;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lWtOa":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "isUnitless", ()=>isUnitless);
+// Ported from Compass
+// https://github.com/Compass/compass/blob/master/core/stylesheets/compass/typography/_units.scss
+// Emulate the sass function "unit"
+parcelHelpers.export(exports, "getUnit", ()=>getUnit);
+// Emulate the sass function "unitless"
+parcelHelpers.export(exports, "toUnitless", ()=>toUnitless);
+// Convert any CSS <length> or <percentage> value to any another.
+// From https://github.com/KyleAMathews/convert-css-length
+parcelHelpers.export(exports, "convertLength", ()=>convertLength);
+parcelHelpers.export(exports, "alignProperty", ()=>alignProperty);
+// fontGrid finds a minimal grid (in rem) for the fontSize values so that the
+// lineHeight falls under a x pixels grid, 4px in the case of Material Design,
+// without changing the relative line height
+parcelHelpers.export(exports, "fontGrid", ()=>fontGrid);
+/**
+ * generate a responsive version of a given CSS property
+ * @example
+ * responsiveProperty({
+ *   cssProperty: 'fontSize',
+ *   min: 15,
+ *   max: 20,
+ *   unit: 'px',
+ *   breakpoints: [300, 600],
+ * })
+ *
+ * // this returns
+ *
+ * {
+ *   fontSize: '15px',
+ *   '@media (min-width:300px)': {
+ *     fontSize: '17.5px',
+ *   },
+ *   '@media (min-width:600px)': {
+ *     fontSize: '20px',
+ *   },
+ * }
+ * @param {Object} params
+ * @param {string} params.cssProperty - The CSS property to be made responsive
+ * @param {number} params.min - The smallest value of the CSS property
+ * @param {number} params.max - The largest value of the CSS property
+ * @param {string} [params.unit] - The unit to be used for the CSS property
+ * @param {Array.number} [params.breakpoints]  - An array of breakpoints
+ * @param {number} [params.alignStep] - Round scaled value to fall under this grid
+ * @returns {Object} responsive styles for {params.cssProperty}
+ */ parcelHelpers.export(exports, "responsiveProperty", ()=>responsiveProperty);
+function isUnitless(value) {
+    return String(parseFloat(value)).length === String(value).length;
+}
+function getUnit(input) {
+    return String(input).match(/[\d.\-+]*\s*(.*)/)[1] || "";
+}
+function toUnitless(length) {
+    return parseFloat(length);
+}
+function convertLength(baseFontSize) {
+    return (length, toUnit)=>{
+        const fromUnit = getUnit(length);
+        // Optimize for cases where `from` and `to` units are accidentally the same.
+        if (fromUnit === toUnit) return length;
+        // Convert input length to pixels.
+        let pxLength = toUnitless(length);
+        if (fromUnit !== "px") {
+            if (fromUnit === "em") pxLength = toUnitless(length) * toUnitless(baseFontSize);
+            else if (fromUnit === "rem") pxLength = toUnitless(length) * toUnitless(baseFontSize);
+        }
+        // Convert length in pixels to the output unit
+        let outputLength = pxLength;
+        if (toUnit !== "px") {
+            if (toUnit === "em") outputLength = pxLength / toUnitless(baseFontSize);
+            else if (toUnit === "rem") outputLength = pxLength / toUnitless(baseFontSize);
+            else return length;
+        }
+        return parseFloat(outputLength.toFixed(5)) + toUnit;
+    };
+}
+function alignProperty({ size, grid }) {
+    const sizeBelow = size - size % grid;
+    const sizeAbove = sizeBelow + grid;
+    return size - sizeBelow < sizeAbove - size ? sizeBelow : sizeAbove;
+}
+function fontGrid({ lineHeight, pixels, htmlFontSize }) {
+    return pixels / (lineHeight * htmlFontSize);
+}
+function responsiveProperty({ cssProperty, min, max, unit = "rem", breakpoints = [
+    600,
+    900,
+    1200
+], transform = null }) {
+    const output = {
+        [cssProperty]: `${min}${unit}`
+    };
+    const factor = (max - min) / breakpoints[breakpoints.length - 1];
+    breakpoints.forEach((breakpoint)=>{
+        let value = min + factor * breakpoint;
+        if (transform !== null) value = transform(value);
+        output[`@media (min-width:${breakpoint}px)`] = {
+            [cssProperty]: `${Math.round(value * 10000) / 10000}${unit}`
+        };
+    });
+    return output;
+}
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5nWMX":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -50542,6 +51214,282 @@ const listItemTextClasses = (0, _generateUtilityClassesDefault.default)("MuiList
 ]);
 exports.default = listItemTextClasses;
 
+},{"@mui/utils/generateUtilityClasses":"7eO93","@mui/utils/generateUtilityClass":"d6tPU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4F50o":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>(0, _skeletonDefault.default));
+parcelHelpers.export(exports, "skeletonClasses", ()=>(0, _skeletonClassesDefault.default));
+var _skeleton = require("./Skeleton");
+var _skeletonDefault = parcelHelpers.interopDefault(_skeleton);
+var _skeletonClasses = require("./skeletonClasses");
+parcelHelpers.exportAll(_skeletonClasses, exports);
+var _skeletonClassesDefault = parcelHelpers.interopDefault(_skeletonClasses);
+"use client";
+
+},{"./Skeleton":"joxJN","./skeletonClasses":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"joxJN":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
+var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _react = require("react");
+var _clsx = require("clsx");
+var _clsxDefault = parcelHelpers.interopDefault(_clsx);
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _system = require("@mui/system");
+var _composeClasses = require("@mui/utils/composeClasses");
+var _composeClassesDefault = parcelHelpers.interopDefault(_composeClasses);
+var _styles = require("../styles");
+var _styled = require("../styles/styled");
+var _styledDefault = parcelHelpers.interopDefault(_styled);
+var _defaultPropsProvider = require("../DefaultPropsProvider");
+var _skeletonClasses = require("./skeletonClasses");
+var _jsxRuntime = require("react/jsx-runtime");
+"use client";
+const _excluded = [
+    "animation",
+    "className",
+    "component",
+    "height",
+    "style",
+    "variant",
+    "width"
+];
+let _ = (t)=>t, _t, _t2, _t3, _t4;
+const useUtilityClasses = (ownerState)=>{
+    const { classes, variant, animation, hasChildren, width, height } = ownerState;
+    const slots = {
+        root: [
+            "root",
+            variant,
+            animation,
+            hasChildren && "withChildren",
+            hasChildren && !width && "fitContent",
+            hasChildren && !height && "heightAuto"
+        ]
+    };
+    return (0, _composeClassesDefault.default)(slots, (0, _skeletonClasses.getSkeletonUtilityClass), classes);
+};
+const pulseKeyframe = (0, _system.keyframes)(_t || (_t = _`
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+
+  100% {
+    opacity: 1;
+  }
+`));
+const waveKeyframe = (0, _system.keyframes)(_t2 || (_t2 = _`
+  0% {
+    transform: translateX(-100%);
+  }
+
+  50% {
+    /* +0.5s of delay between each loop */
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+`));
+const SkeletonRoot = (0, _styledDefault.default)("span", {
+    name: "MuiSkeleton",
+    slot: "Root",
+    overridesResolver: (props, styles)=>{
+        const { ownerState } = props;
+        return [
+            styles.root,
+            styles[ownerState.variant],
+            ownerState.animation !== false && styles[ownerState.animation],
+            ownerState.hasChildren && styles.withChildren,
+            ownerState.hasChildren && !ownerState.width && styles.fitContent,
+            ownerState.hasChildren && !ownerState.height && styles.heightAuto
+        ];
+    }
+})(({ theme, ownerState })=>{
+    const radiusUnit = (0, _styles.unstable_getUnit)(theme.shape.borderRadius) || "px";
+    const radiusValue = (0, _styles.unstable_toUnitless)(theme.shape.borderRadius);
+    return (0, _extendsDefault.default)({
+        display: "block",
+        // Create a "on paper" color with sufficient contrast retaining the color
+        backgroundColor: theme.vars ? theme.vars.palette.Skeleton.bg : (0, _styles.alpha)(theme.palette.text.primary, theme.palette.mode === "light" ? 0.11 : 0.13),
+        height: "1.2em"
+    }, ownerState.variant === "text" && {
+        marginTop: 0,
+        marginBottom: 0,
+        height: "auto",
+        transformOrigin: "0 55%",
+        transform: "scale(1, 0.60)",
+        borderRadius: `${radiusValue}${radiusUnit}/${Math.round(radiusValue / 0.6 * 10) / 10}${radiusUnit}`,
+        "&:empty:before": {
+            content: '"\\00a0"'
+        }
+    }, ownerState.variant === "circular" && {
+        borderRadius: "50%"
+    }, ownerState.variant === "rounded" && {
+        borderRadius: (theme.vars || theme).shape.borderRadius
+    }, ownerState.hasChildren && {
+        "& > *": {
+            visibility: "hidden"
+        }
+    }, ownerState.hasChildren && !ownerState.width && {
+        maxWidth: "fit-content"
+    }, ownerState.hasChildren && !ownerState.height && {
+        height: "auto"
+    });
+}, ({ ownerState })=>ownerState.animation === "pulse" && (0, _system.css)(_t3 || (_t3 = _`
+      animation: ${0} 2s ease-in-out 0.5s infinite;
+    `), pulseKeyframe), ({ ownerState, theme })=>ownerState.animation === "wave" && (0, _system.css)(_t4 || (_t4 = _`
+      position: relative;
+      overflow: hidden;
+
+      /* Fix bug in Safari https://bugs.webkit.org/show_bug.cgi?id=68196 */
+      -webkit-mask-image: -webkit-radial-gradient(white, black);
+
+      &::after {
+        animation: ${0} 2s linear 0.5s infinite;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          ${0},
+          transparent
+        );
+        content: '';
+        position: absolute;
+        transform: translateX(-100%); /* Avoid flash during server-side hydration */
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+      }
+    `), waveKeyframe, (theme.vars || theme).palette.action.hover));
+const Skeleton = /*#__PURE__*/ _react.forwardRef(function Skeleton(inProps, ref) {
+    const props = (0, _defaultPropsProvider.useDefaultProps)({
+        props: inProps,
+        name: "MuiSkeleton"
+    });
+    const { animation = "pulse", className, component = "span", height, style, variant = "text", width } = props, other = (0, _objectWithoutPropertiesLooseDefault.default)(props, _excluded);
+    const ownerState = (0, _extendsDefault.default)({}, props, {
+        animation,
+        component,
+        variant,
+        hasChildren: Boolean(other.children)
+    });
+    const classes = useUtilityClasses(ownerState);
+    return /*#__PURE__*/ (0, _jsxRuntime.jsx)(SkeletonRoot, (0, _extendsDefault.default)({
+        as: component,
+        ref: ref,
+        className: (0, _clsxDefault.default)(classes.root, className),
+        ownerState: ownerState
+    }, other, {
+        style: (0, _extendsDefault.default)({
+            width,
+            height
+        }, style)
+    }));
+});
+Skeleton.propTypes /* remove-proptypes */  = {
+    // ┌────────────────────────────── Warning ──────────────────────────────┐
+    // │ These PropTypes are generated from the TypeScript type definitions. │
+    // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+    // └─────────────────────────────────────────────────────────────────────┘
+    /**
+   * The animation.
+   * If `false` the animation effect is disabled.
+   * @default 'pulse'
+   */ animation: (0, _propTypesDefault.default).oneOf([
+        "pulse",
+        "wave",
+        false
+    ]),
+    /**
+   * Optional children to infer width and height from.
+   */ children: (0, _propTypesDefault.default).node,
+    /**
+   * Override or extend the styles applied to the component.
+   */ classes: (0, _propTypesDefault.default).object,
+    /**
+   * @ignore
+   */ className: (0, _propTypesDefault.default).string,
+    /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */ component: (0, _propTypesDefault.default).elementType,
+    /**
+   * Height of the skeleton.
+   * Useful when you don't want to adapt the skeleton to a text element but for instance a card.
+   */ height: (0, _propTypesDefault.default).oneOfType([
+        (0, _propTypesDefault.default).number,
+        (0, _propTypesDefault.default).string
+    ]),
+    /**
+   * @ignore
+   */ style: (0, _propTypesDefault.default).object,
+    /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */ sx: (0, _propTypesDefault.default).oneOfType([
+        (0, _propTypesDefault.default).arrayOf((0, _propTypesDefault.default).oneOfType([
+            (0, _propTypesDefault.default).func,
+            (0, _propTypesDefault.default).object,
+            (0, _propTypesDefault.default).bool
+        ])),
+        (0, _propTypesDefault.default).func,
+        (0, _propTypesDefault.default).object
+    ]),
+    /**
+   * The type of content that will be rendered.
+   * @default 'text'
+   */ variant: (0, _propTypesDefault.default /* @typescript-to-proptypes-ignore */ ).oneOfType([
+        (0, _propTypesDefault.default).oneOf([
+            "circular",
+            "rectangular",
+            "rounded",
+            "text"
+        ]),
+        (0, _propTypesDefault.default).string
+    ]),
+    /**
+   * Width of the skeleton.
+   * Useful when the skeleton is inside an inline element with no width of its own.
+   */ width: (0, _propTypesDefault.default).oneOfType([
+        (0, _propTypesDefault.default).number,
+        (0, _propTypesDefault.default).string
+    ])
+};
+exports.default = Skeleton;
+
+},{"@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"adHgr","@babel/runtime/helpers/esm/extends":"fTBFS","react":"21dqq","clsx":"gocd3","prop-types":"7wKI2","@mui/system":"Q0Zql","@mui/utils/composeClasses":"4kKno","../styles":"1lzai","../styles/styled":"32xTg","../DefaultPropsProvider":"gbkfk","./skeletonClasses":"fZnwL","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fZnwL":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getSkeletonUtilityClass", ()=>getSkeletonUtilityClass);
+var _generateUtilityClasses = require("@mui/utils/generateUtilityClasses");
+var _generateUtilityClassesDefault = parcelHelpers.interopDefault(_generateUtilityClasses);
+var _generateUtilityClass = require("@mui/utils/generateUtilityClass");
+var _generateUtilityClassDefault = parcelHelpers.interopDefault(_generateUtilityClass);
+function getSkeletonUtilityClass(slot) {
+    return (0, _generateUtilityClassDefault.default)("MuiSkeleton", slot);
+}
+const skeletonClasses = (0, _generateUtilityClassesDefault.default)("MuiSkeleton", [
+    "root",
+    "text",
+    "rectangular",
+    "rounded",
+    "circular",
+    "pulse",
+    "wave",
+    "withChildren",
+    "fitContent",
+    "heightAuto"
+]);
+exports.default = skeletonClasses;
+
 },{"@mui/utils/generateUtilityClasses":"7eO93","@mui/utils/generateUtilityClass":"d6tPU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aMs6C":[function(require,module,exports) {
 module.exports = require("d17ce4a2d8f98711").getBundleURL("bLxZJ") + "chef-bryan-entertainment.079a5731.jpg" + "?" + Date.now();
 
@@ -50607,7 +51555,7 @@ const data = [
     {
         _id: "1",
         eventdisplayname: "Tree of Life",
-        eventcatergory: "Entertainment",
+        eventcategory: "Entertainment",
         eventoperationdatetimestart: "18:00",
         eventoperationdatetimeend: "22:00",
         eventdescription: "Witness the mesmerizing light show projected onto the tree while relaxing with your drinks",
@@ -50620,7 +51568,7 @@ const data = [
     {
         _id: "2",
         eventdisplayname: "Tex BBQ",
-        eventcatergory: "Food",
+        eventcategory: "Food",
         eventoperationdatetimestart: "",
         eventoperationdatetimeend: "",
         eventdescription: "Inspired by Texas, Tex BBQ is cooking up a storm with briskets and pulled pork. Don`t forget the mac and cheese!",
@@ -50633,7 +51581,7 @@ const data = [
     {
         _id: "3",
         eventdisplayname: "Anza Earrings",
-        eventcatergory: "Shop",
+        eventcategory: "Shop",
         eventoperationdatetimestart: "",
         eventoperationdatetimeend: "",
         eventdescription: "Handmade selection of earrings, perfect for any occasion.",
@@ -50646,7 +51594,7 @@ const data = [
     {
         _id: "4",
         eventdisplayname: "DJ Lucy & Cara",
-        eventcatergory: "Entertainment",
+        eventcategory: "Entertainment",
         eventoperationdatetimestart: "15:00",
         eventoperationdatetimeend: "22:00",
         eventdescription: "Geelong locals DJs Lucy and Cara keeping the vibe going between musical and talents acts.",
@@ -50659,7 +51607,7 @@ const data = [
     {
         _id: "5",
         eventdisplayname: "Swirl Bakery",
-        eventcatergory: "Food",
+        eventcategory: "Food",
         eventoperationdatetimestart: "",
         eventoperationdatetimeend: "",
         eventdescription: "Swirl Bakery will be bringing over 20 kinds of baked goods to the showground.",
@@ -50673,7 +51621,7 @@ const data = [
     {
         _id: "6",
         eventdisplayname: "Luminous Lanterns",
-        eventcatergory: "Shop",
+        eventcategory: "Shop",
         eventoperationdatetimestart: "",
         eventoperationdatetimeend: "",
         eventdescription: "lluminate your space with captivating collection of beautifully designed lanterns.",
@@ -50684,7 +51632,7 @@ const data = [
     {
         _id: "7",
         eventdisplayname: "Make Lanterns",
-        eventcatergory: "Entertainment",
+        eventcategory: "Entertainment",
         eventoperationdatetimestart: "15:00",
         eventoperationdatetimeend: "22:00",
         eventdescription: "Light up your night even more with lantern making class. $10 per person.",
@@ -50698,7 +51646,7 @@ const data = [
     {
         _id: "8",
         eventdisplayname: "Loaded",
-        eventcatergory: "Food",
+        eventcategory: "Food",
         eventoperationdatetimestart: "",
         eventoperationdatetimeend: "",
         eventdescription: "Load your potatoes however you want! Vegan options available.",
@@ -50711,7 +51659,7 @@ const data = [
     {
         _id: "9",
         eventdisplayname: "Vine Soaps",
-        eventcatergory: "Shop",
+        eventcategory: "Shop",
         eventoperationdatetimestart: "",
         eventoperationdatetimeend: "",
         eventdescription: "Indulge in our luxurious, all-natural soaps that leave your skin feeling soft and refreshed.",
@@ -50722,7 +51670,7 @@ const data = [
     {
         _id: "10",
         eventdisplayname: "Music by Alisa",
-        eventcatergory: "Entertainment",
+        eventcategory: "Entertainment",
         eventoperationdatetimestart: "18:00",
         eventoperationdatetimeend: "18:45",
         eventdescription: "Alisa will showcase her soulful voice, blending contemporary pop with classic melodies.",
@@ -50736,7 +51684,7 @@ const data = [
 ];
 exports.default = data;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../static/images/treeoflife.jpg":"iyS7s","../static/images/bbq-food.jpg":"eS59g","../static/images/anza-earring-stall.jpg":"8zxNf","../static/images/dj-duo-entertainment.jpg":"2cfqD","../static/images/bakery-food.jpg":"gYice","../static/images/lantern-stall.jpg":"hR4Yf","../static/images/making_lantern_activity.jpg":"39Orq","../static/images/loadedpotato-food.jpg":"1u5Pb","../static/images/soap-stall.jpg":"aWAQi","../static/images/alisa-music-entertainment.jpg":"kAZeJ"}],"iyS7s":[function(require,module,exports) {
+},{"../static/images/treeoflife.jpg":"iyS7s","../static/images/bbq-food.jpg":"eS59g","../static/images/anza-earring-stall.jpg":"8zxNf","../static/images/dj-duo-entertainment.jpg":"2cfqD","../static/images/bakery-food.jpg":"gYice","../static/images/lantern-stall.jpg":"hR4Yf","../static/images/making_lantern_activity.jpg":"39Orq","../static/images/loadedpotato-food.jpg":"1u5Pb","../static/images/soap-stall.jpg":"aWAQi","../static/images/alisa-music-entertainment.jpg":"kAZeJ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iyS7s":[function(require,module,exports) {
 module.exports = require("63beeac1eee45873").getBundleURL("bLxZJ") + "treeoflife.7725f5df.jpg" + "?" + Date.now();
 
 },{"63beeac1eee45873":"lgJ39"}],"eS59g":[function(require,module,exports) {
@@ -51055,7 +52003,162 @@ exports.default = new AdminView();
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"lit-html":"1cmQt","../../Utils":"iRY6S","../../App":"2kQhy","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../Event":"cqvk6","../../Toast":"4N7Ir","react":"21dqq","../../components/react/reactHelper":"3QXBS","../../components/react/sc-event-card":"8huJy","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../components/sc-admin-nav":"f3goH"}],"f3goH":[function(require,module,exports) {
+},{"../../App":"2kQhy","lit-html":"1cmQt","../../Utils":"iRY6S","../../Event":"cqvk6","../../Toast":"4N7Ir","react":"21dqq","../../components/react/reactHelper":"3QXBS","../../components/react/sc-event-card":"8huJy","../../components/sc-admin-nav":"f3goH","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"8huJy":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$94a6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$94a6.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _material = require("@mui/material");
+var _chefBryanEntertainmentJpg = require("../../../static/images/chef-bryan-entertainment.jpg");
+var _chefBryanEntertainmentJpgDefault = parcelHelpers.interopDefault(_chefBryanEntertainmentJpg);
+var _reactScss = require("../../scss/react.scss");
+const eventCard = ({ events })=>{
+    if (!events) return null;
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Grid), {
+        container: true,
+        spacing: 3,
+        className: "card-grid",
+        children: events.map((event)=>{
+            const imageUrl = event.eventimage || (0, _chefBryanEntertainmentJpgDefault.default);
+            return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Grid), {
+                item: true,
+                xs: 12,
+                sm: 6,
+                md: 4,
+                lg: 3,
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Card), {
+                    className: "card",
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardContent), {
+                        className: "event-content",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardMedia), {
+                                component: "img",
+                                alt: "placeholder",
+                                height: "150",
+                                image: imageUrl,
+                                className: "event-image"
+                            }, void 0, false, {
+                                fileName: "src/components/react/sc-event-card.js",
+                                lineNumber: 18,
+                                columnNumber: 33
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Box), {
+                                className: "event-title-box",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                                        className: "event-title",
+                                        children: event.eventdisplayname
+                                    }, void 0, false, {
+                                        fileName: "src/components/react/sc-event-card.js",
+                                        lineNumber: 25,
+                                        columnNumber: 37
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.IconButton), {
+                                        className: "event-button",
+                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                            className: "material-icons",
+                                            children: "favorite_border"
+                                        }, void 0, false, {
+                                            fileName: "src/components/react/sc-event-card.js",
+                                            lineNumber: 29,
+                                            columnNumber: 41
+                                        }, undefined)
+                                    }, void 0, false, {
+                                        fileName: "src/components/react/sc-event-card.js",
+                                        lineNumber: 28,
+                                        columnNumber: 37
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/react/sc-event-card.js",
+                                lineNumber: 24,
+                                columnNumber: 33
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                                className: "event-description",
+                                children: event.eventdescription
+                            }, void 0, false, {
+                                fileName: "src/components/react/sc-event-card.js",
+                                lineNumber: 34,
+                                columnNumber: 33
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                                className: "event-times",
+                                children: [
+                                    event.eventoperationdatetimestart,
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                                        fileName: "src/components/react/sc-event-card.js",
+                                        lineNumber: 38,
+                                        columnNumber: 72
+                                    }, undefined),
+                                    event.eventoperationdatetimeend
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/react/sc-event-card.js",
+                                lineNumber: 37,
+                                columnNumber: 33
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                                className: "hidden",
+                                children: event.eventstallnumber
+                            }, void 0, false, {
+                                fileName: "src/components/react/sc-event-card.js",
+                                lineNumber: 41,
+                                columnNumber: 33
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                                className: "hidden",
+                                children: [
+                                    event.eventcategory,
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                                        fileName: "src/components/react/sc-event-card.js",
+                                        lineNumber: 45,
+                                        columnNumber: 58
+                                    }, undefined),
+                                    event.eventtag
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/react/sc-event-card.js",
+                                lineNumber: 44,
+                                columnNumber: 33
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/react/sc-event-card.js",
+                        lineNumber: 17,
+                        columnNumber: 29
+                    }, undefined)
+                }, void 0, false, {
+                    fileName: "src/components/react/sc-event-card.js",
+                    lineNumber: 16,
+                    columnNumber: 25
+                }, undefined)
+            }, event._id, false, {
+                fileName: "src/components/react/sc-event-card.js",
+                lineNumber: 15,
+                columnNumber: 21
+            }, undefined);
+        })
+    }, void 0, false, {
+        fileName: "src/components/react/sc-event-card.js",
+        lineNumber: 10,
+        columnNumber: 9
+    }, undefined);
+};
+exports.default = eventCard;
+
+  $parcel$ReactRefreshHelpers$94a6.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","../../../static/images/chef-bryan-entertainment.jpg":"aMs6C","../../scss/react.scss":"aLSRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"aLSRg":[function() {},{}],"f3goH":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$3d4a = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -51156,7 +52259,7 @@ $RefreshReg$(_c, "MUIDrawer");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../scss/react.scss":"aLSRg"}],"aLSRg":[function() {},{}],"j0aCk":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","../scss/react.scss":"aLSRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"aLSRg":[function() {},{}],"j0aCk":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _app = require("../../App");

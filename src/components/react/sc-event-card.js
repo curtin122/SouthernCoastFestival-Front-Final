@@ -2,14 +2,14 @@ import * as React from 'react'
 import { Card, CardContent, CardMedia, Typography, Box, IconButton, Grid } from '@mui/material'
 import placeholderImg from '../../../static/images/chef-bryan-entertainment.jpg'
 import '../../scss/react.scss'
-import eventData from '../../eventdata'
 
-const eventCard = () => {
+const eventCard = ({ events }) => {
+    if (!events) { return null }
+
     return (
         <Grid container spacing={3} className="card-grid">
-            {eventData.map(event => {
+            {events.map(event => {
                 const imageUrl = event.eventimage || placeholderImg;
-                console.log("Image URL:", imageUrl)
 
                 return (
                     <Grid item xs={12} sm={6} md={4} lg={3} key={event._id}>
@@ -19,7 +19,7 @@ const eventCard = () => {
                                     component="img"
                                     alt="placeholder"
                                     height="150"
-                                    image={event.eventimage}
+                                    image={imageUrl}
                                     className="event-image" />
                                 <Box className="event-title-box">
                                     <Typography className="event-title">
