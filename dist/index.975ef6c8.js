@@ -3215,7 +3215,7 @@ exports.default = new HomeView();
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"../../App":"2kQhy","lit-html":"1cmQt","../../Utils":"iRY6S","../../Event":"cqvk6","../../Toast":"4N7Ir","react":"21dqq","../../components/react/reactHelper":"3QXBS","../../components/sc-events-grid.js":"32p0x","../../eventdata.js":"5Y3fe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"1cmQt":[function(require,module,exports) {
+},{"../../App":"2kQhy","lit-html":"1cmQt","../../Utils":"iRY6S","../../Event":"cqvk6","../../Toast":"4N7Ir","react":"21dqq","../../components/react/reactHelper":"3QXBS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../components/sc-events-grid.js":"32p0x","../../eventdata.js":"5Y3fe"}],"1cmQt":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2017 Google LLC
@@ -52003,7 +52003,7 @@ exports.default = new AdminView();
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"../../App":"2kQhy","lit-html":"1cmQt","../../Utils":"iRY6S","../../Event":"cqvk6","../../Toast":"4N7Ir","react":"21dqq","../../components/react/reactHelper":"3QXBS","../../components/react/sc-event-card":"8huJy","../../components/sc-admin-nav":"f3goH","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"8huJy":[function(require,module,exports) {
+},{"lit-html":"1cmQt","../../Utils":"iRY6S","../../App":"2kQhy","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../Event":"cqvk6","../../Toast":"4N7Ir","react":"21dqq","../../components/react/reactHelper":"3QXBS","../../components/react/sc-event-card":"8huJy","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../components/sc-admin-nav":"f3goH"}],"8huJy":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$94a6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -52259,7 +52259,7 @@ $RefreshReg$(_c, "MUIDrawer");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","../scss/react.scss":"aLSRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"aLSRg":[function() {},{}],"j0aCk":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../scss/react.scss":"aLSRg"}],"aLSRg":[function() {},{}],"j0aCk":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _app = require("../../App");
@@ -52422,22 +52422,19 @@ class AppHeader extends (0, _lit.LitElement) {
                     border-bottom: 0.2em solid #FFC600;
 
                     display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    align-items: center;
+                    justify-content: center;
                     z-index: 10;
 
                     position: sticky;
                     top: 0;
                 }
                 .app-header-left {
-                    width: 6.5em;
-                    margin: auto 1em;
                     display: flex;
                     align-items: center;
+                    padding-left: 10px;
 
                     .app-header-logo {
-                        width: 6.5em;
+                        width: 3.5em;
                         position: absolute;
                     }
                 }
@@ -52475,23 +52472,11 @@ class AppHeader extends (0, _lit.LitElement) {
                         -webkit-animation: blink 7s infinite;
                     }
                 }
-                .app-header-right {
-                    height: 6.5em;
-                    margin: auto 1em;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-
-                    h2 {
-                        color: #FFC600;
-                        font-weight: normal;
-                        font-size: 1.25em;
-                        margin: 0;
-                    }
-                }
 
                 // tablet
+                @media all and (max-width: 768px) {
+
+                }
 
                 // mobile
             </style>
@@ -52510,11 +52495,7 @@ class AppHeader extends (0, _lit.LitElement) {
                         <li><a class="nav-item" href="#about">About</a></li>
                     </ul>
                 </nav>
-                
-                <div class="app-header-right">
-                    <div><h2 style="font-family: var(--base-font-family)">Geelong</h2></div>
-                    <div><h2 style="font-family: var(--sub-font-family)">2024</h2></div>
-                </div>
+
 
             </header>
         `;
