@@ -2,34 +2,46 @@ import * as React from 'react'
 import { IconButton, Menu, MenuItem } from '@mui/material'
 
 export default function HeaderMenu() {
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+    const [anchorEl, setAnchorEl] = React.useState(null)
     const open = Boolean(anchorEl)
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+
+    const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
     }
     const handleClose = () => {
         setAnchorEl(null)
     }
 
+    const handleMenuItemClick = (id) => {
+        const section = document.getElementById(id)
+        if (section) {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start'})
+        }
+        handleClose()
+    }
+
     return (
         <>
             <div>
-                <IconButton>
-                    <span className="materials-icon">Menu</span>
+                <IconButton 
+                    onClick={handleClick} 
+                    style={{ background: '#2b2b2b', borderStyle: 'none', borderRadius: '0.2em', color: '#FFFFFF', fontSize: '1.5em', padding: '0.1em 0.3em' }}
+                > 
+                    &#9776;
                 </IconButton>
                 <Menu
                     id="header-menu"
                     anchorEl={anchorEl}
                     open={open}
-                    onClose{handleClose}
+                    onClose={handleClose}
                     MenuListProps={{
-                        'aria-labelledby: "basic-button"',
+                        'aria-labelledby': 'basic-button',
                     }}
                 >
-                    <MenuItem onClick={handleClose}>Home</MenuItem>
-                    <MenuItem onClick={handleClose}>Events</MenuItem>
-                    <MenuItem onClick={handleClose}>Venue</MenuItem>
-                    <MenuItem onClick={handleClose}>About</MenuItem>
+                    <MenuItem onClick={() => handleMenuItemClick('home')}>Home</MenuItem>
+                    <MenuItem onClick={() => handleMenuItemClick('events')}>Events</MenuItem>
+                    <MenuItem onClick={() => handleMenuItemClick('venue')}>Venue</MenuItem>
+                    <MenuItem onClick={() => handleMenuItemClick('about')}>About</MenuItem>
                 </Menu>
             </div>
         </>

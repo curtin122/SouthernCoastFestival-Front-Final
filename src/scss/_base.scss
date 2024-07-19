@@ -29,6 +29,13 @@
 .app-header {
     position: relative;
     z-index: 10;
+
+    #app-header-menu {
+        display: none;
+    }
+    .menu-button {
+        background-color: none;
+    }
 }
 
 // HERO ---------------------------
@@ -270,20 +277,11 @@ button {
 }
 
 // RESPONSIVE - TABLET --------------------------------------------
-@media all and (max-width: 768px) {
-    .events-grid{
-        width: 80%;
-    }
+@media all and (min-width: 768px) {
+    
 }
 
 // RESPONSIVE - MOBILE --------------------------------------------
-@media all and (max-width: 400px) {
-    .events-grid {
-        #card-container{
-            display: flex;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            margin: 0;
-        }
-    }
+@media all and (min-width: 400px) {
+
 }

@@ -188,6 +188,14 @@
   position: relative;
 }
 
+.app-header #app-header-menu {
+  display: none;
+}
+
+.app-header .menu-button {
+  background-color: none;
+}
+
 #home {
   border-bottom: .2em solid #ffc600;
 }
@@ -442,21 +450,6 @@ button {
   border: 1px solid #ffc600;
   border-radius: .2em;
   padding: .5em;
-}
-
-@media (width <= 768px) {
-  .events-grid {
-    width: 80%;
-  }
-}
-
-@media (width <= 400px) {
-  .events-grid #card-container {
-    flex-wrap: nowrap;
-    margin: 0;
-    display: flex;
-    overflow-x: auto;
-  }
 }
 
 @font-face {

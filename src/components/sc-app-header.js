@@ -1,11 +1,13 @@
 import { LitElement, html, css } from 'lit'
+import * as React from 'react'
+import { createRoot } from 'react-dom/client'
+import HeaderMenu from './react/sc-header-menu.js'
 
 class AppHeader extends LitElement {
     constructor() {
         super();
         this.anchorEl = null;
         this.menuOpen = false;
-        this.reactRoot = null;
     }
 
     static get properties() {
@@ -20,6 +22,7 @@ class AppHeader extends LitElement {
     firstUpdated() {
         this.navActiveLinks();
         this.scrollTo();
+        this.renderReactComponent();
     }
 
     navActiveLinks() {
@@ -47,6 +50,14 @@ class AppHeader extends LitElement {
                 }
             })
         })
+    }
+
+    renderReactComponent() {
+        const headerMenu = this.shadowRoot.getElementById('app-header-menu')
+        if (headerMenu) {
+            const root = createRoot(headerMenu)
+            root.render(<HeaderMenu />)
+        }
     }
 
     render() {
@@ -78,28 +89,29 @@ class AppHeader extends LitElement {
                     background-color: #000000;
                     border-bottom: 0.2em solid #FFC600;
 
-                    display: flex;
-                    justify-content: center;
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    align-items: center;
                     z-index: 10;
 
                     position: sticky;
                     top: 0;
                 }
-                .app-header-left {
+                #app-header-menu {
+                    width: auto;
+                    display: none;
+                }
+                .app-header-logo {
+                    grid-column: 1;
                     display: flex;
                     align-items: center;
-                    padding-left: 10px;
-
-                    .app-header-logo {
-                        width: 3.5em;
-                        position: absolute;
-                    }
+                    padding-left: 0.5em;
+                    background-image: url('../../static/images/soco-logo.png');
+                    width: 3.5em;
                 }
                 .app-header-nav {
-                    display: flex;
-                    align-items: center;
-                    width: 50%;
-                    margin: auto;
+                    grid-column: 2;
+                    justify-content: center;
 
                     ul {
                         list-style-type: none;
@@ -109,7 +121,6 @@ class AppHeader extends LitElement {
                         font-family: var(--base-font-family);
                         font-weight: 700;
 
-                        width: 100%;
                         display: flex;
                         justify-content: space-evenly;
                     }
@@ -130,19 +141,53 @@ class AppHeader extends LitElement {
                     }
                 }
 
-                // tablet
-                @media all and (max-width: 768px) {
-
+                @media (max-width: 768px) {
+                    .app-header {
+                        height: 4em;
+                    }
+                    .app-header-logo {
+                        width: 2.5em;
+                    }
+                    .app-header-nav {
+                        .nav-item {
+                            padding: 0.5em;
+                            font-size: 0.8em;
+                        }
+                    }
                 }
 
-                // mobile
+                @media (max-width: 400px) {
+                    .app-header {
+                        justify-content: space-between;
+                        flex-wrap: wrap;
+                        align-content: center;
+                    }
+                    #app-header-menu {
+                        grid-column: 3;
+                        display: flex;
+                        justify-content: flex-end;
+                        padding: 1em;
+                    }
+                    .app-header-nav {
+                        display: none;
+                    }
+                    .app-header-logo {
+                        background-image: url('../../static/images/soco-logo-long.png');
+                        display: flex;
+                        align-items: center;
+                        padding-left: 0.5em;
+                        width: 3.5em;
+                    }
+                }
             </style>
 
             <header class="app-header">
 
-                <div class="app-header-left">
+                <div class="app-header-logo">
                     <img class="app-header-logo" src="/images/soco-logo.png">
                 </div>
+
+                <div id="app-header-menu"></div>
 
                 <nav class="app-header-nav">
                     <ul>
