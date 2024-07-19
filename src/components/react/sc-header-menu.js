@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { IconButton, Menu, MenuItem } from '@mui/material'
+import '../../scss/react.scss'
 
 export default function HeaderMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null)
@@ -38,10 +39,10 @@ export default function HeaderMenu() {
                         'aria-labelledby': 'basic-button',
                     }}
                 >
-                    <MenuItem onClick={() => handleMenuItemClick('home')}>Home</MenuItem>
-                    <MenuItem onClick={() => handleMenuItemClick('events')}>Events</MenuItem>
-                    <MenuItem onClick={() => handleMenuItemClick('venue')}>Venue</MenuItem>
-                    <MenuItem onClick={() => handleMenuItemClick('about')}>About</MenuItem>
+                    <MenuItem className="menu-item" onClick={() => handleMenuItemClick('home')}>Home</MenuItem>
+                    <MenuItem className="menu-item" onClick={() => handleMenuItemClick('events')}>Events</MenuItem>
+                    <MenuItem className="menu-item" onClick={() => handleMenuItemClick('venue')}>Venue</MenuItem>
+                    <MenuItem className="menu-item" onClick={() => handleMenuItemClick('about')}>About</MenuItem>
                 </Menu>
             </div>
         </>

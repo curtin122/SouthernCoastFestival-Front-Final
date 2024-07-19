@@ -2,6 +2,8 @@ import { LitElement, html, css } from 'lit'
 import * as React from 'react'
 import { createRoot } from 'react-dom/client'
 import HeaderMenu from './react/sc-header-menu.js'
+import logo from '../../static/images/soco-logo.png'
+import longLogo from '../../static/images/soco-logo-long.png'
 
 class AppHeader extends LitElement {
     constructor() {
@@ -105,9 +107,12 @@ class AppHeader extends LitElement {
                     grid-column: 1;
                     display: flex;
                     align-items: center;
-                    padding-left: 0.5em;
-                    background-image: url('../../static/images/soco-logo.png');
-                    width: 3.5em;
+                    margin-left: 0.75em;
+                    background-image: url(${logo});
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    width: 4em;
+                    height: 3.5em;
                 }
                 .app-header-nav {
                     grid-column: 2;
@@ -146,7 +151,8 @@ class AppHeader extends LitElement {
                         height: 4em;
                     }
                     .app-header-logo {
-                        width: 2.5em;
+                        width: 3.5em;
+                        height: 3em;
                     }
                     .app-header-nav {
                         .nav-item {
@@ -172,20 +178,18 @@ class AppHeader extends LitElement {
                         display: none;
                     }
                     .app-header-logo {
-                        background-image: url('../../static/images/soco-logo-long.png');
+                        background-image: url(${longLogo});
                         display: flex;
                         align-items: center;
-                        padding-left: 0.5em;
-                        width: 3.5em;
+                        width: 9em;
+                        height: 2.5em;
                     }
                 }
             </style>
 
             <header class="app-header">
 
-                <div class="app-header-logo">
-                    <img class="app-header-logo" src="/images/soco-logo.png">
-                </div>
+                <div class="app-header-logo"></div>
 
                 <div id="app-header-menu"></div>
 

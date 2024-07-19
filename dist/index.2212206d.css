@@ -1,3 +1,7 @@
+.menu-item {
+  font-family: var(--base-font-family) !important;
+}
+
 #category-container {
   justify-content: space-between;
   align-items: center;

@@ -3215,7 +3215,7 @@ exports.default = new HomeView();
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"../../App":"2kQhy","lit-html":"1cmQt","../../Utils":"iRY6S","../../Event":"cqvk6","../../Toast":"4N7Ir","react":"21dqq","../../components/react/reactHelper":"3QXBS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../components/sc-events-grid.js":"32p0x","../../eventdata.js":"5Y3fe"}],"1cmQt":[function(require,module,exports) {
+},{"../../App":"2kQhy","lit-html":"1cmQt","../../Utils":"iRY6S","../../Event":"cqvk6","../../Toast":"4N7Ir","react":"21dqq","../../components/react/reactHelper":"3QXBS","../../components/sc-events-grid.js":"32p0x","../../eventdata.js":"5Y3fe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"1cmQt":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2017 Google LLC
@@ -53853,7 +53853,7 @@ exports.default = new AdminView();
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"lit-html":"1cmQt","../../Utils":"iRY6S","../../App":"2kQhy","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../Event":"cqvk6","../../Toast":"4N7Ir","react":"21dqq","../../components/react/reactHelper":"3QXBS","../../components/react/sc-event-card":"8huJy","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../components/sc-admin-nav":"f3goH"}],"8huJy":[function(require,module,exports) {
+},{"../../App":"2kQhy","lit-html":"1cmQt","../../Utils":"iRY6S","../../Event":"cqvk6","../../Toast":"4N7Ir","react":"21dqq","../../components/react/reactHelper":"3QXBS","../../components/react/sc-event-card":"8huJy","../../components/sc-admin-nav":"f3goH","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"8huJy":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$94a6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -54109,7 +54109,7 @@ $RefreshReg$(_c, "MUIDrawer");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../scss/react.scss":"aLSRg"}],"aLSRg":[function() {},{}],"j0aCk":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","../scss/react.scss":"aLSRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"aLSRg":[function() {},{}],"j0aCk":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _app = require("../../App");
@@ -54203,6 +54203,10 @@ var _react = require("react");
 var _client = require("react-dom/client");
 var _scHeaderMenuJs = require("./react/sc-header-menu.js");
 var _scHeaderMenuJsDefault = parcelHelpers.interopDefault(_scHeaderMenuJs);
+var _socoLogoPng = require("../../static/images/soco-logo.png");
+var _socoLogoPngDefault = parcelHelpers.interopDefault(_socoLogoPng);
+var _socoLogoLongPng = require("../../static/images/soco-logo-long.png");
+var _socoLogoLongPngDefault = parcelHelpers.interopDefault(_socoLogoLongPng);
 class AppHeader extends (0, _lit.LitElement) {
     constructor(){
         super();
@@ -54260,7 +54264,7 @@ class AppHeader extends (0, _lit.LitElement) {
             const root = (0, _client.createRoot)(headerMenu);
             root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _scHeaderMenuJsDefault.default), {}, void 0, false, {
                 fileName: "src/components/sc-app-header.js",
-                lineNumber: 59,
+                lineNumber: 61,
                 columnNumber: 25
             }, this));
         }
@@ -54310,9 +54314,12 @@ class AppHeader extends (0, _lit.LitElement) {
                     grid-column: 1;
                     display: flex;
                     align-items: center;
-                    padding-left: 0.5em;
-                    background-image: url('../../static/images/soco-logo.png');
-                    width: 3.5em;
+                    margin-left: 0.75em;
+                    background-image: url(${0, _socoLogoPngDefault.default});
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    width: 4em;
+                    height: 3.5em;
                 }
                 .app-header-nav {
                     grid-column: 2;
@@ -54351,7 +54358,8 @@ class AppHeader extends (0, _lit.LitElement) {
                         height: 4em;
                     }
                     .app-header-logo {
-                        width: 2.5em;
+                        width: 3.5em;
+                        height: 3em;
                     }
                     .app-header-nav {
                         .nav-item {
@@ -54377,20 +54385,18 @@ class AppHeader extends (0, _lit.LitElement) {
                         display: none;
                     }
                     .app-header-logo {
-                        background-image: url('../../static/images/soco-logo-long.png');
+                        background-image: url(${0, _socoLogoLongPngDefault.default});
                         display: flex;
                         align-items: center;
-                        padding-left: 0.5em;
-                        width: 3.5em;
+                        width: 9em;
+                        height: 2.5em;
                     }
                 }
             </style>
 
             <header class="app-header">
 
-                <div class="app-header-logo">
-                    <img class="app-header-logo" src="/images/soco-logo.png">
-                </div>
+                <div class="app-header-logo"></div>
 
                 <div id="app-header-menu"></div>
 
@@ -54415,7 +54421,7 @@ customElements.define("sc-app-header", AppHeader);
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"lit":"4antt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./react/sc-header-menu.js":"c3ijH","react/jsx-dev-runtime":"iTorj","react":"21dqq","react-dom/client":"lOjBx","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"c3ijH":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","lit":"4antt","react":"21dqq","react-dom/client":"lOjBx","./react/sc-header-menu.js":"c3ijH","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../static/images/soco-logo.png":"5qYPa","../../static/images/soco-logo-long.png":"d7Vme"}],"c3ijH":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$6fcc = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -54428,6 +54434,7 @@ parcelHelpers.export(exports, "default", ()=>HeaderMenu);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _material = require("@mui/material");
+var _reactScss = require("../../scss/react.scss");
 var _s = $RefreshSig$();
 function HeaderMenu() {
     _s();
@@ -54463,7 +54470,7 @@ function HeaderMenu() {
                     children: "\u2630"
                 }, void 0, false, {
                     fileName: "src/components/react/sc-header-menu.js",
-                    lineNumber: 26,
+                    lineNumber: 27,
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Menu), {
@@ -54476,47 +54483,51 @@ function HeaderMenu() {
                     },
                     children: [
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.MenuItem), {
+                            className: "menu-item",
                             onClick: ()=>handleMenuItemClick("home"),
                             children: "Home"
-                        }, void 0, false, {
-                            fileName: "src/components/react/sc-header-menu.js",
-                            lineNumber: 41,
-                            columnNumber: 21
-                        }, this),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.MenuItem), {
-                            onClick: ()=>handleMenuItemClick("events"),
-                            children: "Events"
                         }, void 0, false, {
                             fileName: "src/components/react/sc-header-menu.js",
                             lineNumber: 42,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.MenuItem), {
-                            onClick: ()=>handleMenuItemClick("venue"),
-                            children: "Venue"
+                            className: "menu-item",
+                            onClick: ()=>handleMenuItemClick("events"),
+                            children: "Events"
                         }, void 0, false, {
                             fileName: "src/components/react/sc-header-menu.js",
                             lineNumber: 43,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.MenuItem), {
+                            className: "menu-item",
+                            onClick: ()=>handleMenuItemClick("venue"),
+                            children: "Venue"
+                        }, void 0, false, {
+                            fileName: "src/components/react/sc-header-menu.js",
+                            lineNumber: 44,
+                            columnNumber: 21
+                        }, this),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.MenuItem), {
+                            className: "menu-item",
                             onClick: ()=>handleMenuItemClick("about"),
                             children: "About"
                         }, void 0, false, {
                             fileName: "src/components/react/sc-header-menu.js",
-                            lineNumber: 44,
+                            lineNumber: 45,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/react/sc-header-menu.js",
-                    lineNumber: 32,
+                    lineNumber: 33,
                     columnNumber: 17
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/components/react/sc-header-menu.js",
-            lineNumber: 25,
+            lineNumber: 26,
             columnNumber: 13
         }, this)
     }, void 0, false);
@@ -54531,7 +54542,13 @@ $RefreshReg$(_c, "HeaderMenu");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"eSeCb":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../scss/react.scss":"aLSRg"}],"aLSRg":[function() {},{}],"5qYPa":[function(require,module,exports) {
+module.exports = require("1fa9a0d538b9a17e").getBundleURL("bLxZJ") + "soco-logo.a8b2db60.png" + "?" + Date.now();
+
+},{"1fa9a0d538b9a17e":"lgJ39"}],"d7Vme":[function(require,module,exports) {
+module.exports = require("b3fa00abf1a93ad9").getBundleURL("bLxZJ") + "soco-logo-long.ee7e6632.png" + "?" + Date.now();
+
+},{"b3fa00abf1a93ad9":"lgJ39"}],"eSeCb":[function(require,module,exports) {
 var _lit = require("lit");
 class AppFooter extends (0, _lit.LitElement) {
     constructor(){
