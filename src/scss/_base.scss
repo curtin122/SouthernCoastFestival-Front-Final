@@ -1,5 +1,9 @@
 // BASE STYLING
 
+html {
+    scroll-behavior: smooth;
+}
+
 .content-container {
     padding-right: 9em;
 }
@@ -33,9 +37,6 @@
     #app-header-menu {
         display: none;
     }
-    .menu-button {
-        background-color: none;
-    }
 }
 
 // HERO ---------------------------
@@ -44,7 +45,7 @@
 }
 .hero-banner {
     width: 100%;
-    height: 31em;
+    height: 35em;
     background-image: url('../../static/images/treeoflife.jpg');
     background-size: cover;
     background-position-y: bottom;
@@ -57,14 +58,14 @@
     #hero-content {
         max-width: 40%;
         min-width: 20em;
-        background-color: #00000060;
+        background-color: #000000c0;
         padding: 1em;
 
         display: flex;
         flex-direction: column;
         align-items: center;
 
-        h1, p {
+        h1, h3, p {
             margin: 0;
             color: #FFFFFF;
             font-family: var(--base-font-family);
@@ -75,7 +76,7 @@
             padding-bottom: 0.25em;
         }
         p {
-            font-size: 0.75em;
+            font-size: 0.95em;
         }
         button {
             width: max-content;
@@ -124,46 +125,6 @@
     padding-top: 1em;
     border-bottom: 0.2em solid #FFC600;
 }
-.venue-nav {
-    height: auto;
-    width: 60%;
-    margin: 1em auto;
-
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-
-        font-family: var(--base-font-family);
-        font-size: 0.75em;
-
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        
-        li {
-            margin: 0.5em;
-            width: 100%;
-            text-wrap: nowrap;
-        }
-
-        li a {
-            display: block;
-            color: #000000;
-            text-align: center;
-            padding: 0.75em;
-            text-decoration: none;
-            background-color: #bdbdbd;
-            border: 1px solid #bdbdbd;
-            border-radius: 0.2em;
-        }
-        li a:hover {
-            background-color: #FFC600;
-            font-weight: bold;
-            border: 1px solid #FFC600;
-        }
-    }
-}
 .venue-container {
     display: flex;
     flex-direction: column;
@@ -176,18 +137,30 @@
         background-color: #2b2b2b;
         margin: 0.5em;
         border-radius: 0.2em;
-        padding: 0.5em;
+        padding: 1em;
 
-        h1, p {
+        .subtitle, .bold, .paragraph {
             font-family: var(--base-font-family);
             color: #FFFFFF;
             margin: 0;
+            text-align: left;
         }
-        h1 {
+        .subtitle {
             font-size: 1em;
+            font-weight: bold;
         }
-        p {
+        .bold {
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        .paragraph {
             font-size: 0.75em;
+            margin: 0.5em 0;
+        }
+        
+        .info {
+            display: flex;
+            align-items: flex-start;
         }
     }
     #location {
@@ -198,30 +171,36 @@
             display: flex;
             flex-direction: column;
         }
-    }
-    #loc-img {
-        width: 15em;
-        height: 10em;
-        background-color: #bdbdbd;
-        float: right;
-        background-image: url('../../static/images/placeholder.png');
-        background-size: cover;
-        background-position: center;
+        .google-map {
+            margin: 0.5em;
+            position: relative;
+            min-height: 200px;
+        }
+        .google-map iframe {
+            max-height: 100%;
+            max-width: 100%;
+            left: 0;
+            top: 0;
+            position: relative;
+        }
     }
     #map {
         display: flex;
 
         h1 {
             padding-left: 0.5em;
+            width: 100%;
         }
     }
     #map-img {
-        width: 15em;
-        height: 10em;
+        width: 100%;
+        height: 350px;
         background-color: #bdbdbd;
-        background-image: url('../../static/images/placeholder.png');
+        background-image: url('../../static/images/festival-map.png');
         background-size: cover;
         background-position: center;
+        border-radius: 0.2em;
+        margin: 0.5em;
     }
 }
 
@@ -231,57 +210,72 @@
     border-bottom: 0.2em solid #FFC600;
 }
 .about-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto;
     width: 90%;
     margin: auto;
     padding: 1em 0;
-}
-table {
-    width: 90%;
-    margin: auto;
 
-    td, tr {
-        padding: 0.5em;
-
-        text-align: center;
-        color: #FFFFFF;
+    h1, h2, p {
         font-family: var(--base-font-family);
+        color: #FFFFFF;
+    }
+    h1 {
+        font-size: 1.5em;
+    }
+    h2 {
+        font-size: 0.9em;
+    }
+    p {
+        font-size: 0.75em;
+    }
 
-        h1, h2, p { text-align: left; }
-        h1 { font-size: 1.5em; }
-        h2 { font-size: 1em; }
-        p { font-size: 0.75em; }
+    #about-info, #contact-form {
+        margin: 0.5em;
     }
-    td {
-        width: 50%;
-    }
-    #about-img {
-        width: 15em;
-        height: 15em;
-        background-image: url('../../static/images/placeholder.png');
-        background-size: cover;
-        border-radius: 0.2em;
-        margin: auto;
-    }
-    button {
-        width: 80%;
-        max-width: 20em;
-    }
-}
-
-button {
-    border: 1px solid #FFC600;
-    background-color: #FFC600;
-    padding: 0.5em;
-    border-radius: 0.2em;
 }
 
 // RESPONSIVE - TABLET --------------------------------------------
-@media all and (min-width: 768px) {
-    
+@media all and (max-width: 768px) {
+    .hero-banner { 
+        height: 30em;
+    }  
+
+    #location {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .google-map {
+            height: 300px;
+        }
+    }
+    #map {
+        display: flex;
+        flex-direction: column-reverse;
+
+        h1 {
+            padding-left: 0.5em;
+        }
+    }
+    #map-img {
+        height: 300px !important;
+        margin: 0.5em 0 !important;
+    }
+
+    .about-container {
+        grid-template-rows: 1fr auto;
+        grid-template-columns: auto;
+    }
 }
 
 // RESPONSIVE - MOBILE --------------------------------------------
-@media all and (min-width: 400px) {
-
+@media all and (max-width: 400px) {
+    #location {
+        .google-map {
+            height: 250px;
+        }
+    }
+    #map-img {
+        height: 250px !important;
+    }
 }

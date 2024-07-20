@@ -83,6 +83,7 @@
 }
 
 .card .event-image {
+  height: 12em;
   display: flex;
 }
 
@@ -138,6 +139,144 @@
   display: none;
 }
 
+.venue-nav {
+  justify-content: center;
+}
+
+.venue-nav .MuiButtonBase-root {
+  color: #000;
+  text-transform: capitalize;
+  background-color: #bdbdbd;
+  border: 1px solid #bdbdbd;
+  border-radius: .2em;
+  padding: .75em;
+}
+
+.venue-nav .MuiButtonBase-root:hover {
+  background-color: #ffc600;
+  border: 1px solid #ffc600;
+  font-weight: bold;
+}
+
+.venue-nav-list {
+  width: 100%;
+  display: flex;
+}
+
+.venue-nav-list .MuiInputBase-root {
+  background-color: #2b2b2b;
+  width: 40%;
+  margin: auto;
+}
+
+.venue-nav-list .Mui-focused .MuiOutlinedInput-notchedOutline {
+  border: 2px solid #ffc600 !important;
+}
+
+.form-container {
+  font-family: var(--base-font-family);
+  background-color: #2b2b2b;
+  border-radius: .2em;
+  height: auto;
+  padding: .5em 1em;
+}
+
+.form-container .form-title {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.form-container .form-section {
+  background-color: #505050;
+  border-radius: .2em;
+  width: auto;
+  margin: .5em 0;
+  padding: 1em;
+}
+
+.form-container .form-section .form-sub {
+  margin-bottom: .5em;
+  font-size: .9em;
+}
+
+.form-container .form-section .form-text, .form-container .form-section .form-enquiry {
+  font-family: var(--base-font-family);
+  border-radius: .2em;
+  margin: .25em 0;
+}
+
+.form-container .form-section .form-text .MuiInputBase-root, .form-container .form-section .form-enquiry .MuiInputBase-root {
+  background-color: #fff;
+  margin: .1em;
+}
+
+.form-container .form-section .form-text .MuiInputBase-root, .form-container .form-section .form-text label, .form-container .form-section .form-enquiry .MuiInputBase-root, .form-container .form-section .form-enquiry label {
+  color: #000;
+  font-size: .75em;
+}
+
+.form-container .form-section .form-text .MuiOutlinedInput.root .MuiOutlinedInput-notchedOutline, .form-container .form-section .form-enquiry .MuiOutlinedInput.root .MuiOutlinedInput-notchedOutline {
+  border: 1px solid #000;
+}
+
+.form-container .form-section .form-text .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline, .form-container .form-section .form-enquiry .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border: .2em solid #ffc600;
+}
+
+.form-container .form-section .form-text .MuiInputLabel-shrink, .form-container .form-section .form-enquiry .MuiInputLabel-shrink {
+  color: #ffc600;
+}
+
+.form-container .form-section .form-checkbox .MuiCheckbox-root {
+  color: #bdbdbd;
+}
+
+.form-container .form-section .form-checkbox .MuiCheckbox-root.Mui-checked {
+  color: #ffc600;
+}
+
+.form-container .form-section .form-checkbox .MuiFormControlLabel-label {
+  font-family: var(--base-font-family);
+  color: #fff;
+  font-size: .75em;
+}
+
+.form-container .form-section .form-checkbox .MuiButtonBase-root.MuiCheckbox-root {
+  margin-left: .3em;
+  padding: .3em;
+}
+
+.form-container .form-section .form-enquiry {
+  width: 100%;
+}
+
+.form-container .form-controls {
+  flex-direction: row;
+  justify-content: space-evenly;
+  display: flex;
+}
+
+.form-container .form-controls .form-button {
+  color: #000;
+  background-color: #ffc600;
+  padding: .5em 1em;
+}
+
+.form-container .MuiSnackbar-root {
+  left: 43%;
+}
+
+.MuiTypography-root.MuiDialogTitle-root {
+  font-family: var(--base-font-family);
+  padding: 1em 1.5em;
+}
+
+.MuiTypography-root.MuiDialogContentText-root {
+  font-family: var(--base-font-family);
+  padding: .5em;
+}
+
 #admin-icon {
   color: #ffc600;
   margin: .2em auto;
@@ -159,6 +298,10 @@
   .event-card {
     max-width: 32%;
   }
+
+  .form-container {
+    width: auto;
+  }
 }
 
 @media (width <= 400px) {
@@ -166,6 +309,10 @@
     min-width: 49%;
     margin: 0 .5em;
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 .content-container {
@@ -196,10 +343,6 @@
   display: none;
 }
 
-.app-header .menu-button {
-  background-color: none;
-}
-
 #home {
   border-bottom: .2em solid #ffc600;
 }
@@ -211,12 +354,12 @@
   flex-wrap: wrap;
   place-content: flex-end center;
   width: 100%;
-  height: 31em;
+  height: 35em;
   display: flex;
 }
 
 .hero-banner #hero-content {
-  background-color: #00000060;
+  background-color: #000000c0;
   flex-direction: column;
   align-items: center;
   min-width: 20em;
@@ -225,7 +368,7 @@
   display: flex;
 }
 
-.hero-banner #hero-content h1, .hero-banner #hero-content p {
+.hero-banner #hero-content h1, .hero-banner #hero-content h3, .hero-banner #hero-content p {
   color: #fff;
   font-family: var(--base-font-family);
   text-align: center;
@@ -238,7 +381,7 @@
 }
 
 .hero-banner #hero-content p {
-  font-size: .75em;
+  font-size: .95em;
 }
 
 .hero-banner #hero-content button {
@@ -284,46 +427,6 @@
   padding-top: 1em;
 }
 
-.venue-nav {
-  width: 60%;
-  height: auto;
-  margin: 1em auto;
-}
-
-.venue-nav ul {
-  font-family: var(--base-font-family);
-  justify-content: center;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  font-size: .75em;
-  list-style-type: none;
-  display: flex;
-}
-
-.venue-nav ul li {
-  text-wrap: nowrap;
-  width: 100%;
-  margin: .5em;
-}
-
-.venue-nav ul li a {
-  color: #000;
-  text-align: center;
-  background-color: #bdbdbd;
-  border: 1px solid #bdbdbd;
-  border-radius: .2em;
-  padding: .75em;
-  text-decoration: none;
-  display: block;
-}
-
-.venue-nav ul li a:hover {
-  background-color: #ffc600;
-  border: 1px solid #ffc600;
-  font-weight: bold;
-}
-
 .venue-container {
   flex-direction: column;
   align-items: center;
@@ -337,21 +440,34 @@
   width: 70%;
   height: auto;
   margin: .5em;
-  padding: .5em;
+  padding: 1em;
 }
 
-.venue-container #location h1, .venue-container #location p, .venue-container #map h1, .venue-container #map p, .venue-container #accessibility h1, .venue-container #accessibility p, .venue-container #parking h1, .venue-container #parking p, .venue-container #transport h1, .venue-container #transport p {
+.venue-container #location .subtitle, .venue-container #location .bold, .venue-container #location .paragraph, .venue-container #map .subtitle, .venue-container #map .bold, .venue-container #map .paragraph, .venue-container #accessibility .subtitle, .venue-container #accessibility .bold, .venue-container #accessibility .paragraph, .venue-container #parking .subtitle, .venue-container #parking .bold, .venue-container #parking .paragraph, .venue-container #transport .subtitle, .venue-container #transport .bold, .venue-container #transport .paragraph {
   font-family: var(--base-font-family);
   color: #fff;
+  text-align: left;
   margin: 0;
 }
 
-.venue-container #location h1, .venue-container #map h1, .venue-container #accessibility h1, .venue-container #parking h1, .venue-container #transport h1 {
+.venue-container #location .subtitle, .venue-container #map .subtitle, .venue-container #accessibility .subtitle, .venue-container #parking .subtitle, .venue-container #transport .subtitle {
   font-size: 1em;
+  font-weight: bold;
 }
 
-.venue-container #location p, .venue-container #map p, .venue-container #accessibility p, .venue-container #parking p, .venue-container #transport p {
+.venue-container #location .bold, .venue-container #map .bold, .venue-container #accessibility .bold, .venue-container #parking .bold, .venue-container #transport .bold {
+  font-size: .9em;
+  font-weight: bold;
+}
+
+.venue-container #location .paragraph, .venue-container #map .paragraph, .venue-container #accessibility .paragraph, .venue-container #parking .paragraph, .venue-container #transport .paragraph {
+  margin: .5em 0;
   font-size: .75em;
+}
+
+.venue-container #location .info, .venue-container #map .info, .venue-container #accessibility .info, .venue-container #parking .info, .venue-container #transport .info {
+  align-items: flex-start;
+  display: flex;
 }
 
 .venue-container #location {
@@ -364,14 +480,18 @@
   display: flex;
 }
 
-.venue-container #loc-img {
-  float: right;
-  background-color: #bdbdbd;
-  background-image: url("placeholder.811acf7b.png");
-  background-position: center;
-  background-size: cover;
-  width: 15em;
-  height: 10em;
+.venue-container #location .google-map {
+  min-height: 200px;
+  margin: .5em;
+  position: relative;
+}
+
+.venue-container #location .google-map iframe {
+  max-width: 100%;
+  max-height: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
 }
 
 .venue-container #map {
@@ -379,16 +499,19 @@
 }
 
 .venue-container #map h1 {
+  width: 100%;
   padding-left: .5em;
 }
 
 .venue-container #map-img {
   background-color: #bdbdbd;
-  background-image: url("placeholder.811acf7b.png");
+  background-image: url("festival-map.242df979.png");
   background-position: center;
   background-size: cover;
-  width: 15em;
-  height: 10em;
+  border-radius: .2em;
+  width: 100%;
+  height: 350px;
+  margin: .5em;
 }
 
 #about {
@@ -397,63 +520,77 @@
 }
 
 .about-container {
+  grid-template-columns: auto auto;
   width: 90%;
   margin: auto;
   padding: 1em 0;
-  display: flex;
+  display: grid;
 }
 
-table {
-  width: 90%;
-  margin: auto;
-}
-
-table td, table tr {
-  text-align: center;
-  color: #fff;
+.about-container h1, .about-container h2, .about-container p {
   font-family: var(--base-font-family);
-  padding: .5em;
+  color: #fff;
 }
 
-table td h1, table td h2, table td p, table tr h1, table tr h2, table tr p {
-  text-align: left;
-}
-
-table td h1, table tr h1 {
+.about-container h1 {
   font-size: 1.5em;
 }
 
-table td h2, table tr h2 {
-  font-size: 1em;
+.about-container h2 {
+  font-size: .9em;
 }
 
-table td p, table tr p {
+.about-container p {
   font-size: .75em;
 }
 
-table td {
-  width: 50%;
+.about-container #about-info, .about-container #contact-form {
+  margin: .5em;
 }
 
-table #about-img {
-  background-image: url("placeholder.811acf7b.png");
-  background-size: cover;
-  border-radius: .2em;
-  width: 15em;
-  height: 15em;
-  margin: auto;
+@media (width <= 768px) {
+  .hero-banner {
+    height: 30em;
+  }
+
+  #location {
+    flex-direction: column;
+    justify-content: space-between;
+    display: flex;
+  }
+
+  #location .google-map {
+    height: 300px;
+  }
+
+  #map {
+    flex-direction: column-reverse;
+    display: flex;
+  }
+
+  #map h1 {
+    padding-left: .5em;
+  }
+
+  #map-img {
+    height: 300px !important;
+    margin: .5em 0 !important;
+  }
+
+  .about-container {
+    grid-template-rows: 1fr auto;
+    grid-template-columns: auto;
+  }
 }
 
-table button {
-  width: 80%;
-  max-width: 20em;
-}
+@media (width <= 400px) {
+  #location .google-map {
+    height: 250px;
+  }
 
-button {
-  background-color: #ffc600;
-  border: 1px solid #ffc600;
-  border-radius: .2em;
-  padding: .5em;
+  #map-img {
+    height: 250px !important;
+  }
 }
 
 @font-face {
