@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Grid, Box, Button, Stack, Typography, useMediaQuery, Select, MenuItem } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLocationDot, faMap, faWheelchair, faParking, faBus } from '@fortawesome/free-solid-svg-icons'
 import '../../scss/react.scss'
 
 const venueCards = () => {
@@ -13,11 +15,11 @@ const venueCards = () => {
     }
 
     const sections = [
-        { id: 'location', label: 'Location' },
-        { id: 'map', label: 'Festival Map' },
-        { id: 'accessibility', label: 'Accessibility' },
-        { id: 'parking', label: 'Parking' },
-        { id: 'transport', label: 'Transport' },
+        { id: 'location', label: 'Location', icon: faLocationDot },
+        { id: 'map', label: 'Festival Map', icon: faMap },
+        { id: 'accessibility', label: 'Accessibility', icon: faWheelchair },
+        { id: 'parking', label: 'Parking', icon: faParking },
+        { id: 'transport', label: 'Transport', icon: faBus },
     ]
 
     return (
@@ -31,7 +33,7 @@ const venueCards = () => {
                 >
                     {sections.map((section) => (
                         <MenuItem key={section.id} value={section.id}>
-                            {section.label}
+                            <FontAwesomeIcon icon={section.icon} style={{marginRight:'5px'}} />{section.label}
                         </MenuItem>
                     ))}
                 </Select>
@@ -41,7 +43,7 @@ const venueCards = () => {
                 {sections.map((section) => (
                     <Grid item key={section.id}>
                         <Button onClick={() => handleButtonClick(section.id)}>
-                            {section.label}
+                            <FontAwesomeIcon icon={section.icon} style={{marginRight:'5px'}} />{section.label}
                         </Button>
                     </Grid>
                 ))}
@@ -53,7 +55,9 @@ const venueCards = () => {
             {activeSection === 'location' && (
                 <Box id="location">
                     <Stack>
-                        <Typography className="subtitle">Location</Typography>
+                        <Typography className="subtitle">
+                            Location
+                        </Typography>
                         <Typography className="paragraph">Rippleside Park, Bell Parade Geelong, Victoria, Australia</Typography>
                     </Stack>
                     <Box className="google-map">
