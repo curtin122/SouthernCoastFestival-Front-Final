@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Card, CardContent, CardMedia, Typography, Box, IconButton, Grid } from '@mui/material'
+import { Card, CardContent, CardMedia, Typography, Box, IconButton, Grid, Badge } from '@mui/material'
 import placeholderImg from '../../../static/images/chef-bryan-entertainment.jpg'
 import '../../scss/react.scss'
 
@@ -21,6 +21,7 @@ const eventCard = ({ events }) => {
                                     height="150"
                                     image={imageUrl}
                                     className="event-image" />
+                                <Typography className="event-stall-number">{event.eventstallnumber}</Typography>
                                 <Box className="event-title-box">
                                     <Typography className="event-title">
                                         {event.eventdisplayname}

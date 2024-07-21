@@ -52,9 +52,9 @@ class HomeView {
                 Your browser does not support the video tag.
               </video>
               <div id="hero-content">
-                <h1>Come experience Geelong's Festival of Light!</h1>
+                <h1>Come experience Geelong's Festival of Lights!</h1>
                 <p>We are back again! Enjoy family-friendly fireworks, laser shows, light installations with over 100,000 blubs and eat the night away.</p>
-                <h3 style="font-weight: bold; color: #FFC600;">From August 24th to 25th, 2024.</h3>
+                <h3 style="font-weight: bold; color: #FFC600;">From 24 to 25 August 2024.</h3>
                 <button class="jumpTo">Find an event &#8595;</button>
               </div>
             </div>

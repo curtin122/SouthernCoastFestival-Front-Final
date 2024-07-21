@@ -19,7 +19,9 @@
         border-style: none;
         border-radius: 0.2em;
         padding: 0.5em;
-        width: 32%;
+        width: 100%;
+        margin: 0.1em;
+        text-wrap: nowrap;
 
         font-family: var(--base-font-family)
     }
@@ -87,9 +89,14 @@
 }    
 
 // EVENT CARD --------------------------------------
+.card-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
 .card {
     background-color: #2b2b2b !important;
     height: 100%;
+    position: relative;
 
     .event-content {
         padding: 0;
@@ -98,6 +105,31 @@
     .event-image {
         display: flex;
         height: 12em;
+    }
+
+    .event-stall-box {
+        background-color: #000000;
+        color: #FFC600;
+        text-align: center;
+        border-radius: 50%;
+        width: 2em;
+        height: 2em;
+        padding: 0.2em;
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0.5em;
+
+        .stall {
+            font-size: 0.5em;
+            margin: 0;
+            padding: 0;
+            transform: translateY(2px);
+        }
+        .event-stall-number {
+            margin: 0;
+            transform: translateY(-3px);
+        }
     }
 
     .event-title-box {
@@ -399,9 +431,18 @@
 }
 
 // RESPONSIVE - MOBILE --------------------------------------
-@media all and (max-width: 400px) {
+@media all and (max-width: 500px) {
     .event-card {
-        min-width: 49%;
+        max-width: 20em !important;
         margin: 0 0.5em;
     } 
+    .card-grid {
+        display: flex;
+        overflow-x: auto;
+        flex-wrap: nowrap !important;
+    }
+    .card-grid .MuiGrid-item {
+        flex: 0 0 auto;
+        width: 18em;
+    }
 }

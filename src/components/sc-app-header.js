@@ -2,7 +2,6 @@ import { LitElement, html, css } from 'lit'
 import * as React from 'react'
 import { createRoot } from 'react-dom/client'
 import HeaderMenu from './react/sc-header-menu.js'
-import logo from '../../static/images/soco-logo.png'
 import longLogo from '../../static/images/soco-logo-long.png'
 
 class AppHeader extends LitElement {
@@ -108,10 +107,10 @@ class AppHeader extends LitElement {
                     display: flex;
                     align-items: center;
                     margin-left: 0.75em;
-                    background-image: url(${logo});
+                    background-image: url(${longLogo});
                     background-size: cover;
                     background-repeat: no-repeat;
-                    width: 4em;
+                    width: 12em;
                     height: 3.5em;
                 }
                 .app-header-nav {
@@ -151,7 +150,7 @@ class AppHeader extends LitElement {
                         height: 4em;
                     }
                     .app-header-logo {
-                        width: 3.5em;
+                        width: 11em;
                         height: 3em;
                     }
                     .app-header-nav {

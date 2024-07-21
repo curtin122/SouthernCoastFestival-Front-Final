@@ -106,6 +106,10 @@ const EventContainer = () => {
                                             height="150"
                                             image={imageUrl}
                                             className="event-image" />
+                                        <Box className="event-stall-box">
+                                            <Typography className="stall">Stall</Typography>
+                                            <Typography className="event-stall-number">{event.eventstallnumber}</Typography>
+                                        </Box>
                                         <Box className="event-title-box">
                                             <Typography className="event-title">
                                                 {event.eventdisplayname}

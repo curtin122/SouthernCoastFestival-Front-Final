@@ -3106,9 +3106,9 @@ class HomeView {
                 Your browser does not support the video tag.
               </video>
               <div id="hero-content">
-                <h1>Come experience Geelong's Festival of Light!</h1>
+                <h1>Come experience Geelong's Festival of Lights!</h1>
                 <p>We are back again! Enjoy family-friendly fireworks, laser shows, light installations with over 100,000 blubs and eat the night away.</p>
-                <h3 style="font-weight: bold; color: #FFC600;">From August 24th to 25th, 2024.</h3>
+                <h3 style="font-weight: bold; color: #FFC600;">From 24 to 25 August 2024.</h3>
                 <button class="jumpTo">Find an event &#8595;</button>
               </div>
             </div>
@@ -32261,6 +32261,31 @@ const EventContainer = ()=>{
                                         columnNumber: 41
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Box), {
+                                        className: "event-stall-box",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                                                className: "stall",
+                                                children: "Stall"
+                                            }, void 0, false, {
+                                                fileName: "src/components/sc-events-grid.js",
+                                                lineNumber: 110,
+                                                columnNumber: 45
+                                            }, undefined),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                                                className: "event-stall-number",
+                                                children: event.eventstallnumber
+                                            }, void 0, false, {
+                                                fileName: "src/components/sc-events-grid.js",
+                                                lineNumber: 111,
+                                                columnNumber: 45
+                                            }, undefined)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/components/sc-events-grid.js",
+                                        lineNumber: 109,
+                                        columnNumber: 41
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Box), {
                                         className: "event-title-box",
                                         children: [
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
@@ -32268,7 +32293,7 @@ const EventContainer = ()=>{
                                                 children: event.eventdisplayname
                                             }, void 0, false, {
                                                 fileName: "src/components/sc-events-grid.js",
-                                                lineNumber: 110,
+                                                lineNumber: 114,
                                                 columnNumber: 45
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.IconButton), {
@@ -32278,18 +32303,18 @@ const EventContainer = ()=>{
                                                     children: "favorite_border"
                                                 }, void 0, false, {
                                                     fileName: "src/components/sc-events-grid.js",
-                                                    lineNumber: 114,
+                                                    lineNumber: 118,
                                                     columnNumber: 49
                                                 }, undefined)
                                             }, void 0, false, {
                                                 fileName: "src/components/sc-events-grid.js",
-                                                lineNumber: 113,
+                                                lineNumber: 117,
                                                 columnNumber: 45
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/components/sc-events-grid.js",
-                                        lineNumber: 109,
+                                        lineNumber: 113,
                                         columnNumber: 41
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
@@ -32297,7 +32322,7 @@ const EventContainer = ()=>{
                                         children: event.eventdescription
                                     }, void 0, false, {
                                         fileName: "src/components/sc-events-grid.js",
-                                        lineNumber: 119,
+                                        lineNumber: 123,
                                         columnNumber: 41
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
@@ -32306,14 +32331,14 @@ const EventContainer = ()=>{
                                             event.eventoperationdatetimestart,
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                                 fileName: "src/components/sc-events-grid.js",
-                                                lineNumber: 123,
+                                                lineNumber: 127,
                                                 columnNumber: 80
                                             }, undefined),
                                             event.eventoperationdatetimeend
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/components/sc-events-grid.js",
-                                        lineNumber: 122,
+                                        lineNumber: 126,
                                         columnNumber: 41
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
@@ -32321,7 +32346,7 @@ const EventContainer = ()=>{
                                         children: event.eventstallnumber
                                     }, void 0, false, {
                                         fileName: "src/components/sc-events-grid.js",
-                                        lineNumber: 126,
+                                        lineNumber: 130,
                                         columnNumber: 41
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
@@ -32330,14 +32355,14 @@ const EventContainer = ()=>{
                                             event.eventcategory,
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                                 fileName: "src/components/sc-events-grid.js",
-                                                lineNumber: 130,
+                                                lineNumber: 134,
                                                 columnNumber: 66
                                             }, undefined),
                                             event.eventtag
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/components/sc-events-grid.js",
-                                        lineNumber: 129,
+                                        lineNumber: 133,
                                         columnNumber: 41
                                     }, undefined)
                                 ]
@@ -64340,6 +64365,14 @@ const eventCard = ({ events })=>{
                                 lineNumber: 18,
                                 columnNumber: 33
                             }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                                className: "event-stall-number",
+                                children: event.eventstallnumber
+                            }, void 0, false, {
+                                fileName: "src/components/react/sc-event-card.js",
+                                lineNumber: 24,
+                                columnNumber: 33
+                            }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Box), {
                                 className: "event-title-box",
                                 children: [
@@ -64348,7 +64381,7 @@ const eventCard = ({ events })=>{
                                         children: event.eventdisplayname
                                     }, void 0, false, {
                                         fileName: "src/components/react/sc-event-card.js",
-                                        lineNumber: 25,
+                                        lineNumber: 26,
                                         columnNumber: 37
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.IconButton), {
@@ -64358,18 +64391,18 @@ const eventCard = ({ events })=>{
                                             children: "favorite_border"
                                         }, void 0, false, {
                                             fileName: "src/components/react/sc-event-card.js",
-                                            lineNumber: 29,
+                                            lineNumber: 30,
                                             columnNumber: 41
                                         }, undefined)
                                     }, void 0, false, {
                                         fileName: "src/components/react/sc-event-card.js",
-                                        lineNumber: 28,
+                                        lineNumber: 29,
                                         columnNumber: 37
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/react/sc-event-card.js",
-                                lineNumber: 24,
+                                lineNumber: 25,
                                 columnNumber: 33
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
@@ -64377,7 +64410,7 @@ const eventCard = ({ events })=>{
                                 children: event.eventdescription
                             }, void 0, false, {
                                 fileName: "src/components/react/sc-event-card.js",
-                                lineNumber: 34,
+                                lineNumber: 35,
                                 columnNumber: 33
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
@@ -64386,14 +64419,14 @@ const eventCard = ({ events })=>{
                                     event.eventoperationdatetimestart,
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                         fileName: "src/components/react/sc-event-card.js",
-                                        lineNumber: 38,
+                                        lineNumber: 39,
                                         columnNumber: 72
                                     }, undefined),
                                     event.eventoperationdatetimeend
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/react/sc-event-card.js",
-                                lineNumber: 37,
+                                lineNumber: 38,
                                 columnNumber: 33
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
@@ -64401,7 +64434,7 @@ const eventCard = ({ events })=>{
                                 children: event.eventstallnumber
                             }, void 0, false, {
                                 fileName: "src/components/react/sc-event-card.js",
-                                lineNumber: 41,
+                                lineNumber: 42,
                                 columnNumber: 33
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
@@ -64410,14 +64443,14 @@ const eventCard = ({ events })=>{
                                     event.eventcategory,
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                         fileName: "src/components/react/sc-event-card.js",
-                                        lineNumber: 45,
+                                        lineNumber: 46,
                                         columnNumber: 58
                                     }, undefined),
                                     event.eventtag
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/react/sc-event-card.js",
-                                lineNumber: 44,
+                                lineNumber: 45,
                                 columnNumber: 33
                             }, undefined)
                         ]
@@ -64645,8 +64678,6 @@ var _react = require("react");
 var _client = require("react-dom/client");
 var _scHeaderMenuJs = require("./react/sc-header-menu.js");
 var _scHeaderMenuJsDefault = parcelHelpers.interopDefault(_scHeaderMenuJs);
-var _socoLogoPng = require("../../static/images/soco-logo.png");
-var _socoLogoPngDefault = parcelHelpers.interopDefault(_socoLogoPng);
 var _socoLogoLongPng = require("../../static/images/soco-logo-long.png");
 var _socoLogoLongPngDefault = parcelHelpers.interopDefault(_socoLogoLongPng);
 class AppHeader extends (0, _lit.LitElement) {
@@ -64706,7 +64737,7 @@ class AppHeader extends (0, _lit.LitElement) {
             const root = (0, _client.createRoot)(headerMenu);
             root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _scHeaderMenuJsDefault.default), {}, void 0, false, {
                 fileName: "src/components/sc-app-header.js",
-                lineNumber: 61,
+                lineNumber: 60,
                 columnNumber: 25
             }, this));
         }
@@ -64757,10 +64788,10 @@ class AppHeader extends (0, _lit.LitElement) {
                     display: flex;
                     align-items: center;
                     margin-left: 0.75em;
-                    background-image: url(${0, _socoLogoPngDefault.default});
+                    background-image: url(${0, _socoLogoLongPngDefault.default});
                     background-size: cover;
                     background-repeat: no-repeat;
-                    width: 4em;
+                    width: 12em;
                     height: 3.5em;
                 }
                 .app-header-nav {
@@ -64800,7 +64831,7 @@ class AppHeader extends (0, _lit.LitElement) {
                         height: 4em;
                     }
                     .app-header-logo {
-                        width: 3.5em;
+                        width: 11em;
                         height: 3em;
                     }
                     .app-header-nav {
@@ -64863,7 +64894,7 @@ customElements.define("sc-app-header", AppHeader);
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"lit":"4antt","react/jsx-dev-runtime":"iTorj","react":"21dqq","react-dom/client":"lOjBx","./react/sc-header-menu.js":"c3ijH","../../static/images/soco-logo.png":"5qYPa","../../static/images/soco-logo-long.png":"d7Vme","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"c3ijH":[function(require,module,exports) {
+},{"lit":"4antt","react/jsx-dev-runtime":"iTorj","react":"21dqq","react-dom/client":"lOjBx","./react/sc-header-menu.js":"c3ijH","../../static/images/soco-logo-long.png":"d7Vme","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"c3ijH":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$6fcc = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -64984,10 +65015,7 @@ $RefreshReg$(_c, "HeaderMenu");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","../../scss/react.scss":"aLSRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"aLSRg":[function() {},{}],"5qYPa":[function(require,module,exports) {
-module.exports = require("1fa9a0d538b9a17e").getBundleURL("bLxZJ") + "soco-logo.a8b2db60.png" + "?" + Date.now();
-
-},{"1fa9a0d538b9a17e":"lgJ39"}],"d7Vme":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","../../scss/react.scss":"aLSRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"aLSRg":[function() {},{}],"d7Vme":[function(require,module,exports) {
 module.exports = require("b3fa00abf1a93ad9").getBundleURL("bLxZJ") + "soco-logo-long.ee7e6632.png" + "?" + Date.now();
 
 },{"b3fa00abf1a93ad9":"lgJ39"}],"eSeCb":[function(require,module,exports) {
