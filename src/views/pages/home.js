@@ -1,19 +1,15 @@
 import App from '../../App'
 import {html, render } from 'lit-html'
 import Utils from '../../Utils'
-import Event from '../../Event'
-import Toast from '../../Toast'
 
 import { renderReactComponent } from '../../components/react/reactHelper'
 import EventContainer from '../../components/sc-events-grid.js'
 import ContactForm from '../../components/react/sc-contact-form.js'
 import VenueCard from '../../components/react/sc-venue-cards.js'
-import eventData from '../../eventdata.js'
 
 class HomeView {
   constructor() {
-    this.events = eventData;
-    console.log(this.events)
+
   }
 
   init(){
@@ -35,7 +31,13 @@ class HomeView {
     }
   }
 
+  getVideoUrl() {
+    return new URL('../../../static/images/hero-light.mp4', import.meta.url).toString()
+  }
+
   render(){
+    const videoUrl = this.getVideoUrl()
+
     const template = html`
 
       <sc-app-header></sc-app-header>
@@ -45,6 +47,10 @@ class HomeView {
         <!--HERO-->
           <div id="home">
             <div class="hero-banner">
+              <video autoplay muted loop class="hero-video">
+                <source src="${videoUrl}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
               <div id="hero-content">
                 <h1>Come experience Geelong's Festival of Light!</h1>
                 <p>We are back again! Enjoy family-friendly fireworks, laser shows, light installations with over 100,000 blubs and eat the night away.</p>

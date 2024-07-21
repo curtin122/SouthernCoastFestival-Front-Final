@@ -443,14 +443,23 @@ html {
 }
 
 .hero-banner {
-  background-image: url("treeoflife.7725f5df.jpg");
-  background-position-y: bottom;
-  background-size: cover;
   flex-wrap: wrap;
   place-content: flex-end center;
   width: 100%;
   height: 35em;
   display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-banner .hero-video {
+  object-fit: cover;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .hero-banner #hero-content {

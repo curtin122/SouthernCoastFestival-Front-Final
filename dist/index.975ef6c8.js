@@ -3062,10 +3062,6 @@ var _appDefault = parcelHelpers.interopDefault(_app);
 var _litHtml = require("lit-html");
 var _utils = require("../../Utils");
 var _utilsDefault = parcelHelpers.interopDefault(_utils);
-var _event = require("../../Event");
-var _eventDefault = parcelHelpers.interopDefault(_event);
-var _toast = require("../../Toast");
-var _toastDefault = parcelHelpers.interopDefault(_toast);
 var _reactHelper = require("../../components/react/reactHelper");
 var _scEventsGridJs = require("../../components/sc-events-grid.js");
 var _scEventsGridJsDefault = parcelHelpers.interopDefault(_scEventsGridJs);
@@ -3073,13 +3069,8 @@ var _scContactFormJs = require("../../components/react/sc-contact-form.js");
 var _scContactFormJsDefault = parcelHelpers.interopDefault(_scContactFormJs);
 var _scVenueCardsJs = require("../../components/react/sc-venue-cards.js");
 var _scVenueCardsJsDefault = parcelHelpers.interopDefault(_scVenueCardsJs);
-var _eventdataJs = require("../../eventdata.js");
-var _eventdataJsDefault = parcelHelpers.interopDefault(_eventdataJs);
 class HomeView {
-    constructor(){
-        this.events = (0, _eventdataJsDefault.default);
-        console.log(this.events);
-    }
+    constructor(){}
     init() {
         console.log("HomeView.init");
         document.title = "Home";
@@ -3096,7 +3087,11 @@ class HomeView {
             block: "start"
         });
     }
+    getVideoUrl() {
+        return new URL(require("35a1d803fb6932a6")).toString();
+    }
     render() {
+        const videoUrl = this.getVideoUrl();
         const template = (0, _litHtml.html)`
 
       <sc-app-header></sc-app-header>
@@ -3106,6 +3101,10 @@ class HomeView {
         <!--HERO-->
           <div id="home">
             <div class="hero-banner">
+              <video autoplay muted loop class="hero-video">
+                <source src="${videoUrl}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
               <div id="hero-content">
                 <h1>Come experience Geelong's Festival of Light!</h1>
                 <p>We are back again! Enjoy family-friendly fireworks, laser shows, light installations with over 100,000 blubs and eat the night away.</p>
@@ -3158,7 +3157,7 @@ class HomeView {
 }
 exports.default = new HomeView();
 
-},{"../../App":"2kQhy","lit-html":"1cmQt","../../Utils":"iRY6S","../../components/react/reactHelper":"3QXBS","../../components/sc-events-grid.js":"32p0x","../../eventdata.js":"5Y3fe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../components/react/sc-contact-form.js":"jkIgf","../../components/react/sc-venue-cards.js":"jTXWQ","../../Event":"cqvk6","../../Toast":"4N7Ir"}],"1cmQt":[function(require,module,exports) {
+},{"../../App":"2kQhy","lit-html":"1cmQt","../../Utils":"iRY6S","../../components/react/reactHelper":"3QXBS","../../components/sc-events-grid.js":"32p0x","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../components/react/sc-contact-form.js":"jkIgf","../../components/react/sc-venue-cards.js":"jTXWQ","35a1d803fb6932a6":"dU8vx"}],"1cmQt":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2017 Google LLC
@@ -63522,90 +63521,135 @@ exports.default = venueCards;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","@mui/material/styles":"1lzai","../../scss/react.scss":"aLSRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"aLSRg":[function() {},{}],"cqvk6":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","@mui/material/styles":"1lzai","../../scss/react.scss":"aLSRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"aLSRg":[function() {},{}],"dU8vx":[function(require,module,exports) {
+module.exports = require("23b61ff9f79a463d").getBundleURL("bLxZJ") + "hero-light.aef81047.mp4" + "?" + Date.now();
+
+},{"23b61ff9f79a463d":"lgJ39"}],"BO0AV":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _app = require("../../App");
+var _appDefault = parcelHelpers.interopDefault(_app);
+var _litHtml = require("lit-html");
+var _router = require("../../Router");
+var _auth = require("../../Auth");
+var _authDefault = parcelHelpers.interopDefault(_auth);
+var _utils = require("../../Utils");
+var _utilsDefault = parcelHelpers.interopDefault(_utils);
+class ErrorView {
+    init() {
+        console.log("ErrorView.init");
+        document.title = "404 File not found";
+        this.render();
+    }
+    render() {
+        const template = (0, _litHtml.html)`
+      <div>        
+        <h1>Oops!</h1>
+        <p>Sorry, we couldn't find that.</p>
+      </div>      
+    `;
+        (0, _litHtml.render)(template, (0, _appDefault.default).rootEl);
+    }
+}
+exports.default = new ErrorView();
+
+},{"../../App":"2kQhy","lit-html":"1cmQt","../../Router":"kOSdl","../../Auth":"wuqrX","../../Utils":"iRY6S","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"wuqrX":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _app = require("./App");
 var _appDefault = parcelHelpers.interopDefault(_app);
 var _router = require("./Router");
 var _routerDefault = parcelHelpers.interopDefault(_router);
+var _splash = require("./views/partials/splash");
+var _splashDefault = parcelHelpers.interopDefault(_splash);
+var _lit = require("lit");
 var _toast = require("./Toast");
 var _toastDefault = parcelHelpers.interopDefault(_toast);
-class Event {
+class Auth {
     constructor(){
         this.currentUser = {};
     }
-    async getEvents() {
-        // fetch json data
-        const response = await fetch(`${(0, _appDefault.default).apiBase}/events/events`, {
+    // async sign up
+    // async sign in
+    async signIn(userData, fail = false) {
+        const response = await fetch(`${(0, _appDefault.default).apiBase}/auth/signin`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(userData)
+        });
+        const data = await response.json();
+        // if response not ok
+        if (!response.ok) {
+            console.log(data);
+            // run fail() functon if set
+            if (typeof fail == "function") fail();
+        }
+        // sign in success
+        // save access token (jwt) to local storage
+        localStorage.setItem("accessToken", data.accessToken);
+        // set current user
+        this.currentUser = data.user;
+        console.log(this.currentUser);
+        (0, _routerDefault.default).init();
+        console.log("sign in successful");
+    }
+    // async check
+    async check(success) {
+        // show splash screen while loading
+        (0, _lit.render)((0, _splashDefault.default), (0, _appDefault.default).rootEl);
+        // check loacl token exists
+        if (!localStorage.accessToken) {
+            // no local token
+            // Toast.show("token not found")
+            // redirect
+            (0, _router.gotoRoute)("/");
+            return;
+        }
+        // validate token via the backend
+        const response = await fetch(`${(0, _appDefault.default).apiBase}/auth/validate`, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${localStorage.accessToken}`
             }
         });
-        // if response not ok
+        // response not ok
         if (!response.ok) {
-            // log error
+            // console log error
             const err = await response.json();
             if (err) console.log(err);
-            // throw error (exit function)
-            throw new Error("Problem getting events");
+            // delete local token
+            localStorage.removeItem("accessToken");
+            (0, _toastDefault.default).show("session expired, please sign in");
+            // redirect to sign in
+            (0, _router.gotoRoute)("/signin");
+            return;
         }
-        // convert payload into json - store as data
+        // token is valid
         const data = await response.json();
-        // return data
-        return data;
+        // set currentUser obj
+        this.currentUser = data.user;
+        // run success
+        success();
     }
 }
-exports.default = new Event();
+exports.default = new Auth();
 
-},{"./App":"2kQhy","./Router":"kOSdl","./Toast":"4N7Ir","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4N7Ir":[function(require,module,exports) {
+},{"./App":"2kQhy","./Router":"kOSdl","./views/partials/splash":"kasI3","lit":"4antt","./Toast":"4N7Ir","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kasI3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _app = require("./App");
-var _appDefault = parcelHelpers.interopDefault(_app);
 var _lit = require("lit");
-var _gsap = require("gsap");
-class Toast {
-    static init() {
-        this.showDuration = 2.5;
-        // create container element
-        this.containerEl = document.createElement("div");
-        this.containerEl.id = "toasts";
-        // append to <body>
-        document.body.appendChild(this.containerEl);
-    }
-    static show(content, type = "") {
-        if (!content) return;
-        // create element
-        const toastEl = document.createElement("div");
-        toastEl.className = "toast-entry";
-        if (type != "") toastEl.classList.add("is-error");
-        toastEl.innerText = content;
-        // append to container
-        this.containerEl.appendChild(toastEl);
-        // animate using gsap
-        const tl = (0, _gsap.gsap).timeline();
-        tl.from(toastEl, {
-            y: 60,
-            opacity: 0,
-            duration: 0.3,
-            ease: "power3.out"
-        });
-        tl.to(toastEl, {
-            marginTop: -50,
-            opacity: 0,
-            delay: this.showDuration,
-            duration: 0.3,
-            onComplete: ()=>{
-                toastEl.remove();
-            }
-        });
-    }
-}
-exports.default = Toast;
+const splash = (0, _lit.html)`
+    <div class="app-splash">
+        <div>
+            <p style="color: #FFFFFF">loading...</p>
+        </div>
+    </div>
+`;
+exports.default = splash;
 
-},{"./App":"2kQhy","lit":"4antt","gsap":"fPSuC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4antt":[function(require,module,exports) {
+},{"lit":"4antt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4antt":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _reactiveElement = require("@lit/reactive-element");
@@ -63980,132 +64024,53 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "isServer", ()=>o);
 const o = !1;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"BO0AV":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _app = require("../../App");
-var _appDefault = parcelHelpers.interopDefault(_app);
-var _litHtml = require("lit-html");
-var _router = require("../../Router");
-var _auth = require("../../Auth");
-var _authDefault = parcelHelpers.interopDefault(_auth);
-var _utils = require("../../Utils");
-var _utilsDefault = parcelHelpers.interopDefault(_utils);
-class ErrorView {
-    init() {
-        console.log("ErrorView.init");
-        document.title = "404 File not found";
-        this.render();
-    }
-    render() {
-        const template = (0, _litHtml.html)`
-      <div>        
-        <h1>Oops!</h1>
-        <p>Sorry, we couldn't find that.</p>
-      </div>      
-    `;
-        (0, _litHtml.render)(template, (0, _appDefault.default).rootEl);
-    }
-}
-exports.default = new ErrorView();
-
-},{"../../App":"2kQhy","lit-html":"1cmQt","../../Router":"kOSdl","../../Auth":"wuqrX","../../Utils":"iRY6S","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"wuqrX":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4N7Ir":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _app = require("./App");
 var _appDefault = parcelHelpers.interopDefault(_app);
-var _router = require("./Router");
-var _routerDefault = parcelHelpers.interopDefault(_router);
-var _splash = require("./views/partials/splash");
-var _splashDefault = parcelHelpers.interopDefault(_splash);
 var _lit = require("lit");
-var _toast = require("./Toast");
-var _toastDefault = parcelHelpers.interopDefault(_toast);
-class Auth {
-    constructor(){
-        this.currentUser = {};
+var _gsap = require("gsap");
+class Toast {
+    static init() {
+        this.showDuration = 2.5;
+        // create container element
+        this.containerEl = document.createElement("div");
+        this.containerEl.id = "toasts";
+        // append to <body>
+        document.body.appendChild(this.containerEl);
     }
-    // async sign up
-    // async sign in
-    async signIn(userData, fail = false) {
-        const response = await fetch(`${(0, _appDefault.default).apiBase}/auth/signin`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(userData)
+    static show(content, type = "") {
+        if (!content) return;
+        // create element
+        const toastEl = document.createElement("div");
+        toastEl.className = "toast-entry";
+        if (type != "") toastEl.classList.add("is-error");
+        toastEl.innerText = content;
+        // append to container
+        this.containerEl.appendChild(toastEl);
+        // animate using gsap
+        const tl = (0, _gsap.gsap).timeline();
+        tl.from(toastEl, {
+            y: 60,
+            opacity: 0,
+            duration: 0.3,
+            ease: "power3.out"
         });
-        const data = await response.json();
-        // if response not ok
-        if (!response.ok) {
-            console.log(data);
-            // run fail() functon if set
-            if (typeof fail == "function") fail();
-        }
-        // sign in success
-        // save access token (jwt) to local storage
-        localStorage.setItem("accessToken", data.accessToken);
-        // set current user
-        this.currentUser = data.user;
-        console.log(this.currentUser);
-        (0, _routerDefault.default).init();
-        console.log("sign in successful");
-    }
-    // async check
-    async check(success) {
-        // show splash screen while loading
-        (0, _lit.render)((0, _splashDefault.default), (0, _appDefault.default).rootEl);
-        // check loacl token exists
-        if (!localStorage.accessToken) {
-            // no local token
-            // Toast.show("token not found")
-            // redirect
-            (0, _router.gotoRoute)("/");
-            return;
-        }
-        // validate token via the backend
-        const response = await fetch(`${(0, _appDefault.default).apiBase}/auth/validate`, {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${localStorage.accessToken}`
+        tl.to(toastEl, {
+            marginTop: -50,
+            opacity: 0,
+            delay: this.showDuration,
+            duration: 0.3,
+            onComplete: ()=>{
+                toastEl.remove();
             }
         });
-        // response not ok
-        if (!response.ok) {
-            // console log error
-            const err = await response.json();
-            if (err) console.log(err);
-            // delete local token
-            localStorage.removeItem("accessToken");
-            (0, _toastDefault.default).show("session expired, please sign in");
-            // redirect to sign in
-            (0, _router.gotoRoute)("/signin");
-            return;
-        }
-        // token is valid
-        const data = await response.json();
-        // set currentUser obj
-        this.currentUser = data.user;
-        // run success
-        success();
     }
 }
-exports.default = new Auth();
+exports.default = Toast;
 
-},{"./App":"2kQhy","./Router":"kOSdl","./views/partials/splash":"kasI3","lit":"4antt","./Toast":"4N7Ir","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kasI3":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _lit = require("lit");
-const splash = (0, _lit.html)`
-    <div class="app-splash">
-        <div>
-            <p style="color: #FFFFFF">loading...</p>
-        </div>
-    </div>
-`;
-exports.default = splash;
-
-},{"lit":"4antt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aT5rw":[function(require,module,exports) {
+},{"./App":"2kQhy","lit":"4antt","gsap":"fPSuC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aT5rw":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$6c3b = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -64293,7 +64258,44 @@ exports.default = new AdminView();
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"../../App":"2kQhy","lit-html":"1cmQt","../../Utils":"iRY6S","../../Event":"cqvk6","../../Toast":"4N7Ir","react":"21dqq","../../components/react/reactHelper":"3QXBS","../../components/react/sc-event-card":"8huJy","../../components/sc-admin-nav":"f3goH","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"8huJy":[function(require,module,exports) {
+},{"../../App":"2kQhy","lit-html":"1cmQt","../../Utils":"iRY6S","../../Event":"cqvk6","../../Toast":"4N7Ir","react":"21dqq","../../components/react/reactHelper":"3QXBS","../../components/react/sc-event-card":"8huJy","../../components/sc-admin-nav":"f3goH","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"cqvk6":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _app = require("./App");
+var _appDefault = parcelHelpers.interopDefault(_app);
+var _router = require("./Router");
+var _routerDefault = parcelHelpers.interopDefault(_router);
+var _toast = require("./Toast");
+var _toastDefault = parcelHelpers.interopDefault(_toast);
+class Event {
+    constructor(){
+        this.currentUser = {};
+    }
+    async getEvents() {
+        // fetch json data
+        const response = await fetch(`${(0, _appDefault.default).apiBase}/events/events`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${localStorage.accessToken}`
+            }
+        });
+        // if response not ok
+        if (!response.ok) {
+            // log error
+            const err = await response.json();
+            if (err) console.log(err);
+            // throw error (exit function)
+            throw new Error("Problem getting events");
+        }
+        // convert payload into json - store as data
+        const data = await response.json();
+        // return data
+        return data;
+    }
+}
+exports.default = new Event();
+
+},{"./App":"2kQhy","./Router":"kOSdl","./Toast":"4N7Ir","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8huJy":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$94a6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
