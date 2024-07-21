@@ -4,10 +4,6 @@ html {
     scroll-behavior: smooth;
 }
 
-.content-container {
-    padding-right: 9em;
-}
-
 // ROOT -------------------------------
 #root {
     position: absolute;
@@ -18,6 +14,29 @@ html {
     overflow: hidden;
     overflow-y: auto;
     background-color: #000000;
+}
+
+// SCREEN CONTENT --------------------------
+#admin-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 9em;
+    height: 100%;
+    z-index: 100;
+    transition: transform 0.3s ease;
+    transform: translateX(-100%);
+}
+#admin-nav.visible {
+    transform: translateX(0)
+}
+
+#screen-content {
+    margin-right: 0;
+}
+#screen-content.shifted {
+    margin-right: 9em;
+    transition: margin-right 0.3s ease;
 }
 
 // PAGE-CONTENT ---------------------------

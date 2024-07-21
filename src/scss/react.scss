@@ -217,7 +217,6 @@
     }
 }
 
-
 // ABOUT - CONTACT FORM -----------------------------------------
 .form-container {
     height: auto;
@@ -418,6 +417,9 @@
 .admin-text:first-of-type {
     font-size: 1.5em;
     font-weight: bold !important;
+}
+.MuiList-root {
+    background-color: grey;
 }
 
 // RESPONSIVE - TABLET ---------------------------------

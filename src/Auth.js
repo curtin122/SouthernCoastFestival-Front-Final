@@ -7,13 +7,16 @@ import Toast from './Toast'
 class Auth {
 
     constructor() {
-        this.currentUser = {}
+        this.currentUser = {
+          accessLevel: 'user'
+        }
     }
 
     // async sign up
 
     // async sign in
-    async signIn(userData, fail = false){
+    async signIn(userData, callback){
+      try {
         const response = await fetch(`${App.apiBase}/auth/signin`, {
           method: 'POST', 
           headers: {
@@ -21,25 +24,27 @@ class Auth {
           },     
           body: JSON.stringify(userData)
         })
-
+  
         const data = await response.json()
     
         // if response not ok
         if(!response.ok){
           console.log(data)
-          // run fail() functon if set
-          if(typeof fail == 'function') fail()
+          if (callback) callback(false)
+        } else {
+          localStorage.setItem('accessToken', data.accessToken)
+          this.currentUser = {
+            ...data.user,
+            accessLevel: data.user.accessLevel || 'user'
+          }
+          Router.init()
+          if (callback) callback(true)
         }
-    
-        // sign in success
-        // save access token (jwt) to local storage
-        localStorage.setItem('accessToken', data.accessToken)
-        // set current user
-        this.currentUser = data.user      
-        console.log(this.currentUser)           
-        Router.init()
-        console.log('sign in successful')
+      } catch (error) {
+        console.error('Sign-in error:', error)
+        if (callback) callback(false)
       }
+    }
 
     // async check
     async check(success) {
@@ -72,19 +77,34 @@ class Auth {
             localStorage.removeItem('accessToken')
             Toast.show("session expired, please sign in")
             // redirect to sign in
-            gotoRoute('/signin')
+            gotoRoute('/')
             return
         }
 
         // token is valid
         const data = await response.json()
         // set currentUser obj
-        this.currentUser = data.user
+        this.currentUser = {
+          ...data.user,
+          accessLevel: data.user.accessLevel || 'user'
+        }
         // run success
         success()
     }
 
     // async sign out
+    signOut() {
+      localStorage.removeItem('accessToken')
+      gotoRoute('/')
+      this.currentUser = {
+        accessLevel: 'user'
+      }
+
+      const screenContent = document.getElementById('screen-content')
+      if (screenContent) {
+        screenContent.classList.remove('shifted')
+      }
+    }
 }
 
 export default new Auth()

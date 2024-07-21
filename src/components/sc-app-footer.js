@@ -2,6 +2,7 @@ import { LitElement, html, css } from 'lit'
 import { createRoot } from 'react-dom/client'
 import DiscDialog from './react/sc-disc-dialog'
 import LoginDialog from './react/sc-login-dialog'
+
 import share from '../../static/images/share-icon.png'
 import insta from '../../static/images/instagram-icon.png'
 import facebook from '../../static/images/facebook-icon.png'
@@ -9,7 +10,7 @@ import facebook from '../../static/images/facebook-icon.png'
 class AppFooter extends LitElement {
     static properties = {
         dialogOpen: { type: Boolean },
-        loginOpen: { type: Boolean }
+        loginOpen: { type: Boolean },
     };
 
     constructor() {
@@ -41,6 +42,7 @@ class AppFooter extends LitElement {
             <LoginDialog
                 open={this.loginOpen}
                 onClose={() => this.loginOpen = false}
+                onLoginSuccess={() => this.handleLoginSuccess()}
             />
             </>
         )

@@ -50,7 +50,6 @@ const LoginForm = () => {
                 if (success) {
                     setSnackbarMessage('Logged in successfully')
                     setSnackbarOpen(true)
-                    setShowModal(false)
                 } else {
                     setSnackbarMessage('Login failed: incorrect credentials')
                     setSnackbarOpen(true)
@@ -66,7 +65,6 @@ const LoginForm = () => {
     if (!showModal) return null
 
     return (
-
         <Box className="login-container">
             <Typography className="login-title">Admin Login</Typography>
             <form onSubmit={handleSubmit}>

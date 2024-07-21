@@ -1,7 +1,7 @@
 import Router from './Router'
 import Auth from './Auth'
 import Toast from './Toast'
-import Event from './Event'
+import User from './User'
 
 class App {
     constructor() {

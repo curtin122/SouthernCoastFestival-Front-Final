@@ -1,9 +1,30 @@
-import * as React from 'react'
-import { Drawer, List, ListItem, ListItemText, Typography } from '@mui/material'
+import React, { useState, useEffect } from 'react'
+import { Drawer, List, ListItem, ListItemText, Typography, Tooltip } from '@mui/material'
+import Auth from '../Auth'
 import '../scss/react.scss'
 
 export default function MUIDrawer() {
-    const menuItems = [ 'Manage Events', 'Manage Users', 'Log Out']
+    const [isAdmin, setIsAdmin] = useState(Auth.currentUser.accessLevel === 'admin')
+
+    useEffect(() => {
+        setIsAdmin(Auth.currentUser.accessLevel === 'admin')
+    }, [Auth.currentUser.accessLevel])
+
+    const menuItems = [
+        { text: 'Manage Events', diabled: true, tooltip: 'Feature coming soon', className: 'disabled'}, 
+        { text: 'Manage Users', disabled: true, tooltip: 'Feature coming soon', className: 'disabled'}, 
+        { text: 'Log Out', diabled: false, tooltip: '', className: '' }
+    ]
+
+    const handleLogout = () => {
+        Auth.signOut()
+        setIsAdmin(false)
+        console.log('user logged out')
+    }
+
+    if(!isAdmin) {
+        return null
+    }
 
     return (
         <div>
@@ -22,10 +43,14 @@ export default function MUIDrawer() {
                 <Typography className="admin-text">Name</Typography>
                 <Typography className="admin-text">Editor</Typography>
                 <List sx={{ color: '#FFF' }}>
-                    {menuItems.map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemText primary={text} />
-                        </ListItem>
+                    {menuItems.map(( {text, disabled, tooltip, className}, index) => (
+                        <Tooltip title={tooltip} key={text} placement="left">
+                            <span>
+                                <ListItem button key={text} onClick={text === 'Log Out' ? handleLogout : null} disabled={disabled} className={className}>
+                                    <ListItemText primary={text} />
+                                </ListItem>
+                            </span>
+                        </Tooltip>
                     ))}
                 </List>
             </Drawer>
