@@ -95,10 +95,10 @@ class Auth {
     // async sign out
     signOut() {
       localStorage.removeItem('accessToken')
-      gotoRoute('/')
       this.currentUser = {
         accessLevel: 'user'
       }
+      window.location.href = '/'
 
       const screenContent = document.getElementById('screen-content')
       if (screenContent) {

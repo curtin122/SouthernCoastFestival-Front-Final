@@ -11,7 +11,7 @@ export default function MUIDrawer() {
     }, [Auth.currentUser.accessLevel])
 
     const menuItems = [
-        { text: 'Manage Events', diabled: true, tooltip: 'Feature coming soon', className: 'disabled'}, 
+        { text: 'Manage Events', disabled: true, tooltip: 'Feature coming soon', className: 'disabled'}, 
         { text: 'Manage Users', disabled: true, tooltip: 'Feature coming soon', className: 'disabled'}, 
         { text: 'Log Out', diabled: false, tooltip: '', className: '' }
     ]
@@ -43,10 +43,10 @@ export default function MUIDrawer() {
                 <Typography className="admin-text">Name</Typography>
                 <Typography className="admin-text">Editor</Typography>
                 <List sx={{ color: '#FFF' }}>
-                    {menuItems.map(( {text, disabled, tooltip, className}, index) => (
+                    {menuItems.map(( {text, disabled, tooltip}, index) => (
                         <Tooltip title={tooltip} key={text} placement="left">
                             <span>
-                                <ListItem button key={text} onClick={text === 'Log Out' ? handleLogout : null} disabled={disabled} className={className}>
+                                <ListItem button key={text} onClick={text === 'Log Out' ? handleLogout : null} disabled={disabled}>
                                     <ListItemText primary={text} />
                                 </ListItem>
                             </span>

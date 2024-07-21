@@ -423,10 +423,6 @@
   font-weight: bold !important;
 }
 
-.MuiList-root {
-  background-color: gray;
-}
-
 @media (width <= 768px) {
   .event-card {
     max-width: 32%;
