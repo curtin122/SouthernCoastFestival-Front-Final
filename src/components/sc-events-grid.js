@@ -3,6 +3,8 @@ import { Card, CardContent, CardMedia, Typography, Box, IconButton, Grid, Skelet
 import placeholderImg from '../../static/images/chef-bryan-entertainment.jpg'
 import '../scss/react.scss'
 import eventData from '../eventdata'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBowlFood, faLightbulb, faShop } from '@fortawesome/free-solid-svg-icons'
 
 const EventContainer = () => {
     const [events, setEvents] = useState([])
@@ -50,9 +52,9 @@ const EventContainer = () => {
     return (
         <>
             <div id="category-container">
-                <button className={`category-button ${selectedCategory === 'Food' ? 'active' : ''}`} onClick={() => handleCategoryChange('Food')}>Eat + Drink</button>
-                <button className={`category-button ${selectedCategory === 'Entertainment' ? 'active' : ''}`} onClick={() => handleCategoryChange('Entertainment')}>Entertainment</button>
-                <button className={`category-button ${selectedCategory === 'Shop' ? 'active' : ''}`} onClick={() => handleCategoryChange('Shop')}>Shop</button>
+                <button className={`category-button ${selectedCategory === 'Food' ? 'active' : ''}`} onClick={() => handleCategoryChange('Food')}><FontAwesomeIcon icon={faBowlFood} style={{marginRight:'5px'}}/>Eat + Drink</button>
+                <button className={`category-button ${selectedCategory === 'Entertainment' ? 'active' : ''}`} onClick={() => handleCategoryChange('Entertainment')}><FontAwesomeIcon icon={faLightbulb} style={{marginRight:'5px'}}/>Entertainment</button>
+                <button className={`category-button ${selectedCategory === 'Shop' ? 'active' : ''}`} onClick={() => handleCategoryChange('Shop')}><FontAwesomeIcon icon={faShop} style={{marginRight:'5px'}}/>Shop</button>
             </div>
 
             <div id="tag-container">

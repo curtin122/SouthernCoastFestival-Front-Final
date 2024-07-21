@@ -6,6 +6,7 @@ import { renderReactComponent } from '../../components/react/reactHelper'
 import EventContainer from '../../components/sc-events-grid.js'
 import ContactForm from '../../components/react/sc-contact-form.js'
 import VenueCard from '../../components/react/sc-venue-cards.js'
+import AdminNav from '../../components/sc-admin-nav.js'
 
 class HomeView {
   constructor() {
