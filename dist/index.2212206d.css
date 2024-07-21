@@ -277,6 +277,101 @@
   padding: .5em;
 }
 
+.login-form {
+  background-color: #fff;
+}
+
+.login-container {
+  font-family: var(--base-font-family);
+  border-radius: .2em;
+  height: auto;
+  padding: .5em 1em;
+}
+
+.login-container .login-title {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.login-container .login-section {
+  border-radius: .2em;
+  width: auto;
+  margin: .5em 0;
+}
+
+.login-container .login-section .form-sub {
+  margin-bottom: .5em;
+  font-size: .9em;
+}
+
+.login-container .login-section .form-text, .login-container .login-section .form-enquiry {
+  font-family: var(--base-font-family);
+  border-radius: .2em;
+  margin: .25em 0;
+}
+
+.login-container .login-section .form-text .MuiInputBase-root, .login-container .login-section .form-enquiry .MuiInputBase-root {
+  background-color: #fff;
+  margin: .1em;
+}
+
+.login-container .login-section .form-text .MuiInputBase-root, .login-container .login-section .form-text label, .login-container .login-section .form-enquiry .MuiInputBase-root, .login-container .login-section .form-enquiry label {
+  color: #000;
+  font-size: .75em;
+}
+
+.login-container .login-section .form-text .MuiOutlinedInput.root .MuiOutlinedInput-notchedOutline, .login-container .login-section .form-enquiry .MuiOutlinedInput.root .MuiOutlinedInput-notchedOutline {
+  border: 1px solid #000;
+}
+
+.login-container .login-section .form-text .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline, .login-container .login-section .form-enquiry .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border: .2em solid #ffc600;
+}
+
+.login-container .login-section .form-text .MuiInputLabel-shrink, .login-container .login-section .form-enquiry .MuiInputLabel-shrink {
+  color: #ffc600;
+}
+
+.login-container .login-section .form-checkbox .MuiCheckbox-root {
+  color: #bdbdbd;
+}
+
+.login-container .login-section .form-checkbox .MuiCheckbox-root.Mui-checked {
+  color: #ffc600;
+}
+
+.login-container .login-section .form-checkbox .MuiFormControlLabel-label {
+  font-family: var(--base-font-family);
+  color: #fff;
+  font-size: .75em;
+}
+
+.login-container .login-section .form-checkbox .MuiButtonBase-root.MuiCheckbox-root {
+  margin-left: .3em;
+  padding: .3em;
+}
+
+.login-container .login-section .form-enquiry {
+  width: 100%;
+}
+
+.login-container .form-controls {
+  flex-direction: row;
+  justify-content: space-evenly;
+  display: flex;
+}
+
+.login-container .form-controls .form-button {
+  color: #000;
+  background-color: #ffc600;
+  padding: .5em 1em;
+}
+
+.login-container .MuiSnackbar-root {
+  left: 43%;
+}
+
 #admin-icon {
   color: #ffc600;
   margin: .2em auto;

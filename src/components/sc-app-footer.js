@@ -1,6 +1,7 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css } from 'lit'
 import { createRoot } from 'react-dom/client'
-import DiscDialog from './react/sc-disc-dialog';
+import DiscDialog from './react/sc-disc-dialog'
+import LoginDialog from './react/sc-login-dialog'
 import share from '../../static/images/share-icon.png'
 import insta from '../../static/images/instagram-icon.png'
 import facebook from '../../static/images/facebook-icon.png'
@@ -8,11 +9,13 @@ import facebook from '../../static/images/facebook-icon.png'
 class AppFooter extends LitElement {
     static properties = {
         dialogOpen: { type: Boolean },
+        loginOpen: { type: Boolean }
     };
 
     constructor() {
         super();
         this.dialogOpen = false;
+        this.loginOpen = false;
     }
 
     firstUpdated() {
@@ -23,22 +26,32 @@ class AppFooter extends LitElement {
     }
 
     updated(changedProperties) {
-        if (changedProperties.has('dialogOpen')) {
+        if (changedProperties.has('dialogOpen') || changedProperties.has('loginOpen')) {
             this.renderReactDialog()
         }
     }
 
     renderReactDialog() {
         this.reactRoot.render(
+            <>
             <DiscDialog 
                 open={this.dialogOpen}
                 onClose={() => this.dialogOpen = false}
             />
+            <LoginDialog
+                open={this.loginOpen}
+                onClose={() => this.loginOpen = false}
+            />
+            </>
         )
     }
 
     toggleDialog() {
         this.dialogOpen = !this.dialogOpen
+    }
+
+    toggleLogin() {
+        this.loginOpen = !this.loginOpen
     }
 
     render() {
@@ -114,7 +127,7 @@ class AppFooter extends LitElement {
                     <a @click="${this.toggleDialog}">Disclaimer</a>
                 </div>
                 <div class="app-footer-right">
-                    <a>Administration Login</a>
+                    <a @click="${this.toggleLogin}">Administration Login</a>
                 </div>
             </footer>
         `;

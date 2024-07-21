@@ -284,6 +284,94 @@
     padding: 0.5em;
 }
 
+// FOOTER LOGIN ------------------------------
+.login-form {
+    background-color: #ffffff;
+}
+.login-container {
+    height: auto;
+    border-radius: 0.2em;
+    padding: 0.5em 1em;
+    font-family: var(--base-font-family);
+
+    .login-title {
+        font-size: 1.5em;
+        text-align: center;
+        font-weight: bold;
+    }
+    .login-section {
+        margin: 0.5em 0;
+        width: auto;
+        border-radius: 0.2em;
+
+        .form-sub {
+            font-size: 0.9em;
+            margin-bottom: 0.5em;
+        }
+        .form-text, .form-enquiry {
+            margin: 0.25em 0;
+            border-radius: 0.2em;
+            font-family: var(--base-font-family);
+            // text-field background
+            .MuiInputBase-root {
+                background-color: #ffffff;
+                margin: 0.1em;
+            }
+            // text-field label colour
+            .MuiInputBase-root, label {
+                color: #000000;
+                font-size: 0.75em;
+            }
+            // text-field outline not focused
+            .MuiOutlinedInput.root .MuiOutlinedInput-notchedOutline {
+                border: 1px solid #000000;
+            }
+            // text-field outline when focused
+            .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+                border: 0.2em solid #FFC600;
+            }
+            // text-field label shrink colour
+            .MuiInputLabel-shrink {
+                color: #FFC600;
+            }
+        }
+        .form-checkbox {
+            .MuiCheckbox-root {
+                color: #bdbdbd;
+            }
+            .MuiCheckbox-root.Mui-checked  {
+                color: #FFC600;
+            }
+            .MuiFormControlLabel-label {
+                font-family: var(--base-font-family);
+                color: #FFFFFF;
+                font-size: 0.75em;
+            }
+            .MuiButtonBase-root.MuiCheckbox-root {
+                padding: 0.3em;
+                margin-left: 0.3em;
+            }
+        }
+        .form-enquiry {
+            width: 100%;
+        }
+    }
+    .form-controls {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+
+        .form-button {
+            background-color: #FFC600;
+            color: #000000;
+            padding: 0.5em 1em;
+        }
+    }
+    .MuiSnackbar-root {
+        left: 43%;
+    }
+}
+
 // ADMIN NAVIGATION ----------------------------------
 #admin-icon {
     font-size: 5em;

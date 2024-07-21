@@ -21,11 +21,11 @@ class Router {
 
     init() {
         // initial call
-        this.routes(window.location.pathname)
+        this.route(window.location.pathname)
 
         // on back/forward
         window.addEventListener('popstate', () => {
-            this.routes(window.location.pathname)
+            this.route(window.location.pathname)
         })
     }
 
@@ -36,7 +36,7 @@ class Router {
 
         if(route) {
             // if route exists, run init() of the view
-            this.routes[window.location.pathname].init()
+            route.init()
         } else {
             // show 404 view
             this.routes['404'].init()
@@ -44,7 +44,7 @@ class Router {
     }
 
     gotoRoute(pathname) {
-        window.history.pushState({}, window.location.origin + pathname)
+        window.history.pushState({}, '', pathname)
         this.route(pathname)
     }
 }

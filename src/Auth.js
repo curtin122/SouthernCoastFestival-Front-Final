@@ -13,6 +13,33 @@ class Auth {
     // async sign up
 
     // async sign in
+    async signIn(userData, fail = false){
+        const response = await fetch(`${App.apiBase}/auth/signin`, {
+          method: 'POST', 
+          headers: {
+            'Content-Type': 'application/json'
+          },     
+          body: JSON.stringify(userData)
+        })
+
+        const data = await response.json()
+    
+        // if response not ok
+        if(!response.ok){
+          console.log(data)
+          // run fail() functon if set
+          if(typeof fail == 'function') fail()
+        }
+    
+        // sign in success
+        // save access token (jwt) to local storage
+        localStorage.setItem('accessToken', data.accessToken)
+        // set current user
+        this.currentUser = data.user      
+        console.log(this.currentUser)           
+        Router.init()
+        console.log('sign in successful')
+      }
 
     // async check
     async check(success) {

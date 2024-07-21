@@ -3022,10 +3022,10 @@ class Router {
     }
     init() {
         // initial call
-        this.routes(window.location.pathname);
+        this.route(window.location.pathname);
         // on back/forward
         window.addEventListener("popstate", ()=>{
-            this.routes(window.location.pathname);
+            this.route(window.location.pathname);
         });
     }
     route(fullPathname) {
@@ -3033,12 +3033,12 @@ class Router {
         const pathname = fullPathname.split("?")[0];
         const route = this.routes[pathname];
         if (route) // if route exists, run init() of the view
-        this.routes[window.location.pathname].init();
+        route.init();
         else // show 404 view
         this.routes["404"].init();
     }
     gotoRoute(pathname) {
-        window.history.pushState({}, window.location.origin + pathname);
+        window.history.pushState({}, "", pathname);
         this.route(pathname);
     }
 }
@@ -3158,7 +3158,7 @@ class HomeView {
 }
 exports.default = new HomeView();
 
-},{"../../App":"2kQhy","lit-html":"1cmQt","../../Utils":"iRY6S","../../Event":"cqvk6","../../Toast":"4N7Ir","../../components/react/reactHelper":"3QXBS","../../components/sc-events-grid.js":"32p0x","../../eventdata.js":"5Y3fe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../components/react/sc-contact-form.js":"jkIgf","../../components/react/sc-venue-cards.js":"jTXWQ"}],"1cmQt":[function(require,module,exports) {
+},{"../../App":"2kQhy","lit-html":"1cmQt","../../Utils":"iRY6S","../../components/react/reactHelper":"3QXBS","../../components/sc-events-grid.js":"32p0x","../../eventdata.js":"5Y3fe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../components/react/sc-contact-form.js":"jkIgf","../../components/react/sc-venue-cards.js":"jTXWQ","../../Event":"cqvk6","../../Toast":"4N7Ir"}],"1cmQt":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2017 Google LLC
@@ -7520,465 +7520,7 @@ var CSSPlugin = {
 });
 (0, _gsapCoreJs.gsap).registerPlugin(CSSPlugin);
 
-},{"./gsap-core.js":"05eeC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cqvk6":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _app = require("./App");
-var _appDefault = parcelHelpers.interopDefault(_app);
-var _router = require("./Router");
-var _routerDefault = parcelHelpers.interopDefault(_router);
-var _toast = require("./Toast");
-var _toastDefault = parcelHelpers.interopDefault(_toast);
-class Event {
-    constructor(){
-        this.currentUser = {};
-    }
-    async getEvents() {
-        // fetch json data
-        const response = await fetch(`${(0, _appDefault.default).apiBase}/events/events`, {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${localStorage.accessToken}`
-            }
-        });
-        // if response not ok
-        if (!response.ok) {
-            // log error
-            const err = await response.json();
-            if (err) console.log(err);
-            // throw error (exit function)
-            throw new Error("Problem getting events");
-        }
-        // convert payload into json - store as data
-        const data = await response.json();
-        // return data
-        return data;
-    }
-}
-exports.default = new Event();
-
-},{"./App":"2kQhy","./Router":"kOSdl","./Toast":"4N7Ir","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4N7Ir":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _app = require("./App");
-var _appDefault = parcelHelpers.interopDefault(_app);
-var _lit = require("lit");
-var _gsap = require("gsap");
-class Toast {
-    static init() {
-        this.showDuration = 2.5;
-        // create container element
-        this.containerEl = document.createElement("div");
-        this.containerEl.id = "toasts";
-        // append to <body>
-        document.body.appendChild(this.containerEl);
-    }
-    static show(content, type = "") {
-        if (!content) return;
-        // create element
-        const toastEl = document.createElement("div");
-        toastEl.className = "toast-entry";
-        if (type != "") toastEl.classList.add("is-error");
-        toastEl.innerText = content;
-        // append to container
-        this.containerEl.appendChild(toastEl);
-        // animate using gsap
-        const tl = (0, _gsap.gsap).timeline();
-        tl.from(toastEl, {
-            y: 60,
-            opacity: 0,
-            duration: 0.3,
-            ease: "power3.out"
-        });
-        tl.to(toastEl, {
-            marginTop: -50,
-            opacity: 0,
-            delay: this.showDuration,
-            duration: 0.3,
-            onComplete: ()=>{
-                toastEl.remove();
-            }
-        });
-    }
-}
-exports.default = Toast;
-
-},{"./App":"2kQhy","lit":"4antt","gsap":"fPSuC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4antt":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _reactiveElement = require("@lit/reactive-element");
-var _litHtml = require("lit-html");
-var _litElementJs = require("lit-element/lit-element.js");
-parcelHelpers.exportAll(_litElementJs, exports);
-var _isServerJs = require("lit-html/is-server.js");
-parcelHelpers.exportAll(_isServerJs, exports);
-
-},{"@lit/reactive-element":"hypet","lit-html":"1cmQt","lit-element/lit-element.js":"9YxkX","lit-html/is-server.js":"e2OXP","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hypet":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "CSSResult", ()=>(0, _cssTagJs.CSSResult));
-parcelHelpers.export(exports, "adoptStyles", ()=>(0, _cssTagJs.adoptStyles));
-parcelHelpers.export(exports, "css", ()=>(0, _cssTagJs.css));
-parcelHelpers.export(exports, "getCompatibleStyle", ()=>(0, _cssTagJs.getCompatibleStyle));
-parcelHelpers.export(exports, "supportsAdoptingStyleSheets", ()=>(0, _cssTagJs.supportsAdoptingStyleSheets));
-parcelHelpers.export(exports, "unsafeCSS", ()=>(0, _cssTagJs.unsafeCSS));
-parcelHelpers.export(exports, "ReactiveElement", ()=>b);
-parcelHelpers.export(exports, "defaultConverter", ()=>u);
-parcelHelpers.export(exports, "notEqual", ()=>f);
-var _cssTagJs = require("./css-tag.js");
-/**
- * @license
- * Copyright 2017 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */ const { is: i, defineProperty: e, getOwnPropertyDescriptor: r, getOwnPropertyNames: h, getOwnPropertySymbols: o, getPrototypeOf: n } = Object, a = globalThis, c = a.trustedTypes, l = c ? c.emptyScript : "", p = a.reactiveElementPolyfillSupport, d = (t, s)=>t, u = {
-    toAttribute (t, s) {
-        switch(s){
-            case Boolean:
-                t = t ? l : null;
-                break;
-            case Object:
-            case Array:
-                t = null == t ? t : JSON.stringify(t);
-        }
-        return t;
-    },
-    fromAttribute (t, s) {
-        let i = t;
-        switch(s){
-            case Boolean:
-                i = null !== t;
-                break;
-            case Number:
-                i = null === t ? null : Number(t);
-                break;
-            case Object:
-            case Array:
-                try {
-                    i = JSON.parse(t);
-                } catch (t) {
-                    i = null;
-                }
-        }
-        return i;
-    }
-}, f = (t, s)=>!i(t, s), y = {
-    attribute: !0,
-    type: String,
-    converter: u,
-    reflect: !1,
-    hasChanged: f
-};
-Symbol.metadata ??= Symbol("metadata"), a.litPropertyMetadata ??= new WeakMap;
-class b extends HTMLElement {
-    static addInitializer(t) {
-        this._$Ei(), (this.l ??= []).push(t);
-    }
-    static get observedAttributes() {
-        return this.finalize(), this._$Eh && [
-            ...this._$Eh.keys()
-        ];
-    }
-    static createProperty(t, s = y) {
-        if (s.state && (s.attribute = !1), this._$Ei(), this.elementProperties.set(t, s), !s.noAccessor) {
-            const i = Symbol(), r = this.getPropertyDescriptor(t, i, s);
-            void 0 !== r && e(this.prototype, t, r);
-        }
-    }
-    static getPropertyDescriptor(t, s, i) {
-        const { get: e, set: h } = r(this.prototype, t) ?? {
-            get () {
-                return this[s];
-            },
-            set (t) {
-                this[s] = t;
-            }
-        };
-        return {
-            get () {
-                return e?.call(this);
-            },
-            set (s) {
-                const r = e?.call(this);
-                h.call(this, s), this.requestUpdate(t, r, i);
-            },
-            configurable: !0,
-            enumerable: !0
-        };
-    }
-    static getPropertyOptions(t) {
-        return this.elementProperties.get(t) ?? y;
-    }
-    static _$Ei() {
-        if (this.hasOwnProperty(d("elementProperties"))) return;
-        const t = n(this);
-        t.finalize(), void 0 !== t.l && (this.l = [
-            ...t.l
-        ]), this.elementProperties = new Map(t.elementProperties);
-    }
-    static finalize() {
-        if (this.hasOwnProperty(d("finalized"))) return;
-        if (this.finalized = !0, this._$Ei(), this.hasOwnProperty(d("properties"))) {
-            const t = this.properties, s = [
-                ...h(t),
-                ...o(t)
-            ];
-            for (const i of s)this.createProperty(i, t[i]);
-        }
-        const t = this[Symbol.metadata];
-        if (null !== t) {
-            const s = litPropertyMetadata.get(t);
-            if (void 0 !== s) for (const [t, i] of s)this.elementProperties.set(t, i);
-        }
-        this._$Eh = new Map;
-        for (const [t, s] of this.elementProperties){
-            const i = this._$Eu(t, s);
-            void 0 !== i && this._$Eh.set(i, t);
-        }
-        this.elementStyles = this.finalizeStyles(this.styles);
-    }
-    static finalizeStyles(s) {
-        const i = [];
-        if (Array.isArray(s)) {
-            const e = new Set(s.flat(1 / 0).reverse());
-            for (const s of e)i.unshift((0, _cssTagJs.getCompatibleStyle)(s));
-        } else void 0 !== s && i.push((0, _cssTagJs.getCompatibleStyle)(s));
-        return i;
-    }
-    static _$Eu(t, s) {
-        const i = s.attribute;
-        return !1 === i ? void 0 : "string" == typeof i ? i : "string" == typeof t ? t.toLowerCase() : void 0;
-    }
-    constructor(){
-        super(), this._$Ep = void 0, this.isUpdatePending = !1, this.hasUpdated = !1, this._$Em = null, this._$Ev();
-    }
-    _$Ev() {
-        this._$ES = new Promise((t)=>this.enableUpdating = t), this._$AL = new Map, this._$E_(), this.requestUpdate(), this.constructor.l?.forEach((t)=>t(this));
-    }
-    addController(t) {
-        (this._$EO ??= new Set).add(t), void 0 !== this.renderRoot && this.isConnected && t.hostConnected?.();
-    }
-    removeController(t) {
-        this._$EO?.delete(t);
-    }
-    _$E_() {
-        const t = new Map, s = this.constructor.elementProperties;
-        for (const i of s.keys())this.hasOwnProperty(i) && (t.set(i, this[i]), delete this[i]);
-        t.size > 0 && (this._$Ep = t);
-    }
-    createRenderRoot() {
-        const t = this.shadowRoot ?? this.attachShadow(this.constructor.shadowRootOptions);
-        return (0, _cssTagJs.adoptStyles)(t, this.constructor.elementStyles), t;
-    }
-    connectedCallback() {
-        this.renderRoot ??= this.createRenderRoot(), this.enableUpdating(!0), this._$EO?.forEach((t)=>t.hostConnected?.());
-    }
-    enableUpdating(t) {}
-    disconnectedCallback() {
-        this._$EO?.forEach((t)=>t.hostDisconnected?.());
-    }
-    attributeChangedCallback(t, s, i) {
-        this._$AK(t, i);
-    }
-    _$EC(t, s) {
-        const i = this.constructor.elementProperties.get(t), e = this.constructor._$Eu(t, i);
-        if (void 0 !== e && !0 === i.reflect) {
-            const r = (void 0 !== i.converter?.toAttribute ? i.converter : u).toAttribute(s, i.type);
-            this._$Em = t, null == r ? this.removeAttribute(e) : this.setAttribute(e, r), this._$Em = null;
-        }
-    }
-    _$AK(t, s) {
-        const i = this.constructor, e = i._$Eh.get(t);
-        if (void 0 !== e && this._$Em !== e) {
-            const t = i.getPropertyOptions(e), r = "function" == typeof t.converter ? {
-                fromAttribute: t.converter
-            } : void 0 !== t.converter?.fromAttribute ? t.converter : u;
-            this._$Em = e, this[e] = r.fromAttribute(s, t.type), this._$Em = null;
-        }
-    }
-    requestUpdate(t, s, i) {
-        if (void 0 !== t) {
-            if (i ??= this.constructor.getPropertyOptions(t), !(i.hasChanged ?? f)(this[t], s)) return;
-            this.P(t, s, i);
-        }
-        !1 === this.isUpdatePending && (this._$ES = this._$ET());
-    }
-    P(t, s, i) {
-        this._$AL.has(t) || this._$AL.set(t, s), !0 === i.reflect && this._$Em !== t && (this._$Ej ??= new Set).add(t);
-    }
-    async _$ET() {
-        this.isUpdatePending = !0;
-        try {
-            await this._$ES;
-        } catch (t) {
-            Promise.reject(t);
-        }
-        const t = this.scheduleUpdate();
-        return null != t && await t, !this.isUpdatePending;
-    }
-    scheduleUpdate() {
-        return this.performUpdate();
-    }
-    performUpdate() {
-        if (!this.isUpdatePending) return;
-        if (!this.hasUpdated) {
-            if (this.renderRoot ??= this.createRenderRoot(), this._$Ep) {
-                for (const [t, s] of this._$Ep)this[t] = s;
-                this._$Ep = void 0;
-            }
-            const t = this.constructor.elementProperties;
-            if (t.size > 0) for (const [s, i] of t)!0 !== i.wrapped || this._$AL.has(s) || void 0 === this[s] || this.P(s, this[s], i);
-        }
-        let t = !1;
-        const s = this._$AL;
-        try {
-            t = this.shouldUpdate(s), t ? (this.willUpdate(s), this._$EO?.forEach((t)=>t.hostUpdate?.()), this.update(s)) : this._$EU();
-        } catch (s) {
-            throw t = !1, this._$EU(), s;
-        }
-        t && this._$AE(s);
-    }
-    willUpdate(t) {}
-    _$AE(t) {
-        this._$EO?.forEach((t)=>t.hostUpdated?.()), this.hasUpdated || (this.hasUpdated = !0, this.firstUpdated(t)), this.updated(t);
-    }
-    _$EU() {
-        this._$AL = new Map, this.isUpdatePending = !1;
-    }
-    get updateComplete() {
-        return this.getUpdateComplete();
-    }
-    getUpdateComplete() {
-        return this._$ES;
-    }
-    shouldUpdate(t) {
-        return !0;
-    }
-    update(t) {
-        this._$Ej &&= this._$Ej.forEach((t)=>this._$EC(t, this[t])), this._$EU();
-    }
-    updated(t) {}
-    firstUpdated(t) {}
-}
-b.elementStyles = [], b.shadowRootOptions = {
-    mode: "open"
-}, b[d("elementProperties")] = new Map, b[d("finalized")] = new Map, p?.({
-    ReactiveElement: b
-}), (a.reactiveElementVersions ??= []).push("2.0.4");
-
-},{"./css-tag.js":"gkZsf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkZsf":[function(require,module,exports) {
-/**
- * @license
- * Copyright 2019 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "CSSResult", ()=>n);
-parcelHelpers.export(exports, "adoptStyles", ()=>S);
-parcelHelpers.export(exports, "css", ()=>i);
-parcelHelpers.export(exports, "getCompatibleStyle", ()=>c);
-parcelHelpers.export(exports, "supportsAdoptingStyleSheets", ()=>e);
-parcelHelpers.export(exports, "unsafeCSS", ()=>r);
-const t = globalThis, e = t.ShadowRoot && (void 0 === t.ShadyCSS || t.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, s = Symbol(), o = new WeakMap;
-class n {
-    constructor(t, e, o){
-        if (this._$cssResult$ = !0, o !== s) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
-        this.cssText = t, this.t = e;
-    }
-    get styleSheet() {
-        let t = this.o;
-        const s = this.t;
-        if (e && void 0 === t) {
-            const e = void 0 !== s && 1 === s.length;
-            e && (t = o.get(s)), void 0 === t && ((this.o = t = new CSSStyleSheet).replaceSync(this.cssText), e && o.set(s, t));
-        }
-        return t;
-    }
-    toString() {
-        return this.cssText;
-    }
-}
-const r = (t)=>new n("string" == typeof t ? t : t + "", void 0, s), i = (t, ...e)=>{
-    const o = 1 === t.length ? t[0] : e.reduce((e, s, o)=>e + ((t)=>{
-            if (!0 === t._$cssResult$) return t.cssText;
-            if ("number" == typeof t) return t;
-            throw Error("Value passed to 'css' function must be a 'css' function result: " + t + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
-        })(s) + t[o + 1], t[0]);
-    return new n(o, t, s);
-}, S = (s, o)=>{
-    if (e) s.adoptedStyleSheets = o.map((t)=>t instanceof CSSStyleSheet ? t : t.styleSheet);
-    else for (const e of o){
-        const o = document.createElement("style"), n = t.litNonce;
-        void 0 !== n && o.setAttribute("nonce", n), o.textContent = e.cssText, s.appendChild(o);
-    }
-}, c = e ? (t)=>t : (t)=>t instanceof CSSStyleSheet ? ((t)=>{
-        let e = "";
-        for (const s of t.cssRules)e += s.cssText;
-        return r(e);
-    })(t) : t;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9YxkX":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "LitElement", ()=>s);
-parcelHelpers.export(exports, "_$LE", ()=>o);
-var _reactiveElement = require("@lit/reactive-element");
-parcelHelpers.exportAll(_reactiveElement, exports);
-var _litHtml = require("lit-html");
-parcelHelpers.exportAll(_litHtml, exports);
-/**
- * @license
- * Copyright 2017 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */ class s extends (0, _reactiveElement.ReactiveElement) {
-    constructor(){
-        super(...arguments), this.renderOptions = {
-            host: this
-        }, this._$Do = void 0;
-    }
-    createRenderRoot() {
-        const t = super.createRenderRoot();
-        return this.renderOptions.renderBefore ??= t.firstChild, t;
-    }
-    update(t) {
-        const i = this.render();
-        this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(t), this._$Do = (0, _litHtml.render)(i, this.renderRoot, this.renderOptions);
-    }
-    connectedCallback() {
-        super.connectedCallback(), this._$Do?.setConnected(!0);
-    }
-    disconnectedCallback() {
-        super.disconnectedCallback(), this._$Do?.setConnected(!1);
-    }
-    render() {
-        return 0, _litHtml.noChange;
-    }
-}
-s._$litElement$ = !0, s["finalized"] = !0, globalThis.litElementHydrateSupport?.({
-    LitElement: s
-});
-const r = globalThis.litElementPolyfillSupport;
-r?.({
-    LitElement: s
-});
-const o = {
-    _$AK: (t, e, i)=>{
-        t._$AK(e, i);
-    },
-    _$AL: (t)=>t._$AL
-};
-(globalThis.litElementVersions ??= []).push("4.0.6");
-
-},{"@lit/reactive-element":"hypet","lit-html":"1cmQt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"e2OXP":[function(require,module,exports) {
-/**
- * @license
- * Copyright 2022 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "isServer", ()=>o);
-const o = !1;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3QXBS":[function(require,module,exports) {
+},{"./gsap-core.js":"05eeC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3QXBS":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$08ff = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -33400,7 +32942,7 @@ var _generateUtilityClassesDefault = parcelHelpers.interopDefault(_generateUtili
 var _unstableTrapFocus = require("./Unstable_TrapFocus");
 var _unstableTrapFocusDefault = parcelHelpers.interopDefault(_unstableTrapFocus);
 
-},{"./colors":false,"./styles":false,"./utils":false,"./Accordion":false,"./AccordionActions":false,"./AccordionDetails":false,"./AccordionSummary":false,"./Alert":false,"./AlertTitle":false,"./AppBar":false,"./Autocomplete":false,"./Avatar":false,"./AvatarGroup":false,"./Backdrop":false,"./Badge":false,"./BottomNavigation":false,"./BottomNavigationAction":false,"./Box":"eQD0H","./Breadcrumbs":false,"./Button":"73csw","./ButtonBase":false,"./ButtonGroup":false,"./Card":"hWYZ3","./CardActionArea":false,"./CardActions":false,"./CardContent":"lVecn","./CardHeader":false,"./CardMedia":"kaOTJ","./Checkbox":"duHVh","./Chip":false,"./CircularProgress":false,"./ClickAwayListener":false,"./Collapse":false,"./Container":false,"./CssBaseline":false,"./darkScrollbar":false,"./Dialog":"ftK48","./DialogActions":false,"./DialogContent":"gZO7I","./DialogContentText":"iLsKC","./DialogTitle":"642rE","./Divider":false,"./Drawer":"hMEec","./Fab":false,"./Fade":false,"./FilledInput":false,"./FormControl":false,"./FormControlLabel":"gbxlC","./FormGroup":"f1wae","./FormHelperText":false,"./FormLabel":false,"./Grid":"c17UE","./Unstable_Grid2":false,"./Grow":false,"./Hidden":false,"./Icon":false,"./IconButton":"38BrD","./ImageList":false,"./ImageListItem":false,"./ImageListItemBar":false,"./Input":false,"./InputAdornment":false,"./InputBase":false,"./InputLabel":false,"./LinearProgress":false,"./Link":false,"./List":"PwNf5","./ListItem":"kkzrF","./ListItemAvatar":false,"./ListItemButton":false,"./ListItemIcon":false,"./ListItemSecondaryAction":false,"./ListItemText":"g3ISx","./ListSubheader":false,"./Menu":"dOURT","./MenuItem":"6tZ4p","./MenuList":false,"./MobileStepper":false,"./Modal":false,"./NativeSelect":false,"./NoSsr":false,"./OutlinedInput":false,"./Pagination":false,"./PaginationItem":false,"./Paper":false,"./Popover":false,"./Popper":false,"./Portal":false,"./Radio":false,"./RadioGroup":false,"./Rating":false,"./ScopedCssBaseline":false,"./Select":"lFmVj","./Skeleton":"4F50o","./Slide":false,"./Slider":false,"./Snackbar":false,"./SnackbarContent":false,"./SpeedDial":false,"./SpeedDialAction":false,"./SpeedDialIcon":false,"./Stack":"cuThX","./Step":false,"./StepButton":false,"./StepConnector":false,"./StepContent":false,"./StepIcon":false,"./StepLabel":false,"./Stepper":false,"./SvgIcon":false,"./SwipeableDrawer":false,"./Switch":false,"./Tab":false,"./Table":false,"./TableBody":false,"./TableCell":false,"./TableContainer":false,"./TableFooter":false,"./TableHead":false,"./TablePagination":false,"./TableRow":false,"./TableSortLabel":false,"./Tabs":false,"./TabScrollButton":false,"./TextField":"hlqrK","./TextareaAutosize":false,"./ToggleButton":false,"./ToggleButtonGroup":false,"./Toolbar":false,"./Tooltip":false,"./Typography":"faxSz","./useMediaQuery":"eeOzk","./usePagination":false,"./useScrollTrigger":false,"./Zoom":false,"./useAutocomplete":false,"./GlobalStyles":false,"@mui/base/composeClasses":false,"./generateUtilityClass":false,"./generateUtilityClasses":false,"./Unstable_TrapFocus":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1lzai":[function(require,module,exports) {
+},{"./colors":false,"./styles":false,"./utils":false,"./Accordion":false,"./AccordionActions":false,"./AccordionDetails":false,"./AccordionSummary":false,"./Alert":false,"./AlertTitle":false,"./AppBar":false,"./Autocomplete":false,"./Avatar":false,"./AvatarGroup":false,"./Backdrop":false,"./Badge":false,"./BottomNavigation":false,"./BottomNavigationAction":false,"./Box":"eQD0H","./Breadcrumbs":false,"./Button":"73csw","./ButtonBase":false,"./ButtonGroup":false,"./Card":"hWYZ3","./CardActionArea":false,"./CardActions":false,"./CardContent":"lVecn","./CardHeader":false,"./CardMedia":"kaOTJ","./Checkbox":"duHVh","./Chip":false,"./CircularProgress":false,"./ClickAwayListener":false,"./Collapse":false,"./Container":false,"./CssBaseline":false,"./darkScrollbar":false,"./Dialog":"ftK48","./DialogActions":false,"./DialogContent":"gZO7I","./DialogContentText":"iLsKC","./DialogTitle":"642rE","./Divider":false,"./Drawer":"hMEec","./Fab":false,"./Fade":false,"./FilledInput":false,"./FormControl":false,"./FormControlLabel":"gbxlC","./FormGroup":"f1wae","./FormHelperText":false,"./FormLabel":false,"./Grid":"c17UE","./Unstable_Grid2":false,"./Grow":false,"./Hidden":false,"./Icon":false,"./IconButton":"38BrD","./ImageList":false,"./ImageListItem":false,"./ImageListItemBar":false,"./Input":false,"./InputAdornment":false,"./InputBase":false,"./InputLabel":false,"./LinearProgress":false,"./Link":false,"./List":"PwNf5","./ListItem":"kkzrF","./ListItemAvatar":false,"./ListItemButton":false,"./ListItemIcon":false,"./ListItemSecondaryAction":false,"./ListItemText":"g3ISx","./ListSubheader":false,"./Menu":"dOURT","./MenuItem":"6tZ4p","./MenuList":false,"./MobileStepper":false,"./Modal":false,"./NativeSelect":false,"./NoSsr":false,"./OutlinedInput":false,"./Pagination":false,"./PaginationItem":false,"./Paper":false,"./Popover":false,"./Popper":false,"./Portal":false,"./Radio":false,"./RadioGroup":false,"./Rating":false,"./ScopedCssBaseline":false,"./Select":"lFmVj","./Skeleton":"4F50o","./Slide":false,"./Slider":false,"./Snackbar":"25Fj7","./SnackbarContent":false,"./SpeedDial":false,"./SpeedDialAction":false,"./SpeedDialIcon":false,"./Stack":"cuThX","./Step":false,"./StepButton":false,"./StepConnector":false,"./StepContent":false,"./StepIcon":false,"./StepLabel":false,"./Stepper":false,"./SvgIcon":false,"./SwipeableDrawer":false,"./Switch":false,"./Tab":false,"./Table":false,"./TableBody":false,"./TableCell":false,"./TableContainer":false,"./TableFooter":false,"./TableHead":false,"./TablePagination":false,"./TableRow":false,"./TableSortLabel":false,"./Tabs":false,"./TabScrollButton":false,"./TextField":"hlqrK","./TextareaAutosize":false,"./ToggleButton":false,"./ToggleButtonGroup":false,"./Toolbar":false,"./Tooltip":false,"./Typography":"faxSz","./useMediaQuery":"eeOzk","./usePagination":false,"./useScrollTrigger":false,"./Zoom":false,"./useAutocomplete":false,"./GlobalStyles":false,"@mui/base/composeClasses":false,"./generateUtilityClass":false,"./generateUtilityClasses":false,"./Unstable_TrapFocus":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1lzai":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "THEME_ID", ()=>(0, _identifierDefault.default));
@@ -42925,7 +42467,7 @@ var _classNameGeneratorDefault = parcelHelpers.interopDefault(_classNameGenerato
 var _clamp = require("./clamp");
 var _clampDefault = parcelHelpers.interopDefault(_clamp);
 
-},{"./chainPropTypes":false,"./deepmerge":false,"./elementAcceptingRef":"jxtYN","./elementTypeAcceptingRef":false,"./exactProp":"ccZBJ","./formatMuiErrorMessage":false,"./getDisplayName":false,"./HTMLElementType":"kvNNC","./ponyfillGlobal":false,"./refType":false,"./capitalize":false,"./createChainedFunction":"iN1cO","./debounce":"aYvTl","./deprecatedPropType":false,"./isMuiElement":false,"./ownerDocument":"hemkP","./ownerWindow":"he9mV","./requirePropFactory":false,"./setRef":"dFja4","./useEnhancedEffect":"b7XQB","./useId":false,"./unsupportedProp":false,"./useControlled":false,"./useEventCallback":"aGzla","./useForkRef":"cAy1c","./useLazyRef":false,"./useTimeout":false,"./useOnMount":false,"./useIsFocusVisible":false,"./getScrollbarSize":"dcbt5","./scrollLeft":false,"./usePreviousProps":false,"./getValidReactChildren":false,"./visuallyHidden":false,"./integerPropType":false,"./resolveProps":false,"./composeClasses":false,"./generateUtilityClass":false,"./generateUtilityClasses":false,"./ClassNameGenerator":"jqPAj","./clamp":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"d7DEu":[function(require,module,exports) {
+},{"./chainPropTypes":false,"./deepmerge":false,"./elementAcceptingRef":"jxtYN","./elementTypeAcceptingRef":false,"./exactProp":"ccZBJ","./formatMuiErrorMessage":false,"./getDisplayName":false,"./HTMLElementType":"kvNNC","./ponyfillGlobal":false,"./refType":false,"./capitalize":false,"./createChainedFunction":"iN1cO","./debounce":"aYvTl","./deprecatedPropType":false,"./isMuiElement":false,"./ownerDocument":"hemkP","./ownerWindow":"he9mV","./requirePropFactory":false,"./setRef":"dFja4","./useEnhancedEffect":"b7XQB","./useId":false,"./unsupportedProp":false,"./useControlled":false,"./useEventCallback":"aGzla","./useForkRef":"cAy1c","./useLazyRef":false,"./useTimeout":"c1iRO","./useOnMount":false,"./useIsFocusVisible":false,"./getScrollbarSize":"dcbt5","./scrollLeft":false,"./usePreviousProps":false,"./getValidReactChildren":false,"./visuallyHidden":false,"./integerPropType":false,"./resolveProps":false,"./composeClasses":false,"./generateUtilityClass":false,"./generateUtilityClasses":false,"./ClassNameGenerator":"jqPAj","./clamp":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"d7DEu":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>(0, _chainPropTypesDefault.default));
@@ -53541,7 +53083,175 @@ var _unstableUseModal = require("./unstable_useModal");
 parcelHelpers.exportAll(_unstableUseModal, exports);
 var _generateUtilityClass = require("./generateUtilityClass");
 
-},{"./utils":false,"./Badge":false,"./Button":false,"./ClickAwayListener":false,"./composeClasses":false,"./Dropdown":false,"./FocusTrap":false,"./FormControl":false,"./Input":false,"./Menu":false,"./MenuButton":false,"./MenuItem":false,"./Modal":false,"./NoSsr":false,"./Unstable_NumberInput":false,"./OptionGroup":false,"./Option":false,"./Popper":false,"./Unstable_Popup":false,"./Portal":false,"./Select":false,"./Slider":false,"./Snackbar":false,"./Switch":false,"./TablePagination":false,"./TabPanel":false,"./TabsList":false,"./Tabs":false,"./Tab":false,"./TextareaAutosize":"5eQzh","./Transitions":false,"./useAutocomplete":false,"./useBadge":false,"./useButton":false,"./useDropdown":false,"./useInput":false,"./useMenu":false,"./useMenuButton":false,"./useMenuItem":false,"./unstable_useNumberInput":false,"./useOption":false,"./useSelect":false,"./useSlider":false,"./useSnackbar":false,"./useSwitch":false,"./useTab":false,"./useTabPanel":false,"./useTabs":false,"./useTabsList":false,"./unstable_useModal":false,"./generateUtilityClass":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5eQzh":[function(require,module,exports) {
+},{"./utils":false,"./Badge":false,"./Button":false,"./ClickAwayListener":false,"./composeClasses":false,"./Dropdown":false,"./FocusTrap":false,"./FormControl":false,"./Input":false,"./Menu":false,"./MenuButton":false,"./MenuItem":false,"./Modal":false,"./NoSsr":false,"./Unstable_NumberInput":false,"./OptionGroup":false,"./Option":false,"./Popper":false,"./Unstable_Popup":false,"./Portal":false,"./Select":false,"./Slider":false,"./Snackbar":false,"./Switch":false,"./TablePagination":false,"./TabPanel":false,"./TabsList":false,"./Tabs":false,"./Tab":false,"./TextareaAutosize":"5eQzh","./Transitions":false,"./useAutocomplete":false,"./useBadge":false,"./useButton":false,"./useDropdown":false,"./useInput":false,"./useMenu":false,"./useMenuButton":false,"./useMenuItem":false,"./unstable_useNumberInput":false,"./useOption":false,"./useSelect":false,"./useSlider":false,"./useSnackbar":false,"./useSwitch":false,"./useTab":false,"./useTabPanel":false,"./useTabs":false,"./useTabsList":false,"./unstable_useModal":false,"./generateUtilityClass":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lOwtq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _clickAwayListener = require("./ClickAwayListener");
+parcelHelpers.exportAll(_clickAwayListener, exports);
+
+},{"./ClickAwayListener":"65ttv","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"65ttv":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ClickAwayListener", ()=>ClickAwayListener);
+var _react = require("react");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _utils = require("@mui/utils");
+// TODO: return `EventHandlerName extends `on${infer EventName}` ? Lowercase<EventName> : never` once generatePropTypes runs with TS 4.1
+var _jsxRuntime = require("react/jsx-runtime");
+"use client";
+function mapEventPropToEvent(eventProp) {
+    return eventProp.substring(2).toLowerCase();
+}
+function clickedRootScrollbar(event, doc) {
+    return doc.documentElement.clientWidth < event.clientX || doc.documentElement.clientHeight < event.clientY;
+}
+/**
+ * Listen for click events that occur somewhere in the document, outside of the element itself.
+ * For instance, if you need to hide a menu when people click anywhere else on your page.
+ *
+ * Demos:
+ *
+ * - [Click-Away Listener](https://mui.com/base-ui/react-click-away-listener/)
+ *
+ * API:
+ *
+ * - [ClickAwayListener API](https://mui.com/base-ui/react-click-away-listener/components-api/#click-away-listener)
+ */ function ClickAwayListener(props) {
+    const { children, disableReactTree = false, mouseEvent = "onClick", onClickAway, touchEvent = "onTouchEnd" } = props;
+    const movedRef = _react.useRef(false);
+    const nodeRef = _react.useRef(null);
+    const activatedRef = _react.useRef(false);
+    const syntheticEventRef = _react.useRef(false);
+    _react.useEffect(()=>{
+        // Ensure that this component is not "activated" synchronously.
+        // https://github.com/facebook/react/issues/20074
+        setTimeout(()=>{
+            activatedRef.current = true;
+        }, 0);
+        return ()=>{
+            activatedRef.current = false;
+        };
+    }, []);
+    const handleRef = (0, _utils.unstable_useForkRef)(// @ts-expect-error TODO upstream fix
+    children.ref, nodeRef);
+    // The handler doesn't take event.defaultPrevented into account:
+    //
+    // event.preventDefault() is meant to stop default behaviors like
+    // clicking a checkbox to check it, hitting a button to submit a form,
+    // and hitting left arrow to move the cursor in a text input etc.
+    // Only special HTML elements have these default behaviors.
+    const handleClickAway = (0, _utils.unstable_useEventCallback)((event)=>{
+        // Given developers can stop the propagation of the synthetic event,
+        // we can only be confident with a positive value.
+        const insideReactTree = syntheticEventRef.current;
+        syntheticEventRef.current = false;
+        const doc = (0, _utils.unstable_ownerDocument)(nodeRef.current);
+        // 1. IE11 support, which trigger the handleClickAway even after the unbind
+        // 2. The child might render null.
+        // 3. Behave like a blur listener.
+        if (!activatedRef.current || !nodeRef.current || "clientX" in event && clickedRootScrollbar(event, doc)) return;
+        // Do not act if user performed touchmove
+        if (movedRef.current) {
+            movedRef.current = false;
+            return;
+        }
+        let insideDOM;
+        // If not enough, can use https://github.com/DieterHolvoet/event-propagation-path/blob/master/propagationPath.js
+        if (event.composedPath) insideDOM = event.composedPath().indexOf(nodeRef.current) > -1;
+        else insideDOM = !doc.documentElement.contains(// @ts-expect-error returns `false` as intended when not dispatched from a Node
+        event.target) || nodeRef.current.contains(// @ts-expect-error returns `false` as intended when not dispatched from a Node
+        event.target);
+        if (!insideDOM && (disableReactTree || !insideReactTree)) onClickAway(event);
+    });
+    // Keep track of mouse/touch events that bubbled up through the portal.
+    const createHandleSynthetic = (handlerName)=>(event)=>{
+            syntheticEventRef.current = true;
+            const childrenPropsHandler = children.props[handlerName];
+            if (childrenPropsHandler) childrenPropsHandler(event);
+        };
+    const childrenProps = {
+        ref: handleRef
+    };
+    if (touchEvent !== false) childrenProps[touchEvent] = createHandleSynthetic(touchEvent);
+    _react.useEffect(()=>{
+        if (touchEvent !== false) {
+            const mappedTouchEvent = mapEventPropToEvent(touchEvent);
+            const doc = (0, _utils.unstable_ownerDocument)(nodeRef.current);
+            const handleTouchMove = ()=>{
+                movedRef.current = true;
+            };
+            doc.addEventListener(mappedTouchEvent, handleClickAway);
+            doc.addEventListener("touchmove", handleTouchMove);
+            return ()=>{
+                doc.removeEventListener(mappedTouchEvent, handleClickAway);
+                doc.removeEventListener("touchmove", handleTouchMove);
+            };
+        }
+        return undefined;
+    }, [
+        handleClickAway,
+        touchEvent
+    ]);
+    if (mouseEvent !== false) childrenProps[mouseEvent] = createHandleSynthetic(mouseEvent);
+    _react.useEffect(()=>{
+        if (mouseEvent !== false) {
+            const mappedMouseEvent = mapEventPropToEvent(mouseEvent);
+            const doc = (0, _utils.unstable_ownerDocument)(nodeRef.current);
+            doc.addEventListener(mappedMouseEvent, handleClickAway);
+            return ()=>{
+                doc.removeEventListener(mappedMouseEvent, handleClickAway);
+            };
+        }
+        return undefined;
+    }, [
+        handleClickAway,
+        mouseEvent
+    ]);
+    return /*#__PURE__*/ (0, _jsxRuntime.jsx)(_react.Fragment, {
+        children: /*#__PURE__*/ _react.cloneElement(children, childrenProps)
+    });
+}
+ClickAwayListener.propTypes /* remove-proptypes */  = {
+    // ┌────────────────────────────── Warning ──────────────────────────────┐
+    // │ These PropTypes are generated from the TypeScript type definitions. │
+    // │ To update them, edit the TypeScript types and run `pnpm proptypes`. │
+    // └─────────────────────────────────────────────────────────────────────┘
+    /**
+   * The wrapped element.
+   */ children: (0, _utils.elementAcceptingRef).isRequired,
+    /**
+   * If `true`, the React tree is ignored and only the DOM tree is considered.
+   * This prop changes how portaled elements are handled.
+   * @default false
+   */ disableReactTree: (0, _propTypesDefault.default).bool,
+    /**
+   * The mouse event to listen to. You can disable the listener by providing `false`.
+   * @default 'onClick'
+   */ mouseEvent: (0, _propTypesDefault.default).oneOf([
+        "onClick",
+        "onMouseDown",
+        "onMouseUp",
+        "onPointerDown",
+        "onPointerUp",
+        false
+    ]),
+    /**
+   * Callback fired when a "click away" event is detected.
+   */ onClickAway: (0, _propTypesDefault.default).func.isRequired,
+    /**
+   * The touch event to listen to. You can disable the listener by providing `false`.
+   * @default 'onTouchEnd'
+   */ touchEvent: (0, _propTypesDefault.default).oneOf([
+        "onTouchEnd",
+        "onTouchStart",
+        false
+    ])
+};
+// eslint-disable-next-line
+ClickAwayListener["propTypes"] = (0, _utils.exactProp)(ClickAwayListener.propTypes);
+
+},{"react":"21dqq","prop-types":"7wKI2","@mui/utils":"iivny","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5eQzh":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "TextareaAutosize", ()=>(0, _textareaAutosize.TextareaAutosize));
@@ -53761,7 +53471,147 @@ TextareaAutosize.propTypes /* remove-proptypes */  = {
     ])
 };
 
-},{"@babel/runtime/helpers/esm/extends":"fTBFS","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"adHgr","react":"21dqq","prop-types":"7wKI2","@mui/utils":"iivny","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7wKpz":[function(require,module,exports) {
+},{"@babel/runtime/helpers/esm/extends":"fTBFS","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"adHgr","react":"21dqq","prop-types":"7wKI2","@mui/utils":"iivny","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fR2pz":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "useSnackbar", ()=>(0, _useSnackbar.useSnackbar));
+var _useSnackbar = require("./useSnackbar");
+var _useSnackbarTypes = require("./useSnackbar.types");
+parcelHelpers.exportAll(_useSnackbarTypes, exports);
+"use client";
+
+},{"./useSnackbar":"d3ynE","./useSnackbar.types":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"d3ynE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+/**
+ * The basic building block for creating custom snackbar.
+ *
+ * Demos:
+ *
+ * - [Snackbar](https://mui.com/base-ui/react-snackbar/#hook)
+ *
+ * API:
+ *
+ * - [useSnackbar API](https://mui.com/base-ui/react-snackbar/hooks-api/#use-snackbar)
+ */ parcelHelpers.export(exports, "useSnackbar", ()=>useSnackbar);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _react = require("react");
+var _utils = require("@mui/utils");
+var _extractEventHandlers = require("../utils/extractEventHandlers");
+"use client";
+function useSnackbar(parameters = {}) {
+    const { autoHideDuration = null, disableWindowBlurListener = false, onClose, open, resumeHideDuration } = parameters;
+    const timerAutoHide = (0, _utils.unstable_useTimeout)();
+    _react.useEffect(()=>{
+        if (!open) return undefined;
+        /**
+     * @param {KeyboardEvent} nativeEvent
+     */ function handleKeyDown(nativeEvent) {
+            if (!nativeEvent.defaultPrevented) // IE11, Edge (prior to using Blink?) use 'Esc'
+            {
+                if (nativeEvent.key === "Escape" || nativeEvent.key === "Esc") // not calling `preventDefault` since we don't know if people may ignore this event e.g. a permanently open snackbar
+                onClose == null || onClose(nativeEvent, "escapeKeyDown");
+            }
+        }
+        document.addEventListener("keydown", handleKeyDown);
+        return ()=>{
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [
+        open,
+        onClose
+    ]);
+    const handleClose = (0, _utils.unstable_useEventCallback)((event, reason)=>{
+        onClose == null || onClose(event, reason);
+    });
+    const setAutoHideTimer = (0, _utils.unstable_useEventCallback)((autoHideDurationParam)=>{
+        if (!onClose || autoHideDurationParam == null) return;
+        timerAutoHide.start(autoHideDurationParam, ()=>{
+            handleClose(null, "timeout");
+        });
+    });
+    _react.useEffect(()=>{
+        if (open) setAutoHideTimer(autoHideDuration);
+        return timerAutoHide.clear;
+    }, [
+        open,
+        autoHideDuration,
+        setAutoHideTimer,
+        timerAutoHide
+    ]);
+    const handleClickAway = (event)=>{
+        onClose == null || onClose(event, "clickaway");
+    };
+    // Pause the timer when the user is interacting with the Snackbar
+    // or when the user hide the window.
+    const handlePause = timerAutoHide.clear;
+    // Restart the timer when the user is no longer interacting with the Snackbar
+    // or when the window is shown back.
+    const handleResume = _react.useCallback(()=>{
+        if (autoHideDuration != null) setAutoHideTimer(resumeHideDuration != null ? resumeHideDuration : autoHideDuration * 0.5);
+    }, [
+        autoHideDuration,
+        resumeHideDuration,
+        setAutoHideTimer
+    ]);
+    const createHandleBlur = (otherHandlers)=>(event)=>{
+            const onBlurCallback = otherHandlers.onBlur;
+            onBlurCallback == null || onBlurCallback(event);
+            handleResume();
+        };
+    const createHandleFocus = (otherHandlers)=>(event)=>{
+            const onFocusCallback = otherHandlers.onFocus;
+            onFocusCallback == null || onFocusCallback(event);
+            handlePause();
+        };
+    const createMouseEnter = (otherHandlers)=>(event)=>{
+            const onMouseEnterCallback = otherHandlers.onMouseEnter;
+            onMouseEnterCallback == null || onMouseEnterCallback(event);
+            handlePause();
+        };
+    const createMouseLeave = (otherHandlers)=>(event)=>{
+            const onMouseLeaveCallback = otherHandlers.onMouseLeave;
+            onMouseLeaveCallback == null || onMouseLeaveCallback(event);
+            handleResume();
+        };
+    _react.useEffect(()=>{
+        // TODO: window global should be refactored here
+        if (!disableWindowBlurListener && open) {
+            window.addEventListener("focus", handleResume);
+            window.addEventListener("blur", handlePause);
+            return ()=>{
+                window.removeEventListener("focus", handleResume);
+                window.removeEventListener("blur", handlePause);
+            };
+        }
+        return undefined;
+    }, [
+        disableWindowBlurListener,
+        open,
+        handleResume,
+        handlePause
+    ]);
+    const getRootProps = (externalProps = {})=>{
+        const externalEventHandlers = (0, _extendsDefault.default)({}, (0, _extractEventHandlers.extractEventHandlers)(parameters), (0, _extractEventHandlers.extractEventHandlers)(externalProps));
+        return (0, _extendsDefault.default)({
+            // ClickAwayListener adds an `onClick` prop which results in the alert not being announced.
+            // See https://github.com/mui/material-ui/issues/29080
+            role: "presentation"
+        }, externalProps, externalEventHandlers, {
+            onBlur: createHandleBlur(externalEventHandlers),
+            onFocus: createHandleFocus(externalEventHandlers),
+            onMouseEnter: createMouseEnter(externalEventHandlers),
+            onMouseLeave: createMouseLeave(externalEventHandlers)
+        });
+    };
+    return {
+        getRootProps,
+        onClickAway: handleClickAway
+    };
+}
+
+},{"@babel/runtime/helpers/esm/extends":"fTBFS","react":"21dqq","@mui/utils":"iivny","../utils/extractEventHandlers":"iYj1L","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7wKpz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>formControlState);
@@ -61774,6 +61624,527 @@ const skeletonClasses = (0, _generateUtilityClassesDefault.default)("MuiSkeleton
 ]);
 exports.default = skeletonClasses;
 
+},{"@mui/utils/generateUtilityClasses":"7eO93","@mui/utils/generateUtilityClass":"d6tPU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"25Fj7":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>(0, _snackbarDefault.default));
+parcelHelpers.export(exports, "snackbarClasses", ()=>(0, _snackbarClassesDefault.default));
+var _snackbar = require("./Snackbar");
+var _snackbarDefault = parcelHelpers.interopDefault(_snackbar);
+var _snackbarClasses = require("./snackbarClasses");
+var _snackbarClassesDefault = parcelHelpers.interopDefault(_snackbarClasses);
+parcelHelpers.exportAll(_snackbarClasses, exports);
+"use client";
+
+},{"./Snackbar":"6cpAR","./snackbarClasses":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6cpAR":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
+var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _react = require("react");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _utils = require("@mui/base/utils");
+var _composeClasses = require("@mui/utils/composeClasses");
+var _composeClassesDefault = parcelHelpers.interopDefault(_composeClasses);
+var _clickAwayListener = require("@mui/base/ClickAwayListener");
+var _useSnackbar = require("@mui/base/useSnackbar");
+var _styled = require("../styles/styled");
+var _styledDefault = parcelHelpers.interopDefault(_styled);
+var _useTheme = require("../styles/useTheme");
+var _useThemeDefault = parcelHelpers.interopDefault(_useTheme);
+var _defaultPropsProvider = require("../DefaultPropsProvider");
+var _capitalize = require("../utils/capitalize");
+var _capitalizeDefault = parcelHelpers.interopDefault(_capitalize);
+var _grow = require("../Grow");
+var _growDefault = parcelHelpers.interopDefault(_grow);
+var _snackbarContent = require("../SnackbarContent");
+var _snackbarContentDefault = parcelHelpers.interopDefault(_snackbarContent);
+var _snackbarClasses = require("./snackbarClasses");
+var _jsxRuntime = require("react/jsx-runtime");
+"use client";
+const _excluded = [
+    "onEnter",
+    "onExited"
+], _excluded2 = [
+    "action",
+    "anchorOrigin",
+    "autoHideDuration",
+    "children",
+    "className",
+    "ClickAwayListenerProps",
+    "ContentProps",
+    "disableWindowBlurListener",
+    "message",
+    "onBlur",
+    "onClose",
+    "onFocus",
+    "onMouseEnter",
+    "onMouseLeave",
+    "open",
+    "resumeHideDuration",
+    "TransitionComponent",
+    "transitionDuration",
+    "TransitionProps"
+];
+const useUtilityClasses = (ownerState)=>{
+    const { classes, anchorOrigin } = ownerState;
+    const slots = {
+        root: [
+            "root",
+            `anchorOrigin${(0, _capitalizeDefault.default)(anchorOrigin.vertical)}${(0, _capitalizeDefault.default)(anchorOrigin.horizontal)}`
+        ]
+    };
+    return (0, _composeClassesDefault.default)(slots, (0, _snackbarClasses.getSnackbarUtilityClass), classes);
+};
+const SnackbarRoot = (0, _styledDefault.default)("div", {
+    name: "MuiSnackbar",
+    slot: "Root",
+    overridesResolver: (props, styles)=>{
+        const { ownerState } = props;
+        return [
+            styles.root,
+            styles[`anchorOrigin${(0, _capitalizeDefault.default)(ownerState.anchorOrigin.vertical)}${(0, _capitalizeDefault.default)(ownerState.anchorOrigin.horizontal)}`]
+        ];
+    }
+})(({ theme, ownerState })=>{
+    const center = {
+        left: "50%",
+        right: "auto",
+        transform: "translateX(-50%)"
+    };
+    return (0, _extendsDefault.default)({
+        zIndex: (theme.vars || theme).zIndex.snackbar,
+        position: "fixed",
+        display: "flex",
+        left: 8,
+        right: 8,
+        justifyContent: "center",
+        alignItems: "center"
+    }, ownerState.anchorOrigin.vertical === "top" ? {
+        top: 8
+    } : {
+        bottom: 8
+    }, ownerState.anchorOrigin.horizontal === "left" && {
+        justifyContent: "flex-start"
+    }, ownerState.anchorOrigin.horizontal === "right" && {
+        justifyContent: "flex-end"
+    }, {
+        [theme.breakpoints.up("sm")]: (0, _extendsDefault.default)({}, ownerState.anchorOrigin.vertical === "top" ? {
+            top: 24
+        } : {
+            bottom: 24
+        }, ownerState.anchorOrigin.horizontal === "center" && center, ownerState.anchorOrigin.horizontal === "left" && {
+            left: 24,
+            right: "auto"
+        }, ownerState.anchorOrigin.horizontal === "right" && {
+            right: 24,
+            left: "auto"
+        })
+    });
+});
+const Snackbar = /*#__PURE__*/ _react.forwardRef(function Snackbar(inProps, ref) {
+    const props = (0, _defaultPropsProvider.useDefaultProps)({
+        props: inProps,
+        name: "MuiSnackbar"
+    });
+    const theme = (0, _useThemeDefault.default)();
+    const defaultTransitionDuration = {
+        enter: theme.transitions.duration.enteringScreen,
+        exit: theme.transitions.duration.leavingScreen
+    };
+    const { action, anchorOrigin: { vertical, horizontal } = {
+        vertical: "bottom",
+        horizontal: "left"
+    }, autoHideDuration = null, children, className, ClickAwayListenerProps, ContentProps, disableWindowBlurListener = false, message, open, TransitionComponent = (0, _growDefault.default), transitionDuration = defaultTransitionDuration, TransitionProps: { onEnter, onExited } = {} } = props, TransitionProps = (0, _objectWithoutPropertiesLooseDefault.default)(props.TransitionProps, _excluded), other = (0, _objectWithoutPropertiesLooseDefault.default)(props, _excluded2);
+    const ownerState = (0, _extendsDefault.default)({}, props, {
+        anchorOrigin: {
+            vertical,
+            horizontal
+        },
+        autoHideDuration,
+        disableWindowBlurListener,
+        TransitionComponent,
+        transitionDuration
+    });
+    const classes = useUtilityClasses(ownerState);
+    const { getRootProps, onClickAway } = (0, _useSnackbar.useSnackbar)((0, _extendsDefault.default)({}, ownerState));
+    const [exited, setExited] = _react.useState(true);
+    const rootProps = (0, _utils.useSlotProps)({
+        elementType: SnackbarRoot,
+        getSlotProps: getRootProps,
+        externalForwardedProps: other,
+        ownerState,
+        additionalProps: {
+            ref
+        },
+        className: [
+            classes.root,
+            className
+        ]
+    });
+    const handleExited = (node)=>{
+        setExited(true);
+        if (onExited) onExited(node);
+    };
+    const handleEnter = (node, isAppearing)=>{
+        setExited(false);
+        if (onEnter) onEnter(node, isAppearing);
+    };
+    // So we only render active snackbars.
+    if (!open && exited) return null;
+    return /*#__PURE__*/ (0, _jsxRuntime.jsx)((0, _clickAwayListener.ClickAwayListener), (0, _extendsDefault.default)({
+        onClickAway: onClickAway
+    }, ClickAwayListenerProps, {
+        children: /*#__PURE__*/ (0, _jsxRuntime.jsx)(SnackbarRoot, (0, _extendsDefault.default)({}, rootProps, {
+            children: /*#__PURE__*/ (0, _jsxRuntime.jsx)(TransitionComponent, (0, _extendsDefault.default)({
+                appear: true,
+                in: open,
+                timeout: transitionDuration,
+                direction: vertical === "top" ? "down" : "up",
+                onEnter: handleEnter,
+                onExited: handleExited
+            }, TransitionProps, {
+                children: children || /*#__PURE__*/ (0, _jsxRuntime.jsx)((0, _snackbarContentDefault.default), (0, _extendsDefault.default)({
+                    message: message,
+                    action: action
+                }, ContentProps))
+            }))
+        }))
+    }));
+});
+Snackbar.propTypes /* remove-proptypes */  = {
+    // ┌────────────────────────────── Warning ──────────────────────────────┐
+    // │ These PropTypes are generated from the TypeScript type definitions. │
+    // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+    // └─────────────────────────────────────────────────────────────────────┘
+    /**
+   * The action to display. It renders after the message, at the end of the snackbar.
+   */ action: (0, _propTypesDefault.default).node,
+    /**
+   * The anchor of the `Snackbar`.
+   * On smaller screens, the component grows to occupy all the available width,
+   * the horizontal alignment is ignored.
+   * @default { vertical: 'bottom', horizontal: 'left' }
+   */ anchorOrigin: (0, _propTypesDefault.default).shape({
+        horizontal: (0, _propTypesDefault.default).oneOf([
+            "center",
+            "left",
+            "right"
+        ]).isRequired,
+        vertical: (0, _propTypesDefault.default).oneOf([
+            "bottom",
+            "top"
+        ]).isRequired
+    }),
+    /**
+   * The number of milliseconds to wait before automatically calling the
+   * `onClose` function. `onClose` should then set the state of the `open`
+   * prop to hide the Snackbar. This behavior is disabled by default with
+   * the `null` value.
+   * @default null
+   */ autoHideDuration: (0, _propTypesDefault.default).number,
+    /**
+   * Replace the `SnackbarContent` component.
+   */ children: (0, _propTypesDefault.default).element,
+    /**
+   * Override or extend the styles applied to the component.
+   */ classes: (0, _propTypesDefault.default).object,
+    /**
+   * @ignore
+   */ className: (0, _propTypesDefault.default).string,
+    /**
+   * Props applied to the `ClickAwayListener` element.
+   */ ClickAwayListenerProps: (0, _propTypesDefault.default).object,
+    /**
+   * Props applied to the [`SnackbarContent`](/material-ui/api/snackbar-content/) element.
+   */ ContentProps: (0, _propTypesDefault.default).object,
+    /**
+   * If `true`, the `autoHideDuration` timer will expire even if the window is not focused.
+   * @default false
+   */ disableWindowBlurListener: (0, _propTypesDefault.default).bool,
+    /**
+   * When displaying multiple consecutive snackbars using a single parent-rendered
+   * `<Snackbar/>`, add the `key` prop to ensure independent treatment of each message.
+   * For instance, use `<Snackbar key={message} />`. Otherwise, messages might update
+   * in place, and features like `autoHideDuration` could be affected.
+   */ key: ()=>null,
+    /**
+   * The message to display.
+   */ message: (0, _propTypesDefault.default).node,
+    /**
+   * @ignore
+   */ onBlur: (0, _propTypesDefault.default).func,
+    /**
+   * Callback fired when the component requests to be closed.
+   * Typically `onClose` is used to set state in the parent component,
+   * which is used to control the `Snackbar` `open` prop.
+   * The `reason` parameter can optionally be used to control the response to `onClose`,
+   * for example ignoring `clickaway`.
+   *
+   * @param {React.SyntheticEvent<any> | Event} event The event source of the callback.
+   * @param {string} reason Can be: `"timeout"` (`autoHideDuration` expired), `"clickaway"`, or `"escapeKeyDown"`.
+   */ onClose: (0, _propTypesDefault.default).func,
+    /**
+   * @ignore
+   */ onFocus: (0, _propTypesDefault.default).func,
+    /**
+   * @ignore
+   */ onMouseEnter: (0, _propTypesDefault.default).func,
+    /**
+   * @ignore
+   */ onMouseLeave: (0, _propTypesDefault.default).func,
+    /**
+   * If `true`, the component is shown.
+   */ open: (0, _propTypesDefault.default).bool,
+    /**
+   * The number of milliseconds to wait before dismissing after user interaction.
+   * If `autoHideDuration` prop isn't specified, it does nothing.
+   * If `autoHideDuration` prop is specified but `resumeHideDuration` isn't,
+   * we default to `autoHideDuration / 2` ms.
+   */ resumeHideDuration: (0, _propTypesDefault.default).number,
+    /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */ sx: (0, _propTypesDefault.default).oneOfType([
+        (0, _propTypesDefault.default).arrayOf((0, _propTypesDefault.default).oneOfType([
+            (0, _propTypesDefault.default).func,
+            (0, _propTypesDefault.default).object,
+            (0, _propTypesDefault.default).bool
+        ])),
+        (0, _propTypesDefault.default).func,
+        (0, _propTypesDefault.default).object
+    ]),
+    /**
+   * The component used for the transition.
+   * [Follow this guide](/material-ui/transitions/#transitioncomponent-prop) to learn more about the requirements for this component.
+   * @default Grow
+   */ TransitionComponent: (0, _propTypesDefault.default).elementType,
+    /**
+   * The duration for the transition, in milliseconds.
+   * You may specify a single timeout for all transitions, or individually with an object.
+   * @default {
+   *   enter: theme.transitions.duration.enteringScreen,
+   *   exit: theme.transitions.duration.leavingScreen,
+   * }
+   */ transitionDuration: (0, _propTypesDefault.default).oneOfType([
+        (0, _propTypesDefault.default).number,
+        (0, _propTypesDefault.default).shape({
+            appear: (0, _propTypesDefault.default).number,
+            enter: (0, _propTypesDefault.default).number,
+            exit: (0, _propTypesDefault.default).number
+        })
+    ]),
+    /**
+   * Props applied to the transition element.
+   * By default, the element is based on this [`Transition`](https://reactcommunity.org/react-transition-group/transition/) component.
+   * @default {}
+   */ TransitionProps: (0, _propTypesDefault.default).object
+};
+exports.default = Snackbar;
+
+},{"@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"adHgr","@babel/runtime/helpers/esm/extends":"fTBFS","react":"21dqq","prop-types":"7wKI2","@mui/base/utils":"cgIce","@mui/utils/composeClasses":"4kKno","@mui/base/ClickAwayListener":"lOwtq","@mui/base/useSnackbar":"fR2pz","../styles/styled":"32xTg","../styles/useTheme":"5nWMX","../DefaultPropsProvider":"gbkfk","../utils/capitalize":"lwNtZ","../Grow":"9py3h","../SnackbarContent":"5HymQ","./snackbarClasses":"i87x2","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5HymQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>(0, _snackbarContentDefault.default));
+parcelHelpers.export(exports, "snackbarContentClasses", ()=>(0, _snackbarContentClassesDefault.default));
+var _snackbarContent = require("./SnackbarContent");
+var _snackbarContentDefault = parcelHelpers.interopDefault(_snackbarContent);
+var _snackbarContentClasses = require("./snackbarContentClasses");
+var _snackbarContentClassesDefault = parcelHelpers.interopDefault(_snackbarContentClasses);
+parcelHelpers.exportAll(_snackbarContentClasses, exports);
+"use client";
+
+},{"./SnackbarContent":"cULIz","./snackbarContentClasses":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cULIz":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
+var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _react = require("react");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _clsx = require("clsx");
+var _clsxDefault = parcelHelpers.interopDefault(_clsx);
+var _composeClasses = require("@mui/utils/composeClasses");
+var _composeClassesDefault = parcelHelpers.interopDefault(_composeClasses);
+var _colorManipulator = require("@mui/system/colorManipulator");
+var _styled = require("../styles/styled");
+var _styledDefault = parcelHelpers.interopDefault(_styled);
+var _defaultPropsProvider = require("../DefaultPropsProvider");
+var _paper = require("../Paper");
+var _paperDefault = parcelHelpers.interopDefault(_paper);
+var _snackbarContentClasses = require("./snackbarContentClasses");
+var _jsxRuntime = require("react/jsx-runtime");
+"use client";
+const _excluded = [
+    "action",
+    "className",
+    "message",
+    "role"
+];
+const useUtilityClasses = (ownerState)=>{
+    const { classes } = ownerState;
+    const slots = {
+        root: [
+            "root"
+        ],
+        action: [
+            "action"
+        ],
+        message: [
+            "message"
+        ]
+    };
+    return (0, _composeClassesDefault.default)(slots, (0, _snackbarContentClasses.getSnackbarContentUtilityClass), classes);
+};
+const SnackbarContentRoot = (0, _styledDefault.default)((0, _paperDefault.default), {
+    name: "MuiSnackbarContent",
+    slot: "Root",
+    overridesResolver: (props, styles)=>styles.root
+})(({ theme })=>{
+    const emphasis = theme.palette.mode === "light" ? 0.8 : 0.98;
+    const backgroundColor = (0, _colorManipulator.emphasize)(theme.palette.background.default, emphasis);
+    return (0, _extendsDefault.default)({}, theme.typography.body2, {
+        color: theme.vars ? theme.vars.palette.SnackbarContent.color : theme.palette.getContrastText(backgroundColor),
+        backgroundColor: theme.vars ? theme.vars.palette.SnackbarContent.bg : backgroundColor,
+        display: "flex",
+        alignItems: "center",
+        flexWrap: "wrap",
+        padding: "6px 16px",
+        borderRadius: (theme.vars || theme).shape.borderRadius,
+        flexGrow: 1,
+        [theme.breakpoints.up("sm")]: {
+            flexGrow: "initial",
+            minWidth: 288
+        }
+    });
+});
+const SnackbarContentMessage = (0, _styledDefault.default)("div", {
+    name: "MuiSnackbarContent",
+    slot: "Message",
+    overridesResolver: (props, styles)=>styles.message
+})({
+    padding: "8px 0"
+});
+const SnackbarContentAction = (0, _styledDefault.default)("div", {
+    name: "MuiSnackbarContent",
+    slot: "Action",
+    overridesResolver: (props, styles)=>styles.action
+})({
+    display: "flex",
+    alignItems: "center",
+    marginLeft: "auto",
+    paddingLeft: 16,
+    marginRight: -8
+});
+const SnackbarContent = /*#__PURE__*/ _react.forwardRef(function SnackbarContent(inProps, ref) {
+    const props = (0, _defaultPropsProvider.useDefaultProps)({
+        props: inProps,
+        name: "MuiSnackbarContent"
+    });
+    const { action, className, message, role = "alert" } = props, other = (0, _objectWithoutPropertiesLooseDefault.default)(props, _excluded);
+    const ownerState = props;
+    const classes = useUtilityClasses(ownerState);
+    return /*#__PURE__*/ (0, _jsxRuntime.jsxs)(SnackbarContentRoot, (0, _extendsDefault.default)({
+        role: role,
+        square: true,
+        elevation: 6,
+        className: (0, _clsxDefault.default)(classes.root, className),
+        ownerState: ownerState,
+        ref: ref
+    }, other, {
+        children: [
+            /*#__PURE__*/ (0, _jsxRuntime.jsx)(SnackbarContentMessage, {
+                className: classes.message,
+                ownerState: ownerState,
+                children: message
+            }),
+            action ? /*#__PURE__*/ (0, _jsxRuntime.jsx)(SnackbarContentAction, {
+                className: classes.action,
+                ownerState: ownerState,
+                children: action
+            }) : null
+        ]
+    }));
+});
+SnackbarContent.propTypes /* remove-proptypes */  = {
+    // ┌────────────────────────────── Warning ──────────────────────────────┐
+    // │ These PropTypes are generated from the TypeScript type definitions. │
+    // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+    // └─────────────────────────────────────────────────────────────────────┘
+    /**
+   * The action to display. It renders after the message, at the end of the snackbar.
+   */ action: (0, _propTypesDefault.default).node,
+    /**
+   * Override or extend the styles applied to the component.
+   */ classes: (0, _propTypesDefault.default).object,
+    /**
+   * @ignore
+   */ className: (0, _propTypesDefault.default).string,
+    /**
+   * The message to display.
+   */ message: (0, _propTypesDefault.default).node,
+    /**
+   * The ARIA role attribute of the element.
+   * @default 'alert'
+   */ role: (0, _propTypesDefault.default /* @typescript-to-proptypes-ignore */ ).string,
+    /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */ sx: (0, _propTypesDefault.default).oneOfType([
+        (0, _propTypesDefault.default).arrayOf((0, _propTypesDefault.default).oneOfType([
+            (0, _propTypesDefault.default).func,
+            (0, _propTypesDefault.default).object,
+            (0, _propTypesDefault.default).bool
+        ])),
+        (0, _propTypesDefault.default).func,
+        (0, _propTypesDefault.default).object
+    ])
+};
+exports.default = SnackbarContent;
+
+},{"@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"adHgr","@babel/runtime/helpers/esm/extends":"fTBFS","react":"21dqq","prop-types":"7wKI2","clsx":"gocd3","@mui/utils/composeClasses":"4kKno","@mui/system/colorManipulator":"bO1j5","../styles/styled":"32xTg","../DefaultPropsProvider":"gbkfk","../Paper":"6IiTP","./snackbarContentClasses":"5uz3u","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5uz3u":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getSnackbarContentUtilityClass", ()=>getSnackbarContentUtilityClass);
+var _generateUtilityClasses = require("@mui/utils/generateUtilityClasses");
+var _generateUtilityClassesDefault = parcelHelpers.interopDefault(_generateUtilityClasses);
+var _generateUtilityClass = require("@mui/utils/generateUtilityClass");
+var _generateUtilityClassDefault = parcelHelpers.interopDefault(_generateUtilityClass);
+function getSnackbarContentUtilityClass(slot) {
+    return (0, _generateUtilityClassDefault.default)("MuiSnackbarContent", slot);
+}
+const snackbarContentClasses = (0, _generateUtilityClassesDefault.default)("MuiSnackbarContent", [
+    "root",
+    "message",
+    "action"
+]);
+exports.default = snackbarContentClasses;
+
+},{"@mui/utils/generateUtilityClasses":"7eO93","@mui/utils/generateUtilityClass":"d6tPU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"i87x2":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getSnackbarUtilityClass", ()=>getSnackbarUtilityClass);
+var _generateUtilityClasses = require("@mui/utils/generateUtilityClasses");
+var _generateUtilityClassesDefault = parcelHelpers.interopDefault(_generateUtilityClasses);
+var _generateUtilityClass = require("@mui/utils/generateUtilityClass");
+var _generateUtilityClassDefault = parcelHelpers.interopDefault(_generateUtilityClass);
+function getSnackbarUtilityClass(slot) {
+    return (0, _generateUtilityClassDefault.default)("MuiSnackbar", slot);
+}
+const snackbarClasses = (0, _generateUtilityClassesDefault.default)("MuiSnackbar", [
+    "root",
+    "anchorOriginTopCenter",
+    "anchorOriginBottomCenter",
+    "anchorOriginTopRight",
+    "anchorOriginBottomRight",
+    "anchorOriginTopLeft",
+    "anchorOriginBottomLeft"
+]);
+exports.default = snackbarClasses;
+
 },{"@mui/utils/generateUtilityClasses":"7eO93","@mui/utils/generateUtilityClass":"d6tPU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hlqrK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -62676,7 +63047,7 @@ exports.default = contactForm;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../scss/react.scss":"aLSRg"}],"aLSRg":[function() {},{}],"jTXWQ":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","../../scss/react.scss":"aLSRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"aLSRg":[function() {},{}],"jTXWQ":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$a168 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -63151,7 +63522,465 @@ exports.default = venueCards;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","react/jsx-dev-runtime":"iTorj","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react":"21dqq","@mui/material":"40376","../../scss/react.scss":"aLSRg","@mui/material/styles":"1lzai"}],"aLSRg":[function() {},{}],"BO0AV":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","@mui/material/styles":"1lzai","../../scss/react.scss":"aLSRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"aLSRg":[function() {},{}],"cqvk6":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _app = require("./App");
+var _appDefault = parcelHelpers.interopDefault(_app);
+var _router = require("./Router");
+var _routerDefault = parcelHelpers.interopDefault(_router);
+var _toast = require("./Toast");
+var _toastDefault = parcelHelpers.interopDefault(_toast);
+class Event {
+    constructor(){
+        this.currentUser = {};
+    }
+    async getEvents() {
+        // fetch json data
+        const response = await fetch(`${(0, _appDefault.default).apiBase}/events/events`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${localStorage.accessToken}`
+            }
+        });
+        // if response not ok
+        if (!response.ok) {
+            // log error
+            const err = await response.json();
+            if (err) console.log(err);
+            // throw error (exit function)
+            throw new Error("Problem getting events");
+        }
+        // convert payload into json - store as data
+        const data = await response.json();
+        // return data
+        return data;
+    }
+}
+exports.default = new Event();
+
+},{"./App":"2kQhy","./Router":"kOSdl","./Toast":"4N7Ir","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4N7Ir":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _app = require("./App");
+var _appDefault = parcelHelpers.interopDefault(_app);
+var _lit = require("lit");
+var _gsap = require("gsap");
+class Toast {
+    static init() {
+        this.showDuration = 2.5;
+        // create container element
+        this.containerEl = document.createElement("div");
+        this.containerEl.id = "toasts";
+        // append to <body>
+        document.body.appendChild(this.containerEl);
+    }
+    static show(content, type = "") {
+        if (!content) return;
+        // create element
+        const toastEl = document.createElement("div");
+        toastEl.className = "toast-entry";
+        if (type != "") toastEl.classList.add("is-error");
+        toastEl.innerText = content;
+        // append to container
+        this.containerEl.appendChild(toastEl);
+        // animate using gsap
+        const tl = (0, _gsap.gsap).timeline();
+        tl.from(toastEl, {
+            y: 60,
+            opacity: 0,
+            duration: 0.3,
+            ease: "power3.out"
+        });
+        tl.to(toastEl, {
+            marginTop: -50,
+            opacity: 0,
+            delay: this.showDuration,
+            duration: 0.3,
+            onComplete: ()=>{
+                toastEl.remove();
+            }
+        });
+    }
+}
+exports.default = Toast;
+
+},{"./App":"2kQhy","lit":"4antt","gsap":"fPSuC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4antt":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _reactiveElement = require("@lit/reactive-element");
+var _litHtml = require("lit-html");
+var _litElementJs = require("lit-element/lit-element.js");
+parcelHelpers.exportAll(_litElementJs, exports);
+var _isServerJs = require("lit-html/is-server.js");
+parcelHelpers.exportAll(_isServerJs, exports);
+
+},{"@lit/reactive-element":"hypet","lit-html":"1cmQt","lit-element/lit-element.js":"9YxkX","lit-html/is-server.js":"e2OXP","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hypet":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "CSSResult", ()=>(0, _cssTagJs.CSSResult));
+parcelHelpers.export(exports, "adoptStyles", ()=>(0, _cssTagJs.adoptStyles));
+parcelHelpers.export(exports, "css", ()=>(0, _cssTagJs.css));
+parcelHelpers.export(exports, "getCompatibleStyle", ()=>(0, _cssTagJs.getCompatibleStyle));
+parcelHelpers.export(exports, "supportsAdoptingStyleSheets", ()=>(0, _cssTagJs.supportsAdoptingStyleSheets));
+parcelHelpers.export(exports, "unsafeCSS", ()=>(0, _cssTagJs.unsafeCSS));
+parcelHelpers.export(exports, "ReactiveElement", ()=>b);
+parcelHelpers.export(exports, "defaultConverter", ()=>u);
+parcelHelpers.export(exports, "notEqual", ()=>f);
+var _cssTagJs = require("./css-tag.js");
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */ const { is: i, defineProperty: e, getOwnPropertyDescriptor: r, getOwnPropertyNames: h, getOwnPropertySymbols: o, getPrototypeOf: n } = Object, a = globalThis, c = a.trustedTypes, l = c ? c.emptyScript : "", p = a.reactiveElementPolyfillSupport, d = (t, s)=>t, u = {
+    toAttribute (t, s) {
+        switch(s){
+            case Boolean:
+                t = t ? l : null;
+                break;
+            case Object:
+            case Array:
+                t = null == t ? t : JSON.stringify(t);
+        }
+        return t;
+    },
+    fromAttribute (t, s) {
+        let i = t;
+        switch(s){
+            case Boolean:
+                i = null !== t;
+                break;
+            case Number:
+                i = null === t ? null : Number(t);
+                break;
+            case Object:
+            case Array:
+                try {
+                    i = JSON.parse(t);
+                } catch (t) {
+                    i = null;
+                }
+        }
+        return i;
+    }
+}, f = (t, s)=>!i(t, s), y = {
+    attribute: !0,
+    type: String,
+    converter: u,
+    reflect: !1,
+    hasChanged: f
+};
+Symbol.metadata ??= Symbol("metadata"), a.litPropertyMetadata ??= new WeakMap;
+class b extends HTMLElement {
+    static addInitializer(t) {
+        this._$Ei(), (this.l ??= []).push(t);
+    }
+    static get observedAttributes() {
+        return this.finalize(), this._$Eh && [
+            ...this._$Eh.keys()
+        ];
+    }
+    static createProperty(t, s = y) {
+        if (s.state && (s.attribute = !1), this._$Ei(), this.elementProperties.set(t, s), !s.noAccessor) {
+            const i = Symbol(), r = this.getPropertyDescriptor(t, i, s);
+            void 0 !== r && e(this.prototype, t, r);
+        }
+    }
+    static getPropertyDescriptor(t, s, i) {
+        const { get: e, set: h } = r(this.prototype, t) ?? {
+            get () {
+                return this[s];
+            },
+            set (t) {
+                this[s] = t;
+            }
+        };
+        return {
+            get () {
+                return e?.call(this);
+            },
+            set (s) {
+                const r = e?.call(this);
+                h.call(this, s), this.requestUpdate(t, r, i);
+            },
+            configurable: !0,
+            enumerable: !0
+        };
+    }
+    static getPropertyOptions(t) {
+        return this.elementProperties.get(t) ?? y;
+    }
+    static _$Ei() {
+        if (this.hasOwnProperty(d("elementProperties"))) return;
+        const t = n(this);
+        t.finalize(), void 0 !== t.l && (this.l = [
+            ...t.l
+        ]), this.elementProperties = new Map(t.elementProperties);
+    }
+    static finalize() {
+        if (this.hasOwnProperty(d("finalized"))) return;
+        if (this.finalized = !0, this._$Ei(), this.hasOwnProperty(d("properties"))) {
+            const t = this.properties, s = [
+                ...h(t),
+                ...o(t)
+            ];
+            for (const i of s)this.createProperty(i, t[i]);
+        }
+        const t = this[Symbol.metadata];
+        if (null !== t) {
+            const s = litPropertyMetadata.get(t);
+            if (void 0 !== s) for (const [t, i] of s)this.elementProperties.set(t, i);
+        }
+        this._$Eh = new Map;
+        for (const [t, s] of this.elementProperties){
+            const i = this._$Eu(t, s);
+            void 0 !== i && this._$Eh.set(i, t);
+        }
+        this.elementStyles = this.finalizeStyles(this.styles);
+    }
+    static finalizeStyles(s) {
+        const i = [];
+        if (Array.isArray(s)) {
+            const e = new Set(s.flat(1 / 0).reverse());
+            for (const s of e)i.unshift((0, _cssTagJs.getCompatibleStyle)(s));
+        } else void 0 !== s && i.push((0, _cssTagJs.getCompatibleStyle)(s));
+        return i;
+    }
+    static _$Eu(t, s) {
+        const i = s.attribute;
+        return !1 === i ? void 0 : "string" == typeof i ? i : "string" == typeof t ? t.toLowerCase() : void 0;
+    }
+    constructor(){
+        super(), this._$Ep = void 0, this.isUpdatePending = !1, this.hasUpdated = !1, this._$Em = null, this._$Ev();
+    }
+    _$Ev() {
+        this._$ES = new Promise((t)=>this.enableUpdating = t), this._$AL = new Map, this._$E_(), this.requestUpdate(), this.constructor.l?.forEach((t)=>t(this));
+    }
+    addController(t) {
+        (this._$EO ??= new Set).add(t), void 0 !== this.renderRoot && this.isConnected && t.hostConnected?.();
+    }
+    removeController(t) {
+        this._$EO?.delete(t);
+    }
+    _$E_() {
+        const t = new Map, s = this.constructor.elementProperties;
+        for (const i of s.keys())this.hasOwnProperty(i) && (t.set(i, this[i]), delete this[i]);
+        t.size > 0 && (this._$Ep = t);
+    }
+    createRenderRoot() {
+        const t = this.shadowRoot ?? this.attachShadow(this.constructor.shadowRootOptions);
+        return (0, _cssTagJs.adoptStyles)(t, this.constructor.elementStyles), t;
+    }
+    connectedCallback() {
+        this.renderRoot ??= this.createRenderRoot(), this.enableUpdating(!0), this._$EO?.forEach((t)=>t.hostConnected?.());
+    }
+    enableUpdating(t) {}
+    disconnectedCallback() {
+        this._$EO?.forEach((t)=>t.hostDisconnected?.());
+    }
+    attributeChangedCallback(t, s, i) {
+        this._$AK(t, i);
+    }
+    _$EC(t, s) {
+        const i = this.constructor.elementProperties.get(t), e = this.constructor._$Eu(t, i);
+        if (void 0 !== e && !0 === i.reflect) {
+            const r = (void 0 !== i.converter?.toAttribute ? i.converter : u).toAttribute(s, i.type);
+            this._$Em = t, null == r ? this.removeAttribute(e) : this.setAttribute(e, r), this._$Em = null;
+        }
+    }
+    _$AK(t, s) {
+        const i = this.constructor, e = i._$Eh.get(t);
+        if (void 0 !== e && this._$Em !== e) {
+            const t = i.getPropertyOptions(e), r = "function" == typeof t.converter ? {
+                fromAttribute: t.converter
+            } : void 0 !== t.converter?.fromAttribute ? t.converter : u;
+            this._$Em = e, this[e] = r.fromAttribute(s, t.type), this._$Em = null;
+        }
+    }
+    requestUpdate(t, s, i) {
+        if (void 0 !== t) {
+            if (i ??= this.constructor.getPropertyOptions(t), !(i.hasChanged ?? f)(this[t], s)) return;
+            this.P(t, s, i);
+        }
+        !1 === this.isUpdatePending && (this._$ES = this._$ET());
+    }
+    P(t, s, i) {
+        this._$AL.has(t) || this._$AL.set(t, s), !0 === i.reflect && this._$Em !== t && (this._$Ej ??= new Set).add(t);
+    }
+    async _$ET() {
+        this.isUpdatePending = !0;
+        try {
+            await this._$ES;
+        } catch (t) {
+            Promise.reject(t);
+        }
+        const t = this.scheduleUpdate();
+        return null != t && await t, !this.isUpdatePending;
+    }
+    scheduleUpdate() {
+        return this.performUpdate();
+    }
+    performUpdate() {
+        if (!this.isUpdatePending) return;
+        if (!this.hasUpdated) {
+            if (this.renderRoot ??= this.createRenderRoot(), this._$Ep) {
+                for (const [t, s] of this._$Ep)this[t] = s;
+                this._$Ep = void 0;
+            }
+            const t = this.constructor.elementProperties;
+            if (t.size > 0) for (const [s, i] of t)!0 !== i.wrapped || this._$AL.has(s) || void 0 === this[s] || this.P(s, this[s], i);
+        }
+        let t = !1;
+        const s = this._$AL;
+        try {
+            t = this.shouldUpdate(s), t ? (this.willUpdate(s), this._$EO?.forEach((t)=>t.hostUpdate?.()), this.update(s)) : this._$EU();
+        } catch (s) {
+            throw t = !1, this._$EU(), s;
+        }
+        t && this._$AE(s);
+    }
+    willUpdate(t) {}
+    _$AE(t) {
+        this._$EO?.forEach((t)=>t.hostUpdated?.()), this.hasUpdated || (this.hasUpdated = !0, this.firstUpdated(t)), this.updated(t);
+    }
+    _$EU() {
+        this._$AL = new Map, this.isUpdatePending = !1;
+    }
+    get updateComplete() {
+        return this.getUpdateComplete();
+    }
+    getUpdateComplete() {
+        return this._$ES;
+    }
+    shouldUpdate(t) {
+        return !0;
+    }
+    update(t) {
+        this._$Ej &&= this._$Ej.forEach((t)=>this._$EC(t, this[t])), this._$EU();
+    }
+    updated(t) {}
+    firstUpdated(t) {}
+}
+b.elementStyles = [], b.shadowRootOptions = {
+    mode: "open"
+}, b[d("elementProperties")] = new Map, b[d("finalized")] = new Map, p?.({
+    ReactiveElement: b
+}), (a.reactiveElementVersions ??= []).push("2.0.4");
+
+},{"./css-tag.js":"gkZsf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkZsf":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "CSSResult", ()=>n);
+parcelHelpers.export(exports, "adoptStyles", ()=>S);
+parcelHelpers.export(exports, "css", ()=>i);
+parcelHelpers.export(exports, "getCompatibleStyle", ()=>c);
+parcelHelpers.export(exports, "supportsAdoptingStyleSheets", ()=>e);
+parcelHelpers.export(exports, "unsafeCSS", ()=>r);
+const t = globalThis, e = t.ShadowRoot && (void 0 === t.ShadyCSS || t.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, s = Symbol(), o = new WeakMap;
+class n {
+    constructor(t, e, o){
+        if (this._$cssResult$ = !0, o !== s) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
+        this.cssText = t, this.t = e;
+    }
+    get styleSheet() {
+        let t = this.o;
+        const s = this.t;
+        if (e && void 0 === t) {
+            const e = void 0 !== s && 1 === s.length;
+            e && (t = o.get(s)), void 0 === t && ((this.o = t = new CSSStyleSheet).replaceSync(this.cssText), e && o.set(s, t));
+        }
+        return t;
+    }
+    toString() {
+        return this.cssText;
+    }
+}
+const r = (t)=>new n("string" == typeof t ? t : t + "", void 0, s), i = (t, ...e)=>{
+    const o = 1 === t.length ? t[0] : e.reduce((e, s, o)=>e + ((t)=>{
+            if (!0 === t._$cssResult$) return t.cssText;
+            if ("number" == typeof t) return t;
+            throw Error("Value passed to 'css' function must be a 'css' function result: " + t + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
+        })(s) + t[o + 1], t[0]);
+    return new n(o, t, s);
+}, S = (s, o)=>{
+    if (e) s.adoptedStyleSheets = o.map((t)=>t instanceof CSSStyleSheet ? t : t.styleSheet);
+    else for (const e of o){
+        const o = document.createElement("style"), n = t.litNonce;
+        void 0 !== n && o.setAttribute("nonce", n), o.textContent = e.cssText, s.appendChild(o);
+    }
+}, c = e ? (t)=>t : (t)=>t instanceof CSSStyleSheet ? ((t)=>{
+        let e = "";
+        for (const s of t.cssRules)e += s.cssText;
+        return r(e);
+    })(t) : t;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9YxkX":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "LitElement", ()=>s);
+parcelHelpers.export(exports, "_$LE", ()=>o);
+var _reactiveElement = require("@lit/reactive-element");
+parcelHelpers.exportAll(_reactiveElement, exports);
+var _litHtml = require("lit-html");
+parcelHelpers.exportAll(_litHtml, exports);
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */ class s extends (0, _reactiveElement.ReactiveElement) {
+    constructor(){
+        super(...arguments), this.renderOptions = {
+            host: this
+        }, this._$Do = void 0;
+    }
+    createRenderRoot() {
+        const t = super.createRenderRoot();
+        return this.renderOptions.renderBefore ??= t.firstChild, t;
+    }
+    update(t) {
+        const i = this.render();
+        this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(t), this._$Do = (0, _litHtml.render)(i, this.renderRoot, this.renderOptions);
+    }
+    connectedCallback() {
+        super.connectedCallback(), this._$Do?.setConnected(!0);
+    }
+    disconnectedCallback() {
+        super.disconnectedCallback(), this._$Do?.setConnected(!1);
+    }
+    render() {
+        return 0, _litHtml.noChange;
+    }
+}
+s._$litElement$ = !0, s["finalized"] = !0, globalThis.litElementHydrateSupport?.({
+    LitElement: s
+});
+const r = globalThis.litElementPolyfillSupport;
+r?.({
+    LitElement: s
+});
+const o = {
+    _$AK: (t, e, i)=>{
+        t._$AK(e, i);
+    },
+    _$AL: (t)=>t._$AL
+};
+(globalThis.litElementVersions ??= []).push("4.0.6");
+
+},{"@lit/reactive-element":"hypet","lit-html":"1cmQt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"e2OXP":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2022 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "isServer", ()=>o);
+const o = !1;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"BO0AV":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _app = require("../../App");
@@ -63198,6 +64027,30 @@ class Auth {
     }
     // async sign up
     // async sign in
+    async signIn(userData, fail = false) {
+        const response = await fetch(`${(0, _appDefault.default).apiBase}/auth/signin`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(userData)
+        });
+        const data = await response.json();
+        // if response not ok
+        if (!response.ok) {
+            console.log(data);
+            // run fail() functon if set
+            if (typeof fail == "function") fail();
+        }
+        // sign in success
+        // save access token (jwt) to local storage
+        localStorage.setItem("accessToken", data.accessToken);
+        // set current user
+        this.currentUser = data.user;
+        console.log(this.currentUser);
+        (0, _routerDefault.default).init();
+        console.log("sign in successful");
+    }
     // async check
     async check(success) {
         // show splash screen while loading
@@ -64008,7 +64861,7 @@ customElements.define("sc-app-header", AppHeader);
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","lit":"4antt","react":"21dqq","react-dom/client":"lOjBx","./react/sc-header-menu.js":"c3ijH","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../static/images/soco-logo.png":"5qYPa","../../static/images/soco-logo-long.png":"d7Vme"}],"c3ijH":[function(require,module,exports) {
+},{"lit":"4antt","react/jsx-dev-runtime":"iTorj","react":"21dqq","react-dom/client":"lOjBx","./react/sc-header-menu.js":"c3ijH","../../static/images/soco-logo.png":"5qYPa","../../static/images/soco-logo-long.png":"d7Vme","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"c3ijH":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$6fcc = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -64129,7 +64982,7 @@ $RefreshReg$(_c, "HeaderMenu");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../scss/react.scss":"aLSRg"}],"aLSRg":[function() {},{}],"5qYPa":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","../../scss/react.scss":"aLSRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"aLSRg":[function() {},{}],"5qYPa":[function(require,module,exports) {
 module.exports = require("1fa9a0d538b9a17e").getBundleURL("bLxZJ") + "soco-logo.a8b2db60.png" + "?" + Date.now();
 
 },{"1fa9a0d538b9a17e":"lgJ39"}],"d7Vme":[function(require,module,exports) {
@@ -64148,6 +65001,8 @@ var _lit = require("lit");
 var _client = require("react-dom/client");
 var _scDiscDialog = require("./react/sc-disc-dialog");
 var _scDiscDialogDefault = parcelHelpers.interopDefault(_scDiscDialog);
+var _scLoginDialog = require("./react/sc-login-dialog");
+var _scLoginDialogDefault = parcelHelpers.interopDefault(_scLoginDialog);
 var _shareIconPng = require("../../static/images/share-icon.png");
 var _shareIconPngDefault = parcelHelpers.interopDefault(_shareIconPng);
 var _instagramIconPng = require("../../static/images/instagram-icon.png");
@@ -64158,11 +65013,15 @@ class AppFooter extends (0, _lit.LitElement) {
     static properties = {
         dialogOpen: {
             type: Boolean
+        },
+        loginOpen: {
+            type: Boolean
         }
     };
     constructor(){
         super();
         this.dialogOpen = false;
+        this.loginOpen = false;
     }
     firstUpdated() {
         this.dialogContainer = document.createElement("div");
@@ -64171,20 +65030,35 @@ class AppFooter extends (0, _lit.LitElement) {
         this.renderReactDialog();
     }
     updated(changedProperties) {
-        if (changedProperties.has("dialogOpen")) this.renderReactDialog();
+        if (changedProperties.has("dialogOpen") || changedProperties.has("loginOpen")) this.renderReactDialog();
     }
     renderReactDialog() {
-        this.reactRoot.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _scDiscDialogDefault.default), {
-            open: this.dialogOpen,
-            onClose: ()=>this.dialogOpen = false
-        }, void 0, false, {
-            fileName: "src/components/sc-app-footer.js",
-            lineNumber: 33,
-            columnNumber: 13
-        }, this));
+        this.reactRoot.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+            children: [
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _scDiscDialogDefault.default), {
+                    open: this.dialogOpen,
+                    onClose: ()=>this.dialogOpen = false
+                }, void 0, false, {
+                    fileName: "src/components/sc-app-footer.js",
+                    lineNumber: 37,
+                    columnNumber: 13
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _scLoginDialogDefault.default), {
+                    open: this.loginOpen,
+                    onClose: ()=>this.loginOpen = false
+                }, void 0, false, {
+                    fileName: "src/components/sc-app-footer.js",
+                    lineNumber: 41,
+                    columnNumber: 13
+                }, this)
+            ]
+        }, void 0, true));
     }
     toggleDialog() {
         this.dialogOpen = !this.dialogOpen;
+    }
+    toggleLogin() {
+        this.loginOpen = !this.loginOpen;
     }
     render() {
         return (0, _lit.html)`
@@ -64259,7 +65133,7 @@ class AppFooter extends (0, _lit.LitElement) {
                     <a @click="${this.toggleDialog}">Disclaimer</a>
                 </div>
                 <div class="app-footer-right">
-                    <a>Administration Login</a>
+                    <a @click="${this.toggleLogin}">Administration Login</a>
                 </div>
             </footer>
         `;
@@ -64272,7 +65146,7 @@ customElements.define("sc-app-footer", AppFooter);
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"lit":"4antt","./react/sc-disc-dialog":"ehWSS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../static/images/share-icon.png":"5Hki1","../../static/images/instagram-icon.png":"3xniJ","../../static/images/facebook-icon.png":"jOSLX"}],"ehWSS":[function(require,module,exports) {
+},{"lit":"4antt","react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","./react/sc-disc-dialog":"ehWSS","../../static/images/share-icon.png":"5Hki1","../../static/images/instagram-icon.png":"3xniJ","../../static/images/facebook-icon.png":"jOSLX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./react/sc-login-dialog":"iFQ6J"}],"ehWSS":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$d968 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -64336,7 +65210,7 @@ $RefreshReg$(_c, "DiscDialog");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../scss/react.scss":"aLSRg"}],"aLSRg":[function() {},{}],"5Hki1":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","../../scss/react.scss":"aLSRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"aLSRg":[function() {},{}],"5Hki1":[function(require,module,exports) {
 module.exports = require("dd6644d7f5f5db0b").getBundleURL("bLxZJ") + "share-icon.51b5076e.png" + "?" + Date.now();
 
 },{"dd6644d7f5f5db0b":"lgJ39"}],"3xniJ":[function(require,module,exports) {
@@ -64345,6 +65219,226 @@ module.exports = require("fded92679f513fb").getBundleURL("bLxZJ") + "instagram-i
 },{"fded92679f513fb":"lgJ39"}],"jOSLX":[function(require,module,exports) {
 module.exports = require("19503f7d0a9469dc").getBundleURL("bLxZJ") + "facebook-icon.4bcb875c.png" + "?" + Date.now();
 
-},{"19503f7d0a9469dc":"lgJ39"}],"gpsI5":[function() {},{}]},["farZc","1xC6H","8lqZg"], "8lqZg", "parcelRequiree1b3")
+},{"19503f7d0a9469dc":"lgJ39"}],"iFQ6J":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$2525 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$2525.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _material = require("@mui/material");
+var _scLoginForm = require("./sc-login-form");
+var _scLoginFormDefault = parcelHelpers.interopDefault(_scLoginForm);
+var _reactScss = require("../../scss/react.scss");
+const LoginDialog = ({ open, onClose })=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Dialog), {
+        open: open,
+        onClose: onClose,
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.DialogContent), {
+            className: "login-form",
+            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _scLoginFormDefault.default), {}, void 0, false, {
+                fileName: "src/components/react/sc-login-dialog.js",
+                lineNumber: 9,
+                columnNumber: 13
+            }, undefined)
+        }, void 0, false, {
+            fileName: "src/components/react/sc-login-dialog.js",
+            lineNumber: 8,
+            columnNumber: 9
+        }, undefined)
+    }, void 0, false, {
+        fileName: "src/components/react/sc-login-dialog.js",
+        lineNumber: 7,
+        columnNumber: 5
+    }, undefined);
+_c = LoginDialog;
+exports.default = LoginDialog;
+var _c;
+$RefreshReg$(_c, "LoginDialog");
+
+  $parcel$ReactRefreshHelpers$2525.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","./sc-login-form":"8nTcO","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../scss/react.scss":"aLSRg"}],"8nTcO":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$4e4e = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$4e4e.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _material = require("@mui/material");
+var _reactScss = require("../../scss/react.scss");
+var _auth = require("../../Auth");
+var _authDefault = parcelHelpers.interopDefault(_auth);
+var _s = $RefreshSig$();
+const LoginForm = ()=>{
+    _s();
+    const [formData, setFormData] = (0, _react.useState)({
+        email: "",
+        password: ""
+    });
+    const [errors, setErrors] = (0, _react.useState)({
+        email: false,
+        password: false
+    });
+    const [snackbarOpen, setSnackbarOpen] = (0, _react.useState)(false);
+    const [snackbarMessage, setSnackbarMessage] = (0, _react.useState)("");
+    const [showModal, setShowModal] = (0, _react.useState)(true);
+    const handleChange = (e)=>{
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+    const validateEmail = (email)=>{
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        const newErrors = {
+            email: !formData.email || !validateEmail(formData.email),
+            password: !formData.password
+        };
+        setErrors(newErrors);
+        if (!Object.values(newErrors).includes(true)) {
+            const submitBtn = document.querySelector(".form-button");
+            submitBtn.setAttribute("loading", "");
+            (0, _authDefault.default).signIn(formData, (success)=>{
+                submitBtn.removeAttribute("loading");
+                if (success) {
+                    setSnackbarMessage("Logged in successfully");
+                    setSnackbarOpen(true);
+                    setShowModal(false);
+                } else {
+                    setSnackbarMessage("Login failed: incorrect credentials");
+                    setSnackbarOpen(true);
+                }
+            });
+        }
+    };
+    const handleCloseSnackbar = ()=>{
+        setSnackbarOpen(false);
+    };
+    if (!showModal) return null;
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Box), {
+        className: "login-container",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                className: "login-title",
+                children: "Admin Login"
+            }, void 0, false, {
+                fileName: "src/components/react/sc-login-form.js",
+                lineNumber: 71,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
+                onSubmit: handleSubmit,
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Box), {
+                        className: "login-section",
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Stack), {
+                            children: [
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.TextField), {
+                                    variant: "outlined",
+                                    label: "Email address",
+                                    className: "form-text",
+                                    size: "small",
+                                    name: "email",
+                                    onChange: handleChange,
+                                    error: errors.email,
+                                    helperText: errors.email ? "Email is required" : ""
+                                }, void 0, false, {
+                                    fileName: "src/components/react/sc-login-form.js",
+                                    lineNumber: 75,
+                                    columnNumber: 25
+                                }, undefined),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.TextField), {
+                                    variant: "outlined",
+                                    label: "Password",
+                                    className: "form-text",
+                                    size: "small",
+                                    name: "password",
+                                    onChange: handleChange,
+                                    error: errors.password,
+                                    helperText: errors.password ? "Password is required" : ""
+                                }, void 0, false, {
+                                    fileName: "src/components/react/sc-login-form.js",
+                                    lineNumber: 76,
+                                    columnNumber: 25
+                                }, undefined)
+                            ]
+                        }, void 0, true, {
+                            fileName: "src/components/react/sc-login-form.js",
+                            lineNumber: 74,
+                            columnNumber: 21
+                        }, undefined)
+                    }, void 0, false, {
+                        fileName: "src/components/react/sc-login-form.js",
+                        lineNumber: 73,
+                        columnNumber: 17
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Stack), {
+                        className: "form-controls",
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Button), {
+                            className: "form-button",
+                            type: "submit",
+                            children: "Login"
+                        }, void 0, false, {
+                            fileName: "src/components/react/sc-login-form.js",
+                            lineNumber: 80,
+                            columnNumber: 21
+                        }, undefined)
+                    }, void 0, false, {
+                        fileName: "src/components/react/sc-login-form.js",
+                        lineNumber: 79,
+                        columnNumber: 17
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/react/sc-login-form.js",
+                lineNumber: 72,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Snackbar), {
+                open: snackbarOpen,
+                autoHideDuration: 6000,
+                onClose: handleCloseSnackbar,
+                message: snackbarMessage
+            }, void 0, false, {
+                fileName: "src/components/react/sc-login-form.js",
+                lineNumber: 83,
+                columnNumber: 13
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/react/sc-login-form.js",
+        lineNumber: 70,
+        columnNumber: 9
+    }, undefined);
+};
+_s(LoginForm, "V4jubwusCK77QSNOi3I30LjV23M=");
+_c = LoginForm;
+exports.default = LoginForm;
+var _c;
+$RefreshReg$(_c, "LoginForm");
+
+  $parcel$ReactRefreshHelpers$4e4e.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","../../scss/react.scss":"aLSRg","../../Auth":"wuqrX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"aLSRg":[function() {},{}],"aLSRg":[function() {},{}],"gpsI5":[function() {},{}]},["farZc","1xC6H","8lqZg"], "8lqZg", "parcelRequiree1b3")
 
 //# sourceMappingURL=index.975ef6c8.js.map
