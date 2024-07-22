@@ -27,6 +27,21 @@
   font-weight: bold;
 }
 
+#category-container .category-list {
+  width: 100%;
+  display: flex;
+}
+
+#category-container .category-list .MuiInputBase-root {
+  background-color: #2b2b2b;
+  width: 40%;
+  margin: auto;
+}
+
+#category-container .category-list .Mui-focused .MuiOutlinedInput-notchedOutline {
+  border: 2px solid #ffc600 !important;
+}
+
 #tag-container {
   background-color: #2b2b2b;
   border-radius: .2em;
@@ -152,7 +167,7 @@
 
 .card .event-button {
   z-index: 10;
-  background-color: #2b2b2b;
+  pointer-events: all;
   border: none;
   justify-content: center;
   padding: 0 1em;
@@ -165,7 +180,6 @@
 }
 
 .card .event-button:hover .material-icons, .card .event-button.active .material-icons {
-  color: #ffc600;
   cursor: pointer;
 }
 
@@ -433,6 +447,12 @@
   }
 }
 
+@media (width <= 600px) {
+  #category-container {
+    width: 100%;
+  }
+}
+
 @media (width <= 500px) {
   .event-card {
     margin: 0 .5em;
@@ -470,7 +490,7 @@ html {
   position: fixed;
   top: 0;
   right: 0;
-  transform: translateX(-100%);
+  transform: translateX(100%);
 }
 
 #admin-nav.visible {
@@ -667,8 +687,8 @@ html {
   display: flex;
 }
 
-.venue-container #map h1 {
-  width: 100%;
+.venue-container #map .subtitle {
+  width: 50%;
   padding-left: .5em;
 }
 
@@ -768,7 +788,7 @@ html {
 }
 
 :root {
-  --base-font-family: "Manrope", sans-serif;
+  --base-font-family: "Inter", sans-serif;
   --sub-font-family: "Athelas", serif;
   --app-header-height: 5em;
 }

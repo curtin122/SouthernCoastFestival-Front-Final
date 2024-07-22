@@ -35,6 +35,18 @@
         cursor: pointer;
         font-weight: bold; 
     }
+    .category-list {
+        width: 100%;
+        display: flex;
+        .MuiInputBase-root {
+            background-color: #2b2b2b;
+            width: 40%;
+            margin: auto;
+        }
+        .Mui-focused .MuiOutlinedInput-notchedOutline {
+            border: 2px solid #FFC600 !important;
+        }
+    }
 }
 
 // TAG FILTER --------------------------------------
@@ -166,9 +178,9 @@
         display: flex;
         justify-content: center;
         padding: 0 1em;
-        background-color: #2b2b2b;
         border: none;
         z-index: 10;
+        pointer-events: all;
 
         .material-icons {
             color: #bdbdbd;
@@ -177,7 +189,6 @@
     }
     .event-button:hover, .event-button.active {
         .material-icons {
-            color: #FFC600;
             cursor: pointer;
         }
     }
@@ -426,6 +437,12 @@
     }
     .form-container {
         width: auto;
+    }
+}
+
+@media all and (max-width: 600px) {
+    #category-container {
+        width: 100%;
     }
 }
 

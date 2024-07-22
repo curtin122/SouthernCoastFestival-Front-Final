@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from 'react'
-import { Card, CardContent, CardMedia, Typography, Box, IconButton, Grid, Skeleton } from '@mui/material'
+import { Card, CardContent, CardMedia, Typography, Box, IconButton, Grid, Skeleton, Tooltip, useMediaQuery, ListItem, ListItemButton, Select, MenuItem } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faB, faBowlFood, faLightbulb, faShop } from '@fortawesome/free-solid-svg-icons'
+
 import placeholderImg from '../../static/images/chef-bryan-entertainment.jpg'
 import '../scss/react.scss'
+
 import eventData from '../eventdata'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBowlFood, faLightbulb, faShop } from '@fortawesome/free-solid-svg-icons'
+
 
 const EventContainer = () => {
     const [events, setEvents] = useState([])
-    const [selectedCategory, setSelectedCategory] = useState('all')
+    const [selectedCategory, setSelectedCategory] = useState('All')
     const [selectedTag, setSelectedTag] = useState('all')
+
+    const theme = useTheme()
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'))
 
     useEffect(() => {
         const fetchEvents = () => {
@@ -23,17 +30,21 @@ const EventContainer = () => {
     useEffect(() => {
         let filtered = events;
 
-        if (selectedCategory !== 'all') {
-            filtered = filtered.filter(event => event.eventcategory === selectedCategory)
-        }
+        if (selectedCategory === 'All' && selectedTag === 'all') {
+            filtered = events 
+        } else {
+            if (selectedCategory !== 'All') {
+                filtered = filtered.filter(event => event.eventcategory === selectedCategory)
+            }
 
-        if (selectedTag !== 'all') {
-            filtered = filtered.filter(event => {
-                if (Array.isArray(event.eventtag)) {
-                    return event.eventtag.includes(selectedTag)
-                }
-                return event.eventtag === selectedTag
-            })
+            if (selectedTag !== 'all') {
+                filtered = filtered.filter(event => {
+                    if (Array.isArray(event.eventtag)) {
+                        return event.eventtag.includes(selectedTag)
+                    }
+                    return event.eventtag === selectedTag
+                })
+            }
         }
 
         setFilteredEvents(filtered)
@@ -49,12 +60,42 @@ const EventContainer = () => {
         setSelectedTag(tag)
     }
 
+    const categories = [
+        { name: 'All', icon: '', label: 'All'},
+        { name: 'Food', icon: faBowlFood, label: 'Eat + Drink'},
+        { name: 'Entertainment', icon: faLightbulb, label: 'Entertainment'},
+        { name: 'Shop', icon: faShop, label: 'Shop'}
+    ]
+
     return (
         <>
             <div id="category-container">
-                <button className={`category-button ${selectedCategory === 'Food' ? 'active' : ''}`} onClick={() => handleCategoryChange('Food')}><FontAwesomeIcon icon={faBowlFood} style={{marginRight:'5px'}}/>Eat + Drink</button>
-                <button className={`category-button ${selectedCategory === 'Entertainment' ? 'active' : ''}`} onClick={() => handleCategoryChange('Entertainment')}><FontAwesomeIcon icon={faLightbulb} style={{marginRight:'5px'}}/>Entertainment</button>
-                <button className={`category-button ${selectedCategory === 'Shop' ? 'active' : ''}`} onClick={() => handleCategoryChange('Shop')}><FontAwesomeIcon icon={faShop} style={{marginRight:'5px'}}/>Shop</button>
+                {isSmallScreen ? (
+                    <Box className="category-list">
+                        <Select
+                            value={selectedCategory}
+                            onChange={(e) => handleCategoryChange(e.target.value)}
+                            sx={{ color: '#FFFFFF' }}
+                        >
+                            {categories.map((category) => (
+                                <MenuItem key={category.name} value={category.name}>
+                                    <FontAwesomeIcon icon={category.icon} style={{marginRight: '5px'}} />{category.label}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </Box>
+                ) : (
+                    categories.map((category) => (
+                        <button 
+                            key={category.name}
+                            className={`category-button ${selectedCategory === category.name ? 'active' : ''}`}
+                            onClick={() => handleCategoryChange(category.name)}
+                        >
+                            <FontAwesomeIcon icon={category.icon} style={{ marginRight: '5px'}} />
+                            {category.label}
+                        </button>
+                    ))
+                )}
             </div>
 
             <div id="tag-container">
@@ -116,11 +157,15 @@ const EventContainer = () => {
                                             <Typography className="event-title">
                                                 {event.eventdisplayname}
                                             </Typography>
-                                            <IconButton className="event-button">
-                                                <span className="material-icons">
-                                                    favorite_border
+                                            <Tooltip title="Feature coming soon" placement="top" arrow>
+                                                <span>
+                                                <IconButton className="event-button" disabled>
+                                                    <span className="material-icons">
+                                                        favorite_border
+                                                    </span>
+                                                </IconButton>
                                                 </span>
-                                            </IconButton>
+                                            </Tooltip>
                                         </Box>
                                         <Typography className="event-description">
                                             {event.eventdescription}

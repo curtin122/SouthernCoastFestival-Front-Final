@@ -24,6 +24,7 @@ class AppHeader extends LitElement {
         this.navActiveLinks();
         this.scrollTo();
         this.renderReactComponent();
+        this.toTop();
     }
 
     navActiveLinks() {
@@ -51,6 +52,16 @@ class AppHeader extends LitElement {
                 }
             })
         })
+    }
+
+    toTop() {
+        const logo = this.shadowRoot.querySelector('.app-header-logo')
+        if (logo) {
+            logo.addEventListener('click', () => {
+                window.scroll({ top: 0, behavior: 'smooth'})
+                console.log('logo clicked')
+            })
+        }
     }
 
     renderReactComponent() {
@@ -113,6 +124,9 @@ class AppHeader extends LitElement {
                     width: 12em;
                     height: 3.5em;
                 }
+                .app-header-logo:hover {
+                    cursor: pointer;
+                }
                 .app-header-nav {
                     grid-column: 2;
                     justify-content: center;
@@ -150,8 +164,8 @@ class AppHeader extends LitElement {
                         height: 4em;
                     }
                     .app-header-logo {
-                        width: 11em;
-                        height: 3em;
+                        width: 10em;
+                        height: 2.5em;
                     }
                     .app-header-nav {
                         .nav-item {
@@ -160,8 +174,15 @@ class AppHeader extends LitElement {
                         }
                     }
                 }
+                
+                @media (max-width: 530px) {
+                    .app-header-logo {
+                        width: 9em;
+                        height: 2.5em;
+                    }
+                }
 
-                @media (max-width: 400px) {
+                @media (max-width: 530px) {
                     .app-header {
                         justify-content: space-between;
                         flex-wrap: wrap;
@@ -188,7 +209,7 @@ class AppHeader extends LitElement {
 
             <header class="app-header">
 
-                <div class="app-header-logo"></div>
+                <a><div class="app-header-logo"></div></a>
 
                 <div id="app-header-menu"></div>
 
