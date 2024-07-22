@@ -588,6 +588,27 @@ html {
   border: 1px solid #ffc600;
 }
 
+.hero-banner .video-control {
+  color: #000;
+  cursor: pointer;
+  background-color: #ffc600;
+  border: none;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  width: 3em;
+  height: 3em;
+  transition: background-color .3s;
+  display: flex;
+  position: absolute;
+  bottom: 2em;
+  right: 2em;
+}
+
+.hero-banner .video-control i {
+  font-size: 1em;
+}
+
 #events {
   border-bottom: .2em solid #ffc600;
   padding-top: 1em;

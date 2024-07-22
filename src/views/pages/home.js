@@ -37,6 +37,20 @@ class HomeView {
     return new URL('../../../static/images/hero-light.mp4', import.meta.url).toString()
   }
 
+  toggleVideoPlayback() {
+    const video = document.querySelector('.hero-video')
+    const controlButton = document.querySelector('.video-control i')
+    if (video.paused) {
+      video.play()
+      controlButton.classList.remove('fa-play')
+      controlButton.classList.add('fa-pause')
+    } else {
+      video.pause()
+      controlButton.classList.remove('fa-pause')
+      controlButton.classList.add('fa-play')
+    }
+  }
+
   render(){
     const videoUrl = this.getVideoUrl()
 
@@ -60,6 +74,9 @@ class HomeView {
                 <source src="${videoUrl}" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
+              <button class="video-control" @click="${this.toggleVideoPlayback}">
+                <i class="fas fa-pause"></i>
+              </button>
               <div id="hero-content">
                 <h1>Come experience Geelong's Festival of Lights!</h1>
                 <p>We are back again! Enjoy family-friendly fireworks, laser shows, light installations with over 100,000 blubs and eat the night away.</p>

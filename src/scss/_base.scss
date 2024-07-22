@@ -119,6 +119,26 @@ html {
             color: #FFC600;
         }
     }
+    .video-control {
+        position: absolute;
+        bottom: 2em;
+        right: 2em;
+        background-color: #FFC600;
+        color: #000000;
+        border: none;
+        border-radius: 50%;
+        width: 3em;
+        height: 3em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        i {
+            font-size: 1em;
+        }
+    }
 }
 
 // EVENTS ---------------------------
