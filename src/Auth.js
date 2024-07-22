@@ -12,8 +12,6 @@ class Auth {
         }
     }
 
-    // async sign up
-
     // async sign in
     async signIn(userData, callback){
       try {
@@ -54,7 +52,6 @@ class Auth {
         // check loacl token exists
         if(!localStorage.accessToken) {
             // no local token
-            // Toast.show("token not found")
             // redirect
             gotoRoute('/')
             return

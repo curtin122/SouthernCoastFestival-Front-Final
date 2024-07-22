@@ -6,6 +6,7 @@ export default function HeaderMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null)
     const open = Boolean(anchorEl)
 
+    // when menu icon is clicked
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
     }
@@ -13,6 +14,7 @@ export default function HeaderMenu() {
         setAnchorEl(null)
     }
 
+    // when menu item is clicked, scroll to corresponding section
     const handleMenuItemClick = (id) => {
         const section = document.getElementById(id)
         if (section) {

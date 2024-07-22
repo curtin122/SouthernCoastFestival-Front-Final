@@ -41,10 +41,12 @@ const LoginForm = () => {
 
         setErrors(newErrors)
 
+        // if input values of fields are correct, attempt signin
         if (!Object.values(newErrors).includes(true)) {
             const submitBtn = document.querySelector('.form-button')
             submitBtn.setAttribute('loading', '')
 
+            // send data to signIn() method
             Auth.signIn(formData, (success) => {
                 submitBtn.removeAttribute('loading')
                 if (success) {

@@ -6,6 +6,7 @@ import '../scss/react.scss'
 export default function MUIDrawer() {
     const [isAdmin, setIsAdmin] = useState(Auth.currentUser.accessLevel === 'admin')
 
+    // set user access level to admin 
     useEffect(() => {
         setIsAdmin(Auth.currentUser.accessLevel === 'admin')
     }, [Auth.currentUser.accessLevel])

@@ -1,17 +1,11 @@
 // import views
 import homeView from './views/pages/home'
 import errorView from './views/pages/404'
-import adminView from './views/pages/admin'
-import eventsView from './views/pages/events'
-import newEventView from './views/pages/new-event'
 
 // define routes
 const routes = {
     '/': homeView,
     '404': errorView,
-    '/admin': adminView,
-    '/events': eventsView,
-    '/newEvent': newEventView
 }
 
 class Router {

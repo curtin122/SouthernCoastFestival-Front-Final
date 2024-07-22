@@ -7,7 +7,6 @@ class App {
     constructor() {
         this.name = "Southern Coast Festival"
         this.version = "1.0.0"
-        // when backend is deployed, change url
         this.apiBase = "https://southerncoastfestival-backend.onrender.com"
         this.rootEl = document.getElementById("root")
     }

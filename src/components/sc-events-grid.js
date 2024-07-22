@@ -7,6 +7,7 @@ import { faB, faBowlFood, faLightbulb, faShop } from '@fortawesome/free-solid-sv
 import placeholderImg from '../../static/images/chef-bryan-entertainment.jpg'
 import '../scss/react.scss'
 
+// import hardcoded event data
 import eventData from '../eventdata'
 
 
@@ -27,6 +28,7 @@ const EventContainer = () => {
 
     const [filteredEvents, setFilteredEvents] = useState([])
 
+    // filter events by category, then tag
     useEffect(() => {
         let filtered = events;
 

@@ -14,6 +14,7 @@ const venueCards = () => {
         setActiveSection(section)
     }
 
+    // array of navigation items
     const sections = [
         { id: 'location', label: 'Location', icon: faLocationDot },
         { id: 'map', label: 'Festival Map', icon: faMap },

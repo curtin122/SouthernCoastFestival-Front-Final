@@ -2,7 +2,6 @@ import App from '../../App'
 import {html, render } from 'lit-html'
 import Utils from '../../Utils'
 import Auth from '../../Auth.js'
-import User from '../../User.js'
 
 import { renderReactComponent } from '../../components/react/reactHelper'
 import EventContainer from '../../components/sc-events-grid.js'

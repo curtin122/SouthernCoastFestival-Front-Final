@@ -27,6 +27,7 @@ class AppHeader extends LitElement {
         this.toTop();
     }
 
+    // set property of link as active when clicked
     navActiveLinks() {
         const links = this.shadowRoot.querySelectorAll('.nav-item')
 

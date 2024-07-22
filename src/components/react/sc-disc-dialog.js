@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Dialog, DialogContent, DialogContentText, DialogTitle, Button } from '@mui/material'
 import '../../scss/react.scss'
 
+// disclaimer dialog component
 const DiscDialog = ({ open, onClose }) => (
     <Dialog open={open} onClose={onClose} className="disclaimer">
         <DialogTitle>Disclaimer</DialogTitle>

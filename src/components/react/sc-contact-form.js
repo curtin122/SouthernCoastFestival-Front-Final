@@ -19,6 +19,7 @@ const contactForm = () => {
 
     const [snackbarOpen, setSnackbarOpen] = useState(false)
 
+    // when a change is deteced, store those in temporary variables
     const handleChange = (e) => {
         const { name, value } = e.target
         setFormData({
@@ -27,6 +28,7 @@ const contactForm = () => {
         })
     }
 
+    // check all required values are filled
     const handleSendMessage = () => {
         const newErrors = {
             name: !formData.name,
@@ -37,6 +39,7 @@ const contactForm = () => {
 
         setErrors(newErrors)
 
+        // if none are empty, send alert
         if (!Object.values(newErrors).includes(true)) {
             setSnackbarOpen(true)
             alert('Message sent!')
