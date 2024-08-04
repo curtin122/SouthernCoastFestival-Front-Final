@@ -9,6 +9,7 @@ import ContactForm from '../../components/react/sc-contact-form.js'
 import VenueCard from '../../components/react/sc-venue-cards.js'
 import AdminNav from '../../components/sc-admin-nav.js'
 
+
 class HomeView {
   constructor() {
   }
@@ -16,7 +17,7 @@ class HomeView {
   async init(){
     console.log('HomeView.init')
     console.log(Auth.currentUser)
-    document.title = 'Home'   
+    document.title = 'Southern Coast Festival of Lights'   
     
     // await this.getEvents() // only use when front and back are talking
     this.render()
@@ -66,7 +67,6 @@ class HomeView {
       <sc-app-header></sc-app-header>
 
       <div class="page-content">        
-        
         <!--HERO-->
           <div id="home">
             <div class="hero-banner">
@@ -78,10 +78,9 @@ class HomeView {
                 <i class="fas fa-pause"></i>
               </button>
               <div id="hero-content">
-                <h1>Come experience Geelong's Festival of Lights!</h1>
-                <p>We are back again! Enjoy family-friendly fireworks, laser shows, light installations with over 100,000 blubs and eat the night away.</p>
-                <h3 style="font-weight: bold; color: #FFC600;">From 24 to 25 August 2024.</h3>
-                <button class="jumpTo">Find an event &#8595;</button>
+                <h1 style="font-weight: bold; color: #FFC600;">Come to Geelong's Festival of Lights!</h1>
+                <h3 >24 to 25 August 2024</h3><p>Family-friendly fireworks. Laser shows. Over 100,000 lightbulbs. Eat the night away!</p>
+                <button class="jumpTo">FIND AN EVENT</button>
               </div>
             </div>
           </div>
