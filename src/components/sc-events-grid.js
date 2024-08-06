@@ -168,6 +168,7 @@ const EventContainer = () => {
                                     <CardContent className="event-content">
                                         <CardMedia
                                             component="img"
+                                            loading="lazy"
                                             alt="placeholder"
                                             height="150"
                                             image={imageUrl}

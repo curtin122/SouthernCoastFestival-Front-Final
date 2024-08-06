@@ -8,7 +8,7 @@ import EventContainer from '../../components/sc-events-grid.js';
 import ContactForm from '../../components/react/sc-contact-form.js';
 import VenueCard from '../../components/react/sc-venue-cards.js';
 import AdminNav from '../../components/sc-admin-nav.js';
-import VideoControlButton from '../../components/react/sc-video-control.js'
+import VideoControlButton from '../../components/react/icons/sc-video-control.js'
 
 class HomeView {
   constructor() {
