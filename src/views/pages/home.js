@@ -79,7 +79,7 @@ class HomeView {
               <div id="hero-content">
                 <h1 style="font-weight: bold; color: #FFC600;">Come to Geelong's Festival of Lights!</h1>
                 <h3 >24 to 25 August 2024</h3><p>Family-friendly fireworks. Laser shows. Over 100,000 lightbulbs. Eat the night away!</p>
-                <button class="jumpTo">FIND AN EVENT</button>
+                <button class="jumpTo"><i class="fa-solid fa-caret-down"></i> FIND AN EVENT</button>
               </div>
             </div>
           </div>
