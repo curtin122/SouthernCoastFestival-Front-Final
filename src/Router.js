@@ -2,12 +2,14 @@
 import homeView from './views/pages/home'
 import errorView from './views/pages/404'
 import authView from './views/pages/authenticated'
+import adminView from './views/pages/admin'
 
 // define routes
 const routes = {
     '/': homeView,
     '404': errorView,
-    '/authenticated': authView
+    '/authenticated': authView,
+    '/admin': adminView
 }
 
 class Router {
