@@ -1,11 +1,13 @@
 // import views
 import homeView from './views/pages/home'
 import errorView from './views/pages/404'
+import authView from './views/pages/authenticated'
 
 // define routes
 const routes = {
     '/': homeView,
     '404': errorView,
+    '/authenticated': authView
 }
 
 class Router {
