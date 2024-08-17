@@ -112,7 +112,7 @@ class AppFooter extends LitElement {
                     text-align: center;
                     cursor: pointer;
                 }
-                    @meida all and (max-width: 768px) {
+                    @media all and (max-width: 768px) {
                     .app-footer {
                     width: 100%;
                     }
