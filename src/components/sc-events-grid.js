@@ -94,13 +94,14 @@ const EventContainer = () => {
 
     const categories = [
         { name: 'All', icon: faCircle, label: 'All'},
-        { name: 'Eat + Drink', icon: faBowlFood, label: 'Eat + Drink'},
         { name: 'Entertainment', icon: faLightbulb, label: 'Entertainment'},
+        { name: 'Eat + Drink', icon: faBowlFood, label: 'Eat + Drink'},
         { name: 'Shop', icon: faShop, label: 'Shop'}
     ]
 
     const tags = [
         { value: 'all', label: 'All', categories: ['All', 'Eat + Drink', 'Entertainment', 'Shop'] },
+        { value: 'favourites', label: 'Favourites', categories: ['All', 'Eat + Drink', 'Entertainment', 'Shop'], icon: 'favorite_border' },
         { value: 'Family Friendly', label: 'Family Friendly', categories: ['All', 'Entertainment', 'Shop'] },
         { value: '18+ Adults Only', label: '18+ Adults Only', categories: ['All', 'Entertainment', 'Shop'] },
         { value: 'For Children', label: 'For Children', categories: ['All', 'Entertainment', 'Shop'] },
@@ -118,7 +119,6 @@ const EventContainer = () => {
         { value: 'Gluten Free', label: 'Gluten Free', categories: ['Eat + Drink'] },
         { value: 'Nut Free', label: 'Nut Free', categories: ['Eat + Drink'] },
         { value: 'Dairy Free', label: 'Dairy Free', categories: ['Eat + Drink'] },    
-        { value: 'favourites', label: 'Favourites', categories: ['All', 'Eat + Drink', 'Entertainment', 'Shop'], icon: 'favorite_border' }
     ]
 
     const filteredTags = tags.filter(tag => tag.categories.includes(selectedCategory) || selectedCategory === 'All')

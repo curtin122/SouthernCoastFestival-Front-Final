@@ -278,7 +278,7 @@ box-sizing: border-box;
     height: auto;
     background-color: #2b2b2b;
     border-radius: 0.2em;
-    padding: 0.5em 1em;
+    padding: 0.5em 1.5em 1.5em 1.5em;
     font-family: var(--base-font-family);
 
     .MuiTypography-h2 {
@@ -343,8 +343,9 @@ box-sizing: border-box;
     }
     .MuiFormControlLabel-label {
         font-family: var(--base-font-family);
+        font-weight: 300;
         color: #FFFFFF;
-        font-size: 0.75em;
+        font-size: 1em;
     }
     .MuiButtonBase-root.MuiCheckbox-root {
         padding: 0.3em;

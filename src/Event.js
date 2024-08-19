@@ -142,7 +142,7 @@ class Event {
             if (!response.ok) {
                 const err = await response.json()
                 if (err) console.log(err)
-                throw new Error('Problem updating event')
+                throw new Error('Problem deleting event')
             } else {
                 console.log('Event deleted successfully')
                 return

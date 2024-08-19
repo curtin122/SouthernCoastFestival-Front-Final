@@ -92,6 +92,7 @@ const ContactForm = () => {
                     fullWidth
                     error={errors.name}
                     helperText={errors.name ? "Name is required" : ""}
+                    size="small"
                 />
                 <TextField
                     label="Email"
@@ -101,6 +102,7 @@ const ContactForm = () => {
                     fullWidth
                     error={errors.email}
                     helperText={errors.email ? "Valid email is required" : ""}
+                    size="small"
                 />
                 <TextField
                     label="Phone"
@@ -110,6 +112,7 @@ const ContactForm = () => {
                     fullWidth
                     error={errors.phone}
                     helperText={errors.phone ? "Only add number. A valid 8 digit phone number is required" : ""}
+                    size="small"
                 />
                 <TextField
                     label="Enquiry"
@@ -121,6 +124,7 @@ const ContactForm = () => {
                     rows={4}
                     error={errors.enquiry}
                     helperText={errors.enquiry ? "Enquiry is required" : ""}
+                    size="small"
                 />
   
                 <Stack className="submit-reset" direction="row" spacing={2}>

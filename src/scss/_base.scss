@@ -228,6 +228,7 @@ h2 {
     flex-direction: column;
     align-items: center;
     margin: auto;
+    margin-bottom: 1em;
 
     #location, #map, #accessibility, #parking, #transport {
         height: 65vh;
@@ -294,6 +295,9 @@ h2 {
         background-position: center;
         border-radius: 0.2em;
         margin: 0.5em;
+    }
+    #accessibility {
+        height: fit-content;
     }
 }
 
