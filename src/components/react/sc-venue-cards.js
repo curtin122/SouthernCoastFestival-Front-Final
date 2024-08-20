@@ -6,7 +6,7 @@ import { faLocationDot, faMap, faWheelchair, faParking, faBus } from '@fortaweso
 import '../../scss/react.scss'
 
 const venueCards = () => {
-    const [activeSection, setActiveSection] = useState('location')
+    const [activeSection, setActiveSection] = useState('map')
     const theme = useTheme()
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'))
 
@@ -16,8 +16,8 @@ const venueCards = () => {
 
     // array of navigation items
     const sections = [
-        { id: 'location', label: 'Location', icon: faLocationDot },
         { id: 'map', label: 'Event Map', icon: faMap },
+        { id: 'location', label: 'Location', icon: faLocationDot },
         { id: 'accessibility', label: 'Accessibility', icon: faWheelchair },
         { id: 'parking', label: 'Parking', icon: faParking },
         { id: 'transport', label: 'Transport', icon: faBus },
