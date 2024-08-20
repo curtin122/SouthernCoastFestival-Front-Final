@@ -127,14 +127,13 @@ class HomeView {
                   <li>Saturday, 24 August 2024 noon to midnight</li>
                   <li>Sunday,25 August 2024 11am to 10pm</li>
                 </ul>
-              <div id="contact-facebook-container">
+           <div id="contact-facebook-container">
               <div id="contact-form"></div>
-              <div id="facebook-container">
-                              <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D61564461005823&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId" width="100%" height="100%" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+              <div id="facebook-container" class="facebook-iframe">
+                              <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D61564461005823&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"  style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                               </div>
               </div>
               </div>
-
             </div>
             <div id="footer-container">
               <sc-app-footer></sc-app-footer>

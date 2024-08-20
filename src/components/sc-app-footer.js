@@ -123,7 +123,12 @@ class AppFooter extends LitElement {
                     <div><h2 style="font-family: var(--base-font-family)">Geelong</h2></div>
                     <div><h2 style="font-family: var(--sub-font-family)">2024</h2></div>
                     <div class="media-icons">
-</div>
+                        <img src=${share} />
+                        <a href="https://www.instagram.com/southern_fol/" target="_blank" rel="noopener noreferrer">
+  <img src=${insta} />
+                        <a href="https://www.facebook.com/profile.php?id=61564461005823" target="_blank" rel="noopener noreferrer">
+  <img src=${facebook} />
+</a>
                     </div>
                 </div>
                 <div class="ackn-disc">
