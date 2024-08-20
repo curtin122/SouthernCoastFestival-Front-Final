@@ -2,10 +2,8 @@ import { LitElement, html, css } from 'lit'
 import { createRoot } from 'react-dom/client'
 import DiscDialog from './react/sc-disc-dialog'
 import LoginDialog from './react/sc-login-dialog'
+import FacebookShareButton from './react/facebook.js'; // Import the FacebookShareButton component
 
-import share from '../../static/images/share-icon.png'
-import insta from '../../static/images/instagram-icon.png'
-import facebook from '../../static/images/facebook-icon.png'
 
 class AppFooter extends LitElement {
     static properties = {
@@ -119,13 +117,13 @@ class AppFooter extends LitElement {
             </style>
 
             <footer class="app-footer">
+
+
                 <div class="app-footer-left">
                     <div><h2 style="font-family: var(--base-font-family)">Geelong</h2></div>
                     <div><h2 style="font-family: var(--sub-font-family)">2024</h2></div>
                     <div class="media-icons">
-                        <img src=${share} />
-                        <img src=${insta} />
-                        <img src=${facebook} />
+</div>
                     </div>
                 </div>
                 <div class="ackn-disc">
@@ -140,5 +138,6 @@ class AppFooter extends LitElement {
         `;
     }
 }
+
 
 customElements.define('sc-app-footer', AppFooter);

@@ -10,6 +10,7 @@ import VenueCard from '../../components/react/sc-venue-cards.js'
 import AdminNav from '../../components/sc-admin-nav.js'
 import VideoControlButton from '../../components/react/icons/sc-video-control.js'
 
+
 class HomeView {
   constructor() {
     this.state = {
@@ -84,7 +85,7 @@ class HomeView {
           <div id="admin-nav"></div>
         `}
 
-        <sc-app-header></sc-app-header>
+<sc-app-header></sc-app-header>
         <div class="page-content" style="display: ${pageContentDisplayStyle};">
           <!--HERO-->
           <div id="home">
@@ -115,7 +116,6 @@ class HomeView {
           <div id="venue"></div>
 
           <!--ABOUT-->
-          <div id="about">
             <div class="about-container">
               <div id="about-info">
                 <h1>About the Festival</h1>
@@ -127,10 +127,16 @@ class HomeView {
                   <li>Saturday, 24 August 2024 noon to midnight</li>
                   <li>Sunday,25 August 2024 11am to 10pm</li>
                 </ul>
-              </div>
+              <div id="contact-facebook-container">
               <div id="contact-form"></div>
+              <div id="facebook-container">
+                              <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D61564461005823&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId" width="100%" height="100%" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                              </div>
+              </div>
+              </div>
+
             </div>
-                        <div id="footer-container">
+            <div id="footer-container">
               <sc-app-footer></sc-app-footer>
             </div>
           </div>
@@ -150,6 +156,8 @@ class HomeView {
 
     const contactFormContainer = document.getElementById('contact-form')
     renderReactComponent(ContactForm, contactFormContainer)
+
+
 
     this.renderVideoControlButton()
   }

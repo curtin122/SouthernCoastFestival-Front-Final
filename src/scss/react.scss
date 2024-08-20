@@ -5,6 +5,26 @@
     font-family: var(--base-font-family) !important;
 }
 
+.back-to-top-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #FFC600; /* Customize the background color */
+    color: white; /* Customize the text color */
+    border-radius: 50%; /* Make it circular */
+    width: 50px; /* Customize the width */
+    height: 50px; /* Customize the height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow */
+    z-index: 1000; /* Ensure it is above other elements */
+    transition: opacity 0.3s; /* Smooth transition for visibility */
+  }
+  
+  .back-to-top-button:hover {
+    background-color: #FFA500; /* Change color on hover */
+  }
 // CATEGORY FILTER ---------------------------------------
 #category-container {
     width: 80%;

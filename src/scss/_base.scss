@@ -291,9 +291,18 @@ h2 {
     padding-right: 1em;
     font-weight: 200;
 }
-#contact-form {
-    margin-top: 5em;
+
+
+#contact-facebook-container{
+    display: flex;
+    justify-content: space-between;
 }
+#facebook-container, #contact-form{
+    display: flex;
+    margin: 0 1em;
+}
+
+
 //----FOOTER CONTAINER
 #footer-container{
     border-top: 0.2em solid #FFC600;
@@ -383,6 +392,7 @@ h2 {
     #contact-form {
         margin-top: 1em;
     }
+
 }
 
 // RESPONSIVE - MOBILE --------------------------------------------
