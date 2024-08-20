@@ -138,7 +138,7 @@ const venueCards = () => {
             )}
             {activeSection === 'map' && (
                 <Box id="map">
-                    <Typography className="subtitle">Festival Map</Typography>
+                    <Typography className="subtitle">Event Map</Typography>
                     <Box id="map-img"></Box>
                 </Box>
             )}
